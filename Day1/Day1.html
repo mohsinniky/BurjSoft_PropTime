@@ -4,6 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Day1 Tasks</title>
+    <style>
+        table,td,th {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        .mycontainer{
+            display: flex;
+            margin: auto;
+            width: 95%;
+        }
+        
+        .mycontainer > div{
+            /* display: inline-block; */
+            /* float: left; */
+            width: 33%;
+        }
+        .myName{
+            background-color: tomato;
+            color: white;
+            display: inline-block;
+            padding: 10px;
+        }
+
+        #yName{
+            background-color: rgb(255, 38, 0);
+            color: white;
+            display: inline-block;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
     <!-- 1. HTML: Hyper text Markup Language, mainly used for making webpages, Describing the structure of a webpage, consists on a series of elements, tells what to display-->
@@ -51,7 +82,7 @@
      </pre>      
     <!-- 7. HTML Styles: add styles to an element, such as color, font, size, and more, it is an attribute, and its values will define the style of the element -->
 
-     <h3 style="color: white; background-color: gray; font-size: larger; font-family: Arial, Helvetica, sans-serif; text-align: center;">My name is Mohsin Raza</h3>
+     <h3 style="color: white; background-color: gray; font-size: larger; font-family: Arial, Helvetica, sans-serif; text-align: center;" id="myName">My name is Mohsin Raza</h3>
 
     <!-- 8. HTML Formatting: several elements for defining text with a special meaning -->
      <b>bold text</b>
@@ -102,10 +133,144 @@
      <a href="mailto:mohsinraza490490@gmail.com">Send Email</a>
      <br>
      <button onclick="document.location='https://www.w3schools.com/html/html_links.asp'">HTML Links Tutorial</button>
+     <!-- Bookmark Links -->
+      <a href="#myName" style="text-decoration: none;">My Name</a>
+      <br>
 
+    <!-- 14. HTML Images: to embed an image in a web page, no closing tag, creates a holding space for images, src and alt are its two required attributes, for example see line---=>29. 
+    animated GIFs are allowed to be used as image  -->
+     <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="W3Schools.com">
+     <br>    
+     <map name="foodmap">
+        <area shape="poly" coords="140,121,181,116,204,160,204,222,191,270,140,329,85,355,58,352,37,322,40,259,103,161,128,147" href="https://www.google.com/search?q=crossiant&rlz=1C1KNTJ_enPK1075PK1075&oq=crossiant&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIMCAEQLhgKGLEDGIAEMgwIAhAAGAoYsQMYgAQyDAgDEAAYChixAxiABDIJCAQQABgKGIAEMgkIBRAuGAoYgAQyCQgGEAAYChiABDIPCAcQABgKGIMBGLEDGIAEMgkICBAAGAoYgATSAQgzMjg3ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8">
+     </map>
+     <img src="frenchfood.png" alt="FrenchFood" usemap="#foodmap">
 
+     <!-- Using Css property Background Image, u can set an image as a background EX: background-image: url('example_img_girl.jpg');. similarly different properties can be applied on the image for better UI-->
+      <h3>The Below Image Changes w.r.t Width</h3>
+     <picture>
+        <source media="(min-width: 650px)" srcset="frenchfood.png">
+        <img src="surfer.png">
+     </picture>
 
+    <!-- 15. HTML Page Title: Already being used above -->
 
+    <!-- 16. HTML Tables: Table with rows and column, with first row being table head,tags: 
+     table: table element, start end with its content between
+     tr: table row
+     td: table data, or a table cell
+     th: table heading, or heading table cell
+     caption: table title
+     -->
+     <table>
+        <caption>DATA</caption>
+        <tr>
+            <th>Company</th>
+            <th>Contact</th>
+            <th>Country</th>
+        </tr>
+        <tr>
+            <td>Alfreds Futterkiste</td>
+            <td>Maria Anders</td>
+            <td>Germany</td>
+        </tr>
+        <tr>
+            <td>Centro comercial Moctezuma</td>
+            <td>Francisco Chang</td>
+            <td>Mexico</td>
+        </tr>
+     </table>
+     <!-- Using following properties Border Can be manipulated of Table,its Cells:
+      i. border
+      ii. border-collapse
+      iii. border-style
+        styles:
+            dotted     
+            dashed     
+            solid     
+            double     
+            groove     
+            ridge     
+            inset     
+            outset     
+            none     
+            hidden
+      iv. border-radius
+      v. background-color
+      vi. border-color
+      vii. border-spacing
+     colspan: Property for defining width-wise no of  cell, best to use for th
+     rowspan: Property for defining height-wise no of cell
+     :nth-child(even): for applying property on 1 skip 1 then apply on 1
+     ==> tr(horizontally), td,th(vertically)
+     tr:hover: for hover effects on a single row
+     colgroup:
+        col span="2" //some properties
+        applicable properties:
+            width property
+            visibility property
+            background properties
+            border properties
+      -->
+
+    <!-- 17. HTML Lists: ordered,unordered and description lists, type attribute with values(1,A,a,I,i) for ordered list, start attribute to start the counting from a specified number.
+     
+     Applicapable Properties:
+     list-style-type:  list item marker for unordered list
+     -->
+     <dl>
+        <dt>Coffee</dt>
+        <dd>- black hot drink</dd>
+        <dt>Milk</dt>
+        <dd>- white cold drink</dd>
+     </dl>
+
+    <!-- 18. HTML Blocks and Inline: Block(p & div): full-width/start in a new line Inline(span): width-as-needed/doesn't start in a new line -->
+     <p>my profession is <span>Developer</span></p>
+
+    <!-- 19. HTML DIV: div is used as a container for other HTML elements, no required attribute but style,class and id are good practice and most used -->
+     <div style="color: white; background-color: gray; width: 50%; margin: auto; justify-items: center;">
+        <h1>Hello</h1>
+        <p>A greeting from me</p>
+     </div>
+
+     <!-- applying flex -->
+     <div class="mycontainer">
+
+        <div style="background-color:#FFF4A3;">
+            <h2>London</h2>
+        </div>
+
+        <div style="background-color:#FFC0C7;">
+            <h2>Oslo</h2>
+        </div>
+
+        <div style="background-color:#D9EEE1;">
+            <h2>Rome</h2>
+        </div>
+
+     </div>
+    <!-- 20. HTML Classes: to specify a class for an HTML element -->
+     <h1 class="myName">MOHSIN RAZA</h1>
+     
+     
+    <!-- 21. HTML ID: to specify a unique id for an HTML element, same id for different elements not allowed, It is also used for bookmarks with links and also for applying JS -->
+     <h1 class="myName" id="yName">MOHSIN RAZA</h1>
+
+    <!-- 22. HTML Iframe:  to display a web page within a web page -->
+     <br>
+     <iframe src="#" title="Same Page" style="width: 100%; margin-bottom: 10vh; height: 40vh; border: none;"></iframe>
+    
+    <!-- 22. HTML Javascript: used for making Pages dynamic and interactive, JavaScript can change attributes -->
+     <div id="demo"></div>
+
+     <script>
+        document.getElementById("demo").innerHTML = '<h1>MOHSIN RAZA</h1>';
+        document.getElementById("demo").style.fontSize = "25px";
+        document.getElementById("demo").style.color = "red";
+        document.getElementById("demo").style.backgroundColor = "lightgray";
+     </script>
+     <noscript>Sorry, your browser does not support JavaScript!</noscript>
 
      
      
