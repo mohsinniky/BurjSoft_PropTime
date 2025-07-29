@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Day 2</title>
     <style>
-        table,th,td{
+        table,
+        th,
+        td {
             border-left: 1px solid black;
             border-right: 1px solid black;
             border-collapse: collapse;
@@ -14,22 +17,42 @@
 
         }
 
-        .pass{
+        .pass {
             background-color: rgb(164, 238, 164);
             text-align: center;
         }
-        .pass:hover{
+
+        .pass:hover {
             background-color: rgb(121, 240, 121);
         }
-        .fail{
+
+        .fail {
             background-color: rgb(241, 159, 159);
             text-align: center;
         }
-        .fail:hover{
+
+        .fail:hover {
             background-color: rgb(240, 110, 110);
+        }
+
+        .form {
+            width: 50%;
+            margin: auto;
+            margin-top:5vh ;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .form input,
+        .form select{
+            padding: 10px;
+            margin: 5px 0;
         }
     </style>
 </head>
+
 <body>
     <h1 style="text-align: center; color: rgb(32, 156, 144);">Students Admission Page</h1>
     <table>
@@ -51,7 +74,7 @@
         </tr>
 
         <tr>
-            <td colspan="2">ABC</td>
+            <td >ABC</td>
             <td>XYZ</td>
             <td>00/00/0000</td>
             <td>Male</td>
@@ -96,6 +119,91 @@
             <td>Yes</td>
         </tr>
     </table>
-    
+
+    <!-- HTML FORMS: FO Input From user on webpages, name attribute is a must for the inputted value to be submitted Attributes:
+     Action: URL to be sent to on submitting the form 
+     Method: Type of request to be sent 
+     Target: Target of the form just like links
+     Autocomplete(Switch on/off): automatically complete values based on values that the user has entered before
+     Novalidate: it disables client-side form validation -->
+    <div class="form">
+        <form action="#">
+            <label for="fullname">Fullname:</label>
+            <input type="text" id="fullname" name="fullname" required>
+            <br>
+
+            <label for="guardian">Guardian Name:</label>
+            <input type="text" id="guardian" name="guardian" required>
+            <br>
+
+            <label for="dob">Date Of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+            <br>
+
+            <label for="gender">Gender:</label>
+            <input type="radio" id="male" name="gender" value="male" required>
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="female" required>
+            <label for="female">Female</label>
+            <br>
+
+            <label for="cnic">CNIC:</label>
+            <input type="text" id="cnic" name="cnic" placeholder="xxxxx-xxxxxxx-x" required>
+            <br>
+
+            <label for="mobile">Mobile Number:</label>
+            <input type="tel" id="mobile" name="mobile" placeholder="+92 xxx-xxxxxxx" required>
+            <br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+
+            <label for="address">Address:</label>
+            <br>
+            <textarea name="address" id="address" cols="50" rows="5" required></textarea>
+            <br>
+
+            <label for="previousschool">Previous School/College:</label>
+            <input type="text" id="prevschool" name="previousschool" >
+            <br>
+
+            <label for="qualification">Last Qualification:</label>
+            <select id="qualification" name="qualification" required>
+                <option value="">Select</option>
+                <option value="Matric">Matric</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Other">Other like A-level, O-level, DAE</option>
+            </select>
+            <br>
+
+            <label for="marks">Marks In %:</label>
+            <input type="number" id="marks" name="marks" min="0" max="100" required>
+            <br>
+
+            <label for="program">Desired Program:</label>
+            <input type="text" id="program" name="program" required>
+            <br>
+
+            <label for="profileImg">Profile Picture:</label>
+            <input type="file" id="profileImg" name="profileImg">
+            <br>
+
+            <label for="disability">Disability Status:</label>
+            <select id="disability" name="disability" required>
+                <option value="">Select</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+            <br>
+
+            <input type="checkbox" id="term" name="term" value="1">
+            <label for="term">I agree to the Terms and Conditions</label>
+            <br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </body>
+
 </html>
