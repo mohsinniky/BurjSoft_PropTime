@@ -1,0 +1,58 @@
+/* p{
+    by tag
+}
+
+.class{
+    by class
+}
+
+#id{
+    by id
+} */
+
+body {
+  /* background-color: rgb(202, 202, 202);
+    opacity: 50%; */
+  /* Transparency: Opacity */
+  /* background-image: url(../Day1/surfer.png);
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-attachment: fixed; */
+
+  /* shorthand property background */
+  background: url(../Day1/surfer.png) no-repeat right top;
+}
+
+.testText {
+  color: rgb(255, 0, 0);
+  border-style: dotted solid double dashed;
+  /* in case of two values , 1st: top/bottom 2nd: left/right */
+  width: 20%;
+  padding: 10px;
+  margin: auto;
+  text-decoration-line: overline;
+  font-size: 1.4rem;
+}
+
+.text {
+  width: 300px;
+  border: 15px solid green;
+  padding: 50px;
+  margin: 20px;
+  font-size: 1.4rem;
+  /* A box modal showing the realtion between content,padding , margin, border */
+  outline: 20px gray solid;
+  text-shadow: 1px 1px 2px rgb(168, 135, 135), 0 0 25px blue, 0 0 5px darkblue;
+  font-style: oblique;
+  color: red;
+}
+
+a {
+    background-color: #f44336;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    margin: 1px;
+    display: inline-block;
+}
