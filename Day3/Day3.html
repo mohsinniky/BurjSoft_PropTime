@@ -11,6 +11,8 @@
 </head>
 
 <body>
+
+
     <!-- Breakpoints: Customizable widths, that determine how my responsive layout behaves accross different devices and viewports 
      Building Block of responsive design
      optimizing your CSS, improves rendering time, and provides a great experience for your visitors.
@@ -25,7 +27,7 @@
      breakpoints are mostly based on minimum viewport widths
      -->
 
-    <div class="row">
+    <div class="row g-0">
         <div class="col-12 col-md-6 col-lg-4" style="background-color: rgb(161, 160, 160);">
             <!-- 
             - Full width on mobile (col-12)
@@ -37,15 +39,15 @@
     </div>
 
     <!-- Containers: Wraps your site's content, Provides proper horizontal padding, Centers content responsively, Adjusts max-width at different breakpoints -->
-    <div style="border: 1px black solid;" class="container-sm">100% wide until SM (≥576px)</div>
+    <!-- <div style="border: 1px black solid;" class="container-sm">100% wide until SM (≥576px)</div>
     <div style="border: 1px black solid;" class="container-md">100% wide until MD (≥768px)</div>
     <div style="border: 1px black solid;" class="container-lg">100% wide until LG (≥992px)</div>
     <div style="border: 1px black solid;" class="container-xl">100% wide until XL (≥1200px)</div>
-    <div style="border: 1px black solid;" class="container-xxl">100% wide until XXL (≥1400px)</div>
+    <div style="border: 1px black solid;" class="container-xxl">100% wide until XXL (≥1400px)</div> -->
 
     <!-- Grid System: 12 template columns available per row, 
      Gutter width	1.5rem (.75rem on left and right)-->
-    <div class="container text-center">
+    <!-- <div class="container text-center">
         <div class="row">
             <div class="col border">
                 Column
@@ -64,9 +66,9 @@
             <div class="col-8 border">col-8</div>
             <div class="col-4 border">col-4</div>
         </div>
-    </div>
+    </div> -->
     <!-- 1 row having 2 columns only -->
-    <div class="container text-center">
+    <!-- <div class="container text-center">
         <div class="row row-cols-2">
             <div class="col border">Column</div>
             <div class="col border">Column</div>
@@ -101,7 +103,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Alignment:
      align-item-*: start,center,end 
@@ -122,7 +124,7 @@
 
     <h2> A image and a Para with prefect synch --=> </h2>
     <div class="clearfix">
-        <img src="../Day1/surfer.png" class="col-md-3 float-md-end mb-3 ms-md-3" alt="Image">
+        <img src="../Day1/surfer.png" class="col-md-3 float-md-end mb-3 ms-md-3 rounded" alt="Image">
         <p>
             A paragraph of placeholder text. We’re using it here to show the use of the clearfix class. We’re adding
             quite a few meaningless phrases here to demonstrate how the columns interact here with the floated image.
@@ -141,7 +143,7 @@
     </div>
 
     <!-- Gutters -->
-    <div class="container px-4 text-center ">
+    <!-- <div class="container px-4 text-center ">
         <div class="row p-1 gx-5 border ">
             <div class="col ">
                 <div class="p-3 border">Column padding</div>
@@ -150,7 +152,196 @@
                 <div class="p-3 border">Column padding</div>
             </div>
         </div>
+    </div>  -->
+
+
+    <!-- Typography -->
+    <h2 class="display-2">Further tasks: </h2>
+    <h3>
+        Fancy display heading
+        <small class="text-body-secondary">With faded secondary text</small>
+    </h3>
+    <p class="lead"> This is a a lead paragraph</p>
+
+    <!-- like below tags themselves are applied for text-decoration -->
+    <!-- <p>You can use the mark tag to <mark>highlight</mark> text.</p>
+    <p><del>This line of text is meant to be treated as deleted text.</del></p>
+    <p><s>This line of text is meant to be treated as no longer accurate.</s></p>
+    <p><ins>This line of text is meant to be treated as an addition to the document.</ins></p>
+    <p><u>This line of text will render as underlined.</u></p>
+    <p><small>This line of text is meant to be treated as fine print.</small></p>
+    <p><strong>This line rendered as bold text.</strong></p>
+    <p><em>This line rendered as italicized text.</em></p> -->
+    <figure class="text-center">
+        <blockquote class="blockquote">
+            <p>A well-known quote, contained in a blockquote element.</p>
+        </blockquote>
+        <figcaption class="blockquote-footer">
+            Someone famous in <cite title="Source Title">Source Title</cite>
+        </figcaption>
+    </figure>
+
+
+    <!-- Table: BootStraps:
+      -->
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <caption class="caption-top">Students Data List</caption>
+            <thead>
+                <tr>
+                    <th>Fullname</th>
+                    <th>Guardian Name</th>
+                    <th>Date Of birth</th>
+                    <th>Gender</th>
+                    <th>CNIC</th>
+                    <th>Mobile Number</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Previous School/College</th>
+                    <th>Last Qualification</th>
+                    <th>Marks In % </th>
+                    <th>Desired Program</th>
+                    <th>Disability Status</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <tr>
+                    <td>ABC</td>
+                    <td>XYZ</td>
+                    <td>00/00/0000</td>
+                    <td>Male</td>
+                    <td>xxxxx-xxxxxxx-x</td>
+                    <td>+92 xxx-xxxxxxx</td>
+                    <td>test@gmail.com</td>
+                    <td>Test_Address1</td>
+                    <td>Test_School</td>
+                    <td>Matric</td>
+                    <td>81</td>
+                    <td>CS</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td>EFG</td>
+                    <td>LMN</td>
+                    <td>11/11/1111</td>
+                    <td>Male</td>
+                    <td>xxxxx-xxxxxxx-x</td>
+                    <td>+92 xxx-xxxxxxx</td>
+                    <td>test2@gmail.com</td>
+                    <td>Test_Address2</td>
+                    <td>Test_School2</td>
+                    <td>Matric</td>
+                    <td>56</td>
+                    <td>CS</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td>GHI</td>
+                    <td>RST</td>
+                    <td>22/22/2222</td>
+                    <td>Female</td>
+                    <td>xxxxx-xxxxxxx-x</td>
+                    <td>+92 xxx-xxxxxxx</td>
+                    <td>test3@gmail.com</td>
+                    <td>Test_Address3</td>
+                    <td>Test_School3</td>
+                    <td>Intermediate</td>
+                    <td>99</td>
+                    <td>Medical</td>
+                    <td>Yes</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+
+    <!-- Figure -->
+    <figure class="figure justify-content">
+        <img src="../Day1/smiley.gif" class="figure-img img-fluid rounded" alt="Smile Image">
+        <figcaption class="figure-caption text-center">Smiley Emoji/Gif</figcaption>
+    </figure>
+
+
+    <!-- Forms -->
+
+    <div class="form col-12 col-md-10 col-lg-7 mx-auto">
+        <form action="#">
+            <label for="fullname" class="form-label">Fullname:</label>
+            <input type="text" class="form-control" id="fullname" name="fullname" required>
+            <br>
+
+            <label class="form-label" for="guardian">Guardian Name:</label>
+            <input class="form-control" type="text" id="guardian" name="guardian" required>
+            <br>
+            <label class="form-label" for="dob">Date Of Birth:</label>
+            <input class="form-control" type="date" id="dob" name="dob" required>
+            <br>
+
+            <label class="form-label" for="cnic">CNIC:</label>
+            <input class="form-control" type="text" id="cnic" name="cnic" placeholder="xxxxx-xxxxxxx-x" required>
+            <br>
+
+            <label class="form-label" for="mobile">Mobile Number:</label>
+            <input class="form-control" type="tel" id="mobile" name="mobile" placeholder="+92 xxx-xxxxxxx" required>
+            <br>
+
+            <label class="form-label" for="email">Email:</label>
+            <input class="form-control" type="email" id="email" name="email" required>
+            <br>
+
+            <label class="form-label" for="address">Address:</label>
+            <br>
+            <textarea class="form-control" name="address" id="disabledInput" cols="50" rows="5" disabled></textarea>
+            <br>
+
+
+            <label class="form-label" for="marks">Marks In %:</label>
+            <input class="form-control" type="number" id="marks" name="marks" min="0" max="100" required>
+            <br>
+
+
+
+
+            <label for="exampleDataList" class="form-label">Datalist example</label>
+            <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+            <datalist id="datalistOptions">
+                <option value="San Francisco">
+                <option value="New York">
+                <option value="Seattle">
+                <option value="Los Angeles">
+                <option value="Chicago">
+            </datalist>
+            <br>
+
+
+            <input class="form-check-input" type="checkbox" id="term" name="term" value="1">
+            <label class="form-check-label" for="term">I agree to the Terms and Conditions</label>
+            <br>
+
+            <div class="form-check form-switch form-check-reverse">
+                <input class="form-check-input" type="checkbox" id="switchCheckReverse">
+                <label class="form-check-label" for="switchCheckReverse">Reverse switch checkbox input</label>
+            </div>
+            <br>
+            <br>
+
+            <div class="input-group mb-3 ">
+                <span class="input-group-text" id="addon">@</span>
+                <input type="text" class="form-control" id="addon" placeholder="Username">
+            </div>
+
+            <button class="btn btn-primary mb-3" type="submit">Submit</button>
+        </form>
+
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+        </div>
+    </div>
+
 
 
     <!-- Bootstrap JS Bundle with Popper -->
