@@ -48,11 +48,35 @@ body {
 }
 
 a {
-    background-color: #f44336;
-    color: white;
-    padding: 14px 25px;
-    text-align: center;
-    text-decoration: none;
-    margin: 1px;
-    display: inline-block;
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  margin: 1px;
+  display: inline-block;
+}
+
+.para {
+  height: 10vh;
+  width: 20%;
+  overflow: auto;
+  border: 5px black;
+  border-style: ridge;
+  float: right;
+}
+
+.center {
+  display: inline-block;
+  width: 50vw;
+  line-height: 200px;
+  height: 200px;
+  border: 3px solid green;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 10px;
+}
+
+.center > p {
+  margin: 0;
 }
