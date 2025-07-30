@@ -1,11 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day3</title>
+    <title>Local Bootstrap Example</title>
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="css/your-styles.css" rel="stylesheet">  -->
 </head>
+
 <body>
-    
+    <!-- Breakpoints: Customizable widths, that determine how my responsive layout behaves accross different devices and viewports 
+     Building Block of responsive design
+     optimizing your CSS, improves rendering time, and provides a great experience for your visitors.
+
+     Bootstrap inculde 6 default breakpoints, sometimes referred to as grid tiers:
+     i. none(Mobile portrait)        <576
+     ii. sm(Phone landscape)         >=576
+     iii. md(Tablets)                >=768
+     iv. lg(Laptop)                  >=992
+     v. xl (Desktop)                 >=1200
+     vi. xxl (Large Monitors)        >=1400
+     breakpoints are mostly based on minimum viewport widths
+     -->
+
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-4" style="background-color: rgb(161, 160, 160);">
+            <!-- 
+            - Full width on mobile (col-12)
+            - 50% width on tablets (col-md-6)
+            - 33% width on desktops (col-lg-4)
+            -->
+            <H1 style="float: right;">HELLO</H1>
+        </div>
+    </div>
+
+    <!-- Containers: Wraps your site's content, Provides proper horizontal padding, Centers content responsively, Adjusts max-width at different breakpoints -->
+    <div style="border: 1px black solid;" class="container-sm">100% wide until SM (≥576px)</div>
+    <div style="border: 1px black solid;" class="container-md">100% wide until MD (≥768px)</div>
+    <div style="border: 1px black solid;" class="container-lg">100% wide until LG (≥992px)</div>
+    <div style="border: 1px black solid;" class="container-xl">100% wide until XL (≥1200px)</div>
+    <div style="border: 1px black solid;" class="container-xxl">100% wide until XXL (≥1400px)</div>
+
+    <!-- Grid System: 12 template columns available per row, 
+     Gutter width	1.5rem (.75rem on left and right)-->
+    <div class="container text-center">
+        <div class="row">
+            <div class="col border">
+                Column
+            </div>
+            <div class="col border">
+                Column
+            </div>
+            <div class="col border">
+                Column
+            </div>
+        </div>
+    </div>
+    <div class="container text-center border">
+
+        <div class="row ">
+            <div class="col-8 border">col-8</div>
+            <div class="col-4 border">col-4</div>
+        </div>
+    </div>
+    <!-- 1 row having 2 columns only -->
+    <div class="container text-center">
+        <div class="row row-cols-2">
+            <div class="col border">Column</div>
+            <div class="col border">Column</div>
+            <div class="col border">Column</div>
+            <div class="col border">Column</div>
+        </div>
+    </div>
+
+    <div class="container text-center">
+        <div class="row row-cols-4">
+            <div class="col border">Column</div>
+            <div class="col border">Column</div>
+            <div class="col-6 border">Column</div>
+            <div class="col border">Column</div>
+        </div>
+    </div>
+
+    <h2>Nested Grid</h2>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-sm-3">
+                Level 1: .col-sm-3
+            </div>
+            <div class="col-sm-9">
+                <div class="row">
+                    <div class="col-8 col-sm-6">
+                        Level 2: .col-8 .col-sm-6
+                    </div>
+                    <div class="col-4 col-sm-6">
+                        Level 2: .col-4 .col-sm-6
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alignment:
+     align-item-*: start,center,end 
+     justify-content-*: start,center,end, around, between, evenly-->
+    <h2>Forcing A line Break</h2>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+            <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+
+            <!-- Force next columns to break to new line -->
+            <div class="w-100"></div>
+
+            <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+            <div class="col-3 col-sm-3 offset-3">.col-6 .col-sm-3</div>
+        </div>
+    </div>
+
+    <h2> A image and a Para with prefect synch --=> </h2>
+    <div class="clearfix">
+        <img src="../Day1/surfer.png" class="col-md-3 float-md-end mb-3 ms-md-3" alt="Image">
+        <p>
+            A paragraph of placeholder text. We’re using it here to show the use of the clearfix class. We’re adding
+            quite a few meaningless phrases here to demonstrate how the columns interact here with the floated image.
+        </p>
+
+        <p>
+            As you can see the paragraphs gracefully wrap around the floated image. Now imagine how this would look with
+            some actual content in here, rather than just this boring placeholder text that goes on and on, but actually
+            conveys no tangible information at. It simply takes up space and should not really be read.
+        </p>
+
+        <p>
+            And yet, here you are, still persevering in reading this placeholder text, hoping for some more insights, or
+            some hidden easter egg of content. A joke, perhaps. Unfortunately, there’s none of that here.
+        </p>
+    </div>
+
+    <!-- Gutters -->
+    <div class="container px-4 text-center ">
+        <div class="row p-1 gx-5 border ">
+            <div class="col ">
+                <div class="p-3 border">Column padding</div>
+            </div>
+            <div class="col ">
+                <div class="p-3 border">Column padding</div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="js/your-scripts.js"></script> -->
 </body>
+
 </html>
