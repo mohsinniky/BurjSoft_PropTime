@@ -23,13 +23,36 @@
 
 
     <h3>Basic Popover</h3>
-    
+    <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" data-bs-title="Popover title"
+        data-bs-content="And here’s some amazing content. It’s very engaging. Right?" data-bs-placement="bottom"
+        data-bs-container="body">
+        Click to toggle Popover
+    </button>
     <hr>
-    
-    
+
+    <h3>Direction Bottom Popover</h3>
+
+    <button type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover"
+        data-bs-placement="bottom" data-bs-content="Bottom popover">
+        Popover on bottom.
+    </button>
+    <hr>
+
+    <h3>Dismissible Popover</h3>
+    <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="Dismissible popover" data-bs-content="And here’s some amazing content. It’s very engaging. Right?">Dismissible popover</a>
+
+
+
+    <hr>
+
+
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="../js/bootstrap.bundle.min.js"></script>
     <!-- <script src="js/your-scripts.js"></script> -->
+    <script>
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+    </script>
 </body>
 
 </html>
