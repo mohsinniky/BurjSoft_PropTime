@@ -50,8 +50,9 @@
     <hr>
 
     <h3>Custom Toast</h3>
-    <button type="button" class="btn btn-info col-auto mt-3 ms-3" id="customToastBtn">Show live toast</button>
-    <div class="toast-container position-fixed top-0 end-0 p-3">
+    <button type="button" class="btn btn-outline-success col-auto mt-3 ms-3" id="customToastBtn">Show live
+        toast</button>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
         <div id="customToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <img src="../../Day1/smiley.gif" class="rounded me-2" alt="..." style="width: 20px; height: 20px;">
@@ -62,19 +63,22 @@
             <div class="toast-body">
                 This is a custom toast message with additional content.
                 <pre class="mb-0">Yohohohohoho.</pre>
-                <div class="mt-2 pt-2 border-top">
-                    <button type="button" class="btn btn-primary btn-sm">Take action</button>
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button>
-                </div>
             </div>
         </div>
     </div>
     <hr>
 
-    <div class="toast-container position-static">
-        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <h3>Stack Toast</h3>
+    <!-- Buttons to trigger toasts -->
+    <button type="button" class="btn btn-outline-primary mt-3" id="firstToastBtn">Show First Toast</button>
+    <button type="button" class="btn btn-outline-dark mt-3 ms-2" id="secondToastBtn">Show Second Toast</button>
+
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <!-- First Toast -->
+        <div id="firstToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
-                <img src="..." class="rounded me-2" alt="...">
+                <img src="../../Day1/smiley.gif" class="rounded me-2" alt="..." style="width: 20px; height: 20px;">
                 <strong class="me-auto">Bootstrap</strong>
                 <small class="text-body-secondary">just now</small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -84,9 +88,10 @@
             </div>
         </div>
 
-        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <!-- Second Toast -->
+        <div id="secondToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
-                <img src="..." class="rounded me-2" alt="...">
+                <img src="../../Day1/smiley.gif" class="rounded me-2" alt="..." style="width: 20px; height: 20px;">
                 <strong class="me-auto">Bootstrap</strong>
                 <small class="text-body-secondary">2 seconds ago</small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -96,6 +101,7 @@
             </div>
         </div>
     </div>
+    <hr>
 
 
 
