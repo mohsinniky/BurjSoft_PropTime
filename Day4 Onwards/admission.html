@@ -54,25 +54,106 @@
     </nav>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-outline-primary mt-3 ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-outline-primary mt-3 ms-3" data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop">
         Add New Admission
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog  modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Admission Form</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Admission Form</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <hr>
                 <div class="modal-body">
-                    ...
+                    <form>
+                        <div class="row">
+                            <div class="mb-3 col-6">
+                                <label for="fname" class="form-label">Name:</label>
+                                <input type="text" class="form-control" id="fname" placeholder="Enter your Name">
+                            </div>
+                            <div class="mb-3 col-6">
+                                <label for="gname" class="form-label">Guardian Name</label>
+                                <input type="text" class="form-control" id="gname"
+                                    placeholder="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col-6">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                            </div>
+                            <div class="mb-3 col-5">
+                                <label for="dob" class="form-label">DOB:</label>
+                                <input type="date" class="form-control" id="dob">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-3 col-6">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone" placeholder="Your Phone#">
+                            </div>
+
+                            <div class="mb-3 col-6">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password"
+                                    placeholder="Your Secret Word">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-3 col-6">
+                                <label for="course" class="form-label">Course</label>
+                                <select class="form-select" id="course">
+                                    <option selected>Choose...</option>
+                                    <option value="1">B.Tech</option>
+                                    <option value="2">M.Tech</option>
+                                    <option value="3">MBA</option>
+                                    <option value="4">BBA</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 col-6">
+                                <div class="row justify-content-center">
+                                <label for="gender" class="form-label">Gender</label>
+                                    <div class="form-check col-auto">
+                                        <input class="form-check-input " type="radio" name="gender" id="male"
+                                            value="option1">
+                                        <label class="form-check-label " for="male">
+                                            Male
+                                        </label>
+                                    </div>
+                                    <div class="form-check col-auto">
+                                        <input class="form-check-input" type="radio" name="gender" id="female"
+                                            value="option2">
+                                        <label class="form-check-label" for="female">
+                                            Female
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea class="form-control" id="address" rows="3"
+                                placeholder="Enter your Address"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="terms" class="form-check-label">Terms and Conditions</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="terms">
+                                <label class="form-check-label" for="terms">
+                                    I agree to the terms and conditions
+                                </label>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Add Admission</button>
+                    <button type="button" class="btn btn-outline-success">Submit</button>
                 </div>
             </div>
         </div>
@@ -80,7 +161,7 @@
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="js/bootstrap.bundle.min.js"></script>
-    <!-- <script src="js/your-scripts.js"></script> -->
+    <script src="js/your-scripts.js"></script>
 </body>
 
 </html>
