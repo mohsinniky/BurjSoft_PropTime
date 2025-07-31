@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Bootstrap Example</title>
+    <!-- Bootstrap CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="css/your-styles.css" rel="stylesheet">  -->
+</head>
+
+<body class="p-2">
+    <!-- Codes -->
+    <!-- Pagination -->
+    <nav class="breadcrumb p-2" style="--bs-breadcrumb-divider: '>';">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../index.html">ProbTime</a></li>
+            <li class="breadcrumb-item">Learning</li>
+            <li class="breadcrumb-item active">Pagination</li>
+        </ol>
+    </nav>
+
+
+    <h3>Basic Pagination</h3>
+    <nav >
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </nav>
+    <hr>
+    
+    <h3>Pagination with disable previous link</h3>
+    <nav >
+        <ul class="pagination">
+            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </nav>
+    <hr>
+    
+    <h3>Working with icons</h3>
+    <nav >
+        <ul class="pagination">
+            <li class="page-item "><a class="page-link" href="#"><span>&laquo;</span></a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#"><span>&raquo;</span></a></li>
+        </ul>
+    </nav>
+    <hr>
+
+    <h3>Active Page</h3>
+    <nav >
+        <ul class="pagination">
+            <li class="page-item "><a class="page-link" href="#"><span>&laquo;</span></a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#"><span>&raquo;</span></a></li>
+        </ul>
+    </nav>
+    <hr>
+    
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="js/your-scripts.js"></script> -->
+</body>
+
+</html>
