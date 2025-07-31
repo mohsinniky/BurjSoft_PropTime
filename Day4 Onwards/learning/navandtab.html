@@ -10,7 +10,7 @@
     <!-- <link href="css/your-styles.css" rel="stylesheet">  -->
 </head>
 
-<body>
+<body class="p-2">
     <!-- Codes -->
     <!-- Navbar and Tabs -->
     <nav class="breadcrumb p-2" style="--bs-breadcrumb-divider: '>';">
@@ -19,6 +19,111 @@
             <li class="breadcrumb-item">Learning</li>
             <li class="breadcrumb-item active">Nav & Tab</li>
         </ol>
+    </nav>
+
+
+    <h3>Simple Navbar:</h3>
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Active</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" >Disabled</a>
+        </li>
+    </ul>
+    <p>Now below is an exapmle of nav but one without using lists, looks same as above</p>
+    <nav class="nav justify-content-center navbar-dark">
+        <a class="nav-link active" aria-current="page" href="#">Active</a>
+        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+    </nav>
+    
+    <h3>Using Tabs:</h3>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Active</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" >Disabled</a>
+        </li>
+    </ul>
+
+    <hr>
+
+    <h3>Using Pills:</h3>
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Active</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" >Disabled</a>
+        </li>
+    </ul>
+
+    <hr>
+
+    <h3>Using Underline:</h3>
+    <ul class="nav nav-underline">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Active</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" >Disabled</a>
+        </li>
+    </ul>
+
+    <hr>
+
+    <h3>Using Whole Width and Center:</h3>
+    <ul class="nav nav-fill col-sm-12 col-md-8 m-auto">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Active</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" >Disabled</a>
+        </li>
+    </ul>
+
+    <p><code>nav-fill</code> makes the tabs take up the whole width of the container, and nav-items are not of same width while in or by using <code>nav-justified</code> the nav-items are of same width</p>
+
+    <hr>
+    <h3>Using Flexbox:</h3>
+    <nav class="nav nav-pills flex-column flex-sm-row">
+        <a class="flex-sm-fill text-sm-center nav-link active" href="#">Active</a>
+        <a class="flex-sm-fill text-sm-center nav-link" href="#">Longer nav link</a>
+        <a class="flex-sm-fill text-sm-center nav-link" href="#">Link</a>
+        <a class="flex-sm-fill text-sm-center nav-link disabled">Disabled</a>
     </nav>
 
     <!-- Bootstrap JS Bundle with Popper -->
