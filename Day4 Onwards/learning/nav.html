@@ -21,6 +21,132 @@
         </ol>
     </nav>
 
+    <h3>Navbar1 Example</h3>
+    <div>
+        <nav class="navbar bg-body-tertiary navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand ">ProbTime</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav navbar-nav-scroll me-auto mb-2 mb-lg-0 " style="--bs-scroll-height: 100px;">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">Admission</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Learning
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">NavBar</a></li>
+                                <li><a class="dropdown-item" href="#">Nav & Bar</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Modal</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a href="" class="nav-link disabled">Any Option</a></li>
+                    </ul>
+                    <form role="search" class="d-flex">
+                        <input type="search" class="form-control me-2" placeholder="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <p class="m-2">This example uses <mark>background</mark> <code>(bg-body-tertiary)</code>. The Class
+            <code>h1</code> makes the <code>navbar-brand</code> <mark>Bold</mark>
+            We can replace the text within the <code>.navbar-brand</code> with an Image like below. and by using these 3
+            thing we can make the navbar Scrollable
+            <code>1. navbar-nav 2. navbar-nav-scroll 3. style:"--bs-scroll-height:100px" </code>
+        </p>
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="../../Day1/smiley.gif" alt="Logo" width="30" height="24"
+                        class="d-inline-block align-text-top">
+                    Bootstrap
+                </a>
+            </div>
+        </nav>
+
+
+
+    </div>
+    <p class="m-3 bg-light">
+        Using The Below Code We can control the position of the Nav <br>
+        <code>Default: <br>
+            &lt;nav class="navbar bg-body-tertiary"&gt;<br>
+                &lt;div class="container-fluid"&gt;<br>
+                    &lt;a class="navbar-brand" href="#"&gt;Default&lt;/a&gt;<br>
+                &lt;/div&gt;<br>
+            &lt;/nav&gt; <br>
+        </code> <br>
+        By giving these classes to nav <code>fixed-top fixed-bottom sticky-top sticky-bottom</code> we can do the
+        relative positioning w.r.t container
+
+
+    </p>
+
+    <h2>Example of Offcanvas: </h2>
+    <small>When you click on the menu, the offcanvas will slide in from the left</small>
+
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Offcanvas navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex mt-3" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="../js/bootstrap.bundle.min.js"></script>
     <!-- <script src="js/your-scripts.js"></script> -->
