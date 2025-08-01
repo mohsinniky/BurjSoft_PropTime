@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+    <!-- Bootstrap CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="p-2">
+    <!-- Codes -->
+    <!-- Loops in Javascript -->
+    <nav class="breadcrumb p-2" style="--bs-breadcrumb-divider: '>';">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../index.html">ProbTime</a></li>
+            <li class="breadcrumb-item">Javascript</li>
+            <li class="breadcrumb-item active">Loops</li>
+        </ol>
+    </nav>
+    <hr>
+
+    <aside class="alert alert-primary position-fixed bottom-0 end-0 m-3" role="alert">
+        <!-- Loops -->
+         <div id="demo"></div>
+         <div id="demo2"></div>
+
+    </aside>
+
+    <h4>In this Page Folowing JS concepts are covered</h4>
+    <pre>
+        Loops:
+        For Loop.
+        While Loop.
+        Do-While Loop.
+        For-Of Loop.
+        For-In Loop.  
+    </pre>
+    <h2>For Loop</h2>
+    <p>The for loop is used to execute a block of code a specific number of times.
+        <br>
+        <code>
+            for (let i = 0; i < 5; i++) {<br>
+            console.log("Iteration:", i);<br>
+            }
+        </code>
+        </p>
+    <h2>While Loop</h2>
+    <p>The while loop executes a block of code as long as a specified condition is true.
+        <br>
+        
+        <code>
+            let i = 0;<br>
+            while (i < 5) {<br>
+            console.log("Iteration:", i);<br>
+            i++;<br>
+            }
+        </code>
+        </p>
+    <h2>Do-While Loop</h2>
+    <p>The do-while loop executes a block of code once, and then repeats the execution as long as a specified condition is true.
+        <br>
+        
+        <code>
+            let i = 0;<br>
+            do {<br>
+            console.log("Iteration:", i);<br>
+            i++;<br>
+            } while (i < 5);<br>
+        </code>
+        </p>
+    <h2>For-Of Loop</h2>
+    <p>The for-of loop is used to iterate over iterable objects (like arrays, strings, or node lists).
+        <br>
+        
+        <code>
+            const fruits = ["Apple", "Banana", "Cherry"];<br>
+            for (const fruit of fruits) {<br>
+            console.log("Fruit:", fruit);<br>
+            }
+        </code>
+        </p>
+    <h2>For-In Loop</h2>
+    <p>The for-in loop is used to iterate over the enumerable properties of an object.
+        <br>
+        
+        <code>
+            const person = { firstName: "John", lastName: "Doe" };<br>
+            for (const key in person) {<br>
+            console.log(key + ":", person[key]);<br>
+            }
+        </code>
+        </p>
+    <h2>Nested Loops</h2>
+    <p>Loops can be nested inside each other to perform more complex iterations.
+        <br>
+        
+        <code>
+            for (let i = 0; i < 3; i++) {<br>
+            for (let j = 0; j < 2; j++) {<br>
+            console.log("i:", i, "j:", j);<br>
+            }<br>
+            }
+        </code>
+        </p>
+    <h2>Break and Continue Statements</h2>
+    <p>The break statement is used to exit a loop prematurely, while the continue statement skips the current iteration and continues with the next one.
+        <br>
+        
+        <code>
+            for (let i = 0; i < 5; i++) {<br>
+            if (i === 2) {<br>
+            continue; // Skip iteration when i is 2<br>
+            }<br>
+            console.log("Iteration:", i);<br>
+            if (i === 4) {<br>
+            break; // Exit loop when i is 4<br>
+            }<br>
+            }
+        </code>
+    </p>
+    
+
+
+
+    <script>
+        // All loops execution
+        console.log("For Loop:");
+        for (let i = 0; i < 5; i++) {
+            console.log("Iteration:", i);
+        }
+        console.log("While Loop:");
+        let i = 0;
+        while (i < 5) {
+            console.log("Iteration:", i);
+            i++;
+        }
+        console.log("Do-While Loop:");
+        let j = 0;
+        do {
+            console.log("Iteration:", j);
+            j++;
+        } while (j < 5);
+        console.log("For-Of Loop:");
+        const fruits = ["Apple", "Banana", "Cherry"];
+        for (const fruit of fruits) {
+            console.log("Fruit:", fruit);
+        }
+        console.log("For-In Loop:");
+        const person = { firstName: "John", lastName: "Doe" };
+        for (const key in person) {
+            console.log(key + ":", person[key]);
+        }
+        console.log("Nested Loops:");
+        for (let k = 0; k < 3; k++) {
+            for (let l = 0; l < 2; l++) {
+                console.log("i:", k, "j:", l);
+            }
+        }
+        console.log("Break and Continue Statements:");
+        for (let m = 0; m < 5; m++) {
+            if (m === 2) {
+                continue; // Skip iteration when m is 2
+            }
+            console.log("Iteration:", m);
+            if (m === 4) {
+                break; // Exit loop when m is 4
+            }
+        }
+
+        // Displaying the loops in HTML
+        document.getElementById("demo").innerHTML = "Check Console for Loop Outputs";
+        document.getElementById("demo2").innerHTML = "Loops Executed Successfully"; 
+
+       
+    </script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

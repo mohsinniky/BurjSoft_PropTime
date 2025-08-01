@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+    <!-- Bootstrap CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="p-2">
+    <!-- Codes -->
+    <!-- Strings in Javascript -->
+    <nav class="breadcrumb p-2" style="--bs-breadcrumb-divider: '>';">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../index.html">ProbTime</a></li>
+            <li class="breadcrumb-item">Javascript</li>
+            <li class="breadcrumb-item active">Strings</li>
+        </ol>
+    </nav>
+    <hr>
+
+    <aside class="alert alert-primary position-fixed bottom-0 end-0 m-3" role="alert">
+        <!-- Check Console -->
+        <div id="demo"></div>
+
+    </aside>
+
+
+    <h4>In this Page Folowing JS concepts are covered</h4>
+    <pre>
+        Strings:
+        String Creation.
+        String Methods.
+        String Interpolation.
+    </pre>
+    <h2>String Creation</h2>
+    <p>Strings in JavaScript can be created using single quotes, double quotes, or backticks (template literals).
+        <br>
+        <code>
+            let str1 = "Hello, World!";<br>
+            let str2 = 'JavaScript is fun!';<br>
+            let str3 = `Template literals are great!`;
+        </code>
+    </p>
+    <h2>String Methods</h2>
+    <p>Strings in JavaScript have a number of built-in methods that can be used to manipulate the string.
+        <br>
+        <code>
+            console.log("String Methods: toUpperCase, length, includes");<br>
+            console.log(str1.toUpperCase()); // Converts to uppercase<br>
+            console.log(str2.length); // Gets the length of the string<br>
+            console.log(str3.includes("great")); // Checks if the string contains a substring
+        </code>
+    </p>
+    <h2>String Interpolation</h2>
+    <p>String interpolation is a feature in JavaScript that allows you to embed variables or expressions within a
+        string.
+        <br>
+        <code>
+            let name = "John";<br>
+            let greeting = `Hello, ${name}!`; // Using template literals for interpolation<br>
+            console.log(greeting);
+        </code>
+        <mark>`` are called template literals, which are used to create multi-line strings. they allow you to include variables, expressions, and other content within the string.</mark>
+    </p>
+
+    <!-- displaying all occurences of a substring -->
+    <em>Displaying all occurences of a substring "Cats" in the string "I love cats. Cats are very easy to love. Cats are very popular."</em>
+    <p id="demo2"></p>
+
+
+
+
+
+    <script>
+        console.log("This is a simple Javascript code snippet demonstrating strings.");
+
+        // String Creation
+        let str1 = "Hello, World!";
+        let str2 = 'JavaScript is fun!';
+        let str3 = `Template literals are great!`;
+
+        // String Methods
+        console.log("String Methods: toUpperCase, length, includes");
+        console.log(str1.toUpperCase()); // Converts to uppercase
+        console.log(str2.length); // Gets the length of the string
+        console.log(str3.includes("great")); // Checks if the string contains a substring
+
+        // string search methods
+        console.log("String Search Methods: indexOf, lastIndexOf, search");
+        console.log(str1.indexOf("World")); // Finds the index of a substring
+        console.log(str1.lastIndexOf("orld")); // Finds the last index of a substring
+        console.log(str1.search("l")); // Finds the index of a substring
+
+        // matchAll
+        let text = "I love cats. Cats are very easy to love. Cats are very popular."
+        const iterator = text.matchAll(/Cats/gi);
+
+        document.getElementById("demo2").innerHTML ="<span>Search Results: </span>" + Array.from(iterator);
+
+        // String Interpolation
+        let name = "John";
+        let greeting = `Hello, ${name}!`; // Using template literals for interpolation
+        console.log(greeting);
+
+        // Check Console for output
+        document.getElementById("demo").innerHTML = "Check Console for String Outputs";
+
+
+    </script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
