@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+    <!-- Bootstrap CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="p-2">
+    <!-- Codes -->
+    <!-- Objects in Javascript -->
+    <nav class="breadcrumb p-2" style="--bs-breadcrumb-divider: '>';">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../index.html">ProbTime</a></li>
+            <li class="breadcrumb-item">Javascript</li>
+            <li class="breadcrumb-item active">Objects</li>
+        </ol>
+    </nav>
+    <hr>
+
+    <h4>In this Page Folowing JS concepts are covered</h4>
+    <pre>
+        Objects:
+        Object Creation.
+        Object Properties and Methods.
+        Accessing Object Properties.
+        Object Destructuring.
+    </pre>
+    <h2>Object Creation</h2>
+    <p>Objects in JavaScript can be created using object literals or the Object constructor.
+        <br>
+    <h4>See Console</h4>
+
+    <code>const car = {type:"Fiat", model:"500", color:"white"}; <br> // another way to create an object
+    ==> const person = new Object();</code>
+    <img src="../images/object.png" alt="Object Example" class="d-block ms-2 mt-2">
+    </p>
+
+    <h2>Object Properties and Methods</h2>
+    <p>Objects can have properties (key-value pairs) and methods (functions associated with the object).
+        <br>
+    <h4>See Console</h4>
+    <code>
+            person.firstName = "John";<br>
+            person.lastName = "Doe";<br>
+            person.age = 50;<br>
+            person.eyeColor = "blue";<br>
+        </code>
+    </p>
+    <h2>Accessing Object Properties</h2>
+    <p>Object properties can be accessed using dot notation or bracket notation.
+        <br>
+    <h4>See Console</h4>
+    <code>
+            console.log("Person Object:", person.firstName);<br>
+        </code>
+    </p>
+    <h2>Object Destructuring</h2>
+    <p>Object destructuring allows unpacking values from objects into distinct variables.
+        <br>
+    <h4>See Console</h4>
+    <code>
+            const { firstName, lastName } = person;<br>
+            console.log("First Name:", firstName);<br>
+            console.log("Last Name:", lastName);<br>
+        </code>
+    </p>
+    <h2>Deleting Property</h2>
+    <p>Properties can be deleted from an object using the delete operator.
+        <br>
+    <h4>See Console</h4>
+    <code>
+            delete person.age;<br>
+            console.log("After Deletion:", person);<br>
+        </code>
+    </p>
+    <h2>Accessing Object Methods</h2>
+    <p>"This" Keyword refers to a current object. <br>
+        <code> objectName.methodName() </code> is used to call a method
+    </p>
+
+    <h2>Object Constructor Making</h2>
+    <p>Objects can also be created using the Object constructor furnction, which is less common but still valid.
+        <br>
+        <code>
+            function Person(first, last, age, eye) { <br>
+                this.firstName = first; <br>
+                this.lastName = last; <br>
+                this.age = age; <br>
+                this.eyeColor = eye; <br>
+            } <br>
+            const myMother = new Person("Sally", "Rally", 48, "green"); <br>
+            const mySister = new Person("Anna", "Rally", 18, "green"); <br>
+        </code>
+        <br>
+        <em>Adding a property to a created object is easy.like using <code>  mySister.nationality = "English"; </code>The new property will be added to <mark>mySister</mark> Not to any other Person Objects. <mark class="text-danger">You can NOT add a new property to an object constructor</mark></em>
+
+
+
+
+
+
+    </p>
+    <hr>
+
+    <!-- Display the Object -->
+    <div id="objectDisplay" class="mt-3"></div>
+    <!-- Display the Object with both keys and values -->
+    <div id="demo" class="mt-3 ms-3"></div>
+    <!-- Display the Object with JSON Stringify -->
+    <div id="demo2" class="mt-3 ms-3"></div>
+
+
+
+
+
+
+
+
+
+    <script>
+        // Create an Object
+        const person = {};
+        // another way to create an object
+        // const person = new Object();
+
+
+        // Add Properties
+        person.firstName = "John";
+        person.lastName = "Doe";
+        person.age = 50;
+        person.eyeColor = "blue";
+
+        // Log the Object
+        console.log("Person Object:", person);
+        // Delete a Property
+        console.log("Before Deletion of Age:", person);
+        delete person.age;
+        console.log("After Deletion of Age:", person);
+        const car = { type: "Fiat", model: "500", color: "white" };
+        console.log("Car Object:", car);
+
+        // using function as a property
+        const person2 = {
+            firstName: "John",
+            lastName: "Doe",
+            id: 5566,
+            fullName: function () {
+                return this.firstName + " " + this.lastName;
+                // here 'this' refers to the current object
+            }
+        };
+        // destructuring
+        const { firstName, id } = person2;
+        console.log("Destructured Object:", person2);
+        console.log("First Name:", firstName);
+        console.log("ID:", id);
+        console.log("Person2 Full Name:", person2.fullName());
+
+
+        // functions to display object on our html page
+        function displayObject(obj) {
+            let output = "<h3>Object Properties:</h3><ul>";
+            for (let key in obj) {
+                output += `<li>${key}: ${obj[key]}</li>`;
+            }
+            output += "</ul>";
+            document.getElementById("objectDisplay").innerHTML = output;
+        }
+        // Display the person object
+        displayObject(person);
+
+        const myArray = Object.values(person);
+        console.log("Object Values:", myArray);
+
+        // Another Exapmple of Object display
+        const fruits = { Bananas: 300, Oranges: 200, Apples: 500 };
+
+        let text = "";
+        for (let [fruit, amount] of Object.entries(fruits)) {
+            text += fruit + ": " + amount + "<br>";
+        }
+
+        // Stringify the object
+        let myString = JSON.stringify(person);
+
+        // Display String
+        document.getElementById("demo").innerHTML = text;
+        document.getElementById("demo2").innerHTML = myString;
+
+
+
+    </script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

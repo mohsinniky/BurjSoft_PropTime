@@ -27,14 +27,61 @@
         Primitive data types (string, number, boolean, null, undefined, symbol).
         Reference data types (object, array, function).
     </pre>
+    <p>
+    <h2>Primitive Data Types</h2>
+    <ul class="list-group">
+        <li class="list-group-item"><strong>String:</strong> Represents a sequence of characters. <code>let color = "Yellow"; let lastName = "Johnson";</code></li>
+        <li class="list-group-item"><strong>Number:</strong> Represents numeric values (both integers and floating-point). <code>let length = 16; let weight = 7.5;</code></li>
+        <li class="list-group-item"> <strong>Boolean:</strong> Represents a logical entity and can have two values: true or false. <code>let isAlive = true;</code></li>
+        <li class="list-group-item"><strong>null:</strong> Represents the intentional absence of any object value. <code>let x = null;</code></li>
+        <li class="list-group-item"><strong>undefined:</strong> Indicates that a variable has not been assigned a value. <code>let y;</code></li>
+        <li class="list-group-item"><strong>Symbol:</strong> A unique and immutable primitive value, often used as object property keys. <code>let id = Symbol("id");</code></li>
+    </ul>
+    </p>
 
-    
+    <h2>Reference Data Types</h2>
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Object:</strong> A collection of properties, where each property is defined as a key-value pair. <code>let person = { firstName: "John", lastName: "Doe" };</code></li>
+        <li class="list-group-item"><strong>Array:</strong> An ordered collection of values, which can be of any type. <code>let fruits = ["Apple", "Banana", "Cherry"];</code></li>
+        <li class="list-group-item"><strong>Function:</strong> A block of code designed to perform a particular task. Functions can be treated as objects in JavaScript. <code>function greet() { console.log("Hello!"); }</code></li>
+    </ul>
+    <hr>
 
 
-
-
+    <h3>Example of Data Types, Check Console</h3>
+    <pre>
+        // Primitive Data Types
+        let color = "Yellow"; // String
+        let length = 16; // Number
+        let isAlive = true; // Boolean
+        let x = null; // Null
+        let y; // Undefined
+        let id = Symbol("id"); // Symbol
+    </pre>
     <script>
-       
+        // Primitive Data Types
+        let color = "Yellow"; // String
+        let length = 16; // Number
+        let isAlive = true; // Boolean
+        let x = null; // Null
+        let y; // Undefined
+        let id = Symbol("id"); // Symbol
+
+        console.log("Color:", color);
+        console.log("Length:", length);
+        console.log("Is Alive:", isAlive);
+        console.log("Null Value:", x);
+        console.log("Undefined Value:", y);
+        console.log("Symbol ID:", id);
+
+        // Reference Data Types
+        let person = { firstName: "John", lastName: "Doe" }; // Object
+        let fruits = ["Apple", "Banana", "Cherry"]; // Array
+        function greet() { console.log("Hello!"); } // Function
+
+        console.log("Person Object:", person);
+        console.log("Fruits Array:", fruits);
+        greet();
 
     </script>
     <!-- Bootstrap JS Bundle -->

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+    <!-- Bootstrap CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="p-2">
+    <!-- Codes -->
+    <!-- Functions in Javascript -->
+    <nav class="breadcrumb p-2" style="--bs-breadcrumb-divider: '>';">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../index.html">ProbTime</a></li>
+            <li class="breadcrumb-item">Javascript</li>
+            <li class="breadcrumb-item active">Functions</li>
+        </ol>
+    </nav>
+    <hr>
+
+    <h4>In this Page Folowing JS concepts are covered</h4>
+    <pre>
+        Functions:
+        Function Declaration.
+        Function Expression.
+        Arrow Functions.
+        Function Invocation.
+    </pre>
+    <h2>Function Declaration</h2>
+    <p>A function declaration defines a named function that can be called later in the code.</p>
+    <pre>
+        function greet() {
+            console.log("Hello, World!");
+        }
+    </pre>  
+    <h2>Function Expression</h2>
+    <p>A function expression defines a function that can be assigned to a variable.</p>
+    <pre>
+        const add = function(a, b) {
+            return a + b;
+        };
+    </pre>
+    <h2>Arrow Functions</h2>
+    <p>Arrow functions provide a more concise syntax for writing functions.</p>
+    <pre>
+        const multiply = (x, y) => x * y;
+    </pre>
+    <h2>Function Invocation, Check Console</h2>
+    <p>Functions can be invoked by calling their name followed by parentheses.</p>
+
+    <!-- parameters vs arguments -->
+     <p>
+        <strong>Parameters</strong> are the variables listed as part of a function's definition, while <strong>arguments</strong> are the actual values passed to the function when it is called.
+        <br>
+        For example, in the function <code>function add(a, b)</code>, <code>a</code> and <code>b</code> are parameters.  
+        <br>
+        When you call <code>add(5, 10)</code>, <code>5</code> and <code>10</code> are the arguments.
+     </p>
+    
+
+    
+    <script>
+        function greet() {
+            console.log("Hello, World!");
+        }
+        greet();
+        // Arrow function example
+        const multiply = (x, y) => x * y;
+        console.log("const multiply = (x, y) => x * y;");
+        console.log("Multiplication Result:", multiply(5, 10));
+
+        
+
+    </script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
