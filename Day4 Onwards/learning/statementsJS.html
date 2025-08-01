@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+    <!-- Bootstrap CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="p-2">
+    <!-- Codes -->
+    <!-- Introduction to Javascript -->
+    <!-- Codes -->
+    <nav class="breadcrumb p-2" style="--bs-breadcrumb-divider: '>';">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../index.html">ProbTime</a></li>
+            <li class="breadcrumb-item">Javascript</li>
+            <li class="breadcrumb-item active">Statements & Syntax</li>
+        </ol>
+    </nav>
+    <hr>
+    <h4>In this Page Folowing JS concepts are covered</h4>
+    <p>
+        <pre>
+        Statements:
+        Variable declaration and assignment.
+        Conditional statements (if, else if, else).
+        Looping statements (for, while, do-while).
+
+        JavaScript Variables can be declared in 4 ways:
+            Automatically
+            Using var
+            Using let
+            Using const
+        </pre>
+        <hr>
+        <code>let</code> and <code>const</code> have block scope. <br>
+        <code>let</code> and <code>const</code> can not be redeclared. <br>
+        <code>let</code> and <code>const</code> must be declared before use. <br>
+        <code>let</code> and <code>const</code> does not bind to <code>this</code>. <br>
+        <code>let</code> and <code>const</code> are not hoisted. <br>
+
+    </p>
+    <hr>
+    <h3>// is used for single line comment</h3>
+    <h3>/* ...content... */ is used for multiline comment</h3>
+    <h3>Javascript is case sensitive</h3>
+
+    <p id="demo"></p>
+
+
+
+
+    <script>
+        console.log("This is a simple Javascript code snippet demonstrating statements.");
+
+
+        let a; 
+        // let is used to declare a block-scoped variable meaning it is only accessible within the block it is defined. {} is a block. let variables can be reassigned but not redeclared in the same scope. 
+
+
+        // var is used to declare a variable, and it is a global variable that is accessible outside the block it is defined.
+
+        const b =20; 
+        // const cannot be Reassigned, must be assigned a value when they are declared
+        var c = a+b;
+        // Variables defined with var are hoisted
+        carName = "Volvo";
+        console.log("The car name is: " + carName);
+        var carName;
+        a = 10;
+        c = a + b;
+        console.log("The sum of a and c is: " + c);
+        const name = "John" + " " + "Doe";
+        console.log("Name: " + name);
+
+
+        // Constant Arrays elements can be changed but not reassigned
+        const arr = [1, 2, 3];
+        console.log(arr);
+        arr.push(6);
+        arr[0] = 4;
+        console.log(arr);
+
+
+        document.getElementById("demo").innerHTML =
+            "The best place to break a code line is after an operator or a comma.";
+
+    </script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
