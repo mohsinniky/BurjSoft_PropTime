@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+    <!-- Bootstrap CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="p-2">
+    <!-- Codes -->
+    <!-- Introduction to Javascript -->
+    <!-- Codes -->
+    <!-- Toast -->
+    <nav class="breadcrumb p-2" style="--bs-breadcrumb-divider: '>';">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../index.html">ProbTime</a></li>
+            <li class="breadcrumb-item">Javascript</li>
+            <li class="breadcrumb-item active">Display</li>
+        </ol>
+    </nav>
+    <hr>
+    <h4>In this Page Folowing JS concepts are covered</h4>
+    <pre>
+        Display:
+        Writing into an HTML element, using innerHTML or innerText.
+        Writing into the HTML output using document.write().
+        Writing into an alert box, using window.alert().
+        Writing into the browser console, using console.log().
+
+    </pre>
+    <div id="demo">
+        Testing
+
+    </div>
+    
+    <hr>
+    <button class="btn btn-outline-primary" type="button"
+        onclick="document.getElementById('demo').style.display = 'none'">Hide Content</button>
+    <button class="btn btn-outline-primary" type="button" onclick="showContent()">Show Content</button>
+    <hr>
+    <p><mark>The <code>document.write()</code> method should only be used for testing.</mark></p>
+
+    <button class="btn btn-outline-danger" type="button" onclick="showError()">Show Error</button>
+    <button class="btn btn-outline-danger" type="button" onclick="showError2()">Show Error2</button>
+    <button class="btn btn-outline-danger" type="button" onclick="printPage()">Print Page</button>
+
+
+
+
+    <script>
+
+        document.write("Hello, World! This is a simple Javascript code snippet.");
+        document.getElementById('demo').innerText = 'block'
+        function showContent() {
+            document.getElementById('demo').style.display = 'block';
+        }
+        function showError() {
+            window.alert("This is an error message!");
+        }
+        function showError2() {
+            alert("This is an different error message!");
+        }
+        function printPage() {
+            window.print("This is an different error message!");
+        }
+
+    </script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
