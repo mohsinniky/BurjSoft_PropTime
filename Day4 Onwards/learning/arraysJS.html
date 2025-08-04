@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+    <!-- Bootstrap CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="p-2">
+    <!-- Codes -->
+    <!-- Arrays in Javascript -->
+    <nav class="breadcrumb p-2" style="--bs-breadcrumb-divider: '>';">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../index.html">ProbTime</a></li>
+            <li class="breadcrumb-item">Javascript</li>
+            <li class="breadcrumb-item active">Arrays</li>
+        </ol>
+    </nav>
+    <hr>
+
+    <h4>In this Page Folowing JS concepts are covered</h4>
+    <pre>
+        Arrays:
+        Array Creation.
+        Array Properties and Methods.
+        Array Manipulation.
+        
+    </pre>
+    <h1 class="text-center">Arrays</h1>
+    <h2>1. Array Creation</h2>
+    <p>
+        <strong>Arrays are used to store multiple values in a single variable.</strong>
+        <br>
+        An array can hold many values under a single name, and you can access the values by referring to an index
+        number.
+    </p>
+    <h3>Example:</h3>
+    <pre>
+        let fruits = ["Apple", "Banana", "Cherry"];
+        console.log(fruits[0]); // Output: Apple
+        console.log(fruits[1]); // Output: Banana
+        console.log(fruits[2]); // Output: Cherry
+    </pre>
+    <h2>2. Array Properties and Methods</h2>
+    <p>
+        <strong>Arrays have properties and methods that allow you to manipulate the data they contain.</strong>
+        <br>
+        Some common properties and methods include:
+    </p>
+    <ul>
+        <li><strong>length</strong>: Returns the number of elements in the array.</li>
+        <li><strong>push()</strong>: Adds one or more elements to the end of the array.</li>
+        <li><strong>pop()</strong>: Removes the last element from the array and returns it.</li>
+        <li><strong>shift()</strong>: Removes the first element from the array and returns it.</li>
+        <li><strong>unshift()</strong>: Adds one or more elements to the beginning of the array.</li>
+        <li><strong>splice()</strong>: Adds or removes elements from the array at a specified index.</li>
+        <li><strong>slice()</strong>: Returns a shallow copy of a portion of the array.</li>
+        <li><strong>indexOf()</strong>: Returns the first index at which a given element can be found in the array.</li>
+        <li><strong>forEach()</strong>: Executes a provided function once for each array
+            element.</li>
+    </ul>
+    <h3>Example In Console</h3>
+
+
+
+
+
+    <script>
+        console.log("Array Creation and Manipulation Example:");
+        let numbers = [1, 2, 3, 4, 5];
+        console.log(numbers); // Output: [1, 2, 3, 4, 5]
+        console.log("Length of array:", numbers.length); // Output: 5
+        console.log("First element:", numbers[0]); // Output: 1
+        console.log("Pushing 6 to the array...");
+        numbers.push(6);
+        console.log("After push:", numbers); // Output: [1, 2, 3, 4, 5, 6]
+        console.log("Popping last element...");
+        numbers.pop();
+        console.log("After pop:", numbers); // Output: [1, 2, 3, 4, 5]
+        console.log("Shifting first element...");
+        console.log("First element removed:", numbers[0]);
+        numbers.shift();
+        console.log("After shift:", numbers); // Output: [2, 3, 4, 5]
+        console.log("Unshifting 1 to the array...");
+        console.log("Adding 1 to the beginning of the array...");
+        numbers.unshift(1);
+        console.log("After unshift:", numbers); // Output: [1, 2, 3, 4, 5]
+        console.log("Splicing the array...");
+        numbers.splice(2, 1, 10);
+        console.log("After splice:", numbers); // Output: [1, 2, 10, 4, 5]
+        console.log("Slicing the array...");
+        let slicedArray = numbers.slice(1, 3);
+        console.log("Sliced array:", slicedArray); // Output: [2, 10]
+        console.log("Index of 10 in the array:", numbers.indexOf(10)); // Output: 2
+        console.log("Iterating through the array:");
+        numbers.forEach(function (num) {
+            console.log(num); // Output: 1 2 10 4 5
+        });
+
+    </script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
