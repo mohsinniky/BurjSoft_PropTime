@@ -23,14 +23,104 @@
 
     <h4>In this Page Folowing JS concepts are covered</h4>
     <pre>
-        
+        1. Type Conversion
+        2. Implicit Type Conversion
+        3. Explicit Type Conversion
+        4. String Conversion
+        5. Number Conversion
+        6. Boolean Conversion
     </pre>
+    <h5>1. Type Conversion</h5>
+    <p>Type conversion is the process of converting a value from one data type to another
+        data type. In JavaScript, there are two types of type conversion: implicit and explicit.</p>
+    <h5>2. Implicit Type Conversion</h5>
+    <p>Implicit type conversion, also known as coercion, is when JavaScript automatically
+        converts a value from one type to another without the programmer's intervention. This
+        can happen in various situations, such as when performing arithmetic operations or
+        concatenating strings.</p>
+    <h5>3. Explicit Type Conversion</h5>
+    <p>Explicit type conversion, also known as type casting, is when the programmer manually
+        converts a value from one type to another using built-in functions or methods.</p>
+    <h5>4. String Conversion</h5>
+    <p>To convert a value to a string, you can use the <code>String()</code> function or the
+        <code>.toString()</code> method. For example:</p>
+    <pre>
+        let num = 42;
+        let str1 = String(num); // Using String() function
+        let str2 = num.toString(); // Using toString() method
+        console.log(str1); // "42"
+        console.log(str2); // "42"
+    </pre>
+    <h5>5. Number Conversion</h5>
+    <p>To convert a value to a number, you can use the <code>Number()</code> function or
+        parse functions like <code>parseInt()</code> and <code>parseFloat()</code>. For example:</p>
+    <pre>
+        let str = "42";
+        let num1 = Number(str); // Using Number() function
+        let num2 = parseInt(str); // Using parseInt() function
+        let num3 = parseFloat(str); // Using parseFloat() function  
+        console.log(num1); // 42
+        console.log(num2); // 42
+        console.log(num3); // 42
+    </pre>
+    <h5>6. Boolean Conversion</h5>
+    <p>To convert a value to a boolean, you can use the <code>Boolean()</code> function.
+        In JavaScript, values that are considered "falsy" (like <code>0</code>, <code>null</code>,
+        <code>undefined</code>, <code>false</code>, and empty strings) will convert to
+        <code>false</code>, while all other values will convert to <code>true</code>.</p>
+    <pre>
+        let str = "Hello";
+        let bool1 = Boolean(str); // Using Boolean() function
+        let bool2 = !!str; // Using double negation
+        console.log(bool1); // true
+        console.log(bool2); // true
+
+        let num = 0;
+        let bool3 = Boolean(num);
+        console.log(bool3); // false
+        let emptyStr = "";
+        let bool4 = Boolean(emptyStr);
+        console.log(bool4); // false
+    </pre>
+    <h5>7. Automatic String Conversion</h5>
+    <p>JavaScript automatically converts values to strings when necessary, such as during: <br>
+        JavaScript automatically calls the variable's <code>toString()</code> function when you try to "output" an object or a variable</p>
     
+    
+        <h5>Conclusion</h5>
+    <p>Type conversion is an essential concept in JavaScript that allows you to work with
+        different data types effectively. Understanding both implicit and explicit type conversion
+        will help you write more robust and error-free code.</p> 
+        
+ 
 
 
 
     <script>
-       
+        console.log("Type Conversion in JavaScript");
+        // Example of implicit type conversion
+        console.log("Implicit Type Conversion Example:");
+        let result = "5" + 10; // Implicitly converts 10 to a string
+        console.log("Implicit Conversion: "+result); // "510"
+
+        // Example of explicit type conversion
+        let num = "20";
+        console.log("Original Type: " + typeof num); // string
+        let convertedNum = Number(num); // Explicitly converts string to number
+        console.log("Explicit Conversion: " + convertedNum); // 20
+        // String conversion example
+        let value = 123;
+        let strValue = String(value);
+        console.log("String Conversion: " + strValue); // "123"
+        // Number conversion example
+        let strValue2 = "456";
+        let numValue = parseInt(strValue2);
+        console.log("Number Conversion: " + numValue); // 456
+        // Boolean conversion example
+        let truthyValue = "Hello";
+        let boolValue = Boolean(truthyValue);
+
+        console.log("Boolean Conversion: " + boolValue); // true       
     </script>
     <!-- Bootstrap JS Bundle -->
     <script src="../js/bootstrap.bundle.min.js"></script>

@@ -23,14 +23,121 @@
 
     <h4>In this Page Folowing JS concepts are covered</h4>
     <pre>
-        
+        RegExp:
+        1. Regular Expressions
+        2. Creating Regular Expressions
+        3. Using Regular Expressions
+        4. RegExp Methods
+        5. RegExp Properties
+        6. Flags in Regular Expressions
+
     </pre>
+
+    <h5>1. Regular Expressions</h5>
+    <p>Regular expressions (RegExp) are patterns used to match character combinations in strings
+        in JavaScript. They are used for searching, replacing, and validating strings.</p>
+    <h5>2. Creating Regular Expressions</h5>
+    <p>You can create a regular expression using either the RegExp constructor or a regular expression
+        literal. For example:</p>
+    <pre>
+        let regex1 = new RegExp('abc'); // Using RegExp constructor
+        let regex2 = /abc/; // Using regular expression literal
+    </pre>  
+    <h5>3. Using Regular Expressions</h5>
+    <p>You can use regular expressions with methods like <code>test()</code> and
+        <code>exec()</code> to search for patterns in strings. For example:</p>
+    <pre>
+        let str = "Hello, world!";  
+        let regex = /world/;
+        console.log(regex.test(str)); // true
+        console.log(regex.exec(str)); // ["world", index: 7, input: "Hello, world!"]
+    </pre>
+    <h5>4. RegExp Methods</h5>
+    <p>Regular expressions have several methods, including:</p>
+    <ul>
+        <li><code>test()</code>: Tests if a pattern exists in a string.</li>
+        <li><code>exec()</code>: Executes a search for a match in a string and returns an array of results.</li>
+        <li><code>toString()</code>: Returns the string representation of the regular expression.</li>
+        <li><code>compile()</code>: Recompiles the regular expression with a new pattern.</li>
+    </ul>
+    <h5>5. RegExp Properties</h5>
+    <p>Regular expressions have several properties, including:</p>
+    <ul>
+        <li><code>source</code>: The text of the regular expression pattern.</li>
+        <li><code>global</code>: A boolean indicating if the regular expression is global.</li>
+        <li><code>ignoreCase</code>: A boolean indicating if the regular expression is case-insensitive.</li>
+        <li><code>multiline</code>: A boolean indicating if the regular expression works across multiple lines.</li>
+    </ul>
+    <h5>6. Flags in Regular Expressions</h5>
+    <p>Flags are used to modify the behavior of regular expressions. Common flags include:</p>
+    <ul>
+        <li><code>g</code>: Global search (find all matches).</li>
+        <li><code>i</code>: Case-insensitive search.</li>
+        <li><code>m</code>: Multiline search.</li>
+        <li><code>u</code>: Unicode support.</li>
+        <li><code>s</code>: Dotall mode (allows dot to match newline characters).</li>
+    </ul>
+    <p>For example, you can create a case-insensitive global regular expression like this
+    :</p>
+    <pre>
+        let regex = /abc/gi; // Case-insensitive and global search
+        console.log(regex.test("ABC")); // true
+    </pre>
+    <p>Regular expressions are powerful tools for string manipulation and validation in JavaScript.
+        They can be used for tasks like form validation, searching for patterns, and text processing.</p>
+    <hr>
     
 
 
 
     <script>
-       
+        // Example of using RegExp in JavaScript
+        let str = "The quick brown fox jumps over the lazy dog.";
+        let regex = /quick/;
+
+        // Test if the pattern exists in the string
+        console.log(regex.test(str)); // true
+
+        // Find the first match
+        let match = regex.exec(str);
+        console.log(match); // ["quick", index: 4, input: "The quick brown fox jumps over the lazy dog."]
+
+        // Using flags
+        let caseInsensitiveRegex = /lazy/i; // Case-insensitive search
+        console.log(caseInsensitiveRegex.test(str)); // true
+        // Using global flag
+        let globalRegex = /o/g; // Global search for 'o'
+        let matches = str.match(globalRegex);
+        console.log(matches); // ["o", "o", "o"]
+        // Using multiline flag
+        let multilineRegex = /^The/m; // Matches 'The' at the start of a line
+        console.log(multilineRegex.test(str)); // true
+        // Using Unicode flag
+        let unicodeRegex = /\u00A9/; // Matches the copyright symbol
+        let unicodeStr = "© 2023";
+        console.log(unicodeRegex.test(unicodeStr)); // true
+        // Using dotall mode
+        let dotallRegex = /quick.*lazy/s; // Matches 'quick' followed by anything until 'lazy'
+        console.log(dotallRegex.test(str)); // false (because it doesn't match across lines)
+
+        // using match,replace, search, split methods
+        let text = "Hello, world! Hello, universe!";
+        let searchRegex = /Hello/g; // Global search for 'Hello'
+        console.log(text.match(searchRegex)); // ["Hello", "Hello"]
+        console.log(text.search(searchRegex)); // 0
+        console.log(text.replace(searchRegex, "Goodbye")); // "Goodbye, world! Goodbye, universe!"
+        console.log(text.split(searchRegex)); // ["", " world! ", " universe!"]
+
+        console.log("RexExp Alteration (OR)");
+        // Example of altering a regular expression
+        let regex2 = /abc|def|ghi/;
+        let str2 = "abcefhi";
+        console.log(regex2.test(str2)); // true (matches 'abc')
+        console.log(str2.replace(regex2, "XYZ")); // "XYZefhi" (
+
+
+
+
     </script>
     <!-- Bootstrap JS Bundle -->
     <script src="../js/bootstrap.bundle.min.js"></script>

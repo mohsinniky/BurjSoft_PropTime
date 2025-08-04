@@ -239,9 +239,11 @@
         }
         console.log("Using spread operator to convert iterable to array:");
         const arrayFromIterable = [...iterable];
+
         console.log(arrayFromIterable); // Output: [1, 2, 3, 4, 5]
         console.log("Using map() method to create a new iterable:");
         const doubled = iterable.map(num => num * 2);
+
         console.log(doubled); // Output: [2, 4, 6, 8, 10]
         console.log("Using filter() method to create a new iterable:");
         const even = iterable.filter(num => num % 2 === 0);
