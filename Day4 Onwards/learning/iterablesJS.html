@@ -23,14 +23,111 @@
 
     <h4>In this Page Folowing JS concepts are covered</h4>
     <pre>
+        Iterables:
+        What are Iterables?
+        Using Built-in Iterables.
+        Iterating over Iterables.
+
+
         
     </pre>
+    <h1 class="text-center">Iterables</h1>
+    <h2>1. What are Iterables?</h2>
+    <p>
+        <strong>Iterables are objects that can be iterated over.</strong>
+    </p>
+    <hr>
+    <h2>2. Using Built-in Iterables</h2>
+    <p>
+        <strong>Iterables can be created using built-in iterables.</strong>
+        <br>
+        Some common built-in iterables include:
+    </p>
+    <ul>
+        <li><strong>Array</strong>: An array is a collection of elements that can be iterated over.</li>
+        <li><strong>String</strong>: A string is a sequence of characters that can be iterated over.</li>
+        <li><strong>Map</strong>: A map is a collection of key-value pairs that can be iterated over.</li>
+        <li><strong>Set</strong>: A set is a collection of unique values that can be iterated over.</li>
+        <li><strong>Arguments</strong>: The arguments object is an array-like object that contains the arguments passed to a function.</li>
+
+    </ul>
+    <h3>Example:</h3>
+    <pre>
+        let fruits = ["Apple", "Banana", "Cherry"];
+        for (let fruit of fruits) {
+            console.log(fruit);
+        }
+    </pre>
+    <h2>3. Iterating over Iterables</h2>
+    <p>
+        <strong>Iterables can be iterated over using the for...of loop.</strong>
+        <br>
+        The for...of loop allows you to iterate over the elements of an iterable object.
+        <br>
+        You can also use the <code>forEach()</code> method to iterate over the
+        elements of an iterable object.
+    </p>
+    <h3>Example:</h3>
+    <pre>
+        let fruits = ["Apple", "Banana", "Cherry"];
+        fruits.forEach(fruit => {
+            console.log(fruit);
+        });
+    </pre>
+    <p>
+        <strong>Iterables can also be converted to arrays using the spread operator.</strong>
+        <br>
+        The spread operator allows you to expand an iterable object into an array.
+    </p>
+    <h3>Example:</h3>
+    <pre>
+        let fruits = new Set(["Apple", "Banana", "Cherry"]);
+        let fruitsArray = [...fruits];
+        console.log(fruitsArray); // Output: ["Apple", "Banana", "Cherry"]
+    </pre>
+    <p>
+        <strong>Iterables can also be converted to strings using the join() method.</strong>
+        <br>
+        The join() method allows you to join the elements of an iterable object into a string.
+    </p>
+    <h3>Example:</h3>
+    <pre>
+        let fruits = ["Apple", "Banana", "Cherry"];
+        let fruitsString = fruits.join(", ");
+        console.log(fruitsString); // Output: "Apple, Banana, Cherry"
+    </pre>
+
+    <p>
+        <strong>Iterables can also be filtered using the filter() method.</strong>
+        <br>
+        The filter() method allows you to create a new iterable object that contains only the elements that pass a
+        specified test.
+    </p>
+    <h3>Example:</h3>
+    <pre>
+        let fruits = ["Apple", "Banana", "Cherry"];
+        let filteredFruits = fruits.filter(fruit => fruit.startsWith("A"));
+        console.log(filteredFruits); // Output: ["Apple"]
+    </pre>
+
+    <em>Note: Iterators provide a controlled way to work with data sequences, enabling custom iteration logic for various data structures.</em>
+
     
 
 
 
     <script>
-       
+        // Example of using an iterable
+        const iterable = [1, 2, 3, 4, 5];
+        for (const value of iterable) {
+            console.log(value); // Output: 1 2 3 4 5
+        }
+
+        // Example of using a Set as an iterable
+        const mySet = new Set(['a', 'b', 'c']);
+        for (const item of mySet) {
+            console.log(item); // Output: a b c
+        }
     </script>
     <!-- Bootstrap JS Bundle -->
     <script src="../js/bootstrap.bundle.min.js"></script>

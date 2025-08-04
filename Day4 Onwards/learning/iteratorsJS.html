@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Javascript</title>
+    <!-- Bootstrap CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body class="p-2">
+    <!-- Codes -->
+    <!-- Iterators in Javascript -->
+    <nav class="breadcrumb p-2" style="--bs-breadcrumb-divider: '>'">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../index.html">ProbTime</a></li>
+            <li class="breadcrumb-item">Javascript</li>
+            <li class="breadcrumb-item active">Iterators</li>
+        </ol>
+    </nav>
+    <hr />
+
+    <h4>In this Page Folowing JS concepts are covered</h4>
+    <pre>
+        Iterators:
+        What are Iterators?
+        Using Built-in Iterators.
+        
+    </pre>
+
+    <h1 class="text-center">Iterators</h1>
+    <h2>1. What are Iterators?</h2>
+    <p>
+        <strong>Iterators are objects that allow you to iterate over a collection of
+            values.</strong>
+        <br />
+        They provide a way to access elements of a collection one at a time,
+        without exposing the underlying structure.
+    </p>
+    <hr />
+    <h2>2. Using Built-in Iterators</h2>
+    <p>
+        <strong>Iterators can be created using built-in iterators.</strong>
+        <br />
+        Some common built-in iterators include:
+    </p>
+    <ul>
+        <li>
+            <strong>Array Iterator</strong>: An iterator that allows you to iterate
+            over the elements of an array.
+        </li>
+        <li>
+            <strong>String Iterator</strong>: An iterator that allows you to iterate
+            over the characters of a string.
+        </li>
+        <li>
+            <strong>Map Iterator</strong>: An iterator that allows you to iterate
+            over the key-value pairs of a map.
+        </li>
+        <li>
+            <strong>Set Iterator</strong>: An iterator that allows you to iterate
+            over the unique values of a set.
+        </li>
+        <li>
+            <strong>Generator Functions</strong>: Functions that can be paused and
+            resumed, allowing you to create custom iterators.
+        </li>
+    </ul>
+    <h3>Example:</h3>
+    <pre>
+        let fruits = ["Apple", "Banana", "Cherry"];
+        let iterator = fruits[Symbol.iterator]();
+        
+        console.log(iterator.next().value); // Output: Apple
+        console.log(iterator.next().value); // Output: Banana
+        console.log(iterator.next().value); // Output: Cherry
+        console.log(iterator.next().done);  // Output: true
+    </pre>
+    <h2>3. Using Custom Iterators</h2>
+
+    <p>
+        <strong>Iterators can also be used with the for...of loop.</strong>
+        <br />
+        The for...of loop automatically handles the iteration process, making it
+        easier to work with iterators.
+    </p>
+    <h3>Example:</h3>
+    <pre>
+        let numbers = [1, 2, 3];
+        for (let number of numbers) {
+            console.log(number);
+        }
+    </pre>
+    <p>
+        <strong>Iterators can also be used with the spread operator.</strong>
+        <br />
+        The spread operator allows you to expand an iterable object into
+        individual elements.
+    </p>
+    <h3>Example:</h3>
+    <pre>
+        let iterable = new Set([1, 2, 3]);
+        let array = [...iterable];
+        console.log(array); // Output: [1, 2, 3]
+    </pre>
+    <p>
+        <strong>Iterators can also be used with the map() method.</strong>
+        <br />
+        The map() method allows you to apply a function to each element of an
+        iterable object and return a new iterable.
+    </p>
+    <h3>Example:</h3>
+    <pre>
+        let numbers = [1, 2, 3];
+        let doubled = numbers.map(num => num * 2);
+        console.log(doubled); // Output: [2, 4, 6]
+    </pre>
+
+    <p>
+        <strong>Iterators can also be used with the filter() method.</strong>
+        <br />
+        The filter() method allows you to create a new iterable object that
+        contains only the elements that pass a specified test.
+    </p>
+    <h3>Example:</h3>
+    <pre>
+        let numbers = [1, 2, 3, 4, 5];
+        let evenNumbers = numbers.filter(num => num % 2 === 0);
+        console.log(evenNumbers); // Output: [2, 4]
+    </pre>
+    <p>
+        <strong>Iterators can also be used with the reduce() method.</strong>
+        <br />
+        The reduce() method allows you to apply a function to each element of an
+        iterable object and accumulate a single result.
+    </p>
+    <h3>Example:</h3>
+    <pre>
+        let numbers = [1, 2, 3, 4, 5];
+        let sum = numbers.reduce((accumulator, current) => accumulator + current, 0);
+        console.log(sum); // Output: 15
+    </pre>
+    <p>
+        <strong>Iterators can also be used with the find() method.</strong>
+        <br />
+        The find() method allows you to search for the first element in an
+        iterable object that satisfies a specified condition.
+    </p>
+    <h3>Example:</h3>
+    <pre>
+        let numbers = [1, 2, 3, 4, 5];
+        let firstEven = numbers.find(num => num % 2 === 0);
+        console.log(firstEven); // Output: 2
+    </pre>
+        <p>
+            <strong>Iterators can also be used with the every() method.</strong>
+            <br />
+            The every() method tests whether all elements in an iterable object
+            pass a specified test.
+        </p>
+    <h3>Example:</h3>   
+    <pre>
+        let numbers = [2, 4, 6, 8];
+        let allEven = numbers.every(num => num % 2 === 0);
+        console.log(allEven); // Output: true
+    </pre>
+    <p>
+        <strong>Iterators can also be used with the some() method.</strong>
+        <br />
+        The some() method tests whether at least one element in an iterable
+        object passes a specified test.
+    </p>
+    <h3>Example:</h3>
+    <pre>
+        let numbers = [1, 2, 3, 4, 5];
+        let atLeastOneEven = numbers.some(num => num % 2 === 0);
+        console.log(atLeastOneEven); // Output: true
+    </pre>
+    <p>
+        <strong>Iterators can also be used with the forEach() method.</strong>
+        <br />
+        The forEach() method executes a provided function once for each
+        <code>let numbers = [1, 2, 3, 4, 5];
+        element in an iterable object.
+    </p>
+    <h3>Example:</h3>
+    <pre>
+        let numbers = [1, 2, 3, 4, 5];
+        numbers.forEach(num => {
+            console.log(num);
+        });
+    </pre>
+    <p>
+        <strong>Iterators can also be used with the reduceRight() method.</strong>
+        <br />
+        The reduceRight() method applies a function against an accumulator and
+        each element in an iterable object (from right to left) to reduce it to a
+        single value.
+    </p>
+    <h3>Example:</h3>
+    <pre>
+        let numbers = [1, 2, 3, 4, 5];
+        let product = numbers.reduceRight((accumulator, current) => accumulator * current, 1);
+        console.log(product); // Output: 120
+    </pre>
+    <p>
+        <strong>Iterators can also be used with the findIndex() method.</strong>
+        <br />
+        The findIndex() method returns the index of the first element in an
+        iterable object that satisfies a specified condition.
+    </p>
+    <h3>Example:</h3>
+    <pre>
+        let numbers = [1, 2, 3, 4, 5];
+        let indexOfFirstEven = numbers.findIndex(num => num % 2 === 0);
+        console.log(indexOfFirstEven); // Output: 1
+    </pre>
+
+
+    
+
+    <script>
+        // Example of using an iterator
+        const iterable = [1, 2, 3, 4, 5];
+        const iterator = iterable[Symbol.iterator]();
+        console.log("Using an iterator to access elements:");
+        console.log(iterator.next().value); // Output: 1
+        console.log(iterator.next().value); // Output: 2
+        console.log(iterator.next().value); // Output: 3
+        console.log(iterator.next().done);  // Output: false
+        console.log(iterator.next().value); // Output: 4
+        console.log(iterator.next().value); // Output: 5
+        console.log(iterator.next().done);  // Output: true
+
+        console.log("Using for...of loop to iterate over elements:");
+        for (const value of iterable) {
+            console.log(value); // Output: 1 2 3 4 5
+        }
+        console.log("Using spread operator to convert iterable to array:");
+        const arrayFromIterable = [...iterable];
+        console.log(arrayFromIterable); // Output: [1, 2, 3, 4, 5]
+        console.log("Using map() method to create a new iterable:");
+        const doubled = iterable.map(num => num * 2);
+        console.log(doubled); // Output: [2, 4, 6, 8, 10]
+        console.log("Using filter() method to create a new iterable:");
+        const even = iterable.filter(num => num % 2 === 0);
+        console.log(even); // Output: [2, 4]
+        console.log("Using find() method to find the first element that satisfies a condition:");
+        const firstEven = iterable.find(num => num % 2 === 0);
+        console.log(firstEven); // Output: 2    
+        console.log("Using reduce() method to accumulate a single result:");
+        const sum = iterable.reduce((accumulator, current) => accumulator + current, 0);
+        console.log(sum); // Output: 15    
+        console.log("Using findIndex() method to find the index of the first element that satisfies a condition:");
+        const indexOfFirstEven = iterable.findIndex(num => num % 2 === 0);
+        console.log(indexOfFirstEven); // Output: 1    
+        console.log("Using some() method to check if at least one element satisfies a condition:");
+        const atLeastOneEven = iterable.some(num => num % 2 === 0);
+        console.log(atLeastOneEven); // Output: true
+        console.log("Using every() method to check if all elements satisfy a condition:");
+        const allEven = iterable.every(num => num % 2 === 0);
+        console.log(allEven); // Output: false
+        console.log("Using forEach() method to execute a function for each element:");
+        iterable.forEach(num => {
+            console.log(num); // Output: 1 2 3 4 5
+        }); 
+    
+    
+
+    </script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
