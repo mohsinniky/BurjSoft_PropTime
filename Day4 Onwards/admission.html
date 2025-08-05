@@ -160,7 +160,7 @@
                                 <label for="email" class="form-label">Email address</label>
                                 <input type="email" class="form-control" id="email" name="email"
                                     placeholder="name@example.com">
-                                    <span id="email-error" class="text-danger"></span>
+                                <span id="email-error" class="text-danger"></span>
                             </div>
                             <div class="mb-3 col-5">
                                 <label for="dob" class="form-label">DOB:</label>
@@ -195,17 +195,17 @@
                             </div>
                             <div class="mb-3 col-6">
                                 <div class="row justify-content-center">
-                                    <label for="gender" class="form-label">Gender</label>
+                                    <label class="form-label">Gender</label>
                                     <div class="form-check col-auto">
-                                        <input class="form-check-input " type="radio" name="gender" id="male"
+                                        <input class="form-check-input" type="radio" name="gender" id="male"
                                             value="Male">
-                                        <label class="form-check-label " for="male">
+                                        <label class="form-check-label" for="male">
                                             Male
                                         </label>
                                     </div>
                                     <div class="form-check col-auto">
                                         <input class="form-check-input" type="radio" name="gender" id="female"
-                                            value="FeMale">
+                                            value="Female">
                                         <label class="form-check-label" for="female">
                                             Female
                                         </label>
@@ -237,16 +237,18 @@
         </div>
     </div>
     <script>
-        var count=0;
+        let count = 0;
+        let objArray = [];
         const errorElem = `<span class="text-danger">The Entered input is not valid</span>`
+
+
         function validateAndAdd() {
-            // here we will first validate only the 5 named inputs using regexp and then creating an object of inputs
-            var fnameValue = document.getElementById('fname').value;
-            var gname = document.getElementById('gname').value;
-            var email = document.getElementById('email').value;
-            var dob = document.getElementById('dob').value;
-            var gender = document.getElementById('gender').value;
-            var obj = {};
+            let fnameValue = document.getElementById('fname').value;
+            let gnameValue = document.getElementById('gname').value;
+            let emailValue = document.getElementById('email').value;
+            let dobValue = document.getElementById('dob').value;
+            let genderValue = document.querySelector('input[name="gender"]:checked')?.value;
+
 
 
 
@@ -257,47 +259,49 @@
 
             dobRegex = /^\d{4}-\d{2}-\d{2}$/;
 
-            if (!fnameRegex.test(fname)) {
+            if (!fnameRegex.test(fnameValue)) {
                 document.getElementById('fname-error').innerHTML = 'The entered input is not valid';
             } else {
                 document.getElementById('fname-error').innerHTML = '';
             }
-            if (!gnameRegex.test(gname)) {
+            if (!gnameRegex.test(gnameValue)) {
                 document.getElementById('gname-error').innerHTML = 'The entered input is not valid';
             } else {
                 document.getElementById('gname-error').innerHTML = '';
             }
-            if (!emailRegex.test(email)) {
-            document.getElementById('email-error').innerHTML = 'The entered input is not valid';
+            if (!emailRegex.test(emailValue)) {
+                document.getElementById('email-error').innerHTML = 'The entered input is not valid';
             } else {
                 document.getElementById('email-error').innerHTML = '';
             }
-            if (!dobRegex.test(dob)) {
+            if (!dobRegex.test(dobValue)) {
                 console.log(dob);
-            document.getElementById('dob-error').innerHTML = 'The entered input is not valid';
+                document.getElementById('dob-error').innerHTML = 'The entered input is not valid';
             } else {
                 document.getElementById('dob-error').innerHTML = '';
             }
-            if(fnameRegex.test(fname) && gnameRegex.test(gname) && emailRegex.test(email) && dobRegex.test(dob)){
-                add();
+            if (fnameRegex.test(fnameValue) && gnameRegex.test(gnameValue) && emailRegex.test(emailValue) && dobRegex.test(dobValue)) {
+                add(fnameValue, gnameValue, emailValue, dobValue, genderValue);
             }
         }
 
         // adding the 5 values from the form in a object
-        function add() {
+        function add(fnameValue, gnameValue, emailValue, dobValue, genderValue) {
             count++;
 
-            var obj = {
+            let obj = {
                 id: count,
-                fname: fname,
-                gname: gname,
-                email: email,
-                dob: dob,
-                gender: gender
+                fname: fnameValue,
+                gname: gnameValue,
+                email: emailValue,
+                dob: dobValue,
+                gender: genderValue
             }
             console.log(obj);
+            objArray.push(obj);
+            console.log(objArray);
         }
-            
+
 
 
 
