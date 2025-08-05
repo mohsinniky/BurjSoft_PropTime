@@ -102,15 +102,17 @@
             <caption class="caption-top">Students Data List</caption>
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Fullname</th>
                     <th>Guardian Name</th>
                     <th>Date Of birth</th>
                     <th>Gender</th>
                     <th>Email</th>
+                    <th>Action</th>
 
                 </tr>
             </thead>
-            <tbody class="table-group-divider table_body">
+            <tbody class="table-group-divider " id="table_body">
 
             </tbody>
         </table>
@@ -300,7 +302,41 @@
             console.log(obj);
             objArray.push(obj);
             console.log(objArray);
+
+            display();
         }
+
+
+        // displaying the object array in table_body
+        function display() {
+            let table_body = document.getElementById('table_body');
+            table_body.innerHTML = '';
+            for (let i = 0; i < objArray.length; i++) {
+                let row = `<tr>
+                <td>${objArray[i].id}</td>
+                <td>${objArray[i].fname}</td>
+                <td>${objArray[i].gname}</td>
+                <td>${objArray[i].email}</td>
+                <td>${objArray[i].dob}</td>
+                <td>${objArray[i].gender}</td>
+                <td><button class="btn btn-danger" onclick="remove(${objArray[i].id})">Remove</button>
+                <button class="btn btn-success" onclick="edit(${objArray[i].id})">Edit</button></td>
+            </tr>`;
+                table_body.innerHTML += row;
+            }
+        }
+
+        function remove(id) {
+            for (let i = 0; i < objArray.length; i++) {
+                if (objArray[i].id == id) {
+                    objArray.splice(i, 1);
+                    break;
+                }
+            }
+            display();
+        }
+
+
 
 
 
