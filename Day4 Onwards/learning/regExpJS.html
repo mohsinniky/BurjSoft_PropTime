@@ -134,6 +134,10 @@
         let str2 = "abcefhi";
         console.log(regex2.test(str2)); // true (matches 'abc')
         console.log(str2.replace(regex2, "XYZ")); // "XYZefhi" (
+        // Quantifiers
+        let quantifierRegex = /a{2,4}/; // Matches 'aa', 'aaa', or 'aaaa'
+        let str3 = "aaaaa";
+        
 
 
 

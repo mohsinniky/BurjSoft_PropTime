@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+    <!-- Bootstrap CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="p-2">
+    <!-- Codes -->
+    <!-- If Else in Javascript -->
+    <nav class="breadcrumb p-2" style="--bs-breadcrumb-divider: '>';">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../index.html">ProbTime</a></li>
+            <li class="breadcrumb-item">Javascript</li>
+            <li class="breadcrumb-item active">If else</li>
+        </ol>
+    </nav>
+    <hr>
+
+    <h4>In this Page Folowing JS concepts are covered</h4>
+    <pre>
+        0. if Statements
+        1. If-Else Statements
+        2. Nested If-Else Statements
+        3. Ternary Operator
+        4. Switch Statement
+        
+    </pre>
+    <h5>0. if Statements</h5>
+    <p>An if statement is used to execute a block of code if a specified condition is
+        true. The syntax is as follows:</p>
+    <pre>
+        if (condition) {
+            // Code to be executed if condition is true
+        }
+    </pre>
+    <h5>1. If-Else Statements</h5>
+    <p>An if-else statement is used to execute one block of code if a condition is true
+        and another block of code if the condition is false. The syntax is as follows:</p>
+    <pre>
+        if (condition) {
+            // Code to be executed if condition is true
+        } else {
+            // Code to be executed if condition is false
+        }
+    </pre>
+    <h5>2. Nested If-Else Statements</h5>
+    <p>Nested if-else statements are used to check multiple conditions. An if statement
+        can contain another if statement inside it. The syntax is as follows:</p>
+    <pre>
+        if (condition1) {
+            // Code to be executed if condition1 is true
+            if (condition2) {
+                // Code to be executed if condition2 is true
+            } else {
+                // Code to be executed if condition2 is false
+            }
+        } else {
+            // Code to be executed if condition1 is false
+        }   
+    </pre>
+    <h5>3. Ternary Operator</h5>
+    <p>The ternary operator is a shorthand way of writing an if-else statement. It takes
+        three operands: a condition, a value if the condition is true, and a value if the
+        condition is false. The syntax is as follows:</p>
+    <pre>
+        condition ? valueIfTrue : valueIfFalse;
+    </pre>
+    <p>For example:</p>
+    <pre>
+        let age = 18;
+        let canVote = (age >= 18) ? "Yes" : "No";
+        console.log(canVote); // Output: Yes
+    </pre>
+    <h5>4. Switch Statement</h5>
+    <p>A switch statement is used to execute one block of code among many based on the
+        value of a variable or expression. The syntax is as follows:</p>
+    <pre>
+        switch (expression) {
+            case value1:
+                // Code to be executed if expression equals value1
+                break;
+            case value2:
+                // Code to be executed if expression equals value2
+                break;
+            // Add more cases as needed
+            default:
+                // Code to be executed if expression does not match any case
+        }
+    </pre>
+    <p>For example:</p>
+    <pre>
+        let day = 3;
+        switch (day) {
+            case 1:
+                console.log("Monday");
+                break;
+            case 2:
+                console.log("Tuesday");
+                break;
+            case 3:
+                console.log("Wednesday");
+                break;
+            default:
+                console.log("Invalid day");
+        }
+    </pre>
+    <h5>5. Example: If-Else Statement</h5>
+    <p>Here is an example of an if-else statement that checks if a number
+        is even or odd:</p>
+    <pre>
+        let number = 5;
+        if (number % 2 === 0) {
+            console.log(number + " is even.");
+        } else {
+            console.log(number + " is odd.");
+        }
+    </pre>
+    <h5>6. Example: Nested If-Else Statement</h5>
+    <p>Here is an example of a nested if-else statement that checks
+        if a number is positive, negative, or zero:</p>
+    <pre>
+        let num = -5;
+        if (num > 0) {
+            console.log(num + " is positive.");
+        } else if (num < 0) {
+            console.log(num + " is negative.");
+        } else {
+            console.log("The number is zero.");
+        }
+    </pre>
+    <h5>7. Example: Ternary Operator</h5>
+    <p>Here is an example of using the ternary operator to check if a number
+        is greater than 10:</p>
+    <pre>
+        let num2 = 15;
+        let result = (num2 > 10) ? "Greater than 10" : "Less than or equal to 10";
+        console.log(result); // Output: Greater than 10
+    </pre>
+
+    
+
+
+
+    <script>
+        // Example of using if-else statement
+        let number = 5;
+        if (number % 2 === 0) {
+            console.log(number + " is even.");
+        } else {
+            console.log(number + " is odd.");
+        }
+
+        // Example of nested if-else statement
+        let num = -5;
+        if (num > 0) {
+            console.log(num + " is positive.");
+        } else if (num < 0) {
+            console.log(num + " is negative.");
+        } else {
+            console.log("The number is zero.");
+        }
+
+        // Example of using the ternary operator
+        let num2 = 15;
+        let result = (num2 > 10) ? "Greater than 10" : "Less than or equal to 10";
+        console.log(result); // Output: Greater than 10
+        // Example of using switch statement
+        let day = 3;
+        switch (day) {
+            case 1:
+                console.log("Monday");
+                break;
+            case 2:
+                console.log("Tuesday");
+                break;
+            case 3:
+                console.log("Wednesday");
+                break;
+            default:
+                console.log("Invalid day");
+        }
+
+       
+    </script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
