@@ -62,7 +62,7 @@
 
 
 
-    <div class="row">
+    <div class="row g-0">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-outline-primary mt-3 ms-3 col-auto" data-bs-toggle="modal"
             data-bs-target="#staticBackdrop">
@@ -81,7 +81,7 @@
         <div class="toast-container position-fixed top-0 end-0 p-3">
             <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
-                    <img src="../Day1/smiley.gif" class="rounded me-2" alt="..." style="width: 20px; height: 20px;" >
+                    <img src="../Day1/smiley.gif" class="rounded me-2" alt="..." style="width: 20px; height: 20px;">
                     <strong class="me-auto">Testing</strong>
                     <small>11 mins ago</small>
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -110,28 +110,8 @@
 
                 </tr>
             </thead>
-            <tbody class="table-group-divider">
-                <tr>
-                    <td>ABC</td>
-                    <td>XYZ</td>
-                    <td>00/00/0000</td>
-                    <td>Male</td>
-                    <td>test@gmail.com</td>
-                </tr>
-                <tr>
-                    <td>EFG</td>
-                    <td>LMN</td>
-                    <td>11/11/1111</td>
-                    <td>Male</td>
-                    <td>test2@gmail.com</td>
-                </tr>
-                <tr>
-                    <td>GHI</td>
-                    <td>RST</td>
-                    <td>22/22/2222</td>
-                    <td>Female</td>
-                    <td>test3@gmail.com</td>
-                </tr>
+            <tbody class="table-group-divider table_body">
+
             </tbody>
         </table>
         <nav>
@@ -163,21 +143,29 @@
                         <div class="row">
                             <div class="mb-3 col-6">
                                 <label for="fname" class="form-label">Name:</label>
-                                <input type="text" class="form-control" id="fname" placeholder="Enter your Name">
+                                <input type="text" class="form-control" id="fname" name="fname"
+                                    placeholder="Enter your Name">
+                                <span id="fname-error" class="text-danger"></span>
+
                             </div>
                             <div class="mb-3 col-6">
                                 <label for="gname" class="form-label">Guardian Name</label>
-                                <input type="text" class="form-control" id="gname" placeholder="">
+                                <input type="text" class="form-control" id="gname" name="gname" placeholder="">
+                                <span id="gname-error" class="text-danger"></span>
+
                             </div>
                         </div>
                         <div class="row">
                             <div class="mb-3 col-6">
                                 <label for="email" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                                <input type="email" class="form-control" id="email" name="email"
+                                    placeholder="name@example.com">
+                                    <span id="email-error" class="text-danger"></span>
                             </div>
                             <div class="mb-3 col-5">
                                 <label for="dob" class="form-label">DOB:</label>
-                                <input type="date" class="form-control" id="dob">
+                                <input type="date" name="dob" class="form-control" id="dob">
+                                <span id="dob-error" class="text-danger"></span>
                             </div>
                         </div>
 
@@ -210,14 +198,14 @@
                                     <label for="gender" class="form-label">Gender</label>
                                     <div class="form-check col-auto">
                                         <input class="form-check-input " type="radio" name="gender" id="male"
-                                            value="option1">
+                                            value="Male">
                                         <label class="form-check-label " for="male">
                                             Male
                                         </label>
                                     </div>
                                     <div class="form-check col-auto">
                                         <input class="form-check-input" type="radio" name="gender" id="female"
-                                            value="option2">
+                                            value="FeMale">
                                         <label class="form-check-label" for="female">
                                             Female
                                         </label>
@@ -239,15 +227,82 @@
                                 </label>
                             </div>
                         </div>
+                        <button type="button" class="btn btn-outline-success" onclick=validateAndAdd()>Add</button>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-outline-success">Submit</button>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        var count=0;
+        const errorElem = `<span class="text-danger">The Entered input is not valid</span>`
+        function validateAndAdd() {
+            // here we will first validate only the 5 named inputs using regexp and then creating an object of inputs
+            var fnameValue = document.getElementById('fname').value;
+            var gname = document.getElementById('gname').value;
+            var email = document.getElementById('email').value;
+            var dob = document.getElementById('dob').value;
+            var gender = document.getElementById('gender').value;
+            var obj = {};
+
+
+
+
+            fnameRegex = /^(?!\s*$)[-a-zA-Z ]*$/;
+            gnameRegex = /^(?!\s*$)[-a-zA-Z ]*$/;
+            emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+            dobRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+            if (!fnameRegex.test(fname)) {
+                document.getElementById('fname-error').innerHTML = 'The entered input is not valid';
+            } else {
+                document.getElementById('fname-error').innerHTML = '';
+            }
+            if (!gnameRegex.test(gname)) {
+                document.getElementById('gname-error').innerHTML = 'The entered input is not valid';
+            } else {
+                document.getElementById('gname-error').innerHTML = '';
+            }
+            if (!emailRegex.test(email)) {
+            document.getElementById('email-error').innerHTML = 'The entered input is not valid';
+            } else {
+                document.getElementById('email-error').innerHTML = '';
+            }
+            if (!dobRegex.test(dob)) {
+                console.log(dob);
+            document.getElementById('dob-error').innerHTML = 'The entered input is not valid';
+            } else {
+                document.getElementById('dob-error').innerHTML = '';
+            }
+            if(fnameRegex.test(fname) && gnameRegex.test(gname) && emailRegex.test(email) && dobRegex.test(dob)){
+                add();
+            }
+        }
+
+        // adding the 5 values from the form in a object
+        function add() {
+            count++;
+
+            var obj = {
+                id: count,
+                fname: fname,
+                gname: gname,
+                email: email,
+                dob: dob,
+                gender: gender
+            }
+            console.log(obj);
+        }
+            
+
+
+
+
+    </script>
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="js/bootstrap.bundle.min.js"></script>
