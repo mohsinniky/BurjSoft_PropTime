@@ -104,20 +104,36 @@
                 <tr>
                     <th>Fullname</th>
                     <th>Guardian Name</th>
-                    <th>Email</th>
                     <th>Date Of birth</th>
                     <th>Gender</th>
-                    <th>Action</th>
-
+                    <th>Email</th>
 
                 </tr>
             </thead>
-            <tbody class="table-group-divider " id="table_body">
-
+            <tbody class="table-group-divider">
+                <tr>
+                    <td>ABC</td>
+                    <td>XYZ</td>
+                    <td>00/00/0000</td>
+                    <td>Male</td>
+                    <td>test@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>EFG</td>
+                    <td>LMN</td>
+                    <td>11/11/1111</td>
+                    <td>Male</td>
+                    <td>test2@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>GHI</td>
+                    <td>RST</td>
+                    <td>22/22/2222</td>
+                    <td>Female</td>
+                    <td>test3@gmail.com</td>
+                </tr>
             </tbody>
         </table>
-
-
         <nav>
             <ul class="pagination justify-content-center">
                 <li class="page-item disabled">
@@ -143,26 +159,25 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="myForm">
+                    <form>
                         <div class="row">
                             <div class="mb-3 col-6">
                                 <label for="fname" class="form-label">Name:</label>
-                                <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter your Name">
+                                <input type="text" class="form-control" id="fname" placeholder="Enter your Name">
                             </div>
                             <div class="mb-3 col-6">
                                 <label for="gname" class="form-label">Guardian Name</label>
-                                <input type="text" class="form-control" id="gname" name="gname" placeholder="">
+                                <input type="text" class="form-control" id="gname" placeholder="">
                             </div>
                         </div>
                         <div class="row">
                             <div class="mb-3 col-6">
                                 <label for="email" class="form-label">Email address</label>
-
-                                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+                                <input type="email" class="form-control" id="email" placeholder="name@example.com">
                             </div>
                             <div class="mb-3 col-5">
                                 <label for="dob" class="form-label">DOB:</label>
-                                <input type="date" class="form-control" id="dob" name="dob">
+                                <input type="date" class="form-control" id="dob">
                             </div>
                         </div>
 
@@ -195,14 +210,14 @@
                                     <label for="gender" class="form-label">Gender</label>
                                     <div class="form-check col-auto">
                                         <input class="form-check-input " type="radio" name="gender" id="male"
-                                            value="Male">
+                                            value="option1">
                                         <label class="form-check-label " for="male">
                                             Male
                                         </label>
                                     </div>
                                     <div class="form-check col-auto">
                                         <input class="form-check-input" type="radio" name="gender" id="female"
-                                            value="Female">
+                                            value="option2">
                                         <label class="form-check-label" for="female">
                                             Female
                                         </label>
@@ -224,15 +239,11 @@
                                 </label>
                             </div>
                         </div>
-                        <div>
-                    <button type="submit" class="btn btn-outline-success">Submit</button>
-                            
-                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <!-- <button type="button" class="btn btn-outline-success">Submit</button> -->
+                    <button type="button" class="btn btn-outline-success">Submit</button>
                 </div>
             </div>
         </div>
@@ -241,31 +252,6 @@
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/your-scripts.js"></script>
-
-
-    <script>
-         const myForm = document.getElementById('myForm');
-        myForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevents default form submission (page reload)
-            const formData = new FormData(myForm);
-            const tableBody = document.getElementById('table_body');
-            const newRow = document.createElement('tr');
-            newRow.innerHTML = `
-                <td>${formData.get('fname')}</td>
-                <td>${formData.get('gname')}</td>
-                <td>${formData.get('email')}</td>
-                <td>${formData.get('dob')}</td>
-                <td>${formData.get('gender')}</td>
-                <td>
-                    <button class="btn btn-danger btn-sm" onclick="this.closest('tr').remove()">Delete</button>
-                    <button class="btn btn-warning btn-sm" onclick="editRow(this.closest('tr'))">Edit</button>
-                </td>
-
-            `;
-            tableBody.appendChild(newRow);
-        });
-
-    </script>
 </body>
 
 </html>
