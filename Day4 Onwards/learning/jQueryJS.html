@@ -141,6 +141,9 @@
 
     <h4>callback():</h4>
     <p class="col-6">It is the resoponse of an action, and it is executed after the action is completed, As when Clicking the above button to stop animation, the animation is stopped. And A Alert is shown</p>
+
+    <h4>chaining():</h4>
+    <p class="col-6" id="chaining">It is the chaining of multiple action, and they are executed in sequence after one action is completed</p>
     
 
 
@@ -205,6 +208,10 @@
             $("#stopAnimation").click(function () {
                 $("#div5").stop(),
                     alert("Animation Stopped");
+            });
+            $("#chaining").click(function () {
+                $("#chaining").css({"color": "red","font-size": "20px"}).slideUp(2000).slideDown(2000);
+
             });
 
 
