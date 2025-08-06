@@ -121,7 +121,7 @@
 
     <h4>slide():</h4>
     <div class="row g-0 bg-dark text-white text-center col-6">
-        <div id="flip">Click to Slide below Panel Up/Down</div>
+        <div id="flip">Click to Slide the below Panel Up/Down</div>
         <div id="panel" class="bg-secondary">Hello world!</div>
     </div>
 
@@ -138,6 +138,10 @@
     <button id="stopAnimation" class="btn btn-outline-primary">Stop Below Box  Animation</button>
     <div id="div5" style="width:80px;height:80px;background-color:rgb(11, 62, 57); margin: 10px;"></div>
     <hr>
+
+    <h4>callback():</h4>
+    <p class="col-6">It is the resoponse of an action, and it is executed after the action is completed, As when Clicking the above button to stop animation, the animation is stopped. And A Alert is shown</p>
+    
 
 
 
@@ -199,7 +203,8 @@
             });
 
             $("#stopAnimation").click(function () {
-                $("#div5").stop();
+                $("#div5").stop(),
+                    alert("Animation Stopped");
             });
 
 
