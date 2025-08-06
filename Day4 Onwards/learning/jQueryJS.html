@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+    <!-- Bootstrap CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Header Script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body class="p-2">
+    <!-- Codes -->
+    <!-- JQuery in Javascript -->
+    <nav class="breadcrumb p-2" style="--bs-breadcrumb-divider: '>';">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../index.html">ProbTime</a></li>
+            <li class="breadcrumb-item">Javascript</li>
+            <li class="breadcrumb-item active">JQuery JS</li>
+        </ol>
+    </nav>
+    <hr>
+    <h2 class="text-center">JQuery</h2>
+    <h4>In this Page Folowing JS concepts are covered</h4>
+    <pre>
+        JQuery: 
+        What is JQuery?
+        Using JQuery
+        JQuery Selectors
+        JQuery Events
+        JQuery Effects
+        JQuery HTML
+        JQuery Traversing 
+    </pre>
+
+    <h3>JQuery:</h3>
+    <p>
+        jQuery is a JavaScript Library, which greatly simplifies JavaScript programming, since it is easy to learn.
+        <br>
+        <code>
+            <!-- Clicking on the below code will execute it and hide the code --> <br>
+             $(document).ready(function(){ <br>
+                $("code").click(function(){ <br>
+                    $(this).hide(); <br>
+                }); <br>
+            }); <br>
+        </code>
+    </p>
+
+    <h3>What is JQuery?</h3>
+    <p>The purpose of jQuery is to make it much easier to use JavaScript on your website.</p>
+    <pre>
+        The jQuery library contains the following features:
+        ->  HTML/DOM manipulation
+        ->  CSS manipulation
+        ->  HTML event methods
+        ->  Effects and animations
+        ->  AJAX
+        ->  Utilities
+    </pre>
+    <h3>Using JQuery:</h3>
+    <p>For using JQuery, you need to include the jQuery library in your HTML document using its <mark>CDN(Content
+            Delivery Network)</mark></p>
+
+    <h3>JQuery Syntax:</h3>
+    <h4>$(selector).action()</h4>
+    <pre>
+        A $ sign to define/access jQuery
+        A (selector) to "query (or find)" HTML elements
+        A jQuery action() to be performed on the element(s)
+    </pre>
+    <h3>JQuery Selectors:</h3>
+    <code>
+        $(this).hide() - hides the current element. <br>
+
+        $("p").hide() - hides all <"p"> elements.<br>
+
+        $(".test").hide() - hides all elements with class="test". <br>
+
+        $("#test").hide() - hides the element with id="test".<br>
+    </code>
+    <h4>Other Selectors:</h4>
+    <img src="../images/jQuerySelectors.png" alt="jQuerySelectors" class="img-fluid">
+    <hr>
+
+    <em>Note: all jQuery commands are to be inside a document ready event </em>
+    <pre>
+        $(document).ready(function(){
+
+            // jQuery methods go here...
+
+        });
+    </pre>
+
+    <h3>JQuery Events:</h3>
+    <p>Events are <b>actions</b> or occurrences that happen in the browser, such as <b>mark, clicks, key presses, or
+            mouse movements</b>. JavaScript can respond to these events using event handlers.</p>
+    <b>Syntax: </b><code>$("Element").action();</code><br>
+    <img src="../images/jQueryEvents.png" alt="jQueryEvents" class="img-fluid">
+    <!-- Some jQuery Events examples -->
+    <hr>
+
+    <h3>JQuery Effects:</h3>
+    <h4>hide():</h4>
+    <button id="hide" class="btn btn-outline-primary">Hide Images</button>
+    <button id="show" class="btn btn-outline-secondary">Show Images</button>
+    <hr>
+
+    <h4>fade():</h4>
+    <button id="fadeIn" class="btn btn-outline-primary">Fade In</button>
+    <button id="fadeOut" class="btn btn-outline-primary">Fade Out</button>
+    <div class="row g-0">
+        <div id="div1" style="width:80px;height:80px;background-color:red; margin: 10px;"></div>
+    <div id="div2" style="width:80px;height:80px;background-color:green; margin: 10px;"></div>
+    <div id="div3" style="width:80px;height:80px;background-color:blue; margin: 10px;"></div>
+    </div>
+
+    <h4>slide():</h4>
+    <div class="row g-0 bg-dark text-white text-center">
+    <div id="flip">Click to Slide below Panel Up</div>
+    <div id="panel" class="bg-secondary">Hello world!</div>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        $(document).ready(function () {
+            $("code").click(function () {
+                $(this).hide();
+            });
+            $("#hide").click(function () {
+                $(".img-fluid").hide();
+            });
+            $("#show").click(function () {
+                $(".img-fluid").show();
+            });
+            $("#fadeIn").click(function () {
+                $("#div1").fadeIn();
+                $("#div2").fadeIn("slow");
+                $("#div3").fadeIn(3000);
+            });
+            $("#fadeOut").click(function () {
+                $("#div1").fadeOut();
+                $("#div2").fadeOut("slow");
+                $("#div3").fadeOut(3000);               
+            });
+
+            $("#flip").click(function () {
+                $("#panel").slideUp("slow");
+            });
+
+
+        });
+
+    </script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

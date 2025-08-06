@@ -48,7 +48,56 @@
                             <li><a class="dropdown-item" href="learning/toast.html">Toast</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a href="" class="nav-link disabled">Any Option</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Javascript
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-scrollable" style="max-height: 300px; overflow-y: scroll;">
+                            <li><a class="dropdown-item" href="learning/tasksJS.html">Tasks
+                                </a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="learning/domJS.html">DOM
+                                </a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li><a class="dropdown-item" href="learning/introductionJS.html">Introduction
+                                </a></li>
+                            <li><a class="dropdown-item" href="learning/displayJS.html">Display</a></li>
+                            <li>
+
+                            </li>
+                            <li><a class="dropdown-item" href="learning/statementsJS.html">Syntax & Variables</a></li>
+                            <li>
+                            </li>
+                            <li><a class="dropdown-item" href="learning/operatorsJS.html">Operators</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="learning/datatypesJS.html">Datatypes</a></li>
+                            <li><a class="dropdown-item" href="learning/functionsJS.html">Functions</a></li>
+                            <li><a class="dropdown-item" href="learning/objectsJS.html">Objects</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="learning/eventsJS.html">Events</a></li>
+                            <li><a class="dropdown-item" href="learning/stringsJS.html">Strings</a></li>
+                            <li><a class="dropdown-item" href="learning/loopsJS.html">Loops</a></li>
+                            <li><a class="dropdown-item" href="learning/ifElseJS.html">If-Else</a></li>
+                            <li><a class="dropdown-item" href="learning/numbersJS.html">Numbers</a></li>
+                            <li><a class="dropdown-item" href="learning/arraysJS.html">Arrays</a></li>
+                            <li><a class="dropdown-item" href="learning/iterablesJS.html">Iterables</a></li>
+                            <li><a class="dropdown-item" href="learning/iteratorsJS.html">Iterators</a></li>
+                            <li><a class="dropdown-item" href="learning/typeConversionJS.html">Type Conversion</a></li>
+                            <li><a class="dropdown-item" href="learning/regExpJS.html">RegExp</a></li>
+                            <li><a class="dropdown-item" href="learning/jQueryJS.html">JQuery</a></li>
+
+                        </ul>
+                    </li>
                 </ul>
                 <form role="search" class="d-flex">
                     <input type="search" class="form-control me-2" placeholder="Search">
@@ -244,11 +293,14 @@
     <script>
         let count = 0;
         let objArray = [];
+        var isValid = true;
+
 
         function validateInput(inputElementId, errorElementId, errorMessage = 'The entered input is not valid') {
             const value = document.getElementById(inputElementId).value;
             if (!value) {
                 document.getElementById(errorElementId).innerHTML = errorMessage;
+                if(isValid) isValid = false;
             } else {
                 document.getElementById(errorElementId).innerHTML = '';
             }
@@ -260,16 +312,8 @@
 
             if (!emailRegex.test(email)) {
                 document.getElementById(errorElementId).innerHTML = errorMessage;
-            } else {
-                document.getElementById(errorElementId).innerHTML = '';
-            }
-        }
+               if(isValid) isValid = false;
 
-        function validateDateOfBirth(inputElementId, errorElementId, errorMessage = 'Date of birth is invalid') {
-            const dob = document.getElementById(inputElementId).value;
-
-            if (!dob) {
-                document.getElementById(errorElementId).innerHTML = errorMessage;
             } else {
                 document.getElementById(errorElementId).innerHTML = '';
             }
@@ -282,22 +326,16 @@
             const dateOfBirth = document.getElementById('txtDateOfBirth').value;
             const gender = document.querySelector('input[name="gender"]:checked')?.value;
 
-
+            // Validate inputs
+            isValid = true;
             validateInput('txtFirstName', 'fname-error', 'First name is invalid');
             validateInput('txtGaurdianName', 'gname-error', 'Guardian name is invalid');
             validateEmail('txtEmail', 'email-error', 'Email is invalid');
-            validateDateOfBirth('txtDateOfBirth', 'dob-error', 'Date of birth is invalid');
+            validateInput('txtDateOfBirth', 'dob-error', 'Date of birth is invalid');
 
             // If all validations pass, add the record
-            if (firstName && guardianName && email && dateOfBirth) {
-                add(firstName, guardianName, email, dateOfBirth, gender);
-            }
-        }
-
-        function add(firstName, guardianName, email, dateOfBirth, gender) {
-            count++;
-
-            const obj = {
+            if (isValid) {
+                const obj = {
                 id: count,
                 fname: firstName,
                 gname: guardianName,
@@ -306,16 +344,17 @@
                 gender: gender
             };
 
-            objArray.push(obj);
-            display();
+             objArray.push(obj);
+             display();
+            }
         }
 
         function display() {
-            const tableBody = document.getElementById('table_body');
+            let tableBody = document.getElementById('table_body');
             tableBody.innerHTML = '';
 
             objArray.forEach(item => {
-                const row = `<tr>
+                var row = `<tr>
             <td>${item.id}</td>
             <td>${item.fname}</td>
             <td>${item.gname}</td>
@@ -368,6 +407,8 @@
                 if (index !== -1) {
                     objArray[index] = updatedItem;
                 }
+
+                // show all rows in tables
                 display();
                 
                 addButton.classList.remove('d-none');
@@ -377,13 +418,6 @@
                 modal.hide();
             });
         }
-
-
-
-
-
-
-
     </script>
 
     <!-- Bootstrap JS Bundle with Popper -->
