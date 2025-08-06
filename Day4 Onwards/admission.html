@@ -145,14 +145,14 @@
                         <div class="row">
                             <div class="mb-3 col-6">
                                 <label for="fname" class="form-label">Name:</label>
-                                <input type="text" class="form-control" id="fname" name="fname"
+                                <input type="text" class="form-control" id="txtFirstName" name="fname"
                                     placeholder="Enter your Name">
                                 <span id="fname-error" class="text-danger"></span>
 
                             </div>
                             <div class="mb-3 col-6">
                                 <label for="gname" class="form-label">Guardian Name</label>
-                                <input type="text" class="form-control" id="gname" name="gname" placeholder="">
+                                <input type="text" class="form-control" id="txtGaurdianName" name="gname" placeholder="">
                                 <span id="gname-error" class="text-danger"></span>
 
                             </div>
@@ -160,13 +160,13 @@
                         <div class="row">
                             <div class="mb-3 col-6">
                                 <label for="email" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="email" name="email"
+                                <input type="email" class="form-control" id="txtEmail" name="email"
                                     placeholder="name@example.com">
                                 <span id="email-error" class="text-danger"></span>
                             </div>
                             <div class="mb-3 col-5">
                                 <label for="dob" class="form-label">DOB:</label>
-                                <input type="date" name="dob" class="form-control" id="dob">
+                                <input type="date" name="dob" class="form-control" id="txtDateOfBirth">
                                 <span id="dob-error" class="text-danger"></span>
                             </div>
                         </div>
@@ -229,7 +229,10 @@
                                 </label>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-outline-success" onclick=validateAndAdd()>Add</button>
+                        <button type="button" class="btn btn-outline-success" id="add"
+                            onclick=validateAndAdd()>Add</button>
+                        <button type="button" class="btn btn-success d-none" data-bs-dismiss="modal"
+                            id="update">Update</button>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -241,99 +244,138 @@
     <script>
         let count = 0;
         let objArray = [];
-        const errorElem = `<span class="text-danger">The Entered input is not valid</span>`
 
-
-        function validateAndAdd() {
-            let fnameValue = document.getElementById('fname').value;
-            let gnameValue = document.getElementById('gname').value;
-            let emailValue = document.getElementById('email').value;
-            let dobValue = document.getElementById('dob').value;
-            let genderValue = document.querySelector('input[name="gender"]:checked')?.value;
-
-
-
-
-
-            fnameRegex = /^(?!\s*$)[-a-zA-Z ]*$/;
-            gnameRegex = /^(?!\s*$)[-a-zA-Z ]*$/;
-            emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-
-            dobRegex = /^\d{4}-\d{2}-\d{2}$/;
-
-            if (!fnameRegex.test(fnameValue)) {
-                document.getElementById('fname-error').innerHTML = 'The entered input is not valid';
+        function validateInput(inputElementId, errorElementId, errorMessage = 'The entered input is not valid') {
+            const value = document.getElementById(inputElementId).value;
+            if (!value) {
+                document.getElementById(errorElementId).innerHTML = errorMessage;
             } else {
-                document.getElementById('fname-error').innerHTML = '';
-            }
-            if (!gnameRegex.test(gnameValue)) {
-                document.getElementById('gname-error').innerHTML = 'The entered input is not valid';
-            } else {
-                document.getElementById('gname-error').innerHTML = '';
-            }
-            if (!emailRegex.test(emailValue)) {
-                document.getElementById('email-error').innerHTML = 'The entered input is not valid';
-            } else {
-                document.getElementById('email-error').innerHTML = '';
-            }
-            if (!dobRegex.test(dobValue)) {
-                console.log(dob);
-                document.getElementById('dob-error').innerHTML = 'The entered input is not valid';
-            } else {
-                document.getElementById('dob-error').innerHTML = '';
-            }
-            if (fnameRegex.test(fnameValue) && gnameRegex.test(gnameValue) && emailRegex.test(emailValue) && dobRegex.test(dobValue)) {
-                add(fnameValue, gnameValue, emailValue, dobValue, genderValue);
+                document.getElementById(errorElementId).innerHTML = '';
             }
         }
 
-        // adding the 5 values from the form in a object
-        function add(fnameValue, gnameValue, emailValue, dobValue, genderValue) {
+        function validateEmail(inputElementId, errorElementId, errorMessage = 'Email is invalid') {
+            const email = document.getElementById(inputElementId).value;
+            const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+            if (!emailRegex.test(email)) {
+                document.getElementById(errorElementId).innerHTML = errorMessage;
+            } else {
+                document.getElementById(errorElementId).innerHTML = '';
+            }
+        }
+
+        function validateDateOfBirth(inputElementId, errorElementId, errorMessage = 'Date of birth is invalid') {
+            const dob = document.getElementById(inputElementId).value;
+
+            if (!dob) {
+                document.getElementById(errorElementId).innerHTML = errorMessage;
+            } else {
+                document.getElementById(errorElementId).innerHTML = '';
+            }
+        }
+
+        function validateAndAdd() {
+            const firstName = document.getElementById('txtFirstName').value;
+            const guardianName = document.getElementById('txtGaurdianName').value;
+            const email = document.getElementById('txtEmail').value;
+            const dateOfBirth = document.getElementById('txtDateOfBirth').value;
+            const gender = document.querySelector('input[name="gender"]:checked')?.value;
+
+
+            validateInput('txtFirstName', 'fname-error', 'First name is invalid');
+            validateInput('txtGaurdianName', 'gname-error', 'Guardian name is invalid');
+            validateEmail('txtEmail', 'email-error', 'Email is invalid');
+            validateDateOfBirth('txtDateOfBirth', 'dob-error', 'Date of birth is invalid');
+
+            // If all validations pass, add the record
+            if (firstName && guardianName && email && dateOfBirth) {
+                add(firstName, guardianName, email, dateOfBirth, gender);
+            }
+        }
+
+        function add(firstName, guardianName, email, dateOfBirth, gender) {
             count++;
 
-            let obj = {
+            const obj = {
                 id: count,
-                fname: fnameValue,
-                gname: gnameValue,
-                email: emailValue,
-                dob: dobValue,
-                gender: genderValue
-            }
-            console.log(obj);
-            objArray.push(obj);
-            console.log(objArray);
+                fname: firstName,
+                gname: guardianName,
+                email: email,
+                dob: dateOfBirth,
+                gender: gender
+            };
 
+            objArray.push(obj);
             display();
         }
 
-
-        // displaying the object array in table_body
         function display() {
-            let table_body = document.getElementById('table_body');
-            table_body.innerHTML = '';
-            for (let i = 0; i < objArray.length; i++) {
-                let row = `<tr>
-                <td>${objArray[i].id}</td>
-                <td>${objArray[i].fname}</td>
-                <td>${objArray[i].gname}</td>
-                <td>${objArray[i].email}</td>
-                <td>${objArray[i].dob}</td>
-                <td>${objArray[i].gender}</td>
-                <td><button class="btn btn-danger" onclick="remove(${objArray[i].id})">Remove</button>
-                <button class="btn btn-success" onclick="edit(${objArray[i].id})">Edit</button></td>
-            </tr>`;
-                table_body.innerHTML += row;
-            }
+            const tableBody = document.getElementById('table_body');
+            tableBody.innerHTML = '';
+
+            objArray.forEach(item => {
+                const row = `<tr>
+            <td>${item.id}</td>
+            <td>${item.fname}</td>
+            <td>${item.gname}</td>
+            <td>${item.email}</td>
+            <td>${item.dob}</td>
+            <td>${item.gender}</td>
+            <td>
+                <button class="btn btn-danger" onclick="remove(${item.id})">Remove</button>
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="edit(${item.id})">Edit</button>
+            </td>
+        </tr>`;
+                tableBody.innerHTML += row;
+            });
         }
 
         function remove(id) {
-            for (let i = 0; i < objArray.length; i++) {
-                if (objArray[i].id == id) {
-                    objArray.splice(i, 1);
-                    break;
-                }
+            const index = objArray.findIndex(item => item.id == id);
+            if (index !== -1) {
+                objArray.splice(index, 1);
             }
             display();
+        }
+
+        function edit(id) {
+            const addButton = document.getElementById('add');
+            const updateButton = document.getElementById('update');
+            addButton.classList.add('d-none');
+            updateButton.classList.remove('d-none');
+
+            const itemToEdit = objArray.find(item => item.id == id);
+            if (itemToEdit) {
+                document.getElementById('txtFirstName').value = itemToEdit.fname;
+                document.getElementById('txtGaurdianName').value = itemToEdit.gname;
+                document.getElementById('txtEmail').value = itemToEdit.email;
+                document.getElementById('txtDateOfBirth').value = itemToEdit.dob;
+                document.querySelector(`input[name="gender"][value="${itemToEdit.gender}"]`).checked = true;
+            }
+
+            updateButton.addEventListener('click', function () {
+                const updatedItem = {
+                    id: id,
+                    fname: document.getElementById('txtFirstName').value,
+                    gname: document.getElementById('txtGaurdianName').value,
+                    email: document.getElementById('txtEmail').value,
+                    dob: document.getElementById('txtDateOfBirth').value,
+                    gender: document.querySelector('input[name="gender"]:checked').value
+                };
+
+                const index = objArray.findIndex(item => item.id == id);
+                if (index !== -1) {
+                    objArray[index] = updatedItem;
+                }
+                display();
+                
+                addButton.classList.remove('d-none');
+                updateButton.classList.add('d-none');
+
+                const modal = bootstrap.Modal.getInstance(document.getElementById('staticBackdrop'));
+                modal.hide();
+            });
         }
 
 
