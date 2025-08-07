@@ -7,6 +7,9 @@
     <title>Javascript</title>
     <!-- Bootstrap CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- JQuery link -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 </head>
 
 <body class="p-2">
@@ -78,6 +81,162 @@
 
 
 
+    <h2>Task3:</h2>
+    <h4>In this Task Folowing tasks are to be performed</h4>
+    <pre>
+        A button for a form Modal with all Inputs
+        A table that will contain entries from the modal Submission
+        Using Jquery For JS</pre>
+
+
+
+    <div class="row g-0 align-items-center p-1">
+        <button type="button" class="btn btn-outline-primary col-auto" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop">
+            Add New Admission
+        </button> <br>
+        <div class="table-responsive p-2">
+            <table class="table table-bordered table-hover">
+                <caption class="caption-top">Students Data List</caption>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fullname</th>
+                        <th>Guardian Name</th>
+                        <th>Date Of birth</th>
+                        <th>Gender</th>
+                        <th>Email</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider " id="table_body">
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Admission Form</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="mb-3 col-6">
+                                <label for="txtFullName" class="form-label">Name:</label>
+                                <input type="text" class="form-control" id="txtFullName" name="fname"
+                                    placeholder="Enter your Name">
+                                <span id="fname-error" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 col-6">
+                                <label for="txtGuardianName" class="form-label">Guardian Name</label>
+                                <input type="text" class="form-control" id="txtGuardianName" name="gname"
+                                    placeholder="">
+                                <span id="gname-error" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col-6">
+                                <label for="txtEmail" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="txtEmail" name="email"
+                                    placeholder="name@example.com">
+                                <span id="email-error" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 col-5">
+                                <label for="txtDateOfBirth" class="form-label">DOB:</label>
+                                <input type="date" name="dob" class="form-control" id="txtDateOfBirth">
+                                <span id="dob-error" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-3 col-6">
+                                <label for="txtPhoneNumber" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="txtPhoneNumber" name="phone"
+                                    placeholder="Your Phone#">
+                                <span id="phone-error" class="text-danger"></span>
+
+                            </div>
+
+                            <div class="mb-3 col-6">
+                                <label for="txtPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="txtPassword" name="password"
+                                    placeholder="Your Secret Word">
+                                <span id="password-error" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-3 col-6">
+                                <label for="selectCourse" class="form-label">Course</label>
+                                <select class="form-select" id="selectCourse" name="course">
+                                    <option selected>Choose...</option>
+                                    <option value="B.Tech">B.Tech</option>
+                                    <option value="M.Tech">M.Tech</option>
+                                    <option value="MBA">MBA</option>
+                                    <option value="BBA">BBA</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 col-6">
+                                <div class="row justify-content-center">
+                                    <label class="form-label">Gender</label>
+                                    <div class="form-check col-auto">
+                                        <input class="form-check-input" type="radio" name="gender" id="radioMale"
+                                            value="Male">
+                                        <label class="form-check-label" for="radioMale">
+                                            Male
+                                        </label>
+                                    </div>
+                                    <div class="form-check col-auto">
+                                        <input class="form-check-input" type="radio" name="gender" id="radioFemale"
+                                            value="Female">
+                                        <label class="form-check-label" for="radioFemale">
+                                            Female
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="txtAddress" class="form-label">Address</label>
+                            <textarea class="form-control" id="txtAddress" name="address" rows="3"
+                                placeholder="Enter your Address"></textarea>
+                            <span id="address-error" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="checkTerms" class="form-check-label">Terms and Conditions</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="checkTerms" name="terms">
+                                <label class="form-check-label" for="chkTerms">
+                                    I agree to the terms and conditions
+                                </label>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-outline-success" id="btnAdd"
+                            onclick=validateAndAdd()>Add</button>
+                        <button type="button" class="btn btn-success d-none" data-bs-dismiss="modal"
+                            id="btnUpdate">Update</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
     <script>
         const result2 = document.getElementById('result2');
@@ -97,9 +256,9 @@
 
                     }
 
-                    
+
                 }
-                if (emailFound===false) {
+                if (emailFound === false) {
                     // If the email is not found, add it to the array
                     emailArray.push(email);
                     errorSection.innerHTML = '<p class="text-success">Email added successfully</p>';
@@ -135,9 +294,144 @@
             result2.innerHTML = "";
             // Reset the email array
             emailArray = [];
-            emailFound = false;            
+            emailFound = false;
 
         }
+
+        // using jquery
+        let objArray = [];
+        let count = 1;
+        let isEditMode = false;
+        let currentEditId = null;
+
+        function validateAndAdd() {
+            // Get all form values using jQuery
+            const formData = {
+                id: count,
+                fname: $('#txtFullName').val(),
+                gname: $('#txtGuardianName').val(),
+                email: $('#txtEmail').val(),
+                dob: $('#txtDateOfBirth').val(),
+                gender: $('input[name="gender"]:checked').val(),
+                phone: $('#txtPhoneNumber').val(),
+                password: $('#txtPassword').val(),
+                course: $('#selectCourse').val(),
+                address: $('#txtAddress').val(),
+                terms: $('#checkTerms').is(':checked')
+            };
+
+            // Validate inputs
+            let isValid = true;
+            isValid = validateInput('#txtFullName', '#fname-error', 'Name is invalid') && isValid;
+            isValid = validateInput('#txtGuardianName', '#gname-error', 'Guardian name is invalid') && isValid;
+            isValid = validateEmail2('#txtEmail', '#email-error', 'Email is invalid') && isValid;
+            isValid = validateInput('#txtPhoneNumber', '#phone-error', 'Phone number is invalid') && isValid;
+            isValid = validateInput('#txtPassword', '#password-error', 'Password is invalid') && isValid;
+            isValid = validateInput('#txtAddress', '#address-error', 'Address is invalid') && isValid;
+
+            if (isValid) {
+                if (isEditMode) {
+                    // Update existing record
+                    const index = objArray.findIndex(item => item.id == currentEditId);
+                    if (index !== -1) {
+                        formData.id = currentEditId;
+                        objArray[index] = formData;
+                    }
+                    $('#btnAdd').removeClass('d-none');
+                    $('#btnUpdate').addClass('d-none');
+                    isEditMode = false;
+                } else {
+                    // Add new record
+                    objArray.push(formData);
+                    console.log(objArray);
+                    count++;
+                }
+
+                display();
+                $('#staticBackdrop').modal('hide');
+                $('form')[0].reset();
+            }
+        }
+
+        function validateInput(inputSelector, errorSelector, errorMessage) {
+            const value = $(inputSelector).val().trim();
+            if (value === '') {
+                $(errorSelector).text(errorMessage);
+                return false;
+            }
+            $(errorSelector).text('');
+            return true;
+        }
+
+        function validateEmail2(inputSelector, errorSelector, errorMessage) {
+            const email = $(inputSelector).val().trim();
+            const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+            if (!emailRegex.test(email)) {
+                $(errorSelector).text(errorMessage);
+                return false;
+            }
+            $(errorSelector).text('');
+            return true;
+        }
+
+        function display() {
+            $('#table_body').empty();
+
+            $.each(objArray, function (index, item) {
+                const row = `
+            <tr>
+                <td>${item.id}</td>
+                <td>${item.fname}</td>
+                <td>${item.gname}</td>
+                <td>${item.dob}</td>
+                <td>${item.gender}</td>
+                <td>${item.email}</td>
+                <td>
+                    <button class="btn btn-danger" onclick="remove(${item.id})">Remove</button>
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="edit(${item.id})">Edit</button>
+                </td>
+            </tr>`;
+                $('#table_body').append(row);
+            });
+        }
+
+        function remove(id) {
+            objArray = objArray.filter(item => item.id != id);
+            display();
+        }
+
+        function edit(id) {
+            const itemToEdit = objArray.find(item => item.id == id);
+            if (itemToEdit) {
+                currentEditId = id;
+                isEditMode = true;
+
+                $('#btnAdd').addClass('d-none');
+                $('#btnUpdate').removeClass('d-none');
+
+                $('#txtFullName').val(itemToEdit.fname);
+                $('#txtGuardianName').val(itemToEdit.gname);
+                $('#txtEmail').val(itemToEdit.email);
+                $('#txtDateOfBirth').val(itemToEdit.dob);
+                $(`input[name="gender"][value="${itemToEdit.gender}"]`).prop('checked', true);
+                $('#txtPhoneNumber').val(itemToEdit.phone);
+                $('#txtPassword').val(itemToEdit.password);
+                $('#selectCourse').val(itemToEdit.course);
+                $('#txtAddress').val(itemToEdit.address);
+                $('#checkTerms').prop('checked', itemToEdit.terms);
+            }
+        }
+
+        // Initialize modal hide event to reset form
+        $('#staticBackdrop').on('hidden.bs.modal', function () {
+            $('#btnAdd').removeClass('d-none');
+            $('#btnUpdate').addClass('d-none');
+            isEditMode = false;
+            $('.text-danger').text(''); // Clear all error messages
+        });
+
+        // Update button click handler
+        $('#btnUpdate').click(validateAndAdd);
 
 
     </script>
