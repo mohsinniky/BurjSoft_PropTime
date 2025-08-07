@@ -137,13 +137,14 @@
                                 <label for="txtFullName" class="form-label">Name:</label>
                                 <input type="text" class="form-control" id="txtFullName" name="fname"
                                     placeholder="Enter your Name">
-                                <span id="fname-error" class="text-danger"></span>
+                                <span id="fname-error" class="text-danger d-none">Error: 'Name is Required'</span>
                             </div>
                             <div class="mb-3 col-6">
                                 <label for="txtGuardianName" class="form-label">Guardian Name</label>
                                 <input type="text" class="form-control" id="txtGuardianName" name="gname"
                                     placeholder="">
-                                <span id="gname-error" class="text-danger"></span>
+                                <span id="gname-error" class="text-danger d-none">Error: 'Guardian name is
+                                    Required'</span>
                             </div>
                         </div>
                         <div class="row">
@@ -151,12 +152,12 @@
                                 <label for="txtEmail" class="form-label">Email address</label>
                                 <input type="email" class="form-control" id="txtEmail" name="email"
                                     placeholder="name@example.com">
-                                <span id="email-error" class="text-danger"></span>
+                                <span id="email-error" class="text-danger d-none">Error: 'Email is Invalid'</span>
                             </div>
                             <div class="mb-3 col-5">
                                 <label for="txtDateOfBirth" class="form-label">DOB:</label>
                                 <input type="date" name="dob" class="form-control" id="txtDateOfBirth">
-                                <span id="dob-error" class="text-danger"></span>
+                                <span id="dob-error" class="text-danger "></span>
                             </div>
                         </div>
 
@@ -165,7 +166,8 @@
                                 <label for="txtPhoneNumber" class="form-label">Phone Number</label>
                                 <input type="tel" class="form-control" id="txtPhoneNumber" name="phone"
                                     placeholder="Your Phone#">
-                                <span id="phone-error" class="text-danger"></span>
+                                <span id="phone-error" class="text-danger d-none">Error: 'Phone number is
+                                    Required'</span>
 
                             </div>
 
@@ -173,7 +175,7 @@
                                 <label for="txtPassword" class="form-label">Password</label>
                                 <input type="password" class="form-control" id="txtPassword" name="password"
                                     placeholder="Your Secret Word">
-                                <span id="password-error" class="text-danger"></span>
+                                <span id="password-error" class="text-danger d-none">Error: 'Password is Required'</span>
                             </div>
                         </div>
 
@@ -212,7 +214,7 @@
                             <label for="txtAddress" class="form-label">Address</label>
                             <textarea class="form-control" id="txtAddress" name="address" rows="3"
                                 placeholder="Enter your Address"></textarea>
-                            <span id="address-error" class="text-danger"></span>
+                            <span id="address-error" class="text-danger d-none">Error: 'Address is Required'</span>
                         </div>
                         <div class="mb-3">
                             <label for="checkTerms" class="form-check-label">Terms and Conditions</label>
@@ -299,6 +301,10 @@
 
         }
 
+        $('#submitBtn').on('change', function(e){
+            //logics
+        });
+
         // using jquery
         let objArray = [];
         let count = 1;
@@ -323,12 +329,12 @@
 
             // Validate inputs
             let isValid = true;
-            isValid = validateInput('#txtFullName', '#fname-error', 'Name is invalid') && isValid;
-            isValid = validateInput('#txtGuardianName', '#gname-error', 'Guardian name is invalid') && isValid;
-            isValid = validateEmail2('#txtEmail', '#email-error', 'Email is invalid') && isValid;
-            isValid = validateInput('#txtPhoneNumber', '#phone-error', 'Phone number is invalid') && isValid;
-            isValid = validateInput('#txtPassword', '#password-error', 'Password is invalid') && isValid;
-            isValid = validateInput('#txtAddress', '#address-error', 'Address is invalid') && isValid;
+            isValid = validateInput('#txtFullName', '#fname-error') && isValid;
+            isValid = validateInput('#txtGuardianName', '#gname-error') && isValid;
+            isValid = validateEmail2('#txtEmail', '#email-error') && isValid;
+            isValid = validateInput('#txtPhoneNumber', '#phone-error') && isValid;
+            isValid = validateInput('#txtPassword', '#password-error') && isValid;
+            isValid = validateInput('#txtAddress', '#address-error') && isValid;
 
             if (isValid) {
                 if (isEditMode) {
@@ -350,29 +356,31 @@
 
                 display();
                 $('#staticBackdrop').modal('hide');
-                $('form')[0].reset();
+                $('form').reset();
             }
         }
 
-        function validateInput(inputSelector, errorSelector, errorMessage) {
-            const value = $(inputSelector).val().trim();
-            if (value === '') {
-                $(errorSelector).text(errorMessage);
+        function validateInput(inputSelector, errorSelector) {
+            const value = $(inputSelector).val();
+            if (!value) {
+                $(errorSelector).removeClass('d-none');
                 return false;
+            } else {
+                $(errorSelector).addClass('d-none');
+                return true;
             }
-            $(errorSelector).text('');
-            return true;
         }
 
-        function validateEmail2(inputSelector, errorSelector, errorMessage) {
-            const email = $(inputSelector).val().trim();
+        function validateEmail2(inputSelector, errorSelector) {
+            const email = $(inputSelector).val();
             const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
             if (!emailRegex.test(email)) {
-                $(errorSelector).text(errorMessage);
+                $(errorSelector).removeClass('d-none');
                 return false;
+            } else {
+                $(errorSelector).addClass('d-none');
+                return true;
             }
-            $(errorSelector).text('');
-            return true;
         }
 
         function display() {
@@ -428,7 +436,7 @@
             $('#btnAdd').removeClass('d-none');
             $('#btnUpdate').addClass('d-none');
             isEditMode = false;
-            $('.text-danger').text(''); // Clear all error messages
+            // $('.text-danger').text(''); // Clear all error messages
         });
 
         // Update button click handler
