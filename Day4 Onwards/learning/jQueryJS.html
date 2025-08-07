@@ -102,7 +102,7 @@
     <!-- Some jQuery Events examples -->
     <hr>
 
-    <h3>JQuery Effects:</h3>
+    <h3 class="text-center">JQuery Effects:</h3>
     <h4>hide():</h4>
     <button id="hide" class="btn btn-outline-primary">Hide Images</button>
     <button id="show" class="btn btn-outline-secondary">Show Images</button>
@@ -135,16 +135,107 @@
 
 
     <h4>stop():</h4>
-    <button id="stopAnimation" class="btn btn-outline-primary">Stop Below Box  Animation</button>
+    <button id="stopAnimation" class="btn btn-outline-primary">Stop Below Box Animation</button>
     <div id="div5" style="width:80px;height:80px;background-color:rgb(11, 62, 57); margin: 10px;"></div>
     <hr>
 
     <h4>callback():</h4>
-    <p class="col-6">It is the resoponse of an action, and it is executed after the action is completed, As when Clicking the above button to stop animation, the animation is stopped. And A Alert is shown</p>
+    <p class="col-6">It is the resoponse of an action, and it is executed after the action is completed, As when
+        Clicking the above button to stop animation, the animation is stopped. And A Alert is shown</p>
 
     <h4>chaining():</h4>
-    <p class="col-6" id="chaining">It is the chaining of multiple action, and they are executed in sequence after one action is completed</p>
+    <p class="col-6" id="chaining">It is the chaining of multiple action, and they are executed in sequence after one
+        action is completed</p>
+
+    <h3 class="text-center">JQuery HTML:</h3>
+    <h4>GET:</h4>
+    <p>
+        For getting the content/value/HTML of an HTML element, use the following jQuery method: <br>
+        <code>
+        let variable = $(selector).html(); <br>
+        let variable = $(selector).text(); <br>
+        let variable = $(selector).val(); <br>
+        let variable = $(selector).attr(); <br>
+        </code>
+    </p>
     
+    <hr>
+    <h4>SET:</h4>
+    <p>
+        For setting the content/value/HTML of an HTML element, use the following jQuery method: <br>
+        <code>
+            $("#btn1").click(function(){ <br>
+                $("#test1").text("Hello world!"); <br>
+            });<br>
+            $("#btn2").click(function(){<br>
+                $("#test2").html("<b>Hello world!</b>");<br>
+            });<br>
+            $("#btn3").click(function(){<br>
+                $("#test3").val("Dolly Duck");<br>
+            });<br>
+        </code>
+    </p>
+    <hr>
+
+    <h4 id="adding">Add:</h4>
+    <hr>
+
+    <h4>Remove:</h4>
+    <p>
+        For removing an HTML element, use the following jQuery method: <br>
+        <code>
+            $("#btn4").click(function(){<br>
+                $("#test4").remove();<br>
+            });<br>
+        </code>
+        or for emptying an HTML element, use the following jQuery method: <br>
+        <code>
+            $("#btn5").click(function(){<br>
+                $("#test5").empty();<br>
+            });<br>
+        </code>
+    </p>
+    <hr>
+
+    <h4>Dimensions:</h4>
+    <p>
+        For getting the width/height of an HTML element, use the following jQuery method: <br>
+        <code>
+            let variable = $(selector).width(); <br>
+            let variable = $(selector).height(); <br>
+        </code>
+        <b>For Padding/Border/Margin:</b> <br>
+        <code>
+            let variable = $(selector).innerWidth(); <br>
+            let variable = $(selector).innerHeight(); <br>
+            let variable = $(selector).outerWidth(); <br>
+            let variable = $(selector).outerHeight(); <br>
+        </code>
+    </p>
+    <hr>
+
+
+    <h3 class="text-center">JQuery Traversing</h3>
+    <h4>JQuery Traversing:</h4>
+    <img src="../images/travTree.png" alt="Traversing Tree" class="img-fluid m-2 d-block">
+    <p>
+        <b>Image Explaination</b><br>
+        <pre id="details">
+            
+        </pre>
+    </p>
+    <p>
+        For traversing HTML elements, use the following jQuery method: <br>
+        <code>
+            let variable = $(selector).parent(); <br>
+            let variable = $(selector).parents(); <br>
+            let variable = $(selector).children(); <br>
+            let variable = $(selector).find(); <br>
+            let variable = $(selector).next(); <br>
+            let variable = $(selector).prev(); <br>
+        </code>
+    </p>
+
 
 
 
@@ -210,11 +301,15 @@
                     alert("Animation Stopped");
             });
             $("#chaining").click(function () {
-                $("#chaining").css({"color": "red","font-size": "20px"}).slideUp(2000).slideDown(2000);
+                $("#chaining").css({ "color": "red", "font-size": "20px" }).slideUp(2000).slideDown(2000);
 
             });
 
+            $("#adding").append(" 'Appended Text' ").prepend(" 'Prepended Text' ").after("<span>After Text</span>").before("<span>Before Text</span>");
 
+            let data = " The <div> element is the parent of <ul>, and an ancestor of everything inside of it \n The <ul> element is the parent of both <li> elements, and a child of <div> \n The left <li> element is the parent of <span>, child of <ul> and a descendant of <div> \n The <span> element is a child of the left <li> and a descendant of <ul> and <div> \n The two <li> elements are siblings (they share the same parent) \n The right <li> element is the parent of <b>, child of <ul> and a descendant of <div> \n The <b> element is a child of the right <li> and a descendant of <ul> and <div> \n"
+
+            $("#details").text(data)
 
 
         });
