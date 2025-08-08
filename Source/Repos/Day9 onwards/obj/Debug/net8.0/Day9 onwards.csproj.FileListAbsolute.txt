@@ -1,0 +1,15 @@
+G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\bin\Debug\net8.0\Day9 onwards.exe
+G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\bin\Debug\net8.0\Day9 onwards.deps.json
+G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\bin\Debug\net8.0\Day9 onwards.runtimeconfig.json
+G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\bin\Debug\net8.0\Day9 onwards.dll
+G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\bin\Debug\net8.0\Day9 onwards.pdb
+G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\obj\Debug\net8.0\Day9 onwards.GeneratedMSBuildEditorConfig.editorconfig
+G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\obj\Debug\net8.0\Day9 onwards.AssemblyInfoInputs.cache
+G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\obj\Debug\net8.0\Day9 onwards.AssemblyInfo.cs
+G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\obj\Debug\net8.0\Day9 onwards.csproj.CoreCompileInputs.cache
+G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\obj\Debug\net8.0\Day9 onwards.sourcelink.json
+G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\obj\Debug\net8.0\Day9 onwards.dll
+G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\obj\Debug\net8.0\refint\Day9 onwards.dll
+G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\obj\Debug\net8.0\Day9 onwards.pdb
+G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\obj\Debug\net8.0\Day9 onwards.genruntimeconfig.cache
+G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\obj\Debug\net8.0\ref\Day9 onwards.dll
