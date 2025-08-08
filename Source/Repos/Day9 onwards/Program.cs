@@ -27,35 +27,29 @@ Console.WriteLine("Hello, Welcome to niky's Program \nChoose Your Options from 1
 int option = int.Parse(Console.ReadLine());
 double inputNumber1, inputNumber2;
 Console.WriteLine("Your Option chosen: " + option);
+Console.WriteLine("Enter the two Numbers you want to perform the Chosen Arithmetic operation on:");
+inputNumber1 = double.Parse(Console.ReadLine());
+inputNumber2 = double.Parse(Console.ReadLine());
 
 switch (option)
 {
     case 1:
-        Console.WriteLine("Enter the two Numbers you want to perform the Addition operation on:");
-        inputNumber1 = double.Parse(Console.ReadLine());
-        inputNumber2 = double.Parse(Console.ReadLine());
+        
         Console.WriteLine("The Result After selected operations Is:  " + addNumber(inputNumber1, inputNumber2));
         break;
     case 2:
-        Console.WriteLine("Enter the two Numbers you want to perform the Subtraction operation on:");
-        inputNumber1 = double.Parse(Console.ReadLine());
-        inputNumber2 = double.Parse(Console.ReadLine());
+
         Console.WriteLine("The Result After selected operations Is:  " + subNumber(inputNumber1, inputNumber2));
         break;
     case 3:
-        Console.WriteLine("Enter the two Numbers you want to perform the Multiplication operation on:");
-        inputNumber1 = double.Parse(Console.ReadLine());
-        inputNumber2 = double.Parse(Console.ReadLine());
+
         Console.WriteLine("The Result After selected operations Is:  " + mulNumber(inputNumber1, inputNumber2));
         break;
     case 4:
-        Console.WriteLine("Enter the two Numbers you want to perform the Division operation on:");
-        inputNumber1 = double.Parse(Console.ReadLine());
-        inputNumber2 = double.Parse(Console.ReadLine());
         Console.WriteLine("The Result After selected operations Is:  " + divNumber(inputNumber1, inputNumber2));
         break;
     default:
-        Console.WriteLine("Some Error Occured");
+        Console.WriteLine("Incorrect option Chosen");
         break;
 }
 
