@@ -88,6 +88,11 @@ string myNameSentence = string.Concat(mySentence, myName);
 string myNameSentence2 = string.Format("Hello {0}", myName);
 //Compare
 int resultCompare = string.Compare(mySentence, myName);
+//Join
+string[] text = { "C#", "Java", "C++" };
+string stringJoin = string.Join(" ", text);
+//Equals
+bool stringEquals = string.Equals(text, myName);
 
 
 
@@ -99,6 +104,38 @@ string stringSub1 = mySentence.Substring(5,4);
 string stringReplaced = mySentence.Replace("My", "Your");
 //Contains
 bool stringContains = mySentence.Contains("Your");
+//Trim
+string stringTrim = "     text       ";
+stringTrim = stringTrim.Trim();
+//stringTrim = stringTrim.TrimEnd();
+//stringTrim = stringTrim.TrimStart();
+
+//IndexOf
+int stringIndex = myName.IndexOf("Ra");
+//LastIndexOf
+int stringLastIndex = myNameSentence2.LastIndexOf("a");
+//Remove
+string stringRemove = myNameSentence2.Remove(5);
+//string stringRemove = myNameSentence2.Remove(5,3); here 3 is the number of character to be removed starting from index 5
+//ToUpper, ToLower
+string stringToUpper = myName.ToUpper();
+string stringToLower = myName.ToLower();
+
+//EndsWith
+bool stringEndsWith = myName.EndsWith("Raza");
+//StartsWith
+bool stringStartsWith = myName.StartsWith("Raza");
+// CharArray
+char[] stringCharArray = mySentence.ToCharArray();
+// PadLeft, PadRight
+string stringPadLeft = myName.PadLeft(20);
+string stringPadRight = myName.PadRight(20);
+
+
+
+
+
+
 
 
 
@@ -108,11 +145,30 @@ bool stringContains = mySentence.Contains("Your");
 Console.WriteLine(myNameSentence);
 Console.WriteLine(myNameSentence2);
 Console.WriteLine(resultCompare);
+Console.WriteLine(stringJoin);
+Console.WriteLine(stringEquals);
 
-Console.WriteLine(stringsArray[0]);
+Console.WriteLine("\n\n" + stringsArray[0]);
 Console.WriteLine(stringSub1);
 Console.WriteLine(stringReplaced);
 Console.WriteLine(stringContains);
+Console.WriteLine(stringTrim);
+Console.WriteLine(stringIndex);
+Console.WriteLine(stringLastIndex);
+Console.WriteLine(stringRemove);
+Console.WriteLine(stringToUpper);
+Console.WriteLine(stringToLower);
+Console.WriteLine(stringEndsWith);
+Console.WriteLine(stringStartsWith);
+Console.Write(stringCharArray[0]);
+Console.Write(stringCharArray[1]);
+Console.WriteLine(stringCharArray[2]);
+Console.WriteLine(stringPadLeft);
+Console.WriteLine(stringPadRight);
+
+
+
+
 
 
 
