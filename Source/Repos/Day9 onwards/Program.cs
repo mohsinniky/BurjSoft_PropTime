@@ -1,82 +1,62 @@
-﻿using System;
-using System.Drawing;
+﻿
 
-Console.WriteLine("Hello, This Is Mohsin Writing His First Program!");
-Console.Write("Using Write() to write this line lets see what happens! \n");                                                  
-//Below is the code of using Read() and ReadLine()
-Console.WriteLine("Enter your Age");
-int age = Convert.ToInt32(Console.ReadLine());
+//  start your code here
 
-if (age <= 0)
+static double addNumber(double num1, double num2)
 {
-    Console.WriteLine("Invalid Age Entered");
-}else if (age <= 20)
-{
-    Console.WriteLine("Too Young to See this Message");
-}else
-{
-    Console.WriteLine("You can View The Message");
+    return num1 + num2;
 }
 
-
-
-
-//int rdExample = Console.Read();
-//Console.WriteLine(rdExample);
-
-//Variable Initialization and Testing
-int myNum = 5;
-double myDoubleNum = 5.99D;
-char myLetter = 'D';
-bool myBool = true;
-string myText = "Hello";
-
-Console.WriteLine("Int: " + myNum + "\nDouble: " + myDoubleNum + "\nChar: " + myLetter + "\nBool: " + myBool + "\nString: " + myText);
-//const Variable 
-const int myConstant= 15;
-//myConstant = 20; // error
-
-
-//Variables Names Must be unique and they are also called as identifiers..
-
-
-float f1 = 35e3F;
-Console.WriteLine("Float: " + f1);
-
-//Implicit Casting(automatically) -converting a smaller type to a larger type size
-//char -> int -> long -> float -> double
-
-//Explicit Casting (manually) - converting a larger type to a smaller size type
-//double -> float -> long -> int -> char
-
-double myDoubleValue = 10.90;
-int myIntForTypeCasting = (int) myDoubleValue;    // Manual casting: double to int
-string myStringTypeCasting = Convert.ToString(myDoubleValue);
-
-Console.WriteLine($" Double: {myDoubleValue}, Int: {myIntForTypeCasting}, String: {myStringTypeCasting}");
-Console.WriteLine(myDoubleValue + myStringTypeCasting);
-
-//Math
-Console.WriteLine(Math.Min(5, 10));
-Console.WriteLine(Math.Sqrt(20));
-Console.WriteLine(Math.Round(1212.211));
-
-
-
-//Loops
-int i = 0;
-do
+static double subNumber(double num1, double num2)
 {
-    Console.WriteLine(i);
-    i++;
+    return num1 - num2;
 }
-while (i < 5);
 
-
-//ForEach 
-string[] cars = { "Volvo", "BMW", "Ford", "Mazda" };
-foreach (string item in cars)
+static double mulNumber(double num1, double num2)
 {
-    Console.WriteLine(item);
+    return num1 * num2;
 }
+
+static double divNumber(double num1, double num2)
+{
+    return num1 / num2;
+}
+
+//Main Code Starts Form Here
+Console.WriteLine("Hello, Welcome to niky's Program \nChoose Your Options from 1...4:\n1: Addition\n2: Subtraction\n3: Multiplication\n4: Division");
+int option = int.Parse(Console.ReadLine());
+double inputNumber1, inputNumber2;
+Console.WriteLine("Your Option chosen: " + option);
+
+switch (option)
+{
+    case 1:
+        Console.WriteLine("Enter the two Numbers you want to perform the Addition operation on:");
+        inputNumber1 = double.Parse(Console.ReadLine());
+        inputNumber2 = double.Parse(Console.ReadLine());
+        Console.WriteLine("The Result After selected operations Is:  " + addNumber(inputNumber1, inputNumber2));
+        break;
+    case 2:
+        Console.WriteLine("Enter the two Numbers you want to perform the Subtraction operation on:");
+        inputNumber1 = double.Parse(Console.ReadLine());
+        inputNumber2 = double.Parse(Console.ReadLine());
+        Console.WriteLine("The Result After selected operations Is:  " + subNumber(inputNumber1, inputNumber2));
+        break;
+    case 3:
+        Console.WriteLine("Enter the two Numbers you want to perform the Multiplication operation on:");
+        inputNumber1 = double.Parse(Console.ReadLine());
+        inputNumber2 = double.Parse(Console.ReadLine());
+        Console.WriteLine("The Result After selected operations Is:  " + mulNumber(inputNumber1, inputNumber2));
+        break;
+    case 4:
+        Console.WriteLine("Enter the two Numbers you want to perform the Division operation on:");
+        inputNumber1 = double.Parse(Console.ReadLine());
+        inputNumber2 = double.Parse(Console.ReadLine());
+        Console.WriteLine("The Result After selected operations Is:  " + divNumber(inputNumber1, inputNumber2));
+        break;
+    default:
+        Console.WriteLine("Some Error Occured");
+        break;
+}
+
 
