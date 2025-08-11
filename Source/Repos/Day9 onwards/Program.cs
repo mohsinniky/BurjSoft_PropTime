@@ -187,6 +187,18 @@
 //Console.WriteLine(stringPadRight);
 //Console.WriteLine(stringDistinct);
 
+////StringBuilder
+//using System.Text;
+
+//StringBuilder sb = new StringBuilder("Testing");
+//Console.WriteLine(sb.ToString());
+//sb.Clear();
+//Console.WriteLine(sb);
+//Console.WriteLine(sb.Equals(sb));
+
+
+
+
 
 //Array initialization , 1-D, 2-D, and 3-D
 int[] oneDArray = { 1, 2, 3, 4, 5, 6 };
@@ -238,6 +250,8 @@ Console.WriteLine("Get Lower Bound: {0}", twoDArray.GetLowerBound(0));
 Console.WriteLine("Get Upper Bound: {0}", twoDArray.GetUpperBound(0));
 Console.WriteLine("Get Upper Bound: {0}", twoDArray.GetUpperBound(1));
 
+
+Console.WriteLine("Get Value: {0}", twoDArray.GetValue(0,1));
 
 
 
