@@ -200,59 +200,158 @@
 
 
 
-//Array initialization , 1-D, 2-D, and 3-D
-int[] oneDArray = { 1, 2, 3, 4, 5, 6 };
-int[,] twoDArray = {{ 10, 20, 30, 40, 50, 60 },{ 1, 2, 3, 4, 5, 6 }};
-int[,,] threeDArray = { { { 10, 20 }, { 30, 40 } },
-                        { { 10, 20 }, { 30, 40 } } };
+////Array initialization , 1-D, 2-D, and 3-D
+//using System;
+//using System.Xml.Linq;
 
-//Console.WriteLine(threeDArray[0,1,1]);
+//int[] oneDArray = { 1, 2, 3, 4, 5, 6 };
+//int[,] twoDArray = {{ 10, 20, 30, 40, 50, 60 },{ 1, 2, 3, 4, 5, 6 }};
+//int[,,] threeDArray = { { { 10, 20 }, { 30, 40 } },
+//                        { { 10, 20 }, { 30, 40 } } };
 
-int[] testArray = { 1, 2, 3 };
+////Console.WriteLine(threeDArray[0,1,1]);
 
-Console.WriteLine("Array Is Fixed Size:" + testArray.IsFixedSize);
+//int[] testArray = { 1, 2, 3 };
 
-Console.WriteLine("Array Is Read Only:" + testArray.IsReadOnly);
+//Console.WriteLine("Array Is Fixed Size:" + testArray.IsFixedSize);
 
-Console.WriteLine("Array Is Synchronized:" + testArray.IsSynchronized);
+//Console.WriteLine("Array Is Read Only:" + testArray.IsReadOnly);
 
-Console.WriteLine("Array Length:" + testArray.Length);
-Console.WriteLine("Array Long Length:" + threeDArray.LongLength);
-Console.WriteLine("Array Rank:" + testArray.Rank);
-Console.WriteLine("Array Equals:" + testArray.Equals(testArray));
+//Console.WriteLine("Array Is Synchronized:" + testArray.IsSynchronized);
 
-
-//AsReadOnly Method add a wrapper, need to look further in details
-Console.WriteLine("Array Binary Search:" + Array.BinarySearch(testArray,5));
-Console.WriteLine("Array IndexOf:" + Array.IndexOf(testArray,1));
-//Array Clear
-Array.Clear(oneDArray, 1, 1);
-Array.Reverse(oneDArray);
-Console.WriteLine(oneDArray[0]);
-//int[] copiedArray = Array.Copy(oneDArray);
-//Exists
-string[] language = {"Ruby", "C", "C++", "Java", "Perl", "C#", "Python", "Ruby"};
-Console.WriteLine("Is Ruby part of language: {0}", Array.Exists(language, element => element == "Ruby"));
-Console.WriteLine("Is Ruby4 part of language: {0}", Array.Exists(language, element => element == "Ruby4"));
-//Find  Element in Array                                                                      
-Console.WriteLine("Finding Element: {0}", Array.Find(language, element => element == "Ruby")); 
-//Find Last Element in Array                                                                      
-Console.WriteLine("Finding Last Element: {0}", Array.FindLast(language, element => element == "Ruby")); 
-//FindIndex
-Console.WriteLine("Find Index: {0}", Array.FindIndex(language, element => element == "C"));
-//FindIndexLast
-Console.WriteLine("Find Last Index: {0}", Array.FindLastIndex(language, element => element.StartsWith("C")));
+//Console.WriteLine("Array Length:" + testArray.Length);
+//Console.WriteLine("Array Long Length:" + threeDArray.LongLength);
+//Console.WriteLine("Array Rank:" + testArray.Rank);
+//Console.WriteLine("Array Equals:" + testArray.Equals(testArray));
 
 
-Console.WriteLine("Get Length: {0}", language.GetLength(0) );
-Console.WriteLine("Get Long Length: {0}", twoDArray.GetLongLength(1));
-Console.WriteLine("Get Lower Bound: {0}", twoDArray.GetLowerBound(0));
-Console.WriteLine("Get Upper Bound: {0}", twoDArray.GetUpperBound(0));
-Console.WriteLine("Get Upper Bound: {0}", twoDArray.GetUpperBound(1));
+////AsReadOnly Method add a wrapper, need to look further in details
+//Console.WriteLine("Array Binary Search:" + Array.BinarySearch(testArray,5));
+//Console.WriteLine("Array IndexOf:" + Array.IndexOf(testArray,1));
+////Array Clear
+//Array.Clear(oneDArray, 1, 1);
+//Array.Reverse(oneDArray);
+//Console.WriteLine(oneDArray[0]);
+////int[] copiedArray = Array.Copy(oneDArray);
+////Exists
+//string[] language = {"Ruby", "C", "C++", "Java", "Perl", "C#", "Python", "Ruby"};
+//Console.WriteLine("Is Ruby part of language: {0}", Array.Exists(language, element => element == "Ruby"));
+//Console.WriteLine("Is Ruby4 part of language: {0}", Array.Exists(language, element => element == "Ruby4"));
+////Find  Element in Array                                                                      
+//Console.WriteLine("Finding Element: {0}", Array.Find(language, element => element == "Ruby")); 
+////Find Last Element in Array                                                                      
+//Console.WriteLine("Finding Last Element: {0}", Array.FindLast(language, element => element == "Ruby")); 
+////FindIndex
+//Console.WriteLine("Find Index: {0}", Array.FindIndex(language, element => element == "C"));
+////FindIndexLast
+//Console.WriteLine("Find Last Index: {0}", Array.FindLastIndex(language, element => element.StartsWith("C")));
 
 
-Console.WriteLine("Get Value: {0}", twoDArray.GetValue(0,1));
+//Console.WriteLine("Get Length: {0}", language.GetLength(0) );
+//Console.WriteLine("Get Long Length: {0}", twoDArray.GetLongLength(1));
+//Console.WriteLine("Get Lower Bound: {0}", twoDArray.GetLowerBound(0));
+//Console.WriteLine("Get Upper Bound: {0}", twoDArray.GetUpperBound(0));
+//Console.WriteLine("Get Upper Bound: {0}", twoDArray.GetUpperBound(1));
 
+
+//Console.WriteLine("Get Value: {0}", twoDArray.GetValue(0,1));
+
+
+//string a = "123";
+//string b = "123";
+//Console.WriteLine(a == b);
+//Console.WriteLine(a.Equals(b));
+
+//object first = new object();
+//object second = new object();
+//Console.WriteLine(first == second);
+//Console.WriteLine(first.Equals(second));
+
+
+//Task Create a Matrix, Display it, reverse it And Display it, Find the Largest number and Duplicates from the Matrix
+
+Console.WriteLine("Enter the Number Of Rows In The Matrix");
+int rows = Convert.ToInt32(Console.ReadLine());
+
+Console.WriteLine("Enter the Number Of Columns In The Matrix");
+int columns = Convert.ToInt32(Console.ReadLine());
+
+int[,] matrix = new int[rows, columns];
+
+for (int i = 0; i < rows; i++)
+{
+    for (int j = 0; j < columns; j++)
+    {
+        Console.WriteLine("Enter Element At Row {0} And Column {1}", i + 1, j + 1);
+        matrix[i, j] = Convert.ToInt32(Console.ReadLine());
+    }
+}
+Console.WriteLine("The Orignal Matrix Is: ");
+for (int i = 0; i < rows; i++)
+{
+    for (int j = 0; j < columns; j++)
+    {
+        Console.Write(matrix[i, j] + " ");
+    }
+    Console.WriteLine();
+}
+//  Finding The Largest Number
+int largest = matrix[0, 0];
+for (int i = 0; i < rows; i++)
+{
+    for (int j = 0; j < columns; j++)
+    {
+        if (matrix[i, j] > largest)
+        {
+            largest = matrix[i, j];
+        }
+    }
+}
+Console.WriteLine("The Largest Number In The Matrix Is: " + largest);
+
+
+// Finding Duplicates
+Console.WriteLine("The Duplicates Are:");
+for (int i = 0; i < rows; i++)
+{
+    for (int j = 0; j < columns; j++)
+    {
+        for (int k = 0; k < rows; k++)
+        {
+            for (int l = 0; l < columns; l++)
+            {
+                if ((matrix[i, j] == matrix[k, l]) && (i != k || j != l))
+                {
+                    Console.WriteLine(matrix[i, j]);
+
+                }
+            }
+
+        }
+    }
+}
+
+
+
+// // Now Reverse The Matrix in a new Array
+// int[,] reversedMatrix = new int[rows, columns];
+
+// for (int i = 0; i < rows; i++)
+// {
+//     for (int j = 0; j < columns; j++)
+//     {
+//         reversedMatrix[i, j] = matrix[j, i];
+//     }
+// }
+
+// for (int i = 0; i < rows; i++)
+// {
+//     for (int j = 0; j < columns; j++)
+//     {
+//         Console.Write(reversedMatrix[i, j] + " ");
+//     }
+//     Console.WriteLine();
+// }
 
 
 
