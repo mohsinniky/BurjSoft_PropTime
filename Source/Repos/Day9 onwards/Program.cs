@@ -81,6 +81,8 @@
 
 
 //String Methods
+using System.Linq;
+
 string myName = "Mohsin Raza";
 string mySentence = "My Name is ";
 string myNameSentence = string.Concat(mySentence, myName);
@@ -131,6 +133,24 @@ char[] stringCharArray = mySentence.ToCharArray();
 string stringPadLeft = myName.PadLeft(20);
 string stringPadRight = myName.PadRight(20);
 
+// All, not applicable here , specific case is needed
+
+//Distinct
+var stringDistinct = myName.Distinct();
+// All()	Checks if all elements match a condition.
+// Any()	Checks if any element matches a condition (or if collection is non-empty).
+// Distinct()	Returns unique elements (removes duplicates).
+// DistinctBy()	Returns unique elements based on a condition.
+
+
+// is
+if (myName is string)
+{
+    Console.WriteLine("myName is String");
+}
+
+
+
 
 
 
@@ -165,6 +185,8 @@ Console.Write(stringCharArray[1]);
 Console.WriteLine(stringCharArray[2]);
 Console.WriteLine(stringPadLeft);
 Console.WriteLine(stringPadRight);
+Console.WriteLine(stringDistinct);
+
 
 
 
