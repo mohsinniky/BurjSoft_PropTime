@@ -333,25 +333,42 @@ for (int i = 0; i < rows; i++)
 
 
 
-// // Now Reverse The Matrix in a new Array
-// int[,] reversedMatrix = new int[rows, columns];
+// Now Reverse The Matrix in a new Array
 
-// for (int i = 0; i < rows; i++)
-// {
-//     for (int j = 0; j < columns; j++)
-//     {
-//         reversedMatrix[i, j] = matrix[j, i];
-//     }
-// }
+int[] reversedMatrix = new int[rows * columns];
 
-// for (int i = 0; i < rows; i++)
-// {
-//     for (int j = 0; j < columns; j++)
-//     {
-//         Console.Write(reversedMatrix[i, j] + " ");
-//     }
-//     Console.WriteLine();
-// }
+
+for (int i = 0; i < rows; i++)
+{
+    for (int j = 0; j < columns; j++)
+    {
+        reversedMatrix[i * columns + j] = matrix[i, j];
+    }
+    
+}
+
+Array.Reverse(reversedMatrix);
+
+// Matix Reversal
+
+for (int i = 0; i < rows; i++)
+{
+    for (int j = 0; j < columns; j++)
+    {
+        matrix[i, j] = reversedMatrix[i * columns + j];
+    }
+}
+
+// Displaying The Reversed Matrix
+Console.WriteLine("The Reversed Matrix Is: ");
+for (int i = 0; i < rows; i++)
+{
+    for (int j = 0; j < columns; j++)
+    {
+        Console.Write(matrix[i, j] + " ");
+    }
+    Console.WriteLine();
+}
 
 
 
