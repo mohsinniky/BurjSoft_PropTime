@@ -60,7 +60,7 @@
 //string numString = "1234";
 
 ////int numInt = int.Parse(numString);
-////it throw an error exceptio n when tried to do incrorrect 
+////it throw an error exception when tried to do incrorrect 
 //int result;
 //int.TryParse(numString, out  result);
 ////if tryparse fails, instead of throwing an exception it display false or 0 
@@ -80,76 +80,74 @@
 //Console.WriteLine(myValue);
 
 
-//String Methods
-using System.Linq;
+////String Methods
+//using System.Linq;
 
-string myName = "Mohsin Raza";
-string mySentence = "My Name is ";
-string myNameSentence = string.Concat(mySentence, myName);
-//Format
-string myNameSentence2 = string.Format("Hello {0}", myName);
-//Compare
-int resultCompare = string.Compare(mySentence, myName);
-//Join
-string[] text = { "C#", "Java", "C++" };
-string stringJoin = string.Join(" ", text);
-//Equals
-bool stringEquals = string.Equals(text, myName);
-
-
-
-//Split
-string[] stringsArray = mySentence.Split(" ");
-//Substring
-string stringSub1 = mySentence.Substring(5,4);
-//Replace
-string stringReplaced = mySentence.Replace("My", "Your");
-//Contains
-bool stringContains = mySentence.Contains("Your");
-//Trim
-string stringTrim = "     text       ";
-stringTrim = stringTrim.Trim();
-//stringTrim = stringTrim.TrimEnd();
-//stringTrim = stringTrim.TrimStart();
-
-//IndexOf
-int stringIndex = myName.IndexOf("Ra");
-//LastIndexOf
-int stringLastIndex = myNameSentence2.LastIndexOf("a");
-//Remove
-string stringRemove = myNameSentence2.Remove(5);
-//string stringRemove = myNameSentence2.Remove(5,3); here 3 is the number of character to be removed starting from index 5
-//ToUpper, ToLower
-string stringToUpper = myName.ToUpper();
-string stringToLower = myName.ToLower();
-
-//EndsWith
-bool stringEndsWith = myName.EndsWith("Raza");
-//StartsWith
-bool stringStartsWith = myName.StartsWith("Raza");
-// CharArray
-char[] stringCharArray = mySentence.ToCharArray();
-// PadLeft, PadRight
-string stringPadLeft = myName.PadLeft(20);
-string stringPadRight = myName.PadRight(20);
-
-// All, not applicable here , specific case is needed
-
-//Distinct
-var stringDistinct = myName.Distinct();
-// All()	Checks if all elements match a condition.
-// Any()	Checks if any element matches a condition (or if collection is non-empty).
-// Distinct()	Returns unique elements (removes duplicates).
-// DistinctBy()	Returns unique elements based on a condition.
+//string myName = "Mohsin Raza";
+//string mySentence = "My Name is ";
+//string myNameSentence = string.Concat(mySentence, myName);
+////Format
+//string myNameSentence2 = string.Format("Hello {0}", myName);
+////Compare
+//int resultCompare = string.Compare(mySentence, myName);
+////Join
+//string[] text = { "C#", "Java", "C++" };
+//string stringJoin = string.Join(" ", text);
+////Equals
+//bool stringEquals = string.Equals(text, myName);
 
 
-// is
-if (myName is string)
-{
-    Console.WriteLine("myName is String");
-}
+
+////Split
+//string[] stringsArray = mySentence.Split(" ");
+////Substring
+//string stringSub1 = mySentence.Substring(5,4);
+////Replace
+//string stringReplaced = mySentence.Replace("My", "Your");
+////Contains
+//bool stringContains = mySentence.Contains("Your");
+////Trim
+//string stringTrim = "     text       ";
+//stringTrim = stringTrim.Trim();
+////stringTrim = stringTrim.TrimEnd();
+////stringTrim = stringTrim.TrimStart();
+
+////IndexOf
+//int stringIndex = myName.IndexOf("Ra");
+////LastIndexOf
+//int stringLastIndex = myNameSentence2.LastIndexOf("a");
+////Remove
+//string stringRemove = myNameSentence2.Remove(5);
+////string stringRemove = myNameSentence2.Remove(5,3); here 3 is the number of character to be removed starting from index 5
+////ToUpper, ToLower
+//string stringToUpper = myName.ToUpper();
+//string stringToLower = myName.ToLower();
+
+////EndsWith
+//bool stringEndsWith = myName.EndsWith("Raza");
+////StartsWith
+//bool stringStartsWith = myName.StartsWith("Raza");
+//// CharArray
+//char[] stringCharArray = mySentence.ToCharArray();
+//// PadLeft, PadRight
+//string stringPadLeft = myName.PadLeft(20);
+//string stringPadRight = myName.PadRight(20);
+
+//// All, not applicable here , specific case is needed
+
+////Distinct
+//var stringDistinct = myName.Distinct();
+//// All()	Checks if all elements match a condition.
+//// Any()	Checks if any element matches a condition (or if collection is non-empty).
+//// Distinct()	Returns unique elements (removes duplicates).
+//// DistinctBy()	Returns unique elements based on a condition.
 
 
+//// is
+//if (myName is string)
+//{
+//    Console.WriteLine("myName is String");
+//}
 
 
 
@@ -162,30 +160,43 @@ if (myName is string)
 
 
 
-Console.WriteLine(myNameSentence);
-Console.WriteLine(myNameSentence2);
-Console.WriteLine(resultCompare);
-Console.WriteLine(stringJoin);
-Console.WriteLine(stringEquals);
 
-Console.WriteLine("\n\n" + stringsArray[0]);
-Console.WriteLine(stringSub1);
-Console.WriteLine(stringReplaced);
-Console.WriteLine(stringContains);
-Console.WriteLine(stringTrim);
-Console.WriteLine(stringIndex);
-Console.WriteLine(stringLastIndex);
-Console.WriteLine(stringRemove);
-Console.WriteLine(stringToUpper);
-Console.WriteLine(stringToLower);
-Console.WriteLine(stringEndsWith);
-Console.WriteLine(stringStartsWith);
-Console.Write(stringCharArray[0]);
-Console.Write(stringCharArray[1]);
-Console.WriteLine(stringCharArray[2]);
-Console.WriteLine(stringPadLeft);
-Console.WriteLine(stringPadRight);
-Console.WriteLine(stringDistinct);
+////String Methods Being Displayed
+//Console.WriteLine(myNameSentence);
+//Console.WriteLine(myNameSentence2);
+//Console.WriteLine(resultCompare);
+//Console.WriteLine(stringJoin);
+//Console.WriteLine(stringEquals);
+
+//Console.WriteLine("\n\n" + stringsArray[0]);
+//Console.WriteLine(stringSub1);
+//Console.WriteLine(stringReplaced);
+//Console.WriteLine(stringContains);
+//Console.WriteLine(stringTrim);
+//Console.WriteLine(stringIndex);
+//Console.WriteLine(stringLastIndex);
+//Console.WriteLine(stringRemove);
+//Console.WriteLine(stringToUpper);
+//Console.WriteLine(stringToLower);
+//Console.WriteLine(stringEndsWith);
+//Console.WriteLine(stringStartsWith);
+//Console.Write(stringCharArray[0]);
+//Console.Write(stringCharArray[1]);
+//Console.WriteLine(stringCharArray[2]);
+//Console.WriteLine(stringPadLeft);
+//Console.WriteLine(stringPadRight);
+//Console.WriteLine(stringDistinct);
+
+
+//Array initialization , 1-D, 2-D, and 3-D
+int[] oneDArray = { 1, 2, 3, 4, 5, 6 };
+int[,] twoDArray = {{ 10, 20, 30, 40, 50, 60 },{ 1, 2, 3, 4, 5, 6 }};
+int[,,] threeDArray = { { { 10, 20 }, { 30, 40 } },
+                        { { 10, 20 }, { 30, 40 } } };
+
+Console.WriteLine(threeDArray[0,1,1]);
+
+int[] testArray 
 
 
 
