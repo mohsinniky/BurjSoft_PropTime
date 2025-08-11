@@ -194,10 +194,49 @@ int[,] twoDArray = {{ 10, 20, 30, 40, 50, 60 },{ 1, 2, 3, 4, 5, 6 }};
 int[,,] threeDArray = { { { 10, 20 }, { 30, 40 } },
                         { { 10, 20 }, { 30, 40 } } };
 
-Console.WriteLine(threeDArray[0,1,1]);
+//Console.WriteLine(threeDArray[0,1,1]);
 
-int[] testArray 
+int[] testArray = { 1, 2, 3 };
 
+Console.WriteLine("Array Is Fixed Size:" + testArray.IsFixedSize);
+
+Console.WriteLine("Array Is Read Only:" + testArray.IsReadOnly);
+
+Console.WriteLine("Array Is Synchronized:" + testArray.IsSynchronized);
+
+Console.WriteLine("Array Length:" + testArray.Length);
+Console.WriteLine("Array Long Length:" + threeDArray.LongLength);
+Console.WriteLine("Array Rank:" + testArray.Rank);
+Console.WriteLine("Array Equals:" + testArray.Equals(testArray));
+
+
+//AsReadOnly Method add a wrapper, need to look further in details
+Console.WriteLine("Array Binary Search:" + Array.BinarySearch(testArray,5));
+Console.WriteLine("Array IndexOf:" + Array.IndexOf(testArray,1));
+//Array Clear
+Array.Clear(oneDArray, 1, 1);
+Array.Reverse(oneDArray);
+Console.WriteLine(oneDArray[0]);
+//int[] copiedArray = Array.Copy(oneDArray);
+//Exists
+string[] language = {"Ruby", "C", "C++", "Java", "Perl", "C#", "Python", "Ruby"};
+Console.WriteLine("Is Ruby part of language: {0}", Array.Exists(language, element => element == "Ruby"));
+Console.WriteLine("Is Ruby4 part of language: {0}", Array.Exists(language, element => element == "Ruby4"));
+//Find  Element in Array                                                                      
+Console.WriteLine("Finding Element: {0}", Array.Find(language, element => element == "Ruby")); 
+//Find Last Element in Array                                                                      
+Console.WriteLine("Finding Last Element: {0}", Array.FindLast(language, element => element == "Ruby")); 
+//FindIndex
+Console.WriteLine("Find Index: {0}", Array.FindIndex(language, element => element == "C"));
+//FindIndexLast
+Console.WriteLine("Find Last Index: {0}", Array.FindLastIndex(language, element => element.StartsWith("C")));
+
+
+Console.WriteLine("Get Length: {0}", language.GetLength(0) );
+Console.WriteLine("Get Long Length: {0}", twoDArray.GetLongLength(1));
+Console.WriteLine("Get Lower Bound: {0}", twoDArray.GetLowerBound(0));
+Console.WriteLine("Get Upper Bound: {0}", twoDArray.GetUpperBound(0));
+Console.WriteLine("Get Upper Bound: {0}", twoDArray.GetUpperBound(1));
 
 
 
