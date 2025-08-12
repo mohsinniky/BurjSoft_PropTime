@@ -15,8 +15,10 @@ namespace Day9_onwards
      *           Abstract class:
      *           - a restricted class that cannot be used to create objects 
      *              (to access it, it must be inherited from another class)
+     *           - Can contain fields, properties, and constructors
      *           - During Inheritance Can't Use Public Keyword
-     * 
+     *           Abstract Methods:
+     *           - methods without implementation
      * 
      * 
      * 
@@ -41,6 +43,7 @@ namespace Day9_onwards
     }
 
     //Practice of Interfaces
+    //It contains only method declarations(no implementation)
     interface IFirstInterface
     {
         void myMethod();
@@ -56,11 +59,11 @@ namespace Day9_onwards
     {
         public void myMethod()
         {
-            Console.WriteLine("Some text..");
+            Console.WriteLine("My First Method..");
         }
         public void myOtherMethod()
         {
-            Console.WriteLine("Some other text...");
+            Console.WriteLine("My Second Method...");
         }
     }
 
@@ -73,6 +76,12 @@ namespace Day9_onwards
 
             Dog myDog = new Dog();
             myDog.animalSound();
+            myDog.sleep();
+
+            DemoClass demoClass = new DemoClass(); 
+            demoClass.myMethod();
+            demoClass.myOtherMethod();
+
 
         }
 
