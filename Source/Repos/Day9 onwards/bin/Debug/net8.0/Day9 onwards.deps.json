@@ -7,14 +7,30 @@
   "targets": {
     ".NETCoreApp,Version=v8.0": {
       "Day9 onwards/1.0.0": {
+        "dependencies": {
+          "Oops": "1.0.0"
+        },
         "runtime": {
           "Day9 onwards.dll": {}
+        }
+      },
+      "Oops/1.0.0": {
+        "runtime": {
+          "Oops.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
   },
   "libraries": {
     "Day9 onwards/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Oops/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

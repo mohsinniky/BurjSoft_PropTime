@@ -13,3 +13,7 @@ G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\obj\Debug\net8.0\refint\Day9 onwa
 G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\obj\Debug\net8.0\Day9 onwards.pdb
 G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\obj\Debug\net8.0\Day9 onwards.genruntimeconfig.cache
 G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\obj\Debug\net8.0\ref\Day9 onwards.dll
+G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\bin\Debug\net8.0\Oops.dll
+G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\bin\Debug\net8.0\Oops.pdb
+G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\obj\Debug\net8.0\Day9 onwards.csproj.AssemblyReference.cache
+G:\BurjSoft_PropTime\Source\Repos\Day9 onwards\obj\Debug\net8.0\Day9 onw.1736E45C.Up2Date

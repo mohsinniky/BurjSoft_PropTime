@@ -1,0 +1,12 @@
+G:\BurjSoft_PropTime\Source\Repos\Oops\bin\Debug\net8.0\Oops.deps.json
+G:\BurjSoft_PropTime\Source\Repos\Oops\bin\Debug\net8.0\Oops.dll
+G:\BurjSoft_PropTime\Source\Repos\Oops\bin\Debug\net8.0\Oops.pdb
+G:\BurjSoft_PropTime\Source\Repos\Oops\obj\Debug\net8.0\Oops.GeneratedMSBuildEditorConfig.editorconfig
+G:\BurjSoft_PropTime\Source\Repos\Oops\obj\Debug\net8.0\Oops.AssemblyInfoInputs.cache
+G:\BurjSoft_PropTime\Source\Repos\Oops\obj\Debug\net8.0\Oops.AssemblyInfo.cs
+G:\BurjSoft_PropTime\Source\Repos\Oops\obj\Debug\net8.0\Oops.csproj.CoreCompileInputs.cache
+G:\BurjSoft_PropTime\Source\Repos\Oops\obj\Debug\net8.0\Oops.sourcelink.json
+G:\BurjSoft_PropTime\Source\Repos\Oops\obj\Debug\net8.0\Oops.dll
+G:\BurjSoft_PropTime\Source\Repos\Oops\obj\Debug\net8.0\refint\Oops.dll
+G:\BurjSoft_PropTime\Source\Repos\Oops\obj\Debug\net8.0\Oops.pdb
+G:\BurjSoft_PropTime\Source\Repos\Oops\obj\Debug\net8.0\ref\Oops.dll
