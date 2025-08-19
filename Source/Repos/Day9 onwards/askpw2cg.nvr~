@@ -1,7 +1,6 @@
 ﻿using Oops;
 using System;
 using System.Collections;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Enumeration;
@@ -135,7 +134,7 @@ namespace Day9_onwards
             //        Console.WriteLine("NestedListItem:  " + item);
             //    }
             //}
-
+    
             //// create an ArrayList
             //ArrayList student = new ArrayList();
 
@@ -191,48 +190,8 @@ namespace Day9_onwards
             //Console.WriteLine(studentDictionary.Values);
 
 
-            /*          // Practice Program 1
-                        List<string> studentNames = new List<string>() { "Mohsin", "Ahmed", "Ali" };
-                        List<int> studentGrades = new List<int>() { 60, 70, 80 };
-                        double averageGrade = 0;
-                        foreach (int grade in studentGrades)
-                        {
-                            averageGrade += grade;
-                        }
-                        averageGrade /= studentGrades.Count;
-                        for (int i = 0; i < studentNames.Count; i++)
-                        {
-                            Console.WriteLine("Student Name: {0} and his Grade: {1}", studentNames[i], studentGrades[i]);
-                        }
-                        Console.WriteLine("Average Grade: " + averageGrade);
-
-                        Console.WriteLine("Student With the Highest Grades is: {0}", studentNames[studentGrades.IndexOf(studentGrades.Max())]);
-            */
 
 
-            ////Practice Program 2
-            //ArrayList taskArrayList = new ArrayList() { 10, "Hello", 3.14, "World" };
-            //List<string> stringListForP2 = new List<string>();
-            //foreach (object item in taskArrayList)
-            //{
-            //        //Console.WriteLine(item.GetType());
-            //    if (item.GetType().Equals(typeof(string)))
-            //    {
-            //        // Adding string elements to stringList
-            //        stringListForP2.Add((string)item);
-            //    }
-            //}
-
-            //foreach (string values in stringListForP2)
-            //{
-            //    Console.WriteLine(values); 
-            //}
-
-            //Practice Program 3
-            Dictionary<string, List<string>> instituteDictionary = new Dictionary<string, List<string>>();
-            //Adding Key And values in the Dictionary
-            instituteDictionary.Add("IT", new List<string>() { "Mohsin", "Raza", "Ahmed" });
-            instituteDictionary.Add("EE", new List<string>() { "Hamza", "Hafiz", "Ali" });
 
 
 
