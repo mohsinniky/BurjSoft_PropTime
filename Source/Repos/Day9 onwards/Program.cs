@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Enumeration;
+using System.Linq.Expressions;
 
 namespace Day9_onwards
 {
@@ -44,29 +45,17 @@ namespace Day9_onwards
             subjects.Add("Chemistry");
             subjects.Add("Biology");
 
-            //ForEach Loop
-            subjects.ForEach(x => Console.WriteLine(x));
-
             // Insert Items
             subjects.Insert(2, "Geography");
 
-            // Looping thorugh the list
-            for (int i = 0; i < subjects.Count; i++)
-            {
-                Console.WriteLine("Subject Number {0}:  {1}", i, subjects[i]);
-            }
+            //ForEach Loop
+            subjects.ForEach(x => Console.WriteLine(x));
 
-            //Methods
-            // AddRange
-            subjects.AddRange(subjects);
-            // AsReadOnly
-            IList<string> readlist = subjects.AsReadOnly();
-            //readlist.Add("testing"); // this causes Exception Error
             // Random Integer List
             List<int> randomInts = new List<int>() { 1, 4, 51, 62, 3, 2, 8, 9, 11, 15, 53 };
             // Sort
             randomInts.Sort();
-
+            //LambdaExpression Methods
             // Find
             Console.WriteLine("Find:  " + randomInts.Find(x => x > 50));
             // FindAll
@@ -77,6 +66,22 @@ namespace Day9_onwards
             Console.WriteLine("FindLastIndex:  " + randomInts.FindLastIndex(x => x > 50));
             // Exists
             Console.WriteLine("Exists:  " + randomInts.Exists(x => x > 50));
+            // Select
+            List<int> list = new List<int>(randomInts.Select(x => x * 2));
+            Console.WriteLine("Select: ");
+            list.ForEach(x => Console.WriteLine(x));
+            //FirstAndDefault
+            Console.WriteLine("First:  " + randomInts.First(x => x > 50));
+            Console.WriteLine("FirstOrDefault:  " + randomInts.FirstOrDefault(x => x > 50));
+            Console.WriteLine("FirstOrDefault For > 100:  " + randomInts.FirstOrDefault(x => x > 100));
+            //LastAndDefault
+            Console.WriteLine("Last:  " + randomInts.Last(x => x > 50));
+            Console.WriteLine("LastOrDefault:  " + randomInts.LastOrDefault(x => x > 50));
+
+
+
+
+
 
             ////NestedList
             //List<List<int>> nestedList = new List<List<int>>();
