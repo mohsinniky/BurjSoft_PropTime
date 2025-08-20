@@ -7,16 +7,7 @@
       "RelativeMoniker": "D:0:0:{884843B2-4F76-470A-90E5-DEC164486075}|Day9 onwards.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{884843B2-4F76-470A-90E5-DEC164486075}|Day9 onwards.csproj|g:\\burjsoft_proptime\\source\\repos\\day9 onwards\\collections.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{884843B2-4F76-470A-90E5-DEC164486075}|Day9 onwards.csproj|solutionrelative:collections.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{884843B2-4F76-470A-90E5-DEC164486075}|Day9 onwards.csproj|g:\\burjsoft_proptime\\source\\repos\\day9 onwards\\generic_class_practice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{884843B2-4F76-470A-90E5-DEC164486075}|Day9 onwards.csproj|solutionrelative:generic_class_practice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{884843B2-4F76-470A-90E5-DEC164486075}|Day9 onwards.csproj|g:\\burjsoft_proptime\\source\\repos\\day9 onwards\\inheritance_practice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{884843B2-4F76-470A-90E5-DEC164486075}|Day9 onwards.csproj|solutionrelative:inheritance_practice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3CBB55C1-BC40-4EF5-99B3-0CAAC8874158}|..\\Oops\\Oops.csproj|g:\\burjsoft_proptime\\source\\repos\\oops\\studentlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,14 +22,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Collections.cs",
-              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\Day9 onwards\\Collections.cs",
-              "RelativeDocumentMoniker": "Collections.cs",
-              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\Day9 onwards\\Collections.cs",
-              "RelativeToolTip": "Collections.cs",
-              "ViewState": "AgIAANYAAAAAAAAAAAAowN0AAAARAAAAAAAAAA==",
+              "Title": "StudentList.cs",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\Oops\\StudentList.cs",
+              "RelativeDocumentMoniker": "..\\Oops\\StudentList.cs",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\Oops\\StudentList.cs",
+              "RelativeToolTip": "..\\Oops\\StudentList.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T08:57:10.531Z",
+              "WhenOpened": "2025-08-20T12:53:33.385Z",
               "EditorCaption": ""
             },
             {
@@ -49,34 +40,10 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\Day9 onwards\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAD8AAAAASDMzMzPzv0sAAABaAAAAAAAAAA==",
+              "ViewState": "AgIAACIAAAAAAAAAAAAqwDwAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-07T15:35:26.602Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Generic_Class_Practice.cs",
-              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\Day9 onwards\\Generic_Class_Practice.cs",
-              "RelativeDocumentMoniker": "Generic_Class_Practice.cs",
-              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\Day9 onwards\\Generic_Class_Practice.cs",
-              "RelativeToolTip": "Generic_Class_Practice.cs",
-              "ViewState": "AgIAADUAAAAAAAAAAAAswFcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-15T12:08:39.38Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Inheritance_Practice.cs",
-              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\Day9 onwards\\Inheritance_Practice.cs",
-              "RelativeDocumentMoniker": "Inheritance_Practice.cs",
-              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\Day9 onwards\\Inheritance_Practice.cs",
-              "RelativeToolTip": "Inheritance_Practice.cs",
-              "ViewState": "AgIAAG8AAAAAAAAAAAAgwIEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-15T11:58:21.035Z"
             }
           ]
         }

@@ -1,105 +1,66 @@
-﻿using Oops;
-using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
-using System.IO.Enumeration;
-using System.Linq.Expressions;
+﻿
+
+using Oops;
 
 namespace Day9_onwards
 {
-    /* C# Collections:
-     * Collections are classes that provide an easy way to work with a g
-     * System.Collections.Generic:
-     *      classes provide the implementation of strongly typed entities like lists, stacks etc
-     *      to create a generic collection.
-     *      in this we store , Type Compatible Data elements
-     *      Storing Different type of elements not allowed here 
-     *      Classes Under this: List Stack SortedList Queue
-     * System.Collections: 
-     *      To create a non Generic Colloection
-     *      Using this we can create classes where we can add data elements of multiple data types
-     *      Classes Under this: ArrayList Hashtable
-     * System.Collections.Concurrent:
-     *      Classes that help to achieve thread-safe code
-     *      Thread-Safe Code:
-     *          There can be situations when multiple threads are trying to execute the same piece of code
-     *          The code is said to be "thread-safe" if it can be executed correctly irrespective of multiple threads accessing concurrently.
-     *      These are the classes to be used when multiple threads are accessing the collection
-     *      Classes Under This: ConcurrentStack<T> ConcurrentQueue<T> ConcurrentDictionary<TKey,TValue>
-     */
-
-
-
     public static class Program
     {
+        public static void addToStudentList(Students studentListObject, int s_Id, string s_Name, int s_Age, bool s_IsActive)
+        {
+            studentListObject.studentId.Add(s_Id);
+            studentListObject.studentName.Add(s_Name);
+            studentListObject.studentAge.Add(s_Age);
+            studentListObject.studentIsActive.Add(s_IsActive);
+        }
+
+        public static void displayStudentList(Students studentListObject)
+        {
+
+            Console.Write("ID\t");
+            Console.Write("Name\t");
+            Console.Write("Age\t");
+            Console.Write("Is Active\t");
+            Console.WriteLine();
+
+            for (int i = 0; i < studentListObject.studentId.Count; i++)
+            {
+                Console.Write(studentListObject.studentId[i] + "\t");
+                Console.Write(studentListObject.studentName[i] + "\t");
+                Console.Write(studentListObject.studentAge[i] + "\t");
+                Console.Write(studentListObject.studentIsActive[i] + "\t");
+                Console.WriteLine();
+            }
+        }
 
         static void Main(string[] args)
         {
-            // list  
-            List<string> subjects = new List<string>() { "English", "Math" };
+            Students studentList = new Students();
 
-            // Adding Items
-            subjects.Add("Physics");
-            subjects.Add("Chemistry");
-            subjects.Add("Biology");
+            addToStudentList(studentList, 1, "Mohsin", 19, true);
+            addToStudentList(studentList, 2, "Raza", 19, true);
+            addToStudentList(studentList, 3, "Hammad", 19, true);
+            addToStudentList(studentList, 4, "Ayesha", 20, true);
+            addToStudentList(studentList, 5, "Bilal", 22, false);
+            addToStudentList(studentList, 6, "Fatima", 18, true);
+            addToStudentList(studentList, 7, "Usman", 21, true);
+            addToStudentList(studentList, 8, "Sana", 19, false);
+            addToStudentList(studentList, 9, "Ali", 23, true);
+            addToStudentList(studentList, 10, "Zainab", 20, true);
+            addToStudentList(studentList, 11, "Ahmed", 18, false);
+            addToStudentList(studentList, 12, "Hina", 21, true);
+            addToStudentList(studentList, 13, "Kamran", 22, true);
+            addToStudentList(studentList, 14, "Sadia", 19, false);
+            addToStudentList(studentList, 15, "Omar", 20, true);
+            addToStudentList(studentList, 16, "Amina", 18, true);
+            addToStudentList(studentList, 17, "Faisal", 24, false);
+            addToStudentList(studentList, 18, "Rabia", 19, true);
+            addToStudentList(studentList, 19, "Tariq", 21, true);
+            addToStudentList(studentList, 20, "Nadia", 22, false);
 
-            // Insert Items
-            subjects.Insert(2, "Geography");
+            displayStudentList(studentList);
 
-            //ForEach Loop
-            subjects.ForEach(x => Console.WriteLine(x));
-
-            // Random Integer List
-            List<int> randomInts = new List<int>() { 1, 4, 51, 62, 3, 2, 8, 9, 11, 15, 53 };
-            // Sort
-            randomInts.Sort();
-            //LambdaExpression Methods
-            // Find
-            Console.WriteLine("Find:  " + randomInts.Find(x => x > 50));
-            // FindAll
-            Console.WriteLine("FindAll:  " + randomInts.FindAll(x => x > 50));
-            // FindIndex
-            Console.WriteLine("FindIndex:  " + randomInts.FindIndex(x => x > 50));
-            // FindLastIndex
-            Console.WriteLine("FindLastIndex:  " + randomInts.FindLastIndex(x => x > 50));
-            // Exists
-            Console.WriteLine("Exists:  " + randomInts.Exists(x => x > 50));
-            // Select
-            List<int> list = new List<int>(randomInts.Select(x => x * 2));
-            Console.WriteLine("Select: ");
-            list.ForEach(x => Console.WriteLine(x));
-            //FirstAndDefault
-            Console.WriteLine("First:  " + randomInts.First(x => x > 50));
-            Console.WriteLine("FirstOrDefault:  " + randomInts.FirstOrDefault(x => x > 50));
-            Console.WriteLine("FirstOrDefault For > 100:  " + randomInts.FirstOrDefault(x => x > 100));
-            //LastAndDefault
-            Console.WriteLine("Last:  " + randomInts.Last(x => x > 50));
-            Console.WriteLine("LastOrDefault:  " + randomInts.LastOrDefault(x => x > 50));
-
-
-
-
-
-
-            ////NestedList
-            //List<List<int>> nestedList = new List<List<int>>();
-            //// Create inner lists
-            //List<int> innerList1 = new List<int> { 1, 2, 3 };
-            //List<int> innerList2 = new List<int> { 4, 5 };
-            //// Add inner lists to the nested list
-            //nestedList.Add(innerList1);
-            //nestedList.Add(innerList2);
-            //// ForEach
-            //foreach (List<int> innerList in nestedList)
-            //{
-            //    foreach (int item in innerList)
-            //    {
-            //        Console.WriteLine("NestedListItem:  " + item);
-            //    }
-            //}
-
+            //Queries/Questions
 
 
         }
