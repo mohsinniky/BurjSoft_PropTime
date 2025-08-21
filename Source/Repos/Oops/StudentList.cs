@@ -14,4 +14,12 @@ namespace Oops
         public List<bool> studentIsActive = new List<bool>();
 
     }
+
+    public class Employee
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public bool IsActive { get; set; }
+    }
 }

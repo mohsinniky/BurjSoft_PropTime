@@ -6,61 +6,57 @@ namespace Day9_onwards
 {
     public static class Program
     {
-        public static void addToStudentList(Students studentListObject, int s_Id, string s_Name, int s_Age, bool s_IsActive)
+        static int calculateSum(int x, int y)
         {
-            studentListObject.studentId.Add(s_Id);
-            studentListObject.studentName.Add(s_Name);
-            studentListObject.studentAge.Add(s_Age);
-            studentListObject.studentIsActive.Add(s_IsActive);
+            return x + y;
         }
 
-        public static void displayStudentList(Students studentListObject)
-        {
-
-            Console.Write("ID\t");
-            Console.Write("Name\t");
-            Console.Write("Age\t");
-            Console.Write("Is Active\t");
-            Console.WriteLine();
-
-            for (int i = 0; i < studentListObject.studentId.Count; i++)
-            {
-                Console.Write(studentListObject.studentId[i] + "\t");
-                Console.Write(studentListObject.studentName[i] + "\t");
-                Console.Write(studentListObject.studentAge[i] + "\t");
-                Console.Write(studentListObject.studentIsActive[i] + "\t");
-                Console.WriteLine();
-            }
-        }
+        // define a delegate
+        public delegate int myDelegate(int num1, int num2);
 
         static void Main(string[] args)
         {
-            Students studentList = new Students();
+            //List<Employee?> employees;
 
-            addToStudentList(studentList, 1, "Mohsin", 19, true);
-            addToStudentList(studentList, 2, "Raza", 19, true);
-            addToStudentList(studentList, 3, "Hammad", 19, true);
-            addToStudentList(studentList, 4, "Ayesha", 20, true);
-            addToStudentList(studentList, 5, "Bilal", 22, false);
-            addToStudentList(studentList, 6, "Fatima", 18, true);
-            addToStudentList(studentList, 7, "Usman", 21, true);
-            addToStudentList(studentList, 8, "Sana", 19, false);
-            addToStudentList(studentList, 9, "Ali", 23, true);
-            addToStudentList(studentList, 10, "Zainab", 20, true);
-            addToStudentList(studentList, 11, "Ahmed", 18, false);
-            addToStudentList(studentList, 12, "Hina", 21, true);
-            addToStudentList(studentList, 13, "Kamran", 22, true);
-            addToStudentList(studentList, 14, "Sadia", 19, false);
-            addToStudentList(studentList, 15, "Omar", 20, true);
-            addToStudentList(studentList, 16, "Amina", 18, true);
-            addToStudentList(studentList, 17, "Faisal", 24, false);
-            addToStudentList(studentList, 18, "Rabia", 19, true);
-            addToStudentList(studentList, 19, "Tariq", 21, true);
-            addToStudentList(studentList, 20, "Nadia", 22, false);
+            //employees = new List<Employee?>()
+            //{
+            //    new Employee() { Id = 1, Name =  "John", Age = 12, IsActive= true },
+            //    null,
+            //    new Employee() { Id = 3, Name =  "Michel", Age = 67, IsActive= true },
+            //    new Employee() { Id = 5, Name =  null, Age = 67, IsActive= true },
 
-            displayStudentList(studentList);
+            //};
 
-            //Queries/Questions
+
+            //var secondEmployees = employees.FirstOrDefault(x => x?.Id.Equals(3) ?? false);
+            //var johnEmployees = employees.Where(x => x?.Name?.Contains("John") ?? false);
+            //var agedEmployees = employees.Where(x => x?.Age >= 2 && x.Age < 20);
+            //var activeEmployees = employees.Where(x => x?.IsActive ?? false).Select(x => x.Name);
+
+
+            //List<string> FrutisList = new List<string>() { "Apple1", "Apple2", "Apple3", "Apple4" };
+
+            //IEnumerable<string> iEnumerableFruitsList = FrutisList;
+            //foreach (var item in iEnumerableFruitsList)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            //IEnumerator<string> iEnumeratorFruitsList = iEnumerableFruitsList.GetEnumerator();
+
+            //while (iEnumeratorFruitsList.MoveNext())
+            //{
+            //    Console.WriteLine(iEnumeratorFruitsList.Current);
+            //}
+
+
+            //Delegate
+            myDelegate delegateVariableForSumMethod = new myDelegate(calculateSum);
+
+            int result = delegateVariableForSumMethod(2, 3);
+            Console.WriteLine(result);
+
+
 
 
         }
