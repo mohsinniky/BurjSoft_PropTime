@@ -1,6 +1,7 @@
 ﻿
 
 using Oops;
+using System.Text.RegularExpressions;
 
 namespace Day9_onwards
 {
@@ -10,9 +11,30 @@ namespace Day9_onwards
         {
             return x + y;
         }
+        static void printMsg(string message)
+        {
+            Console.WriteLine(message);
+        }
+
+        // Factorial Method Recursive
+        static int Factorial(int n)
+        {
+            if (n == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return n * Factorial(n - 1);
+            }
+        }
+
+
 
         // define a delegate
         public delegate int myDelegate(int num1, int num2);
+        public delegate void printDelegate(string message);
+
 
         static void Main(string[] args)
         {
@@ -56,7 +78,37 @@ namespace Day9_onwards
             int result = delegateVariableForSumMethod(2, 3);
             Console.WriteLine(result);
 
+            printDelegate displayPrint = new printDelegate(printMsg);
+            displayPrint("Hello WOrld");
 
+            //For a Delegate 3 things Must match with its pointed Method, i. Return Type, ii. Parameters type/Sequence iii. Parameter Modifiers if any
+            //Used For: Callback Methods, Events Handling, Passing Method as parameter, Deligates can be chained together
+
+
+            //Recursion Practice
+            displayPrint("Enter Your Number for finding its Factorial: ");
+            int numberInput = Convert.ToInt32(Console.ReadLine());
+
+            int resultFactorial = Factorial(numberInput);
+            displayPrint($"Factorial of {numberInput} is: {resultFactorial}");
+
+
+            ////RegularExpression
+            //string pattern = "[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+";
+            //displayPrint("Enter Your Email: ");
+            //string? email = Console.ReadLine();
+            //Regex regexPattern = new Regex(pattern);
+            ////regexPattern.
+
+            //bool isValidEmail = regexPattern.IsMatch(email);
+            //displayPrint($"Email is Valid: {isValidEmail}");
+
+
+            //File Handling
+            string writeText = "Hello World!";
+            File.WriteAllText("filename.txt", writeText);
+            string readText = File.ReadAllText("filename.txt");
+            displayPrint(readText);
 
 
         }

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "cQ8PHEnpU6w=",
+  "success": true,
+  "projectFilePath": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\CoreMVCTutorial.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\NIKy\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

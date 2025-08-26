@@ -56,7 +56,7 @@ namespace Day9_onwards
 
             Console.WriteLine("Int: " + myNum + "\nDouble: " + myDoubleNum + "\nChar: " + myLetter + "\nBool: " + myBool + "\nString: " + myText);
             //const Variable 
-            const int myConstant = 15;
+            //const int myConstant = 15;
             //myConstant = 20; // error
 
 
