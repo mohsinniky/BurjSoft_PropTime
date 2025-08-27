@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CoreMVCTutorial")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a47b07153c37441e7b87e69bd5409092c97a80c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5b11bb0b9dc94ef732c4592a0f667a04bc623122")]
 [assembly: System.Reflection.AssemblyProductAttribute("CoreMVCTutorial")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CoreMVCTutorial")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
