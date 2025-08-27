@@ -1,0 +1,21 @@
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace CoreMVCTutorial.Controllers
+{
+    public class SecondController : Controller
+    {
+        public IActionResult SecondControlMethod() 
+        { 
+            return View(); 
+        }
+        //Attribute Based Routing
+
+        [Route("Second/Details/{name}/{age:id}")]
+        public IActionResult Details(string name = "Mohsin", int age = 19)
+        {
+            ViewBag.Name = name;
+            ViewBag.Age = age;
+            return View();
+        }
+    }
+}

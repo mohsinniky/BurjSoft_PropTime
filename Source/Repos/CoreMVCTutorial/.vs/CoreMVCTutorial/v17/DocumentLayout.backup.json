@@ -3,28 +3,28 @@
   "WorkspaceRootPath": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\views\\first\\parsingargument.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:views\\first\\parsingargument.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\controllers\\secondcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:controllers\\secondcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\views\\second\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:views\\second\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\controllers\\firstcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:controllers\\firstcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\views\\first\\firstcontrolmethod.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:views\\first\\firstcontrolmethod.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\controllers\\secondcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:controllers\\secondcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\views\\second\\secondcontrolmethod.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:views\\second\\secondcontrolmethod.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,37 +38,64 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ParsingArgument.cshtml",
-              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\First\\ParsingArgument.cshtml",
-              "RelativeDocumentMoniker": "Views\\First\\ParsingArgument.cshtml",
-              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\First\\ParsingArgument.cshtml",
-              "RelativeToolTip": "Views\\First\\ParsingArgument.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-27T09:14:15.862Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "SecondControlMethod.cshtml",
-              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\Second\\SecondControlMethod.cshtml",
-              "RelativeDocumentMoniker": "Views\\Second\\SecondControlMethod.cshtml",
-              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\Second\\SecondControlMethod.cshtml",
-              "RelativeToolTip": "Views\\Second\\SecondControlMethod.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-27T09:01:14.809Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAcAAAAAMzMzMzMLwBkAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-27T11:37:24.604Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\Second\\Details.cshtml",
+              "RelativeDocumentMoniker": "Views\\Second\\Details.cshtml",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\Second\\Details.cshtml",
+              "RelativeToolTip": "Views\\Second\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-27T12:36:24.17Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SecondController.cs",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Controllers\\SecondController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SecondController.cs",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Controllers\\SecondController.cs",
+              "RelativeToolTip": "Controllers\\SecondController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-27T08:55:32.427Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FirstController.cs",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Controllers\\FirstController.cs",
+              "RelativeDocumentMoniker": "Controllers\\FirstController.cs",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Controllers\\FirstController.cs",
+              "RelativeToolTip": "Controllers\\FirstController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-27T08:55:13.843Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "FirstControlMethod.cshtml",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\First\\FirstControlMethod.cshtml",
               "RelativeDocumentMoniker": "Views\\First\\FirstControlMethod.cshtml",
@@ -81,33 +108,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SecondController.cs",
-              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Controllers\\SecondController.cs",
-              "RelativeDocumentMoniker": "Controllers\\SecondController.cs",
-              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Controllers\\SecondController.cs",
-              "RelativeToolTip": "Controllers\\SecondController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-27T08:55:32.427Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FirstController.cs",
-              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Controllers\\FirstController.cs",
-              "RelativeDocumentMoniker": "Controllers\\FirstController.cs",
-              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Controllers\\FirstController.cs",
-              "RelativeToolTip": "Controllers\\FirstController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-27T08:55:13.843Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "StudentsController.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Controllers\\StudentsController.cs",
               "RelativeDocumentMoniker": "Controllers\\StudentsController.cs",

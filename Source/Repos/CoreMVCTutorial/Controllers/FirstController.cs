@@ -4,6 +4,7 @@ namespace CoreMVCTutorial.Controllers
 {
     public class FirstController : Controller
     {
+        [Route("First/FirstMethod")]
         public IActionResult FirstControlMethod()
         {
             return View();
@@ -18,16 +19,16 @@ namespace CoreMVCTutorial.Controllers
          */
 
         //The Below is attribute Based Routing Example
-        //[Route("First/ParsingArgument/{num:int}")]
+        [Route("First/ParsingArgument/{num:int?}")]
         public IActionResult ParsingArgument(int num)
         {
             //Using ViewBag
-            //ViewBag.Number = num;
+            ViewBag.Number = num;
 
             //Using ViewData
             ViewData["Number"] = num;
             return View();
         }
-
+       
     }
 }
