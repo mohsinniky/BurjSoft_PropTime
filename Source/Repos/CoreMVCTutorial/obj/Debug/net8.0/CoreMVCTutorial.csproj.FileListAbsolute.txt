@@ -21,9 +21,7 @@ G:\BurjSoft_PropTime\Source\Repos\CoreMVCTutorial\obj\Debug\net8.0\CoreMVCTutori
 G:\BurjSoft_PropTime\Source\Repos\CoreMVCTutorial\obj\Debug\net8.0\rjimswa.dswa.cache.json
 G:\BurjSoft_PropTime\Source\Repos\CoreMVCTutorial\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 G:\BurjSoft_PropTime\Source\Repos\CoreMVCTutorial\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
-G:\BurjSoft_PropTime\Source\Repos\CoreMVCTutorial\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 G:\BurjSoft_PropTime\Source\Repos\CoreMVCTutorial\obj\Debug\net8.0\scopedcss\bundle\CoreMVCTutorial.styles.css
-G:\BurjSoft_PropTime\Source\Repos\CoreMVCTutorial\obj\Debug\net8.0\scopedcss\projectbundle\CoreMVCTutorial.bundle.scp.css
 G:\BurjSoft_PropTime\Source\Repos\CoreMVCTutorial\obj\Debug\net8.0\staticwebassets.build.json
 G:\BurjSoft_PropTime\Source\Repos\CoreMVCTutorial\obj\Debug\net8.0\staticwebassets.build.json.cache
 G:\BurjSoft_PropTime\Source\Repos\CoreMVCTutorial\obj\Debug\net8.0\staticwebassets.development.json

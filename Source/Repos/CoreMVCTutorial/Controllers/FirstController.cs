@@ -4,7 +4,7 @@ namespace CoreMVCTutorial.Controllers
 {
     public class FirstController : Controller
     {
-        [Route("First/FirstMethod")]
+        [HttpGet("First/FirstMethod")]
         public IActionResult FirstControlMethod()
         {
             return View();

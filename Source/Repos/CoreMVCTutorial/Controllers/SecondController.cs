@@ -12,9 +12,12 @@ namespace CoreMVCTutorial.Controllers
         //Attribute Based Routing
 
         // Adding Route
-        [Route("Details")]
-        public IActionResult Details()
+        [Route("Details/{age:int?}/{name?}")]
+        public IActionResult Details(int age = 19, string name = "Mohsin")
         {
+            // Using ViewBag
+            ViewBag.Age = age;  
+            ViewBag.Name = name;
             return View();
         }
     }
