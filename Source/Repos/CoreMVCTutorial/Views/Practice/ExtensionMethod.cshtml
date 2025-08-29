@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "ExtensionMethod";
+}
+
+<h1>ExtensionMethod</h1>
+
+<!-- Html.ActionLink()	 -->
+@Html.ActionLink("RazorSyntax", "Index")
+<br />
+
+<!-- Html.TextBox() -->
+@Html.TextBox("FieldName", "Default Value")
+<br />
+
+<!-- Html.TextArea() -->
+@Html.TextArea("Description", "Default text", 5, 20, null)
+<br />
+
+<!-- Html.CheckBox() -->
+@Html.CheckBox("IsActive", true)
+<br />
+
+<!-- Html.RadioButton() -->
+@Html.RadioButton("Gender", "Male", true)
+<br />
+
+<!-- Html.DropDownList() -->
+@Html.DropDownList("Category", new SelectList(new[] { "Option1", "Option2" }))
+<br />
+
+<!-- Html.ListBox() -->
+@Html.ListBox("Roles", new MultiSelectList(new[] { "Admin", "User" }))
+<br />
+
+<!-- Html.Hidden() -->
+@Html.Hidden("UserId", 123)
+<br />
+
+<!-- Html.Password() -->
+@Html.Password("Password")
+<br />
+
+<!-- Html.Display() -->
+@Html.Display("UserName")

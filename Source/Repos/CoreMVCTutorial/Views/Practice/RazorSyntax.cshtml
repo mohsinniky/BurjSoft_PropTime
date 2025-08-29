@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "RazorSyntax";
+}
+
+<h1>RazorSyntax</h1>
+@* Using Inline Syntax *@
+<h2>@DateTime.Now.ToShortDateString()</h2>
+@* Multi-statement Code block *@
+@{
+    var date = DateTime.Now.ToShortDateString();
+    var message = "Hello World";
+}
+
+<h2>Today's date is: @date </h2>
+<h3>@message</h3>
+@* Use @: or <text>/<text> to display texts within code block. *@
+@{
+    @:Today's date is: @date
+    <br />
+    @message
+}
+
+@* IfCondition *@
+@if(DateTime.IsLeapYear(DateTime.Now.Year) )
+{
+    @DateTime.Now.Year @:is a leap year.
+}
+else { 
+    @DateTime.Now.Year @:is not a leap year.
+}
+<br />
+
+@* Loop *@
+@for (int i = 0; i < 5; i++) { 
+    @i.ToString() <br />
+}

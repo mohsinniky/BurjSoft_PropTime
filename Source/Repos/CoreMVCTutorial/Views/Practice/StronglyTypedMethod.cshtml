@@ -1,0 +1,50 @@
+﻿@model PracticeModel
+@{
+    ViewData["Title"] = "StronglyTypedMethod";
+}
+
+<h1>StronglyTypedMethod</h1>
+@using (Html.BeginForm())
+{
+    <!-- Html.TextBoxFor() -->
+    @Html.TextBoxFor(model => model.UserName)
+    <br/>
+
+    <!-- Html.TextAreaFor() -->
+    @Html.TextAreaFor(model => model.Description)
+    <br/>
+
+    <!-- Html.CheckBoxFor() -->
+    @Html.CheckBoxFor(model => model.IsActive)
+    <br/>
+
+    <!-- Html.RadioButtonFor() -->
+    @foreach (var gender in Model.Genders)
+    {
+        @Html.RadioButtonFor(model => model.Gender, gender.Value) @gender.Text
+    }
+    <br/>
+
+    <!-- Html.DropDownListFor() -->
+    @Html.DropDownListFor(model => model.Category, Model.Categories, "Select Category")
+    <br/>
+
+    <!-- Html.ListBoxFor() -->
+    @Html.ListBoxFor(model => model.SelectedRoles, Model.Roles)
+    <br/>
+
+    <!-- Html.HiddenFor() -->
+    @Html.HiddenFor(model => model.UserId)
+    <br/>
+
+    <!-- Html.PasswordFor() -->
+    <h4>Password</h4>
+    @Html.PasswordFor(model => model.Password)
+    <br/>
+
+    <!-- Html.DisplayFor() -->
+    @Html.DisplayFor(model => model.UserName)
+    <br/>
+
+    <button type="submit">Submit</button>
+}

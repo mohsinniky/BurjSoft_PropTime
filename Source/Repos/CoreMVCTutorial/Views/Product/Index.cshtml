@@ -1,0 +1,37 @@
+﻿@model IEnumerable<CoreMVCTutorial.Models.Product>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div>
+    <h4>Products</h4>
+
+    <table class="table">
+        <tr>
+            <th>
+                ProductID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Price
+            </th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            @await Html.PartialAsync("_PartialViewPracticeCode", item)
+        }
+
+    </table>
+</div>
+
