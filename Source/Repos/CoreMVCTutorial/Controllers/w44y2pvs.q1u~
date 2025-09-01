@@ -11,7 +11,7 @@ namespace CoreMVCTutorial.Controllers
             new Students
             {
                 StudentId = 1, FullName = "Mohsin", Password = "Password123!",
-                DateOfBirth = new DateTime(1111, 1, 1), Gender = Gender.Male, Address = "Test Address 1234",
+                DateOfBirth = new DateTime(1990, 1, 1), Gender = Gender.Male, Address = "Test Address 1234",
                 Branch = Branch.CSE, TermsAndConditions = true,
                 Hobbies = new List<string> { "Reading", "Traveling" },
                 Skills = new List<string> { "C#", "SQL" }
@@ -19,7 +19,7 @@ namespace CoreMVCTutorial.Controllers
             new Students
             {
                 StudentId = 2, FullName = "Raza", Password = "Password123!",
-                DateOfBirth = new DateTime(2222, 2, 2), Gender = Gender.Female, Address = "Test Address 1234",
+                DateOfBirth = new DateTime(1992, 2, 15), Gender = Gender.Female, Address = "Test Address 1234",
                 Branch = Branch.ETC, TermsAndConditions = true,
                 Hobbies = new List<string> { "Music", "Traveling" },
                 Skills = new List<string> { "Python", "Machine Learning" }
