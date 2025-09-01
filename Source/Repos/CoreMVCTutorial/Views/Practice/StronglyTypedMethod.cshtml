@@ -4,47 +4,49 @@
 }
 
 <h1>StronglyTypedMethod</h1>
-@using (Html.BeginForm())
-{
-    <!-- Html.TextBoxFor() -->
-    @Html.TextBoxFor(model => model.UserName)
-    <br/>
-
-    <!-- Html.TextAreaFor() -->
-    @Html.TextAreaFor(model => model.Description)
-    <br/>
-
-    <!-- Html.CheckBoxFor() -->
-    @Html.CheckBoxFor(model => model.IsActive)
-    <br/>
-
-    <!-- Html.RadioButtonFor() -->
-    @foreach (var gender in Model.Genders)
+<div class="border rounded w-50 px-3 container p-2">
+    @using (Html.BeginForm())
     {
-        @Html.RadioButtonFor(model => model.Gender, gender.Value) @gender.Text
+        <!-- Html.TextBoxFor() -->
+        <h4>Username</h4>
+        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control mb-2 w-50 " })
+
+        <!-- Html.TextAreaFor() -->
+        <h4>TextArea</h4>
+        @Html.TextAreaFor(model => model.Description, new { @class = "form-control mb-2" })
+
+        <!-- Html.CheckBoxFor() -->
+        @Html.CheckBoxFor(model => model.IsActive, new { @class = "form-check-input" })
+        <span class="me-1"> CheckBox </span>
+
+
+        <!-- Html.RadioButtonFor() -->
+        @foreach (var gender in Model.Genders)
+        {
+            @Html.RadioButtonFor(model => model.Gender, gender.Value, new { @class = "form-check-input mx-1 mb-2" }) @gender.Text
+        }
+
+
+        <!-- Html.DropDownListFor() -->
+        <h4>Select</h4>
+        @Html.DropDownListFor(model => model.Category, Model.Categories, "Select Category", new { @class = "form-select w-50 mb-2" })
+
+
+        <!-- Html.ListBoxFor() -->
+        @Html.ListBoxFor(model => model.SelectedRoles, Model.Roles, new { @class = "form-select mb-2 " })
+
+
+        <!-- Html.HiddenFor() -->
+        @Html.HiddenFor(model => model.UserId, new { @class = "hidden" })
+
+
+        <!-- Html.PasswordFor() -->
+        <h4>Password</h4>
+        @Html.PasswordFor(model => model.Password, new { @class = "form-control  mb-2" })
+
+
+        <button class="btn btn-outline-success" type="submit">Submit</button>
+        <!-- Html.DisplayFor() -->
+        @Html.DisplayFor(model => model.UserName, new { @class = "form-control" })
     }
-    <br/>
-
-    <!-- Html.DropDownListFor() -->
-    @Html.DropDownListFor(model => model.Category, Model.Categories, "Select Category")
-    <br/>
-
-    <!-- Html.ListBoxFor() -->
-    @Html.ListBoxFor(model => model.SelectedRoles, Model.Roles)
-    <br/>
-
-    <!-- Html.HiddenFor() -->
-    @Html.HiddenFor(model => model.UserId)
-    <br/>
-
-    <!-- Html.PasswordFor() -->
-    <h4>Password</h4>
-    @Html.PasswordFor(model => model.Password)
-    <br/>
-
-    <!-- Html.DisplayFor() -->
-    @Html.DisplayFor(model => model.UserName)
-    <br/>
-
-    <button type="submit">Submit</button>
-}
+</div>
