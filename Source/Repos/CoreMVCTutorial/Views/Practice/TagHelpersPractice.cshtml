@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "TagHelpersPractice";
+}
+
+<h1>This Page is for Tag Helpers Practice</h1>
+<!-- asp-controller & asp-action-->
+Using <strong>asp-controller="Home"</strong> & <strong>asp-action="Index"</strong>
+<a asp-controller="Home" asp-action="Index">Go Home</a>
+<br />
+<!-- asp-route-* -->
+Using <strong>asp-route-*</strong>
+<a asp-controller="Product" asp-action="Details" asp-route-id="3">View</a>
+<br />
+
+<!-- asp-append-version -->
+Using <strong>asp-append-version</strong>
+<img height="100px" width="100px" src="~/images/vecteezy_fruit-farm-logo_11186933.jpg" asp-append-version="true" />
+
+<br />
+<!-- environment-include-exclude -->
+Using <strong>environment</strong>, <strong>include="Development"</strong> & <strong>exclude="Development"</strong>
+
+<environment include="Development">
+    <script src="~/js/dev.js"></script>
+</environment>
+
+<environment exclude="Development">
+    <script src="~/js/prod.min.js"></script>
+</environment>
+<br />
+
+<!-- Form Tag Helpers -->
+Using <strong>method</strong>
+<form asp-action="Register" asp-controller="Account" method="post" class="d-flex">
+    <input class="form-control w-25 me-2" type="text" name="username" />
+    <button class="btn btn-outline-primary" type="submit">Register</button>
+</form>
+<br />
+
+<!-- Partial -->
+Using <strong>partial</strong>
+<partial name="_PartialViewPracticeCode" />
+

@@ -104,6 +104,15 @@ namespace CoreMVCTutorial.Controllers
             return PhysicalFile(path, contentType, fileName);
         }
 
+        /* End Of Different Return form of an ActionReslt
+         * Now We Discuss Tag Helpers
+         */
+
+        public IActionResult TagHelpersPractice()
+        {
+            return View();
+        }
+
 
 
     }
