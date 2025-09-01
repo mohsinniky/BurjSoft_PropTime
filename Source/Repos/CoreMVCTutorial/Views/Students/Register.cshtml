@@ -1,0 +1,124 @@
+﻿@model CoreMVCTutorial.Models.Students
+
+@{
+    ViewData["Title"] = "Student Registration";
+}
+
+<h2 class="mb-4">Student Registration</h2>
+
+<form asp-action="Register" asp-controller="Student" method="post" class="form-horizontal">
+
+    <!-- Name Input -->
+    <div class="form-group row mb-3">
+        <label asp-for="FullName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="FullName" class="form-control" />
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Password Input -->
+    <div class="form-group row mb-3">
+        <label asp-for="Password" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Password" type="password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Date of Birth Input -->
+    <div class="form-group row mb-3">
+        <label asp-for="DateOfBirth" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="DateOfBirth" type="date" class="form-control" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" />
+            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Gender Radio Buttons (using Enum) -->
+    <div class="form-group row mb-3">
+        <label class="col-sm-2 col-form-label">Gender</label>
+        <div class="col-sm-10">
+            @foreach (var gender in Enum.GetValues(typeof(FormTagHelperDemo.Models.Gender)))
+            {
+                <div class="form-check form-check-inline">
+                    <input type="radio" asp-for="Gender" value="@gender" class="form-check-input" />
+                    <label class="form-check-label">@gender</label>
+                </div>
+            }
+            <span asp-validation-for="Gender" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Address Text Area -->
+    <div class="form-group row mb-3">
+        <label asp-for="Address" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <textarea asp-for="Address" class="form-control"></textarea>
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Branch Drop Down List (using Enum) -->
+    <div class="form-group row mb-3">
+        <label asp-for="Branch" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <select asp-for="Branch" class="form-control">
+                <option value="">-- Select Branch --</option>
+                @foreach (var branch in Enum.GetValues(typeof(FormTagHelperDemo.Models.Branch)))
+                {
+                    <option value="@branch">@branch</option>
+                }
+            </select>
+            <span asp-validation-for="Branch" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Hobbies Multi-Select Check Box -->
+    <div class="form-group row mb-3">
+        <label class="col-sm-2 col-form-label">Hobbies</label>
+        <div class="col-sm-10">
+            @foreach (var hobby in ViewBag.Hobbies as List<string>)
+            {
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" name="Hobbies" value="@hobby"
+                           @(Model.Hobbies != null && Model.Hobbies.Contains(hobby) ? "checked" : "") />
+                    <label class="form-check-label">@hobby</label>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Skills List Box with multiple selection -->
+    <div class="form-group row mb-3">
+        <label asp-for="Skills" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <select asp-for="Skills" class="form-control" multiple>
+                @foreach (var skill in ViewBag.Skills as List<string>)
+                {
+                    <option value="@skill">@skill</option>
+                }
+            </select>
+            <span asp-validation-for="Skills" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Terms and Conditions Single Check Box -->
+    <div class="form-group row mb-3">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+            <div class="form-check">
+                <input asp-for="TermsAndConditions" type="checkbox" class="form-check-input" />
+                <label class="form-check-label" for="TermsAndConditions">I agree to the terms and conditions</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group row mb-4">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </div>
+</form>
