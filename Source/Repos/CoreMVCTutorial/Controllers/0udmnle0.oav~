@@ -1,0 +1,33 @@
+﻿using CoreMVCTutorial.Models;
+using Microsoft.AspNetCore.Mvc;
+
+namespace CoreMVCTutorial.Controllers
+{
+    public class TeachersController : Controller
+    {
+        // Simulated in-memory storage with hardcoded data for demonstration purposes
+        private static List<Students> students = new List<Students>
+        {
+            new Students
+            {
+                StudentId = 1, FullName = "Mohsin", Password = "Password123!",
+                DateOfBirth = new DateTime(1111, 1, 1), Gender = Gender.Male, Address = "Test Address 1234",
+                Branch = Branch.CSE, TermsAndConditions = true,
+                Hobbies = new List<string> { "Reading", "Traveling" },
+                Skills = new List<string> { "C#", "SQL" }
+            },
+            new Students
+            {
+                StudentId = 2, FullName = "Raza", Password = "Password123!",
+                DateOfBirth = new DateTime(2222, 2, 2), Gender = Gender.Female, Address = "Test Address 1234",
+                Branch = Branch.ETC, TermsAndConditions = true,
+                Hobbies = new List<string> { "Music", "Traveling" },
+                Skills = new List<string> { "Python", "Machine Learning" }
+            }
+        };
+        public IActionResult Index()
+        {
+            return View();
+        }
+    }
+}

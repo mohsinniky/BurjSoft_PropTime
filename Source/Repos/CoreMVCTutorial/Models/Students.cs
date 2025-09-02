@@ -2,19 +2,6 @@
 
 namespace CoreMVCTutorial.Models
 {
-    public enum Gender
-    {
-        Male,
-        Female,
-        Other
-    }
-    public enum Branch
-    {
-        CSE,
-        ETC,
-        Mechanical,
-        Electrical
-    }
     public class Students
     {
         public int? StudentId { get; set; }
