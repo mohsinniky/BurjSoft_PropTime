@@ -30,7 +30,7 @@ namespace CoreMVCTutorial.Controllers
             {
                 teacher.TeacherId = teachers.Count + 1;
                 teachers.Add(teacher);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
             ViewBag.Courses = new List<string> { "B.Tech", "M.Tech", "MBA", "BBA" };
             ViewBag.Hobbies = new List<string> { "Reading", "Traveling", "Music", "Sports", "Photography" };

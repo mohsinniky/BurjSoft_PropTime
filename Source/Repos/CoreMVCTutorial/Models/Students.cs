@@ -25,7 +25,7 @@ namespace CoreMVCTutorial.Models
         public Gender Gender { get; set; }
 
         [Required(ErrorMessage = "Address is required")] // Ensures address is entered
-        [StringLength(500, MinimumLength = 10, ErrorMessage = "Address must be between 10 and 500 characters")] // Address length restriction
+        [StringLength(200, MinimumLength = 10, ErrorMessage = "Address must be between 10 and 500 characters")] // Address length restriction
         public string Address { get; set; }
 
         [Required(ErrorMessage = "Branch is required")] // Ensures branch is selected
