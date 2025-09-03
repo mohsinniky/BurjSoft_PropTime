@@ -120,7 +120,7 @@
         
 
         if (valid) {
-            $('#myForm').submit();
+            $('#myForm')[0].submit();
         }
     });
 });

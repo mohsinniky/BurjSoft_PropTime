@@ -65,7 +65,7 @@
         <div class="col-sm-10">
             <select asp-for="Branch" class="form-control">
                 <option value="">-- Select Branch --</option>
-                @foreach (var branch in Enum.GetValues(typeof(CoreMVCTutorial.Models.Branch)))
+                @foreach (var branch in Enum.GetValues(typeof(Branch)))
                 {
                     <option value="@branch">@branch</option>
                 }

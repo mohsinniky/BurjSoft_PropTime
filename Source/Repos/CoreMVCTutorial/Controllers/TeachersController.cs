@@ -23,19 +23,28 @@ namespace CoreMVCTutorial.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public IActionResult Index(Teacher teacher)
+        //Without Parameters
+        public IActionResult GetServertime()
         {
-            if (ModelState.IsValid)
-            {
-                teacher.TeacherId = teachers.Count + 1;
-                teachers.Add(teacher);
-                return RedirectToAction("Index","Home");
-            }
-            ViewBag.Courses = new List<string> { "B.Tech", "M.Tech", "MBA", "BBA" };
-            ViewBag.Hobbies = new List<string> { "Reading", "Traveling", "Music", "Sports", "Photography" };
-            ViewBag.Skills = new List<string> { "C#", "Python", "SQL", "Machine Learning", "Physics", "Research", "Data Analysis" };
-            return View(teacher);
+            return Content(DateTime.Now.ToString());
         }
+
+
+        //With Parameters
+        [HttpGet]
+        public IActionResult GetGreeting(string name) 
+        {
+            var message = $"Hello {name}";
+            return Json(new { greeting = message });
+
+        }
+        //With Parameters
+        [HttpPost]
+        public IActionResult MultiplyTwoNums(int num1, int num2)
+        {
+            int result = num1 * num2;
+            return Json(new { product = result });
+        }
+
     }
 }

@@ -8,27 +8,26 @@ namespace CoreMVCTutorial.Models
 
         [Display(Name = "Full Name")]
         [Required(ErrorMessage = "Name is required")]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "Name must be between 2 and 50 characters")]
         public string FullName { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]
         [StringLength(100, MinimumLength = 8, ErrorMessage = "Password must be at least 8 characters")]
-        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$", ErrorMessage = "Password must contain letters and numbers")]
         public string Password { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "Password is not matched")]
+        public string ConfirmPassword { get; set; }
 
         [Required(ErrorMessage = "Date of Birth is required")]
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 
-        [Required(ErrorMessage = "Gender is required")] // Ensures gender is selected
-        public Gender Gender { get; set; }
+        public Gender Gender { get; set; }  
 
-        [Required(ErrorMessage = "Address is required")] // Ensures address is entered
-        [StringLength(200, MinimumLength = 10, ErrorMessage = "Address must be between 10 and 500 characters")] // Address length restriction
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "Branch is required")] // Ensures branch is selected
         public Branch Branch { get; set; }
 
         public bool TermsAndConditions { get; set; } // Checkbox, no validation needed
