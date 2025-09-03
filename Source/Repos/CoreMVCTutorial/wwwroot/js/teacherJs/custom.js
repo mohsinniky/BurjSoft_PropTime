@@ -81,3 +81,40 @@ $("#postMultiply").click(function (e) {
         }
     })
 })
+
+//Send Teacher Data Object
+var teacherObj = {
+    TeacherId: null,
+    FullName: "John Doe",
+    FatherName: "Michael Doe",
+    Email: "john.doe@example.com",
+    DateOfBirth: "1990-05-15",
+    Phone: "03001234567",
+    Password: "StrongPass123",
+    Course: "B.Tech",
+    Gender: 1,  // should match your enum
+    Address: "123 Street, Lahore",
+    TermsAndConditions: true,
+    Hobbies: ["Reading", "Drawing"],
+    Skills: ["C#", "ASP.NET Core", "SQL"]
+};
+
+
+$("#postTeacherObject").click(function (e) {
+    $.ajax({
+        //Now here will come the parameters that are to used
+        url: "/Teachers/SaveTeacher",
+        type: "POST",
+        data: JSON.stringify(teacherObj),
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            $("#ajaxResponseSection").text(response.message);
+        },
+        error: function (xhr, status, error) {
+            alert('Error: ' + xhr.responseText);
+        }
+    })
+})
+
+
+

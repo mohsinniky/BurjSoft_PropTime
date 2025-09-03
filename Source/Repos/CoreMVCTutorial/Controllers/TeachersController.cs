@@ -46,5 +46,22 @@ namespace CoreMVCTutorial.Controllers
             return Json(new { product = result });
         }
 
+        //With Object Such as Teacher
+        [HttpPost]
+        public IActionResult SaveTeacher([FromBody] Teacher teacherObject)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Json(new { status = "Error", message = "Model binding failed", errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
+            }
+            if (teacherObject == null)
+            {
+                return Json(new { status="Error", message= "No data Received" });
+            }
+            string msg = $"Saved {teacherObject.FullName}, whose Email is {teacherObject.Email}";
+            return Json(new { status = "Success", message = msg });
+        }
+
+
     }
 }
