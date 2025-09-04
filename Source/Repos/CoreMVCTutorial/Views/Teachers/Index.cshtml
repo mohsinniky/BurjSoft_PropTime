@@ -24,6 +24,10 @@
         SendTeacherData
     </button>
 
+    <button type="button" id="postMultipleTeacherData" class="btn btn-outline-primary mx-2 col-auto">
+        SendMultipleTeacherData
+    </button>
+
 </div>
 
 <h1 id="ajaxResponseSection"></h1>
@@ -93,7 +97,7 @@
                                 @foreach (var gender in Enum.GetValues(typeof(CoreMVCTutorial.Models.Gender)))
                                 {
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" asp-for="Gender" value="@gender" id="gender_@gender" name="Gender" />
+                                        <input class="form-check-input" type="radio" asp-for="Gender" value="@((int)gender)" id="gender_@gender" name="Gender" />
                                         <label class="form-check-label" for="gender_@gender">@gender</label>
                                     </div>
                                 }

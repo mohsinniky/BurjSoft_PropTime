@@ -23,6 +23,24 @@ namespace CoreMVCTutorial.Controllers
             return View(model);
         }
 
+        // Add teacher to the list
+        [HttpPost]
+        public IActionResult AddTeacher([FromBody] Teacher teacherObject)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Json(new { status = "Error", message = "Model binding failed", errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
+            }
+            if (teacherObject == null)
+            {
+                return Json(new { status = "Error", message = "No data Received" });
+            }
+            teachers.Add(teacherObject);
+            string msg = $"Teacher {teacherObject.FullName} added successfully!";
+            return Json(new { status = "Success", message = msg });
+        }
+
+
         //Without Parameters
         public IActionResult GetServertime()
         {
@@ -32,7 +50,7 @@ namespace CoreMVCTutorial.Controllers
 
         //With Parameters
         [HttpGet]
-        public IActionResult GetGreeting(string name) 
+        public IActionResult GetGreeting(string name)
         {
             var message = $"Hello {name}";
             return Json(new { greeting = message });
@@ -56,11 +74,25 @@ namespace CoreMVCTutorial.Controllers
             }
             if (teacherObject == null)
             {
-                return Json(new { status="Error", message= "No data Received" });
+                return Json(new { status = "Error", message = "No data Received" });
             }
             string msg = $"Saved {teacherObject.FullName}, whose Email is {teacherObject.Email}";
             return Json(new { status = "Success", message = msg });
         }
+
+        //With List Such as Teacher list
+        //With Object Such as Teacher
+        [HttpPost]
+        public IActionResult SaveMultipleTeacher([FromBody] List<Teacher> teacherList)
+        {
+            if (teacherList == null)
+            {
+                return Json(new { status = "Error", message = "No data Received" });
+            }
+            string msg = $"Total Number of Teachers: {teacherList.Count}";
+            return Json(new { status = "Success", message = msg });
+        }
+
 
 
     }
