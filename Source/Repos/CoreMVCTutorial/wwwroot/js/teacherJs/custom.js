@@ -1,29 +1,24 @@
-﻿$(document).ready(function () {
-
-    //// Show and hide modal
-    //$('#modalButton').click(function (e) {
-    //    $('#addTeachermModal').modal('show');
-    //});
-
-    $('.closeModalButton').click(function (e) {
-        $('#addTeachermModal').modal('hide');
-    });
-
-    // Main validation
-    $('#addTeacher').click(function (e) {
-        saveTeacher();
-    });
-});
-
-// In your main view's script section or a linked JS file
+﻿// In your main view's script section or a linked JS file
 $(document).ready(function () {
     $('#modalButton').on('click', function () {
+        // Clear previous modal HTML to avoid duplicate elements
+        $('#modalPlaceholder').html('');
         $.ajax({
-            url: '/Teachers/ShowTeacherModal', // Adjust URL as per your routing
+            url: '/Teachers/ShowTeacherModal',
             type: 'GET',
             success: function (data) {
-                $('#modalPlaceholder').html(data); // Inject the partial view into a placeholder
-                $('#addTeacherModal').modal('show'); // Show the modal
+                $('#modalPlaceholder').html(data);
+                $('#addTeacherModal').modal('show');
+
+                // Always attach handler after modal is injected
+                $('#addTeacher').off('click').on('click', function (e) {
+                    e.preventDefault();
+                    saveTeacher();
+                });
+
+                $('.closeModalButton').off('click').on('click', function () {
+                    $('#addTeacherModal').modal('hide');
+                });
             },
             error: function () {
                 alert('Error loading modal.');
@@ -32,9 +27,7 @@ $(document).ready(function () {
     });
 });
 
-
-
-
+// Main validation and AJAX
 function getTeacherFormData() {
     return {
         TeacherId: null,
@@ -53,24 +46,18 @@ function getTeacherFormData() {
     };
 }
 
-// save teacher info
 function saveTeacher() {
     let valid = true;
     valid = validateInput('txtFullName', 'fullname-error', 'Full name is required') && valid;
-    console.log(valid);
     valid = validateInput('txtFatherName', 'fathername-error', 'Father name is required') && valid;
     valid = validateInput('txtDateOfBirth', 'dob-error', 'Date of birth is required') && valid;
     valid = validateInput('txtPhone', 'phone-error', 'Phone is required') && valid;
     valid = validateInput('txtPassword', 'password-error', 'Password is required') && valid;
     valid = validateInput('course', 'course-error', 'Course is required') && valid;
-    console.log(valid);
     valid = validateInput('txtAddress', 'address-error', 'Address is required') && valid;
     valid = validateEmail('txtEmail', 'email-error', 'Email is invalid') && valid;
     valid = validateMultiSelect('skills', 'skills-error', 1, 10) && valid;
-    // valid = validateCheckboxGroup('Hobbies', 'hobbies-error', 1, 5) && valid;
-    //valid = validateRadioGroup('Gender', 'gender-error') && valid;
-    //valid = validateTerms('terms', 'terms-error') && valid;
-    console.log(valid);
+    // Add other validations as needed
 
     if (valid) {
         var teacherObj = getTeacherFormData();
@@ -82,7 +69,7 @@ function saveTeacher() {
             success: function (response) {
                 if (response.status === "Success") {
                     $("#ajaxResponseSection").text(response.message);
-                    $('#staticBackdrop').modal('hide');
+                    $('#addTeacherModal').modal('hide');
                 } else {
                     $("#ajaxResponseSection").text(response.message);
                 }

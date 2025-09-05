@@ -10,7 +10,17 @@ namespace CoreMVCTutorial.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            ViewBag.Courses = new List<string> { "B.Tech", "M.Tech", "MBA", "BBA" };
+            ViewBag.Hobbies = new List<string> { "Reading", "Traveling", "Music", "Sports", "Photography" };
+            ViewBag.Skills = new List<string> { "C#", "Python", "SQL", "Machine Learning", "Physics", "Research", "Data Analysis" };
+
+            // Ensure model is initialized with empty lists to avoid null reference
+            var model = new Teacher
+            {
+                Hobbies = new List<string>(),
+                Skills = new List<string>()
+            };
+            return View(model);
         }
 
 
@@ -20,13 +30,12 @@ namespace CoreMVCTutorial.Controllers
             ViewBag.Hobbies = new List<string> { "Reading", "Traveling", "Music", "Sports", "Photography" };
             ViewBag.Skills = new List<string> { "C#", "Python", "SQL", "Machine Learning", "Physics", "Research", "Data Analysis" };
 
-            // Pass a new Teacher model if needed
             var model = new Teacher
             {
                 Hobbies = new List<string>(),
                 Skills = new List<string>()
             };
-            return PartialView("_addTeacherModalView");
+            return PartialView("_addTeacherModalView", model);
         }
 
 

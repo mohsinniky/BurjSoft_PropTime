@@ -1,10 +1,11 @@
 ﻿// Validation functions
-function validateInput(inputElementId, errorElementId, errorMessage = 'This field is required') {
+function validateInput(inputElementId, errorElementId, errorMessage = 'This is required') {
     const value = document.getElementById(inputElementId).value;
     if (!value) {
         document.getElementById(errorElementId).innerHTML = errorMessage;
         return false;
     } else {
+        document.getElementById(errorElementId).innerHTML = "";
         return true;
     }
 }
