@@ -207,4 +207,138 @@ function refreshTeachersTable() {
     });
 }
 
+// Delegate event handlers after table refresh
+$(document).on('click', '.edit-teacher-btn', function () {
+    var teacherId = $(this).data('id');
+    $.ajax({
+        url: '/Teachers/GetTeacherById',
+        type: 'GET',
+        data: { id: teacherId },
+        success: function (response) {
+            if (response.status === "Success") {
+                $('#modalPlaceholder').html('');
+                $.ajax({
+                    url: '/Teachers/ShowTeacherModal',
+                    type: 'GET',
+                    success: function (modalHtml) {
+                        $('#modalPlaceholder').html(modalHtml);
+                        $('#addTeacherModal').modal('show');
+
+                        // Attach the event only once
+                        $('#addTeacherModal').one('shown.bs.modal', function () {
+                            fillTeacherForm(response.data);
+                        });
+
+                        // Change Add button to Update
+                        $('#addTeacher').hide();
+                        if ($('#updateTeacher').length === 0) {
+                            $('#myForm').append('<button type="button" class="btn btn-success" id="updateTeacher">Update</button>');
+                        } else {
+                            $('#updateTeacher').show();
+                        }
+
+                        $('#updateTeacher').off('click').on('click', function (e) {
+                            e.preventDefault();
+                            updateTeacher(teacherId);
+                        });
+
+                        $('.closeModalButton').off('click').on('click', function () {
+                            $('#addTeacherModal').modal('hide');
+                        });
+                    }
+                });
+            } else {
+                $("#ajaxResponseSection").text(response.message);
+            }
+        }
+    });
+});
+
+function fillTeacherForm(data) {
+    $("#txtFullName").val(data.fullName || "N/A");
+    $("#txtFatherName").val(data.fatherName || "N/A");
+    $("#txtEmail").val(data.email || "N/A");
+    $("#txtDateOfBirth").val(data.dateOfBirth ? data.dateOfBirth.substring(0, 10) : "N/A");
+    $("#txtPhone").val(data.phone || "N/A");
+    $("#txtPassword").val(data.password || "N/A");
+    $("#course").val(data.course || "N/A");
+    $("input[name='Gender'][value='" + data.gender + "']").prop('checked', true);
+    $("#txtAddress").val(data.address || "N/A");
+    $("#terms").prop('checked', !!data.termsAndConditions);
+
+    $("input[name='Hobbies']").prop('checked', false);
+    if (Array.isArray(data.hobbies)) {
+        data.hobbies.forEach(function (hobby) {
+            $("input[name='Hobbies'][value='" + hobby + "']").prop('checked', true);
+        });
+    }
+
+    $("#skills option").prop('selected', false);
+    if (Array.isArray(data.skills)) {
+        data.skills.forEach(function (skill) {
+            $("#skills option[value='" + skill + "']").prop('selected', true);
+        });
+    }
+}
+
+function updateTeacher(teacherId) {
+    let valid = true;
+    valid = validateInput('txtFullName', 'fullname-error', 'Full name is required') && valid;
+    valid = validateInput('txtFatherName', 'fathername-error', 'Father name is required') && valid;
+    valid = validateInput('txtDateOfBirth', 'dob-error', 'Date of birth is required') && valid;
+    valid = validateInput('txtPhone', 'phone-error', 'Phone is required') && valid;
+    valid = validateInput('txtPassword', 'password-error', 'Password is required') && valid;
+    valid = validateInput('course', 'course-error', 'Course is required') && valid;
+    valid = validateInput('txtAddress', 'address-error', 'Address is required') && valid;
+    valid = validateEmail('txtEmail', 'email-error', 'Email is invalid') && valid;
+    valid = validateMultiSelect('skills', 'skills-error', 1, 10) && valid;
+    // Add other validations as needed
+
+    if (valid) {
+        var teacherObj = getTeacherFormData();
+        teacherObj.TeacherId = teacherId;
+        $.ajax({
+            url: "/Teachers/UpdateTeacher",
+            type: "POST",
+            data: JSON.stringify(teacherObj),
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+                if (response.status === "Success") {
+                    $("#ajaxResponseSection").text(response.message);
+                    $('#addTeacherModal').modal('hide');
+                    refreshTeachersTable();
+                } else {
+                    $("#ajaxResponseSection").text(response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                $("#ajaxResponseSection").text("Error: " + xhr.responseText);
+            }
+        });
+    }
+}
+
+// Delete handler
+$(document).on('click', '.delete-teacher-btn', function () {
+    var teacherId = $(this).data('id');
+    if (confirm("Are you sure you want to delete this teacher?")) {
+        $.ajax({
+            url: "/Teachers/DeleteTeacher",
+            type: "POST",
+            data: { id: teacherId },
+            success: function (response) {
+                if (response.status === "Success") {
+                    $("#ajaxResponseSection").text(response.message);
+                    refreshTeachersTable();
+                } else {
+                    $("#ajaxResponseSection").text(response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                $("#ajaxResponseSection").text("Error: " + xhr.responseText);
+            }
+        });
+    }
+});
+
 

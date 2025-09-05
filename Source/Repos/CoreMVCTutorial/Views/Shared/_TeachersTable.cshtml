@@ -8,6 +8,7 @@
             <th>Email</th>
             <th>Course</th>
             <th>Gender</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -21,13 +22,17 @@
                     <td>@teacher.Email</td>
                     <td>@teacher.Course</td>
                     <td>@teacher.Gender</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning edit-teacher-btn" data-id="@teacher.TeacherId">Edit</button>
+                        <button class="btn btn-sm btn-danger delete-teacher-btn" data-id="@teacher.TeacherId">Delete</button>
+                    </td>
                 </tr>
             }
         }
         else
         {
             <tr>
-                <td colspan="5" class="text-center">No teachers found.</td>
+                <td colspan="6" class="text-center">No teachers found.</td>
             </tr>
         }
     </tbody>
