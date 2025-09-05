@@ -1,12 +1,12 @@
 ﻿$(document).ready(function () {
 
-    // Show and hide modal
-    $('#modalButton').click(function (e) {
-        $('#staticBackdrop').modal('show');
-    });
+    //// Show and hide modal
+    //$('#modalButton').click(function (e) {
+    //    $('#addTeachermModal').modal('show');
+    //});
 
     $('.closeModalButton').click(function (e) {
-        $('#staticBackdrop').modal('hide');
+        $('#addTeachermModal').modal('hide');
     });
 
     // Main validation
@@ -14,6 +14,26 @@
         saveTeacher();
     });
 });
+
+// In your main view's script section or a linked JS file
+$(document).ready(function () {
+    $('#modalButton').on('click', function () {
+        $.ajax({
+            url: '/Teachers/ShowTeacherModal', // Adjust URL as per your routing
+            type: 'GET',
+            success: function (data) {
+                $('#modalPlaceholder').html(data); // Inject the partial view into a placeholder
+                $('#addTeacherModal').modal('show'); // Show the modal
+            },
+            error: function () {
+                alert('Error loading modal.');
+            }
+        });
+    });
+});
+
+
+
 
 function getTeacherFormData() {
     return {

@@ -1,0 +1,125 @@
+﻿@model CoreMVCTutorial.Models.Teacher
+
+
+<!-- Modal -->
+<div class="modal fade" id="addTeacherModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Admission Form</h1>
+                <button type="button" class="btn-close closeModalButton"></button>
+            </div>
+            <div class="modal-body">
+                <form id="myForm">
+                    <div class="row">
+                        <div class="mb-3 col-6">
+                            <label asp-for="FullName" class="form-label"></label>
+                            <input asp-for="FullName" class="form-control" id="txtFullName" />
+                            <span id="fullname-error" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label asp-for="FatherName" class="form-label"></label>
+                            <input asp-for="FatherName" class="form-control" id="txtFatherName" />
+                            <span id="fathername-error" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-6">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" class="form-control" id="txtEmail" />
+                            <span id="email-error" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label asp-for="DateOfBirth" class="form-label"></label>
+                            <input asp-for="DateOfBirth" type="date" class="form-control" id="txtDateOfBirth" />
+                            <span id="dob-error" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-6">
+                            <label asp-for="Phone" class="form-label"></label>
+                            <input asp-for="Phone" class="form-control" id="txtPhone" />
+                            <span id="phone-error" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label asp-for="Password" class="form-label"></label>
+                            <input asp-for="Password" type="password" class="form-control" id="txtPassword" />
+                            <span id="password-error" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-6">
+                            <label asp-for="Course" class="form-label"></label>
+                            <select asp-for="Course" class="form-select" id="course">
+                                <option value="">Choose...</option>
+                                @foreach (var course in ViewBag.Courses as List<string>)
+                                {
+                                    <option value="@course">@course</option>
+                                }
+                            </select>
+                            <span id="course-error" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label asp-for="Gender" class="form-label"></label>
+                            <div>
+                                @foreach (var gender in Enum.GetValues(typeof(CoreMVCTutorial.Models.Gender)))
+                                {
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" asp-for="Gender" value="@((int)gender)" id="gender_@gender" name="Gender" />
+                                        <label class="form-check-label" for="gender_@gender">@gender</label>
+                                    </div>
+                                }
+                            </div>
+                            <span id="gender-error" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Address" class="form-label"></label>
+                        <textarea asp-for="Address" class="form-control" rows="3" id="txtAddress"></textarea>
+                        <span id="address-error" class="text-danger"></span>
+                    </div>
+
+                    <!-- Hobbies (multi-checkbox) -->
+                    <div class="mb-3">
+                        <label class="form-label">Hobbies</label>
+                        <div>
+                            @foreach (var hobby in ViewBag.Hobbies as List<string>)
+                            {
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="Hobbies" value="@hobby" id="hobby_@hobby" />
+                                    <label class="form-check-label" for="hobby_@hobby">@hobby</label>
+                                </div>
+                            }
+                        </div>
+                        <span id="hobbies-error" class="text-danger"></span>
+                    </div>
+
+                    <!-- Skills (multi-select) -->
+                    <div class="mb-3">
+                        <label asp-for="Skills" class="form-label"></label>
+                        <select asp-for="Skills" class="form-select" multiple id="skills">
+                            @foreach (var skill in ViewBag.Skills as List<string>)
+                            {
+                                <option value="@skill">@skill</option>
+                            }
+                        </select>
+                        <span id="skills-error" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input asp-for="TermsAndConditions" class="form-check-input" id="terms" />
+                            <label asp-for="TermsAndConditions" class="form-check-label"></label>
+                        </div>
+                        <span id="terms-error" class="text-danger"></span>
+                    </div>
+                    <button type="button" class="btn btn-outline-success" id="addTeacher">
+                        Add
+                    </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary closeModalButton">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

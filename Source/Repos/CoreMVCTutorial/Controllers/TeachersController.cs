@@ -10,18 +10,25 @@ namespace CoreMVCTutorial.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            return View();
+        }
+
+
+        public IActionResult ShowTeacherModal()
+        {
             ViewBag.Courses = new List<string> { "B.Tech", "M.Tech", "MBA", "BBA" };
             ViewBag.Hobbies = new List<string> { "Reading", "Traveling", "Music", "Sports", "Photography" };
             ViewBag.Skills = new List<string> { "C#", "Python", "SQL", "Machine Learning", "Physics", "Research", "Data Analysis" };
 
-            // Ensure model is initialized with empty lists to avoid null reference
+            // Pass a new Teacher model if needed
             var model = new Teacher
             {
                 Hobbies = new List<string>(),
                 Skills = new List<string>()
             };
-            return View(model);
+            return PartialView("_addTeacherModalView");
         }
+
 
         // Add teacher to the list
         [HttpPost]
