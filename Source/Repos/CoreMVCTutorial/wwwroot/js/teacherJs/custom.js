@@ -25,7 +25,7 @@ function getTeacherFormData() {
         Phone: $("#txtPhone").val(),
         Password: $("#txtPassword").val(),
         Course: $("#course").val(),
-        Gender: $("input[name='Gender']:checked").val(),
+        Gender: parseInt($("input[name='Gender']:checked").val()),
         Address: $("#txtAddress").val(),
         TermsAndConditions: $("#terms").prop("checked"),
         Hobbies: $("input[name='Hobbies']:checked").map(function () { return $(this).val(); }).get(),
