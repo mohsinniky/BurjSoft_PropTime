@@ -1,4 +1,23 @@
 ﻿// Validation functions
+
+function getTeacherFormData() {
+    return {
+        TeacherId: null,
+        FullName: $("#txtFullName").val(),
+        FatherName: $("#txtFatherName").val(),
+        Email: $("#txtEmail").val(),
+        DateOfBirth: $("#txtDateOfBirth").val(),
+        Phone: $("#txtPhone").val(),
+        Password: $("#txtPassword").val(),
+        Course: $("#course").val(),
+        Gender: parseInt($("input[name='Gender']:checked").val()),
+        Address: $("#txtAddress").val(),
+        TermsAndConditions: $("#terms").prop("checked"),
+        Hobbies: $("input[name='Hobbies']:checked").map(function () { return $(this).val(); }).get(),
+        Skills: $("#skills").val()
+    };
+}
+
 function validateInput(inputElementId, errorElementId, errorMessage = 'This is required') {
     const value = document.getElementById(inputElementId).value;
     if (!value) {

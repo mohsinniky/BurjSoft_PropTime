@@ -10,8 +10,7 @@ $(document).ready(function () {
                 $('#modalPlaceholder').html(data);
                 $('#addTeacherModal').modal('show');
 
-                // Always attach handler after modal is injected
-                $('#addTeacher').off('click').on('click', function (e) {
+                $('#addTeacher').on('click', function (e) {
                     e.preventDefault();
                     saveTeacher();
                 });
@@ -28,23 +27,6 @@ $(document).ready(function () {
 });
 
 // Main validation and AJAX
-function getTeacherFormData() {
-    return {
-        TeacherId: null,
-        FullName: $("#txtFullName").val(),
-        FatherName: $("#txtFatherName").val(),
-        Email: $("#txtEmail").val(),
-        DateOfBirth: $("#txtDateOfBirth").val(),
-        Phone: $("#txtPhone").val(),
-        Password: $("#txtPassword").val(),
-        Course: $("#course").val(),
-        Gender: parseInt($("input[name='Gender']:checked").val()),
-        Address: $("#txtAddress").val(),
-        TermsAndConditions: $("#terms").prop("checked"),
-        Hobbies: $("input[name='Hobbies']:checked").map(function () { return $(this).val(); }).get(),
-        Skills: $("#skills").val()
-    };
-}
 
 function saveTeacher() {
     let valid = true;
@@ -70,6 +52,7 @@ function saveTeacher() {
                 if (response.status === "Success") {
                     $("#ajaxResponseSection").text(response.message);
                     $('#addTeacherModal').modal('hide');
+                    refreshTeachersTable();
                 } else {
                     $("#ajaxResponseSection").text(response.message);
                 }
@@ -210,5 +193,18 @@ $("#postMultipleTeacherData").click(function (e) {
         }
     })
 })
+
+function refreshTeachersTable() {
+    $.ajax({
+        url: '/Teachers/GetTeachersTable',
+        type: 'GET',
+        success: function (data) {
+            $('#teachersTablePlaceholder').html(data);
+        },
+        error: function () {
+            $("#ajaxResponseSection").text("Error loading teachers table.");
+        }
+    });
+}
 
 

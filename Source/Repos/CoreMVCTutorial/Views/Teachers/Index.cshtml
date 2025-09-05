@@ -33,8 +33,10 @@
 <h1 id="ajaxResponseSection"></h1>
 <div id="modalPlaceholder"></div>
 
-
-
+<!-- Table placeholder -->
+<div id="teachersTablePlaceholder">
+    @Html.Partial("_TeachersTable", ViewBag.Teachers as List<CoreMVCTutorial.Models.Teacher>)
+</div>
 
 @section Scripts {
     <script src="~/js/teacherJs/custom.js" asp-append-version="true"></script>
