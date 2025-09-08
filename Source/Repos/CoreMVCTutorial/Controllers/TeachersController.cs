@@ -57,6 +57,11 @@ namespace CoreMVCTutorial.Controllers
             return View(model);
         }
 
+        public IActionResult GetTeachers()
+        {
+            return PartialView("_TeachersTable",teachers);
+        }
+
         public IActionResult ShowTeacherModal()
         {
             ViewBag.Courses = new List<string> { "B.Tech", "M.Tech", "MBA", "BBA" };
@@ -71,11 +76,6 @@ namespace CoreMVCTutorial.Controllers
             return PartialView("_addTeacherModalView", model);
         }
 
-        [HttpGet]
-        public IActionResult GetTeachersTable()
-        {
-            return PartialView("_TeachersTable", teachers);
-        }
 
         // Add teacher to the list
         [HttpPost]
@@ -95,29 +95,6 @@ namespace CoreMVCTutorial.Controllers
             return Json(new { status = "Success", message = msg });
         }
 
-        //Without Parameters
-        public IActionResult GetServertime()
-        {
-            return Content(DateTime.Now.ToString());
-        }
-
-
-        //With Parameters
-        [HttpGet]
-        public IActionResult GetGreeting(string name)
-        {
-            var message = $"Hello {name}";
-            return Json(new { greeting = message });
-
-        }
-        //With Parameters
-        [HttpPost]
-        public IActionResult MultiplyTwoNums(int num1, int num2)
-        {
-            int result = num1 * num2;
-            return Json(new { product = result });
-        }
-
         //With Object Such as Teacher
         [HttpPost]
         public IActionResult SaveTeacher([FromBody] Teacher teacherObject)
@@ -130,22 +107,11 @@ namespace CoreMVCTutorial.Controllers
             {
                 return Json(new { status = "Error", message = "No data Received" });
             }
-            string msg = $"Saved {teacherObject.FullName}, whose Email is {teacherObject.Email}";
+
+            string msg = $"{teacherObject.FullName} Saved";
             return Json(new { status = "Success", message = msg });
         }
 
-        //With List Such as Teacher list
-        //With Object Such as Teacher
-        [HttpPost]
-        public IActionResult SaveMultipleTeacher([FromBody] List<Teacher> teacherList)
-        {
-            if (teacherList == null)
-            {
-                return Json(new { status = "Error", message = "No data Received" });
-            }
-            string msg = $"Total Number of Teachers: {teacherList.Count}";
-            return Json(new { status = "Success", message = msg });
-        }
 
         // Get teacher data for editing
         [HttpGet]

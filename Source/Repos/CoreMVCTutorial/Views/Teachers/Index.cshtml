@@ -7,27 +7,6 @@
     <button type="button" id="modalButton" class="btn btn-outline-primary mx-2 col-auto">
         Add Teacher
     </button>
-
-    <button type="button" id="getTimeButton" class="btn btn-outline-primary mx-2 col-auto">
-        Without Params, GetTime
-    </button>
-
-    <button type="button" id="getGreeting" class="btn btn-outline-primary mx-2 col-auto">
-        Greetings
-    </button>
-
-    <button type="button" id="postMultiply" class="btn btn-outline-primary mx-2 col-auto">
-        MultiplyTwoNums
-    </button>
-
-    <button type="button" id="postTeacherObject" class="btn btn-outline-primary mx-2 col-auto">
-        SendTeacherData
-    </button>
-
-    <button type="button" id="postMultipleTeacherData" class="btn btn-outline-primary mx-2 col-auto">
-        SendMultipleTeacherData
-    </button>
-
 </div>
 
 <h1 id="ajaxResponseSection"></h1>
@@ -35,7 +14,22 @@
 
 <!-- Table placeholder -->
 <div id="teachersTablePlaceholder">
-    @Html.Partial("_TeachersTable", ViewBag.Teachers as List<CoreMVCTutorial.Models.Teacher>)
+    <table class="table table-bordered mt-4" id="teachersTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Father Name</th>
+                <th>Email</th>
+                <th>Course</th>
+                <th>Gender</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody id="teachersList">
+            
+        </tbody>
+    </table>
 </div>
 
 @section Scripts {
