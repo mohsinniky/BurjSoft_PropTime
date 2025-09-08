@@ -45,27 +45,21 @@ $(document).ready(function () {
     // Delegate event handlers after table refresh
     $(document).on('click', '.edit-teacher-btn', function () {
         var teacherId = $(this).data('id');
+        $('#modalPlaceholder').html('');
         $.ajax({
-            url: '/Teachers/GetTeacherById',
+            url: '/Teachers/ShowTeacherModal',
             type: 'GET',
             data: { id: teacherId },
-            success: function (response) {
-                if (response.status === "Success") {
-                    $('#modalPlaceholder').html('');
-                    $.ajax({
-                        url: '/Teachers/ShowTeacherModal',
-                        type: 'GET',
-                        success: function (data) {
-                            $('#modalPlaceholder').html(data);
-                            $('#addTeacherModal').modal('show');
-                        },
-                        error: function (err) {
-                            console.log(err);
-                        }
-                    });
-                } else {
-                    $("#ajaxResponseSection").text(response.message);
-                }
+            success: function (data) {
+                $('#modalPlaceholder').html(data);
+                $('#addTeacherModal').modal('show');
+
+                $('#updateTeacher').off('click').on('click', function () {
+                    updateTeacher();
+                });
+            },
+            error: function () {
+                alert('Error loading modal.');
             }
         });
     });
@@ -84,12 +78,47 @@ function saveTeacher() {
     valid = validateInput('txtAddress', 'address-error', 'Address is required') && valid;
     valid = validateEmail('txtEmail', 'email-error', 'Email is invalid') && valid;
     valid = validateMultiSelect('skills', 'skills-error', 1, 10) && valid;
-    // Add other validations as needed
 
     if (valid) {
         var teacherObj = getTeacherFormData();
         $.ajax({
             url: "/Teachers/AddTeacher",
+            type: "POST",
+            data: JSON.stringify(teacherObj),
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+                if (response.status === "Success") {
+                    $("#ajaxResponseSection").text(response.message);
+                    $('#addTeacherModal').modal('hide');
+                    getTeachersList();
+                } else {
+                    $("#ajaxResponseSection").text(response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                $("#ajaxResponseSection").text("Error: " + xhr.responseText);
+            }
+        });
+    }
+}
+
+function updateTeacher() {
+    let valid = true;
+    valid = validateInput('txtFullName', 'fullname-error', 'Full name is required') && valid;
+    valid = validateInput('txtFatherName', 'fathername-error', 'Father name is required') && valid;
+    valid = validateInput('txtDateOfBirth', 'dob-error', 'Date of birth is required') && valid;
+    valid = validateInput('txtPhone', 'phone-error', 'Phone is required') && valid;
+    valid = validateInput('txtPassword', 'password-error', 'Password is required') && valid;
+    valid = validateInput('course', 'course-error', 'Course is required') && valid;
+    valid = validateInput('txtAddress', 'address-error', 'Address is required') && valid;
+    valid = validateEmail('txtEmail', 'email-error', 'Email is invalid') && valid;
+    valid = validateMultiSelect('skills', 'skills-error', 1, 10) && valid;
+    console.log(valid)
+    if (valid) {
+        var teacherObj = getTeacherFormData();
+        teacherObj.TeacherId = $("#TeacherId").val();
+        $.ajax({
+            url: "/Teachers/UpdateTeacher",
             type: "POST",
             data: JSON.stringify(teacherObj),
             contentType: "application/json; charset=utf-8",

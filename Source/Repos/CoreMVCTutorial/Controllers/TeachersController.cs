@@ -59,20 +59,32 @@ namespace CoreMVCTutorial.Controllers
 
         public IActionResult GetTeachers()
         {
-            return PartialView("_TeachersTable",teachers);
+            return PartialView("_TeachersTable", teachers);
         }
 
-        public IActionResult ShowTeacherModal()
+        public IActionResult ShowTeacherModal(int? id)
         {
             ViewBag.Courses = new List<string> { "B.Tech", "M.Tech", "MBA", "BBA" };
             ViewBag.Hobbies = new List<string> { "Reading", "Traveling", "Music", "Sports", "Photography" };
             ViewBag.Skills = new List<string> { "C#", "Python", "SQL", "Machine Learning", "Physics", "Research", "Data Analysis" };
 
-            var model = new Teacher
+            Teacher model;
+            if (id.HasValue)
             {
-                Hobbies = new List<string>(),
-                Skills = new List<string>()
-            };
+                model = teachers.FirstOrDefault(t => t.TeacherId == id.Value) ?? new Teacher
+                {
+                    Hobbies = new List<string>(),
+                    Skills = new List<string>()
+                };
+            }
+            else
+            {
+                model = new Teacher
+                {
+                    Hobbies = new List<string>(),
+                    Skills = new List<string>()
+                };
+            }
             return PartialView("_addTeacherModalView", model);
         }
 
@@ -113,15 +125,6 @@ namespace CoreMVCTutorial.Controllers
         }
 
 
-        // Get teacher data for editing
-        [HttpGet]
-        public IActionResult GetTeacherById(int id)
-        {
-            var teacher = teachers.FirstOrDefault(t => t.TeacherId == id);
-            if (teacher == null)
-                return Json(new { status = "Error", message = "Teacher not found" });
-            return Json(new { status = "Success", data = teacher });
-        }
 
         // Update teacher
         [HttpPost]
