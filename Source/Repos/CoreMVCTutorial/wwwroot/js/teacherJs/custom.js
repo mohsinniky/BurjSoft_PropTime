@@ -54,8 +54,8 @@ $(document).ready(function () {
                 $('#modalPlaceholder').html(data);
                 $('#addTeacherModal').modal('show');
 
-                $('#updateTeacher').off('click').on('click', function () {
-                    updateTeacher();
+                $('#addTeacher').off('click').on('click', function () {
+                    submitTeacher();
                 });
             },
             error: function () {
@@ -67,7 +67,24 @@ $(document).ready(function () {
 
 // Main validation and AJAX
 
-function saveTeacher() {
+function getTeacherFormData() {
+    return {
+        TeacherId: $("#TeacherId").val() || 0,
+        FullName: $("#txtFullName").val(),
+        FatherName: $("#txtFatherName").val(),
+        Email: $("#txtEmail").val(),
+        DateOfBirth: $("#txtDateOfBirth").val(),
+        Phone: $("#txtPhone").val(),
+        Password: $("#txtPassword").val(),
+        Course: $("#course").val(),
+        Gender: parseInt($("input[name='Gender']:checked").val()),
+        Address: $("#txtAddress").val(),
+        TermsAndConditions: $("#terms").prop("checked"),
+        Hobbies: $("input[name='Hobbies']:checked").map(function () { return $(this).val(); }).get(),
+        Skills: $("#skills").val()
+    };
+}
+function inputValidations(){
     let valid = true;
     valid = validateInput('txtFullName', 'fullname-error', 'Full name is required') && valid;
     valid = validateInput('txtFatherName', 'fathername-error', 'Father name is required') && valid;
@@ -78,66 +95,8 @@ function saveTeacher() {
     valid = validateInput('txtAddress', 'address-error', 'Address is required') && valid;
     valid = validateEmail('txtEmail', 'email-error', 'Email is invalid') && valid;
     valid = validateMultiSelect('skills', 'skills-error', 1, 10) && valid;
-
-    if (valid) {
-        var teacherObj = getTeacherFormData();
-        $.ajax({
-            url: "/Teachers/AddTeacher",
-            type: "POST",
-            data: JSON.stringify(teacherObj),
-            contentType: "application/json; charset=utf-8",
-            success: function (response) {
-                if (response.status === "Success") {
-                    $("#ajaxResponseSection").text(response.message);
-                    $('#addTeacherModal').modal('hide');
-                    getTeachersList();
-                } else {
-                    $("#ajaxResponseSection").text(response.message);
-                }
-            },
-            error: function (xhr, status, error) {
-                $("#ajaxResponseSection").text("Error: " + xhr.responseText);
-            }
-        });
-    }
+    return valid;
 }
-
-function updateTeacher() {
-    let valid = true;
-    valid = validateInput('txtFullName', 'fullname-error', 'Full name is required') && valid;
-    valid = validateInput('txtFatherName', 'fathername-error', 'Father name is required') && valid;
-    valid = validateInput('txtDateOfBirth', 'dob-error', 'Date of birth is required') && valid;
-    valid = validateInput('txtPhone', 'phone-error', 'Phone is required') && valid;
-    valid = validateInput('txtPassword', 'password-error', 'Password is required') && valid;
-    valid = validateInput('course', 'course-error', 'Course is required') && valid;
-    valid = validateInput('txtAddress', 'address-error', 'Address is required') && valid;
-    valid = validateEmail('txtEmail', 'email-error', 'Email is invalid') && valid;
-    valid = validateMultiSelect('skills', 'skills-error', 1, 10) && valid;
-    console.log(valid)
-    if (valid) {
-        var teacherObj = getTeacherFormData();
-        teacherObj.TeacherId = $("#TeacherId").val();
-        $.ajax({
-            url: "/Teachers/UpdateTeacher",
-            type: "POST",
-            data: JSON.stringify(teacherObj),
-            contentType: "application/json; charset=utf-8",
-            success: function (response) {
-                if (response.status === "Success") {
-                    $("#ajaxResponseSection").text(response.message);
-                    $('#addTeacherModal').modal('hide');
-                    getTeachersList();
-                } else {
-                    $("#ajaxResponseSection").text(response.message);
-                }
-            },
-            error: function (xhr, status, error) {
-                $("#ajaxResponseSection").text("Error: " + xhr.responseText);
-            }
-        });
-    }
-}
-
 function getTeachersList() {
     $.ajax({
         url: "/Teachers/GetTeachers",
@@ -152,20 +111,29 @@ function getTeachersList() {
     })
 }
 
-function getTeacherFormData() {
-    return {
-        TeacherId: null,
-        FullName: $("#txtFullName").val(),
-        FatherName: $("#txtFatherName").val(),
-        Email: $("#txtEmail").val(),
-        DateOfBirth: $("#txtDateOfBirth").val(),
-        Phone: $("#txtPhone").val(),
-        Password: $("#txtPassword").val(),
-        Course: $("#course").val(),
-        Gender: parseInt($("input[name='Gender']:checked").val()),
-        Address: $("#txtAddress").val(),
-        TermsAndConditions: $("#terms").prop("checked"),
-        Hobbies: $("input[name='Hobbies']:checked").map(function () { return $(this).val(); }).get(),
-        Skills: $("#skills").val()
-    };
+//Main Submit function
+function submitTeacher() {
+    let valid = inputValidations();
+    if (valid) {
+        var teacherObj = getTeacherFormData();
+
+        $.ajax({
+            url: "/Teachers/UpdateTeachers",
+            type: "POST",
+            data: JSON.stringify(teacherObj),
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+                if (response.status === "Success") {
+                    $("#ajaxResponseSection").text(response.message);
+                    $('#addTeacherModal').modal('hide');
+                    getTeachersList();
+                } else {
+                    $("#ajaxResponseSection").text(response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                $("#ajaxResponseSection").text("Error: " + xhr.responseText);
+            }
+        });
+    }
 }

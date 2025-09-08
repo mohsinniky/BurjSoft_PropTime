@@ -81,7 +81,7 @@ namespace CoreMVCTutorial.Controllers
 
         // Add teacher to the list
         [HttpPost]
-        public IActionResult AddTeacher([FromBody] Teacher teacherObject)
+        public IActionResult UpdateTeachers([FromBody] Teacher teacherObject)
         {
             if (!ModelState.IsValid)
             {
@@ -91,37 +91,30 @@ namespace CoreMVCTutorial.Controllers
             {
                 return Json(new { status = "Error", message = "No data Received" });
             }
-            teacherObject.TeacherId = teachers.Count + 1;
+            if (teacherObject.TeacherId > 0 && teachers.Any(t => t.TeacherId == teacherObject.TeacherId))
+            {
+                // Update existing teacher
+                var existingTeacher = teachers.FirstOrDefault(t => t.TeacherId == teacherObject.TeacherId);
+                existingTeacher.FullName = teacherObject.FullName;
+                existingTeacher.FatherName = teacherObject.FatherName;
+                existingTeacher.Email = teacherObject.Email;
+                existingTeacher.DateOfBirth = teacherObject.DateOfBirth;
+                existingTeacher.Phone = teacherObject.Phone;
+                existingTeacher.Password = teacherObject.Password;
+                existingTeacher.Course = teacherObject.Course;
+                existingTeacher.Gender = teacherObject.Gender;
+                existingTeacher.Address = teacherObject.Address;
+                existingTeacher.TermsAndConditions = teacherObject.TermsAndConditions;
+                existingTeacher.Hobbies = teacherObject.Hobbies;
+                existingTeacher.Skills = teacherObject.Skills;
+                return Json(new { status = "Success", message = "Teacher updated successfully!" });
+            }
+            // Add new teacher
+            teacherObject.TeacherId = teachers.Count > 0 ? teachers.Max(t => t.TeacherId) + 1 : 1;
             teachers.Add(teacherObject);
-            string msg = $"Teacher added successfully!";
-            return Json(new { status = "Success", message = msg });
+            return Json(new { status = "Success", message = "Teacher added successfully!" });
         }
 
-
-        // Update teacher
-        [HttpPost]
-        public IActionResult UpdateTeacher([FromBody] Teacher updatedTeacher)
-        {
-            var teacher = teachers.FirstOrDefault(t => t.TeacherId == updatedTeacher.TeacherId);
-            if (teacher == null)
-                return Json(new { status = "Error", message = "Teacher not found" });
-
-            // Update fields
-            teacher.FullName = updatedTeacher.FullName;
-            teacher.FatherName = updatedTeacher.FatherName;
-            teacher.Email = updatedTeacher.Email;
-            teacher.DateOfBirth = updatedTeacher.DateOfBirth;
-            teacher.Phone = updatedTeacher.Phone;
-            teacher.Password = updatedTeacher.Password;
-            teacher.Course = updatedTeacher.Course;
-            teacher.Gender = updatedTeacher.Gender;
-            teacher.Address = updatedTeacher.Address;
-            teacher.TermsAndConditions = updatedTeacher.TermsAndConditions;
-            teacher.Hobbies = updatedTeacher.Hobbies;
-            teacher.Skills = updatedTeacher.Skills;
-
-            return Json(new { status = "Success", message = "Teacher updated successfully!" });
-        }
 
         // Delete teacher
         [HttpPost]
