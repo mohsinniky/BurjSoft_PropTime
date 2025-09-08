@@ -44,17 +44,7 @@ namespace CoreMVCTutorial.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            ViewBag.Courses = new List<string> { "B.Tech", "M.Tech", "MBA", "BBA" };
-            ViewBag.Hobbies = new List<string> { "Reading", "Traveling", "Music", "Sports", "Photography" };
-            ViewBag.Skills = new List<string> { "C#", "Python", "SQL", "Machine Learning", "Physics", "Research", "Data Analysis" };
-
-            var model = new Teacher
-            {
-                Hobbies = new List<string>(),
-                Skills = new List<string>()
-            };
-            ViewBag.Teachers = teachers;
-            return View(model);
+            return View();
         }
 
         public IActionResult GetTeachers()
@@ -106,24 +96,6 @@ namespace CoreMVCTutorial.Controllers
             string msg = $"Teacher added successfully!";
             return Json(new { status = "Success", message = msg });
         }
-
-        //With Object Such as Teacher
-        [HttpPost]
-        public IActionResult SaveTeacher([FromBody] Teacher teacherObject)
-        {
-            if (!ModelState.IsValid)
-            {
-                return Json(new { status = "Error", message = "Model binding failed", errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
-            }
-            if (teacherObject == null)
-            {
-                return Json(new { status = "Error", message = "No data Received" });
-            }
-
-            string msg = $"{teacherObject.FullName} Saved";
-            return Json(new { status = "Success", message = msg });
-        }
-
 
 
         // Update teacher

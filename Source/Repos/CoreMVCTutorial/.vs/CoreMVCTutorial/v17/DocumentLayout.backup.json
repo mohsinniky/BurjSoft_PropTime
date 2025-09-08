@@ -7,20 +7,8 @@
       "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:views\\shared\\_addteachermodalview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\controllers\\teacherscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:controllers\\teacherscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\views\\shared\\_teacherstable.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:views\\shared\\_teacherstable.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\wwwroot\\js\\teacherjs\\custom.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:wwwroot\\js\\teacherjs\\custom.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\models\\teacherviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:models\\teacherviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\views\\teachers\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -29,6 +17,18 @@
     {
       "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\controllers\\teacherscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:controllers\\teacherscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\views\\shared\\_teacherstable.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:views\\shared\\_teacherstable.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\models\\teacherviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:models\\teacherviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\views\\students\\list.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -58,11 +58,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "site.js",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\wwwroot\\js\\site.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\site.js",
@@ -76,20 +76,34 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\Teachers\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Teachers\\Index.cshtml",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\Teachers\\Index.cshtml",
+              "RelativeToolTip": "Views\\Teachers\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-02T09:30:07.174Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "custom.js",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\wwwroot\\js\\teacherJs\\custom.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\teacherJs\\custom.js",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\wwwroot\\js\\teacherJs\\custom.js",
               "RelativeToolTip": "wwwroot\\js\\teacherJs\\custom.js",
-              "ViewState": "AgIAADYAAAAAZmZmZmYswEAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADkAAAAAAAAAAAAiwEUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-09-02T11:12:37.214Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "_TeachersTable.cshtml",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\Shared\\_TeachersTable.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_TeachersTable.cshtml",
@@ -102,13 +116,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "TeachersController.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Controllers\\TeachersController.cs",
               "RelativeDocumentMoniker": "Controllers\\TeachersController.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Controllers\\TeachersController.cs",
               "RelativeToolTip": "Controllers\\TeachersController.cs",
-              "ViewState": "AgIAAG0AAAAAmZmZmZkZwIIAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAD4AAAAgAAAAAAAowDgAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-05T11:14:19.424Z",
               "EditorCaption": ""
@@ -121,27 +135,14 @@
               "RelativeDocumentMoniker": "Views\\Shared\\_addTeacherModalView.cshtml",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\Shared\\_addTeacherModalView.cshtml",
               "RelativeToolTip": "Views\\Shared\\_addTeacherModalView.cshtml",
-              "ViewState": "AgIAAHEAAACAZ2ZmZmYkwHoAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAGoAAABANDMzMzMrwIEAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-09-05T11:01:54.99Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\Teachers\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Teachers\\Index.cshtml",
-              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\Teachers\\Index.cshtml",
-              "RelativeToolTip": "Views\\Teachers\\Index.cshtml",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAkAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-02T09:30:07.174Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "TeacherViewModel.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Models\\TeacherViewModel.cs",
               "RelativeDocumentMoniker": "Models\\TeacherViewModel.cs",
