@@ -25,12 +25,28 @@ EXEC sp_rename 'Persons.Email',  'PersonEmail', 'COLUMN';
 ALTER TABLE Persons
 ALTER COLUMN PersonEmail varchar(200);
 
+ALTER TABLE Persons
+ALTER COLUMN PersonID int NOT NULL;
 
+ALTER TABLE Persons
+ADD UNIQUE(Address);
+
+Alter Table Persons
+Add Constraint d_value
+Default 'Some' For LastName;
+
+// Identity being used for auto Icrement
+CREATE TABLE Products (
+    ProductId int IDENTITY(1,1) PRIMARY KEY,
+    ProductName varchar(255) NOT NULL,
+    Price int
+);
 
 
 
 
 */
+
 
 
 
