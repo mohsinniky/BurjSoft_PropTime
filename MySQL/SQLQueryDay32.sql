@@ -108,5 +108,32 @@ Delete from Persons where PersonEmail= 'emily.j@email.com';
 Select top 3 * from Persons where FirstName IS NOT NULL;
 Select * from Persons LIMIT 3 where FirstName IS NOT NULL ;
 
+-- Min
+Select * From Persons where PersonID = (Select MIN(PersonID) From Persons);
 
+--Max
+Select * From Persons where PersonID = (Select MAX(PersonID) From Persons);
+
+--Avg
+Select * From Persons where PersonID = (Select AVG(PersonID) From Persons);
+
+--Count
+Select * From Persons where PersonID = (Select COUNT(PersonID) From Persons);
+
+-- Like and WildCard
+Select * from Persons where FirstName like 'M%';
+Select * from Persons where FirstName like '%n';
+Select * from Persons where FirstName like '%i%';
+Select * from Persons where FirstName like '_o_si_';
+-- Different WildCards
+Select * from Persons where FirstName like 'M_%';
+-- [],-(Range)
+Select * from Persons where FirstName like '[D-M]%';
+
+-- IN, BEtween
+Select * from Persons where PersonID in (1,2,3);
+Select * from Persons where PersonID between 1 and 3;
+
+-- AS ( Alias )
+Select FirstName,LastName as 'Full Name' From Persons;
 
