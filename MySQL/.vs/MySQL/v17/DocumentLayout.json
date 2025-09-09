@@ -1,0 +1,36 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "G:\\BurjSoft_PropTime\\MySQL\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\BurjSoft_PropTime\\MySQL\\SQLQueryDay32.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SQLQueryDay32.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SQLQueryDay32.sql - DESKTOP-3OT71VJ.SchoolManagement (sa (63))",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\MySQL\\SQLQueryDay32.sql",
+              "RelativeDocumentMoniker": "SQLQueryDay32.sql",
+              "ToolTip": "G:\\BurjSoft_PropTime\\MySQL\\SQLQueryDay32.sql - DESKTOP-3OT71VJ.SchoolManagement (sa (63))",
+              "RelativeToolTip": "SQLQueryDay32.sql - DESKTOP-3OT71VJ.SchoolManagement (sa (63))",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-09-09T08:21:13.934Z",
+              "EditorCaption": " - DESKTOP-3OT71VJ.SchoolManagement (sa (63))"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

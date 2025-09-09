@@ -41,14 +41,14 @@ CREATE TABLE Products (
     ProductName varchar(255) NOT NULL,
     Price int
 );
-
-
+// View Code
+Create View PersonView as
+Select FirstName,LastName
+From Persons
+where PersonID > 0;
 
 
 */
-
-
-
 
 
 
