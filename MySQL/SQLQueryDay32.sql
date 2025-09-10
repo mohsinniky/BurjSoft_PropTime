@@ -136,4 +136,64 @@ Select * from Persons where PersonID between 1 and 3;
 
 -- AS ( Alias )
 Select FirstName,LastName as 'Full Name' From Persons;
+Select FirstName + ' ' + LastName as 'Full Name' From Persons;
 
+Select FirstName,LastName From Persons as [Full Name];
+
+
+-- Creating Orders Table and inserting sample data before applying joins
+CREATE TABLE Orders (
+    OrderID int,
+    OrderDate date,
+    CustomerID int
+);
+INSERT INTO Orders (OrderID, OrderDate, CustomerID)
+VALUES
+(101, '2023-01-15', 1),
+(102, '2023-02-20', 2),
+(103, '2023-03-25', 3),
+(104, '2023-04-30', 1),
+(105, '2023-05-10', 4);
+Select * from Orders;
+
+-- Join ( Inner Join, Left Join, Right Join, Full Join)
+-- Inner Join
+Select p.PersonID, p.FirstName, p.LastName, o.OrderID, o.OrderDate
+From Persons p
+Inner Join Orders o
+On p.PersonID = o.CustomerID;
+-- Left Join
+Select p.PersonID, p.FirstName, p.LastName, o.OrderID, o.OrderDate
+From Persons p
+Left Join Orders o
+On p.PersonID = o.CustomerID;
+-- Right Join
+Select p.PersonID, p.FirstName, p.LastName, o.OrderID, o.OrderDate
+From Persons p
+Right Join Orders o
+On p.PersonID = o.CustomerID;
+-- Full Join
+Select p.PersonID, p.FirstName, p.LastName, o.OrderID, o.OrderDate
+From Persons p
+Full Join Orders o
+On p.PersonID = o.CustomerID;
+
+
+-- Union
+Select FirstName from Persons
+Union
+Select LastName From Persons;
+
+
+-- Union All
+Select FirstName from Persons
+Union All
+Select LastName From Persons;
+
+-- Group By
+Select COUNT(PersonID) as 'Total Persons', FirstName From Persons
+Group By FirstName
+-- Having
+Select COUNT(PersonID) as 'Total Persons', FirstName From Persons
+Group By FirstName   
+Having COUNT(PersonID) > 0;
