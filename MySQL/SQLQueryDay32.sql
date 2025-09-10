@@ -197,3 +197,10 @@ Group By FirstName
 Select COUNT(PersonID) as 'Total Persons', FirstName From Persons
 Group By FirstName   
 Having COUNT(PersonID) > 0;
+
+-- Exists  
+Select * from Persons p
+Where Exists (Select 1 from Orders o where o.CustomerID = p.PersonID);
+
+--  Select into
+Select FirstName,LastName into PersonNames from Persons;
