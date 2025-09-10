@@ -204,3 +204,9 @@ Where Exists (Select 1 from Orders o where o.CustomerID = p.PersonID);
 
 --  Select into
 Select FirstName,LastName into PersonNames from Persons;
+
+-- Insert Into Select
+Insert into PersonNames
+Select FirstName,LastName from Persons;
+
+Select * from PersonNames;
