@@ -5,6 +5,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\BurjSoft_PropTime\\MySQL\\SQLQueryDay32.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SQLQueryDay32.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\BurjSoft_PropTime\\MySQL\\SQLQueryDay32Part2.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SQLQueryDay32Part2.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,19 +18,31 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SQLQueryDay32Part2.sql - not connected",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\MySQL\\SQLQueryDay32Part2.sql",
+              "RelativeDocumentMoniker": "SQLQueryDay32Part2.sql",
+              "ToolTip": "G:\\BurjSoft_PropTime\\MySQL\\SQLQueryDay32Part2.sql - not connected",
+              "RelativeToolTip": "SQLQueryDay32Part2.sql - not connected",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-09-11T07:35:42.328Z",
+              "EditorCaption": " - not connected"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "SQLQueryDay32.sql - DESKTOP-3OT71VJ.SchoolManagement (sa (68))",
+              "Title": "SQLQueryDay32.sql - not connected",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\MySQL\\SQLQueryDay32.sql",
               "RelativeDocumentMoniker": "SQLQueryDay32.sql",
-              "ToolTip": "G:\\BurjSoft_PropTime\\MySQL\\SQLQueryDay32.sql - DESKTOP-3OT71VJ.SchoolManagement (sa (68))",
-              "RelativeToolTip": "SQLQueryDay32.sql - DESKTOP-3OT71VJ.SchoolManagement (sa (68))",
+              "ToolTip": "G:\\BurjSoft_PropTime\\MySQL\\SQLQueryDay32.sql - not connected",
+              "RelativeToolTip": "SQLQueryDay32.sql - not connected",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
               "WhenOpened": "2025-09-09T10:47:25.845Z",
-              "EditorCaption": " - DESKTOP-3OT71VJ.SchoolManagement (sa (68))"
+              "EditorCaption": " - not connected"
             }
           ]
         }

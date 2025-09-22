@@ -210,3 +210,33 @@ Insert into PersonNames
 Select FirstName,LastName from Persons;
 
 Select * from PersonNames;
+
+-- Indexes
+Create Index idx_lastname on Persons(LastName);
+Create Unique Index idx_unique_email on Persons(PersonEmail);
+
+-- Drop Index
+Drop Index idx_lastname on Persons;
+-- Other DropMethod
+Drop Index Persons.idx_unique_email;
+
+-- Procedures
+Create Procedure GetPersonsByCity
+@City varchar(255)
+As
+Begin
+Select * from Persons where City = @City;
+End;
+
+-- Execute Procedure
+Exec GetPersonsByCity 'New York';
+-- Drop Procedure
+Drop Procedure GetPersonsByCity;
+
+-- Composite Key
+Create Table EmployeeProjects (
+    EmployeeID int,
+    ProjectID int,
+    Role varchar(255),
+    PRIMARY KEY (EmployeeID, ProjectID)
+);
