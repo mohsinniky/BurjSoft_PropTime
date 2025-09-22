@@ -3,7 +3,7 @@ using CoreMVCTutorial.Interfaces;
 
 namespace CoreMVCTutorial.Repositories
 {
-    //Step1: Here We inherit the interface 
+    //Step1: Here We inherit the interface And Defince The actions
     public class TeacherRepository : ITeacherRepository
     {
         public List<Teacher> _teachers;

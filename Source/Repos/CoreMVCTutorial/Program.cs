@@ -1,7 +1,16 @@
+using CoreMVCTutorial.Interfaces;
+using CoreMVCTutorial.Services;
+using CoreMVCTutorial.Repositories;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Registering the Dependency Injections
+builder.Services.AddSingleton<ITeacherRepository, TeacherRepository>();
+builder.Services.AddSingleton<ITeacherService, TeacherService>();
 
 var app = builder.Build();
 

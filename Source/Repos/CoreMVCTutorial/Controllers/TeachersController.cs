@@ -1,45 +1,17 @@
 ﻿using CoreMVCTutorial.Models;
+using CoreMVCTutorial.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreMVCTutorial.Controllers
 {
     public class TeachersController : Controller
     {
-        private static List<Teacher> teachers = new List<Teacher>
+        public ITeacherService _teacherService;
+        //Constructor Injection
+        public TeachersController(ITeacherService teacherService)
         {
-            new Teacher
-            {
-                TeacherId = 1,
-                FullName = "Mohsin Raza",
-                FatherName = "Raza",
-                Email = "mohsin@example.com",
-                DateOfBirth = new DateTime(1990, 1, 1),
-                Phone = "03001234567",
-                Password = "StrongPass123",
-                Course = "B.Tech",
-                Gender = Gender.Male,
-                Address = "123 Street, Lahore",
-                TermsAndConditions = true,
-                Hobbies = new List<string> { "Reading", "Music" },
-                Skills = new List<string> { "C#", "SQL" }
-            },
-            new Teacher
-            {
-                TeacherId = 2,
-                FullName = "Ali Ahmed",
-                FatherName = "Ahmed",
-                Email = "ali@example.com",
-                DateOfBirth = new DateTime(1988, 10, 20),
-                Phone = "03111234567",
-                Password = "Pass@123",
-                Course = "MBA",
-                Gender = Gender.Male,
-                Address = "456 Street, Karachi",
-                TermsAndConditions = true,
-                Hobbies = new List<string> { "Sports", "Photography" },
-                Skills = new List<string> { "Python", "Machine Learning" }
-            }
-        };
+            _teacherService = teacherService;
+        }
 
         [HttpGet]
         public IActionResult Index()
@@ -49,19 +21,21 @@ namespace CoreMVCTutorial.Controllers
 
         public IActionResult GetTeachers()
         {
+            var teachers = _teacherService.GetAllTeachers();
             return PartialView("_TeachersTable", teachers);
         }
 
         public IActionResult ShowTeacherModal(int? id)
         {
-            ViewBag.Courses = new List<string> { "B.Tech", "M.Tech", "MBA", "BBA" };
-            ViewBag.Hobbies = new List<string> { "Reading", "Traveling", "Music", "Sports", "Photography" };
-            ViewBag.Skills = new List<string> { "C#", "Python", "SQL", "Machine Learning", "Physics", "Research", "Data Analysis" };
+            var dropdownData = _teacherService.GetDropdownData();
+            ViewBag.Courses = dropdownData.Courses;
+            ViewBag.Hobbies = dropdownData.Hobbies;
+            ViewBag.Skills = dropdownData.Skills;
 
             Teacher model;
             if (id.HasValue)
             {
-                model = teachers.FirstOrDefault(t => t.TeacherId == id.Value) ?? new Teacher
+                model = _teacherService.GetTeacherById(id.Value) ?? new Teacher
                 {
                     Hobbies = new List<string>(),
                     Skills = new List<string>()
@@ -87,32 +61,29 @@ namespace CoreMVCTutorial.Controllers
             {
                 return Json(new { status = "Error", message = "Model binding failed", errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
             }
+
             if (teacherObject == null)
             {
                 return Json(new { status = "Error", message = "No data Received" });
             }
-            if (teacherObject.TeacherId > 0 && teachers.Any(t => t.TeacherId == teacherObject.TeacherId))
+
+            try
             {
-                // Update existing teacher
-                var existingTeacher = teachers.FirstOrDefault(t => t.TeacherId == teacherObject.TeacherId);
-                existingTeacher.FullName = teacherObject.FullName;
-                existingTeacher.FatherName = teacherObject.FatherName;
-                existingTeacher.Email = teacherObject.Email;
-                existingTeacher.DateOfBirth = teacherObject.DateOfBirth;
-                existingTeacher.Phone = teacherObject.Phone;
-                existingTeacher.Password = teacherObject.Password;
-                existingTeacher.Course = teacherObject.Course;
-                existingTeacher.Gender = teacherObject.Gender;
-                existingTeacher.Address = teacherObject.Address;
-                existingTeacher.TermsAndConditions = teacherObject.TermsAndConditions;
-                existingTeacher.Hobbies = teacherObject.Hobbies;
-                existingTeacher.Skills = teacherObject.Skills;
-                return Json(new { status = "Success", message = "Teacher updated successfully!" });
+                if (teacherObject.TeacherId > 0)
+                {
+                    _teacherService.UpdateTeacher(teacherObject);
+                    return Json(new { status = "Success", message = "Teacher updated successfully!" });
+                }
+                else
+                {
+                    _teacherService.CreateTeacher(teacherObject);
+                    return Json(new { status = "Success", message = "Teacher added successfully!" });
+                }
             }
-            // Add new teacher
-            teacherObject.TeacherId = teachers.Count > 0 ? teachers.Max(t => t.TeacherId) + 1 : 1;
-            teachers.Add(teacherObject);
-            return Json(new { status = "Success", message = "Teacher added successfully!" });
+            catch (Exception ex)
+            {
+                return Json(new { status = "Error", message = $"An error occurred: {ex.Message}" });
+            }
         }
 
 
@@ -120,12 +91,21 @@ namespace CoreMVCTutorial.Controllers
         [HttpPost]
         public IActionResult DeleteTeacher(int id)
         {
-            var teacher = teachers.FirstOrDefault(t => t.TeacherId == id);
-            if (teacher == null)
-                return Json(new { status = "Error", message = "Teacher not found" });
-
-            teachers.Remove(teacher);
-            return Json(new { status = "Success", message = "Teacher deleted successfully!" });
+            try
+            {
+                var teacher = _teacherService.GetTeacherById(id);
+                if (teacher == null)
+                    return Json(new { status = "Error", message = "Teacher not found" });
+                else
+                {
+                    _teacherService.DeleteTeacher(id);
+                    return Json(new { status = "Success", message = "Teacher deleted successfully!" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { status = "Error", message = $"An error occurred: {ex.Message}" });
+            }
         }
     }
 }
