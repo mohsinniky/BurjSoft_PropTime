@@ -4,14 +4,25 @@ using CoreMVCTutorial.Models;
 
 namespace CoreMVCTutorial.Services
 {
-    public class TeacherService: ITeacherService
+    public class TeacherService : ITeacherService
     {
+        //Dependency Injection
         public ITeacherRepository _teacherRepository;
-
+        // Consrtuctor Injection
         public TeacherService(ITeacherRepository teacherRepository)
         {
             _teacherRepository = teacherRepository;
         }
+        // Method Injection used ,when needed by method
+        //public void ProcessTeacher( ITeacherRepository teacherRepo, int teacherId)
+        //{
+        //    var teacher = teacherRepo.GetTeacherById(teacherId);
+        //    // process
+        //}
+
+        // Property Injection
+        //[FromServices]
+        //public ITeacherRepository TeacherRepo { get; set; }
 
         public List<Teacher> GetAllTeachers()
         {

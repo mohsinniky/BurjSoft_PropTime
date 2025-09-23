@@ -7,48 +7,53 @@ namespace CoreMVCTutorial.Repositories
     public class TeacherRepository : ITeacherRepository
     {
         public static List<Teacher> _teachers;
-        private static int _nextId;
+        private static int _nextId ;
+        private static bool _initialized = false;
+
 
         public TeacherRepository()
         {
-            _teachers = new List<Teacher>
+            if (!_initialized)
             {
-                new Teacher
+                _teachers = new List<Teacher>
                 {
-                    TeacherId = 1,
-                    FullName = "Mohsin Raza",
-                    FatherName = "Raza",
-                    Email = "mohsin@example.com",
-                    DateOfBirth = new DateTime(1990, 1, 1),
-                    Phone = "03001234567",
-                    Password = "StrongPass123",
-                    Course = "B.Tech",
-                    Gender = Gender.Male,
-                    Address = "123 Street, Lahore",
-                    TermsAndConditions = true,
-                    Hobbies = new List<string> { "Reading", "Music" },
-                    Skills = new List<string> { "C#", "SQL" }
-                },
-                new Teacher
-                {
-                    TeacherId = 2,
-                    FullName = "Ali Ahmed",
-                    FatherName = "Ahmed",
-                    Email = "ali@example.com",
-                    DateOfBirth = new DateTime(1988, 10, 20),
-                    Phone = "03111234567",
-                    Password = "Pass@123",
-                    Course = "MBA",
-                    Gender = Gender.Male,
-                    Address = "456 Street, Karachi",
-                    TermsAndConditions = true,
-                    Hobbies = new List<string> { "Sports", "Photography" },
-                    Skills = new List<string> { "Python", "Machine Learning" }
-                }
-            };
+                    new Teacher
+                    {
+                        TeacherId = 1,
+                        FullName = "Mohsin Raza",
+                        FatherName = "Raza",
+                        Email = "mohsin@example.com",
+                        DateOfBirth = new DateTime(1990, 1, 1),
+                        Phone = "03001234567",
+                        Password = "StrongPass123",
+                        Course = "B.Tech",
+                        Gender = Gender.Male,
+                        Address = "123 Street, Lahore",
+                        TermsAndConditions = true,
+                        Hobbies = new List<string> { "Reading", "Music" },
+                        Skills = new List<string> { "C#", "SQL" }
+                    },
+                    new Teacher
+                    {
+                        TeacherId = 2,
+                        FullName = "Ali Ahmed",
+                        FatherName = "Ahmed",
+                        Email = "ali@example.com",
+                        DateOfBirth = new DateTime(1988, 10, 20),
+                        Phone = "03111234567",
+                        Password = "Pass@123",
+                        Course = "MBA",
+                        Gender = Gender.Male,
+                        Address = "456 Street, Karachi",
+                        TermsAndConditions = true,
+                        Hobbies = new List<string> { "Sports", "Photography" },
+                        Skills = new List<string> { "Python", "Machine Learning" }
+                    }
+                };
 
-            _nextId = _teachers.Count > 0 ? (_teachers.Max(t => t.TeacherId) ?? 0) + 1 : 1;
-
+                _nextId = _teachers.Count > 0 ? (_teachers.Max(t => t.TeacherId) ?? 0) + 1 : 1;
+                _initialized = true;
+            }
         }
 
         public List<Teacher> GetAllTeacher()
@@ -64,7 +69,7 @@ namespace CoreMVCTutorial.Repositories
 
         public Teacher GetTeacherById(int? id)
         {
-            return _teachers.FirstOrDefault(x=> x.TeacherId == id);
+            return _teachers.FirstOrDefault(x => x.TeacherId == id);
         }
 
         public void AddTeacher(Teacher teacher)
@@ -109,7 +114,7 @@ namespace CoreMVCTutorial.Repositories
 
         public int GetNextTeacherId()
         {
-            return _nextId  ;
+            return _nextId;
         }
 
     }

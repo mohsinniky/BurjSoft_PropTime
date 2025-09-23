@@ -34,15 +34,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Day9 onwards",
+              "Title": "Day9 onwards.csproj",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\Day9 onwards\\Day9 onwards.csproj",
               "RelativeDocumentMoniker": "Day9 onwards.csproj",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\Day9 onwards\\Day9 onwards.csproj",
               "RelativeToolTip": "Day9 onwards.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-09-23T09:20:26.868Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-23T09:20:26.868Z"
             },
             {
               "$type": "Document",
@@ -66,8 +65,7 @@
               "RelativeToolTip": "Basics.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAHoAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T13:47:28.88Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-21T13:47:28.88Z"
             },
             {
               "$type": "Document",
@@ -89,7 +87,7 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\Day9 onwards\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFgAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAF4AAABAMjMzM5MwwG8AAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-07T15:35:26.602Z",
               "EditorCaption": ""
