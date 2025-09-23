@@ -9,8 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 //Registering the Dependency Injections
-builder.Services.AddSingleton<ITeacherRepository, TeacherRepository>();
-builder.Services.AddSingleton<ITeacherService, TeacherService>();
+builder.Services.AddScoped <ITeacherRepository, TeacherRepository>();
+builder.Services.AddScoped<ITeacherService, TeacherService>();
 
 var app = builder.Build();
 

@@ -1,116 +1,133 @@
-﻿
-
-using Oops;
-using System.Text.RegularExpressions;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Day9_onwards
 {
-    public static class Program
+    // Interfaces
+    public interface ITransientService
     {
-        static int calculateSum(int x, int y)
+        string GetId();
+    }
+
+    public interface IScopedService
+    {
+        string GetId();
+    }
+
+    public interface ISingletonService
+    {
+        string GetId();
+    }
+
+    // Implementations
+    public class TransientService : ITransientService
+    {
+        private readonly string _id;
+
+        public TransientService()
         {
-            return x + y;
+            _id = Guid.NewGuid().ToString().Substring(0, 8);
+            Console.WriteLine($"TransientService created with ID: {_id}");
         }
-        static void printMsg(string message)
+
+        public string GetId() => _id;
+    }
+
+    public class ScopedService : IScopedService
+    {
+        private readonly string _id;
+
+        public ScopedService()
         {
-            Console.WriteLine(message);
+            _id = Guid.NewGuid().ToString().Substring(0, 8);
+            Console.WriteLine($"ScopedService created with ID: {_id}");
         }
 
-        // Factorial Method Recursive
-        static int Factorial(int n)
+        public string GetId() => _id;
+    }
+
+    public class SingletonService : ISingletonService
+    {
+        private readonly string _id;
+
+        public SingletonService()
         {
-            if (n == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return n * Factorial(n - 1);
-            }
+            _id = Guid.NewGuid().ToString().Substring(0, 8);
+            Console.WriteLine($"SingletonService created with ID: {_id}");
         }
 
+        public string GetId() => _id;
+    }
 
+    // Service that uses all three lifetimes
+    public class ConsumerService
+    {
+        private readonly ITransientService _transient;
+        private readonly IScopedService _scoped;
+        private readonly ISingletonService _singleton;
 
-        // define a delegate
-        public delegate int myDelegate(int num1, int num2);
-        public delegate void printDelegate(string message);
+        public ConsumerService(
+            ITransientService transient,
+            IScopedService scoped,
+            ISingletonService singleton)
+        {
+            _transient = transient;
+            _scoped = scoped;
+            _singleton = singleton;
+        }
 
+        public void DisplayIds(string consumerName)
+        {
+            Console.WriteLine($"\n{consumerName}:");
+            Console.WriteLine($"Transient ID: {_transient.GetId()}");
+            Console.WriteLine($"Scoped ID: {_scoped.GetId()}");
+            Console.WriteLine($"Singleton ID: {_singleton.GetId()}");
+        }
+    }
 
+    class Program
+    {
         static void Main(string[] args)
         {
-            //List<Employee?> employees;
+            // Setup dependency injection container
+            var services = new ServiceCollection();
 
-            //employees = new List<Employee?>()
-            //{
-            //    new Employee() { Id = 1, Name =  "John", Age = 12, IsActive= true },
-            //    null,
-            //    new Employee() { Id = 3, Name =  "Michel", Age = 67, IsActive= true },
-            //    new Employee() { Id = 5, Name =  null, Age = 67, IsActive= true },
+            // Register services with different lifetimes - THIS IS WHERE IMPORTS ARE USED
+            services.AddTransient<ITransientService, TransientService>();
+            services.AddScoped<IScopedService, ScopedService>();
+            services.AddSingleton<ISingletonService, SingletonService>();
+            services.AddTransient<ConsumerService>();
 
-            //};
+            var serviceProvider = services.BuildServiceProvider();
 
+            Console.WriteLine("=== DEMONSTRATING DEPENDENCY INJECTION LIFETIMES ===\n");
 
-            //var secondEmployees = employees.FirstOrDefault(x => x?.Id.Equals(3) ?? false);
-            //var johnEmployees = employees.Where(x => x?.Name?.Contains("John") ?? false);
-            //var agedEmployees = employees.Where(x => x?.Age >= 2 && x.Age < 20);
-            //var activeEmployees = employees.Where(x => x?.IsActive ?? false).Select(x => x.Name);
+            // First scope
+            Console.WriteLine("--- Scope 1 ---");
+            using (var scope1 = serviceProvider.CreateScope())
+            {
+                var consumer1 = scope1.ServiceProvider.GetRequiredService<ConsumerService>();
+                var consumer2 = scope1.ServiceProvider.GetRequiredService<ConsumerService>();
 
+                consumer1.DisplayIds("Consumer 1 (Scope 1)");
+                consumer2.DisplayIds("Consumer 2 (Scope 1)");
+            }
 
-            //List<string> FrutisList = new List<string>() { "Apple1", "Apple2", "Apple3", "Apple4" };
+            Console.WriteLine("\n--- Scope 2 ---");
+            // Second scope
+            using (var scope2 = serviceProvider.CreateScope())
+            {
+                var consumer3 = scope2.ServiceProvider.GetRequiredService<ConsumerService>();
+                var consumer4 = scope2.ServiceProvider.GetRequiredService<ConsumerService>();
 
-            //IEnumerable<string> iEnumerableFruitsList = FrutisList;
-            //foreach (var item in iEnumerableFruitsList)
-            //{
-            //    Console.WriteLine(item);
-            //}
+                consumer3.DisplayIds("Consumer 3 (Scope 2)");
+                consumer4.DisplayIds("Consumer 4 (Scope 2)");
+            }
 
-            //IEnumerator<string> iEnumeratorFruitsList = iEnumerableFruitsList.GetEnumerator();
-
-            //while (iEnumeratorFruitsList.MoveNext())
-            //{
-            //    Console.WriteLine(iEnumeratorFruitsList.Current);
-            //}
-
-
-            //Delegate
-            myDelegate delegateVariableForSumMethod = new myDelegate(calculateSum);
-
-            int result = delegateVariableForSumMethod(2, 3);
-            Console.WriteLine(result);
-
-            printDelegate displayPrint = new printDelegate(printMsg);
-            displayPrint("Hello WOrld");
-
-            //For a Delegate 3 things Must match with its pointed Method, i. Return Type, ii. Parameters type/Sequence iii. Parameter Modifiers if any
-            //Used For: Callback Methods, Events Handling, Passing Method as parameter, Deligates can be chained together
-
-
-            //Recursion Practice
-            displayPrint("Enter Your Number for finding its Factorial: ");
-            int numberInput = Convert.ToInt32(Console.ReadLine());
-
-            int resultFactorial = Factorial(numberInput);
-            displayPrint($"Factorial of {numberInput} is: {resultFactorial}");
-
-
-            ////RegularExpression
-            //string pattern = "[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+";
-            //displayPrint("Enter Your Email: ");
-            //string? email = Console.ReadLine();
-            //Regex regexPattern = new Regex(pattern);
-            ////regexPattern.
-
-            //bool isValidEmail = regexPattern.IsMatch(email);
-            //displayPrint($"Email is Valid: {isValidEmail}");
-
-
-            //File Handling
-            string writeText = "Hello World!";
-            File.WriteAllText("filename.txt", writeText);
-            string readText = File.ReadAllText("filename.txt");
-            displayPrint(readText);
-
-
+            Console.WriteLine("\n=== LIFETIME EXPLANATION ===");
+            Console.WriteLine("Transient: New instance EVERY TIME it's requested");
+            Console.WriteLine("Scoped: Same instance within the SAME SCOPE, different across scopes");
+            Console.WriteLine("Singleton: Same instance for the ENTIRE APPLICATION LIFETIME");
         }
     }
 }

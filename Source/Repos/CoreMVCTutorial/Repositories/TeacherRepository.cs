@@ -6,8 +6,8 @@ namespace CoreMVCTutorial.Repositories
     //Step1: Here We inherit the interface And Defince The actions
     public class TeacherRepository : ITeacherRepository
     {
-        public List<Teacher> _teachers;
-        private int _nextId;
+        public static List<Teacher> _teachers;
+        private static int _nextId;
 
         public TeacherRepository()
         {
@@ -53,6 +53,12 @@ namespace CoreMVCTutorial.Repositories
 
         public List<Teacher> GetAllTeacher()
         {
+            Console.WriteLine($"=== GET ALL TEACHERS CALLED ===");
+            Console.WriteLine($"Current teachers count: {_teachers.Count}");
+            foreach (var teacher in _teachers)
+            {
+                Console.WriteLine($"- {teacher.TeacherId}: {teacher.FullName}");
+            }
             return _teachers;
         }
 
