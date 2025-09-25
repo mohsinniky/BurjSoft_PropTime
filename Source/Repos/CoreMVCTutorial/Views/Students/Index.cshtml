@@ -1,0 +1,49 @@
+﻿@using System.Data
+
+@model DataTable;
+
+@{
+    ViewBag.Title = "Students";
+}
+
+<h2>Student List</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Created Date</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (DataRow row in Model.Rows)
+    {
+        <tr>
+            <td>@row["Id"]</td>
+            <td>@row["Name"]</td>
+            <td>@row["Email"]</td>
+            <td>@row["Age"]</td>
+            <td>@Convert.ToDateTime(row["CreatedDate"]).ToString("MM/dd/yyyy")</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = row["Id"]}) |
+                @Html.ActionLink("Delete", "Delete", new { id = row["Id"] })
+            </td>
+        </tr>
+    }
+</table>

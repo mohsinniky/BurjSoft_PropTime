@@ -1,90 +1,117 @@
 ﻿using CoreMVCTutorial.Models;
+using CoreMVCTutorial.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreMVCTutorial.Controllers
 {
     public class StudentsController : Controller
     {
-        // Simulated in-memory storage with hardcoded data for demonstration purposes
-        private static List<Students> students = new List<Students>
-        {
-            new Students
-            {
-                StudentId = 1, FullName = "Mohsin", Password = "Password123!",
-                DateOfBirth = new DateTime(1111, 1, 1), Gender = Gender.Male, Address = "Test Address 1234",
-                Branch = Branch.CSE, TermsAndConditions = true,
-                Hobbies = new List<string> { "Reading", "Traveling" },
-                Skills = new List<string> { "C#", "SQL" }
-            },
-            new Students
-            {
-                StudentId = 2, FullName = "Raza", Password = "Password123!",
-                DateOfBirth = new DateTime(2222, 2, 2), Gender = Gender.Female, Address = "Test Address 1234",
-                Branch = Branch.ETC, TermsAndConditions = true,
-                Hobbies = new List<string> { "Music", "Traveling" },
-                Skills = new List<string> { "Python", "Machine Learning" }
-            }
-        };
 
+        private StudentRepository studentRepository;
 
-        // GET: Student/List
-        [HttpGet]
-        public IActionResult List()
+        public StudentsController()
         {
-            // Return the list of students to the view
+            studentRepository = new StudentRepository();
+        }
+
+        // GET: Student
+        public ActionResult Index()
+        {
+            var students = studentRepository.GetAllStudents();
             return View(students);
         }
 
-
-
-        // GET: Student/Details/{id}
-        [HttpGet]
-        public IActionResult Details(int id)
+        // GET: Student/Create
+        public ActionResult Create()
         {
-            // Find the student by Id
-            var student = students.FirstOrDefault(std => std.StudentId == id);
-            if (student == null)
-            {
-                return NotFound();
-            }
-            // Return the student details view
-            return View(student);
+            return View();
         }
 
-
-
-        // GET: Student/Register
-        [HttpGet]
-        public IActionResult Register()
-        {
-            // Ensure the Hobbies list is initialized
-            var student = new Students
-            {
-                Hobbies = new List<string>()  // Initialize to prevent null reference issues
-            };
-            // Pass the list of available hobbies and skills to the view
-            ViewBag.Hobbies = new List<string> { "Reading", "Traveling", "Music", "Sports", "Photography" };
-            ViewBag.Skills = new List<string> { "C#", "Python", "SQL", "Machine Learning", "ASP.NET Core", "Oracle", "Data Analysis" };
-            return View(student);
-        }
-        // POST: Student/Register
+        // POST: Student/Create
         [HttpPost]
-        public IActionResult Register(Students student)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Students student)
         {
             if (ModelState.IsValid)
             {
-                //Generated the Student Id
-                student.StudentId = students.Count() + 1;
-                // Add the student to the list
-                students.Add(student);
-                // Redirect to the List page after successful registration
-                return RedirectToAction("List");
+                if (studentRepository.AddStudent(student))
+                {
+                    TempData["SuccessMessage"] = "Student added successfully!";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Error adding student.");
+                }
             }
-            // Pass the list of available hobbies and skills back to the view in case of errors
-            ViewBag.Hobbies = new List<string> { "Reading", "Traveling", "Music", "Sports", "Photography" };
-            ViewBag.Skills = new List<string> { "C#", "Python", "SQL", "Machine Learning", "Physics", "Research", "Data Analysis" };
-            // If invalid, return the same view with validation messages
             return View(student);
         }
+
+        // GET: Student/Edit/5
+        public ActionResult Edit(int id)
+        {
+            var student = studentRepository.GetStudentById(id);
+            if (student == null)
+            {
+                return HttpNotFound();
+            }
+            return View(student);
+        }
+
+        // POST: Student/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Students student)
+        {
+            if (ModelState.IsValid)
+            {
+                if (studentRepository.UpdateStudent(student))
+                {
+                    TempData["SuccessMessage"] = "Student updated successfully!";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Error updating student.");
+                }
+            }
+            return View(student);
+        }
+
+        // GET: Student/Delete/5
+        public ActionResult Delete(int id)
+        {
+            var student = studentRepository.GetStudentById(id);
+            if (student == null)
+            {
+                throw new NotImplementedException();
+            }
+            return View(student);
+        }
+
+        private ActionResult HttpNotFound()
+        {
+            throw new NotImplementedException();
+        }
+
+        // POST: Student/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            if (studentRepository.DeleteStudent(id))
+            {
+                TempData["SuccessMessage"] = "Student deleted successfully!";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Error deleting student.";
+            }
+            return RedirectToAction("Index");
+        }
+
+
+
+
     }
 }

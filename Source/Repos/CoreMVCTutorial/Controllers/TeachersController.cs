@@ -6,8 +6,9 @@ namespace CoreMVCTutorial.Controllers
 {
     public class TeachersController : Controller
     {
-        public ITeacherService _teacherService;
-        //Constructor Injection
+        private readonly ITeacherService _teacherService;
+
+        // Constructor Injection
         public TeachersController(ITeacherService teacherService)
         {
             _teacherService = teacherService;
@@ -37,48 +38,56 @@ namespace CoreMVCTutorial.Controllers
             {
                 model = _teacherService.GetTeacherById(id.Value) ?? new Teacher
                 {
-                    Hobbies = new List<string>(),
-                    Skills = new List<string>()
+                    HobbiesList = new List<string>(),
+                    SkillsList = new List<string>()
                 };
             }
             else
             {
                 model = new Teacher
                 {
-                    Hobbies = new List<string>(),
-                    Skills = new List<string>()
+                    HobbiesList = new List<string>(),
+                    SkillsList = new List<string>()
                 };
             }
             return PartialView("_addTeacherModalView", model);
         }
 
-
-        // Add teacher to the list
         [HttpPost]
-        public IActionResult UpdateTeachers([FromBody] Teacher teacherObject)
+        [HttpPost]
+        public IActionResult UpdateTeachers([FromBody] Teacher teacher) // Changed from teacherObject to teacher
         {
             if (!ModelState.IsValid)
             {
-                return Json(new { status = "Error", message = "Model binding failed", errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
+                return Json(new
+                {
+                    status = "Error",
+                    message = "Model binding failed",
+                    errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage)
+                });
             }
 
-            if (teacherObject == null)
+            if (teacher == null)
             {
                 return Json(new { status = "Error", message = "No data Received" });
             }
 
             try
             {
-                if (teacherObject.TeacherId > 0)
+                if (teacher.TeacherId > 0)
                 {
-                    _teacherService.UpdateTeacher(teacherObject);
+                    _teacherService.UpdateTeacher(teacher);
                     return Json(new { status = "Success", message = "Teacher updated successfully!" });
                 }
                 else
                 {
-                    _teacherService.CreateTeacher(teacherObject);
+                    _teacherService.CreateTeacher(teacher);
                     return Json(new { status = "Success", message = "Teacher added successfully!" });
                 }
+            }
+            catch (InvalidOperationException ex) when (ex.Message.Contains("Email already exists"))
+            {
+                return Json(new { status = "Error", message = ex.Message });
             }
             catch (Exception ex)
             {
@@ -86,8 +95,6 @@ namespace CoreMVCTutorial.Controllers
             }
         }
 
-
-        // Delete teacher
         [HttpPost]
         public IActionResult DeleteTeacher(int id)
         {
