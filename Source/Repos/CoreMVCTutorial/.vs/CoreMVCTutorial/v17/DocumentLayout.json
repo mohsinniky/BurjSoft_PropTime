@@ -3,12 +3,28 @@
   "WorkspaceRootPath": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\repositories\\studentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:repositories\\studentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\repositories\\studentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:repositories\\studentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\models\\students.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,20 +42,8 @@
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/DESKTOP_3OT71VJ/TeachersManagement/sa/SqlTable/dbo.Students.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3C2AD2AA-0ABA-4E25-81B4-0CBFA7A6CE0D}|CoreMVCTutorial.csproj|g:\\burjsoft_proptime\\source\\repos\\coremvctutorial\\views\\students\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -65,11 +69,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-25T12:30:16.385Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "_NavMenus.cshtml",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\Shared\\_NavMenus.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_NavMenus.cshtml",
@@ -82,20 +99,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 0,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\appsettings.Development.json",
               "RelativeDocumentMoniker": "appsettings.Development.json",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\appsettings.Development.json",
               "RelativeToolTip": "appsettings.Development.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAACbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-09-25T08:59:37.761Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
@@ -108,7 +125,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "dbo.Students [Data]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/DESKTOP_3OT71VJ/TeachersManagement/sa/SqlTable/dbo.Students.sql",
               "ToolTip": "dbo.Students [Data]",
@@ -118,7 +135,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\Students\\Edit.cshtml",
               "RelativeDocumentMoniker": "Views\\Students\\Edit.cshtml",
@@ -131,7 +148,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\Students\\Delete.cshtml",
               "RelativeDocumentMoniker": "Views\\Students\\Delete.cshtml",
@@ -144,7 +161,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "TeacherRepository.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Repositories\\TeacherRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\TeacherRepository.cs",
@@ -157,7 +174,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "Create.cshtml",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\Students\\Create.cshtml",
               "RelativeDocumentMoniker": "Views\\Students\\Create.cshtml",
@@ -170,7 +187,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "Index.cshtml",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Views\\Students\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Students\\Index.cshtml",
@@ -183,33 +200,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "StudentRepository.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Repositories\\StudentRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\StudentRepository.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Repositories\\StudentRepository.cs",
               "RelativeToolTip": "Repositories\\StudentRepository.cs",
-              "ViewState": "AgIAADMAAAAAAAAAAAAvwEIAAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-24T13:19:09.783Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
               "Title": "DatabaseHelper.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\DatabaseHelper.cs",
               "RelativeDocumentMoniker": "DatabaseHelper.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\DatabaseHelper.cs",
               "RelativeToolTip": "DatabaseHelper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-24T13:12:31.692Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "Students.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Models\\Students.cs",
               "RelativeDocumentMoniker": "Models\\Students.cs",
@@ -222,26 +239,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "StudentsController.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Controllers\\StudentsController.cs",
               "RelativeDocumentMoniker": "Controllers\\StudentsController.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Controllers\\StudentsController.cs",
               "RelativeToolTip": "Controllers\\StudentsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAFcAAAAY//////8swHAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-24T13:07:12.413Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\CoreMVCTutorial\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-24T13:03:42.907Z",
               "EditorCaption": ""
