@@ -1,6 +1,6 @@
 ﻿@using System.Data
 
-@model DataTable;
+@model IEnumerable<Students>
 
 @{
     ViewBag.Title = "Students";
@@ -32,17 +32,17 @@
         <th>Actions</th>
     </tr>
 
-    @foreach (DataRow row in Model.Rows)
+    @foreach (var student in Model)
     {
         <tr>
-            <td>@row["Id"]</td>
-            <td>@row["Name"]</td>
-            <td>@row["Email"]</td>
-            <td>@row["Age"]</td>
-            <td>@Convert.ToDateTime(row["CreatedDate"]).ToString("MM/dd/yyyy")</td>
+            <td>@student.Id</td>
+            <td>@student.Name</td>
+            <td>@student.Email</td>
+            <td>@student.Age</td>
+            <td>@Convert.ToDateTime(@student.CreatedDate).ToString("MM/dd/yyyy")</td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = row["Id"]}) |
-                @Html.ActionLink("Delete", "Delete", new { id = row["Id"] })
+                @Html.ActionLink("Edit", "Edit", new { id = @student.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = @student.Id })
             </td>
         </tr>
     }

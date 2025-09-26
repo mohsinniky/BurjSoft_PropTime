@@ -37,3 +37,11 @@ Select * From Departments;
 Select * From Employees;
 
 */
+
+
+Drop Database EF_Practice;
+
+Create Database SchoolDb;
+
+Select * Form Students;
+Select * From Grades;

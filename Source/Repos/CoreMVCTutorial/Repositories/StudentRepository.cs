@@ -1,6 +1,7 @@
 ﻿using CoreMVCTutorial.Models;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using System.Diagnostics;
 namespace CoreMVCTutorial.Repositories
 
 {
@@ -8,52 +9,49 @@ namespace CoreMVCTutorial.Repositories
     {
         public bool AddStudent(Students student)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (var context = new StudentContext())
             {
-                string query = "INSERT INTO Students (Name, Email, Age) VALUES (@Name, @Email, @Age);";
+                context.Database.EnsureCreated();
 
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Name", student.Name);
-                    command.Parameters.AddWithValue("@Email", student.Email);
-                    command.Parameters.AddWithValue("@Age", student.Age);
+                var studentData = new Students() { Name = student.Name, Email = student.Email , Age = student.Age, CreatedDate = DateTime.Now};
 
-                    connection.Open();
-                    int result = command.ExecuteNonQuery();
-                    ChangesMethod();
-                    return result > 0;
-                }
+                context.Students.Add(studentData);
+
+                context.SaveChanges();
+
+
+                int result = 1;
+                return result > 0;
+                
             }
         }
 
-        public DataTable GetAllStudents()
+        public List<Students> GetAllStudents()
         {
-            DataTable students = new DataTable();
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (var context = new StudentContext())
             {
-                string query = "SELECT * FROM Students";
+                // Ensure database exists (creates if not)
+                context.Database.EnsureCreated();
 
-                connection.Open();
-                using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
-                {
-                    adapter.Fill(students);
-                }
+                // Fetch all students from the table
+                var students = context.Students.ToList();
 
+                return students;
             }
-            return students;
         }
 
 
-        public void ChangesMethod()
-        {
-            var studentsTable = GetAllStudents();
 
-            studentsTable.Rows[0]["Name"] = "testing";
-            studentsTable.Rows[1]["Age"] = 1111;
+        //public void ChangesMethod()
+        //{
+        //    var studentsTable = GetAllStudents();
 
-            UpdateMultipleStudents(studentsTable);
+        //    studentsTable.Rows[0]["Name"] = "testing";
+        //    studentsTable.Rows[1]["Age"] = 1111;
 
-        }
+        //    UpdateMultipleStudents(studentsTable);
+
+        //}
 
         public void UpdateMultipleStudents(DataTable changedTable)
         {
