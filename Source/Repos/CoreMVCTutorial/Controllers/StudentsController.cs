@@ -14,100 +14,45 @@ namespace CoreMVCTutorial.Controllers
             studentRepository = new StudentRepository();
         }
 
-        // GET: Student
         public ActionResult Index()
         {
             var students = studentRepository.GetAllStudents();
             return View(students);
         }
 
-        // GET: Student/Create
-        public ActionResult Create()
+ 
+
+        [HttpGet]
+        public JsonResult GetAllStudents()
         {
-            return View();
+            var students = studentRepository.GetAllStudents();
+            return Json(students);
         }
 
-        // POST: Student/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Students student)
-        {
-            if (ModelState.IsValid)
-            {
-                if (studentRepository.AddStudent(student))
-                {
-                    TempData["SuccessMessage"] = "Student added successfully!";
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Error adding student.");
-                }
-            }
-            return View(student);
-        }
-
-        // GET: Student/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public JsonResult GetStudent(int id)
         {
             var student = studentRepository.GetStudentById(id);
-            if (student == null)
-            {
-                return HttpNotFound();
-            }
-            return View(student);
+            return Json(student);
         }
 
-        // POST: Student/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Students student)
+        public JsonResult SaveStudent([FromBody] Students student)
         {
-            if (ModelState.IsValid)
-            {
-                if (studentRepository.UpdateStudent(student))
-                {
-                    TempData["SuccessMessage"] = "Student updated successfully!";
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Error updating student.");
-                }
-            }
-            return View(student);
-        }
-
-        // GET: Student/Delete/5
-        public ActionResult Delete(int id)
-        {
-            var student = studentRepository.GetStudentById(id);
-            if (student == null)
-            {
-                throw new NotImplementedException();
-            }
-            return View(student);
-        }
-
-        private ActionResult HttpNotFound()
-        {
-            throw new NotImplementedException();
-        }
-
-        // POST: Student/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            if (studentRepository.DeleteStudent(id))
-            {
-                TempData["SuccessMessage"] = "Student deleted successfully!";
-            }
+            bool result;
+            if (student.Id > 0)
+                result = studentRepository.UpdateStudent(student);
             else
-            {
-                TempData["ErrorMessage"] = "Error deleting student.";
-            }
-            return RedirectToAction("Index");
+                result = studentRepository.AddStudent(student);
+
+            return Json(new { success = result });
+        }
+
+        [HttpPost]
+        public JsonResult DeleteStudent(int id)
+        {
+            var result = studentRepository.DeleteStudent(id);
+            return Json(new { success = result });
         }
 
 

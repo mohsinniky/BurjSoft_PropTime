@@ -1,37 +1,79 @@
-﻿// // Validation functions
+﻿$(document).ready(function () {
+    loadStudents();
 
-// function validateInput(inputElementId, errorElementId, errorMessage = 'This is required') {
-//     const value = document.getElementById(inputElementId).value;
-//     if (!value) {
-//         document.getElementById(errorElementId).innerHTML = errorMessage;
-//         return false;
-//     } else {
-//         document.getElementById(errorElementId).innerHTML = "";
-//         return true;
-//     }
-// }
-// function validateEmail(inputElementId, errorElementId, errorMessage = 'Email is invalid') {
-//     const email = document.getElementById(inputElementId).value;
-//     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-//     if (!emailRegex.test(email)) {
-//         document.getElementById(errorElementId).innerHTML = errorMessage;
-//         return false;
-//     } else {
-//         document.getElementById(errorElementId).innerHTML = '';
-//         return true;
-//     }
-// }
+    // Show modal for add
+    $('#addStudentBtn').on('click', function () {
+        clearStudentForm();
+        $('#studentModal').modal('show');
+    });
 
-// function validateMultiSelect(selectId, errorElementId, min = 1, max = 10, errorMessage = 'Select at least one option') {
-//     const selected = $(`#${selectId}`).val();
-//     if (!selected || selected.length < min) {
-//         document.getElementById(errorElementId).innerHTML = `Select at least ${min} skill`;
-//         return false;
-//     } else if (selected.length > max) {
-//         document.getElementById(errorElementId).innerHTML = `You can select up to ${max} skills`;
-//         return false;
-//     } else {
-//         document.getElementById(errorElementId).innerHTML = '';
-//         return true;
-//     }
-// }
+    // Save student (add or update)
+    $('#studentForm').on('submit', function (e) {
+        e.preventDefault();
+        var student = {
+            Id: $('#studentId').val() ? parseInt($('#studentId').val()) : 0,
+            Name: $('#studentName').val(),
+            Email: $('#studentEmail').val(),
+            Age: parseInt($('#studentAge').val())
+        };
+        $.ajax({
+            url: '/Students/SaveStudent',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(student),
+            success: function (res) {
+                $('#studentModal').modal('hide');
+                loadStudents();
+            }
+        });
+    });
+});
+
+// Load students table
+function loadStudents() {
+    $.get('/Students/GetAllStudents', function (students) {
+        var html = `<table class="table table-bordered">
+            <thead><tr><th>Name</th><th>Email</th><th>Age</th><th>Actions</th></tr></thead><tbody>`;
+        $.each(students, function (i, s) {
+            html += `<tr>
+                <td>${s.name}</td>
+                <td>${s.email}</td>
+                <td>${s.age}</td>
+                <td>
+                    <button class="btn btn-sm btn-warning" onclick="editStudent(${s.id})">Edit</button>
+                    <button class="btn btn-sm btn-danger" onclick="deleteStudent(${s.id})">Delete</button>
+                </td>
+            </tr>`;
+        });
+        html += '</tbody></table>';
+        $('#studentsTableContainer').html(html);
+    });
+}
+
+// Edit student
+function editStudent(id) {
+    $.get('/Students/GetStudent?id=' + id, function (s) {
+        $('#studentId').val(s.id);
+        $('#studentName').val(s.name);
+        $('#studentEmail').val(s.email);
+        $('#studentAge').val(s.age);
+        $('#studentModal').modal('show');
+    });
+}
+
+// Delete student
+function deleteStudent(id) {
+    if (confirm('Delete this student?')) {
+        $.post('/Students/DeleteStudent?id=' + id, function (res) {
+            loadStudents();
+        });
+    }
+}
+
+// Clear form
+function clearStudentForm() {
+    $('#studentId').val('');
+    $('#studentName').val('');
+    $('#studentEmail').val('');
+    $('#studentAge').val('');
+}
