@@ -11,7 +11,7 @@ namespace CoreMVCTutorial
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                "Server=DESKTOP-3OT71VJ;Database=TeachersManagement;User Id=sa;Password=123;TrustServerCertificate=true;Encrypt=false;"
+                "Server=DESKTOP-3OT71VJ;Database=StudentsManagement;User Id=sa;Password=123;TrustServerCertificate=true;Encrypt=false;"
             );
         }
 

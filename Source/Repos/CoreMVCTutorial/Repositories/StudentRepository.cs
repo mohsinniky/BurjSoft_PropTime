@@ -7,38 +7,69 @@ namespace CoreMVCTutorial.Repositories
 {
     public class StudentRepository
     {
+        //Connected State
+        //public bool AddStudent(Students student)
+        //{
+        //    using (var context = new StudentContext())
+        //    {
+        //        context.Database.EnsureCreated();
+
+        //        var studentData = new Students() { Name = student.Name, Email = student.Email , Age = student.Age, CreatedDate = DateTime.Now};
+
+        //        context.Students.Add(studentData);
+
+        //        context.SaveChanges();
+
+
+        //        int result = 1;
+        //        return result > 0;
+
+        //    }
+        //}
+        //Disconnected State
         public bool AddStudent(Students student)
         {
+            var studentData = new Students() { Name = student.Name, Email = student.Email, Age = student.Age, CreatedDate = DateTime.Now };
             using (var context = new StudentContext())
             {
                 context.Database.EnsureCreated();
 
-                var studentData = new Students() { Name = student.Name, Email = student.Email , Age = student.Age, CreatedDate = DateTime.Now};
 
-                context.Students.Add(studentData);
+                context.Add<Students>(studentData);
 
                 context.SaveChanges();
 
 
                 int result = 1;
                 return result > 0;
-                
+
             }
         }
 
+        //CodeFirst Approach
         public List<Students> GetAllStudents()
         {
             using (var context = new StudentContext())
             {
-                // Ensure database exists (creates if not)
-                context.Database.EnsureCreated();
-
-                // Fetch all students from the table
                 var students = context.Students.ToList();
 
                 return students;
             }
         }
+
+        //public List<Students> GetAllStudents()
+        //{
+        //    using (var context = new StudentContext())
+        //    {
+        //        // Ensure database exists (creates if not)
+        //        context.Database.EnsureCreated();
+
+        //        // Fetch all students from the table
+        //        var students = context.Students.ToList();
+
+        //        return students;
+        //    }
+        //}
 
         public Students GetStudentById(int id)
         {
@@ -49,22 +80,38 @@ namespace CoreMVCTutorial.Repositories
                 return student;
             }
         }
-
+        //Code First Approach Update
         // UPDATE - Update student
         public bool UpdateStudent(Students student)
         {
+
+            //var studentUpdated = context.Students.FirstOrDefault(x => x.Id == student.Id);
+            //studentUpdated.Name = student.Name;
+            //studentUpdated.Email = student.Email;
+            //studentUpdated.Age = student.Age;
             using (var context = new StudentContext())
             {
-                context.Database.EnsureCreated();
-                var studentUpdated = context.Students.FirstOrDefault(x => x.Id == student.Id);
-                studentUpdated.Name = student.Name;
-                studentUpdated.Email = student.Email;
-                studentUpdated.Age = student.Age;
+                context.Update<Students>(student);
 
                 context.SaveChanges();
                 return true;
             }
         }
+        //// UPDATE - Update student
+        //public bool UpdateStudent(Students student)
+        //{
+        //    using (var context = new StudentContext())
+        //    {
+        //        context.Database.EnsureCreated();
+        //        var studentUpdated = context.Students.FirstOrDefault(x => x.Id == student.Id);
+        //        studentUpdated.Name = student.Name;
+        //        studentUpdated.Email = student.Email;
+        //        studentUpdated.Age = student.Age;
+
+        //        context.SaveChanges();
+        //        return true;
+        //    }
+        //}
 
         // Delete
         public bool DeleteStudent(int id)
