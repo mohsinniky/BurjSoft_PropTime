@@ -40,60 +40,43 @@ namespace CoreMVCTutorial.Controllers
         [HttpPost]
         public ActionResult Create(Students student)
         {
-
-            try
-            {
-                using (var context = new StudentContext())
-                {
-                    context.Students.Add(student);
-                    int result = context.SaveChanges();
-
-                    if (result > 0)
-                    {
-                        TempData["SuccessMessage"] = "Student added successfully!";
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Error adding student.");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("", "An error occurred while saving the student: " + ex.Message);
-            }
-
             using (var context = new StudentContext())
             {
+                context.Students.Add(student);
+                int result = context.SaveChanges();
+
+                if (result > 0)
+                {
+                    TempData["SuccessMessage"] = "Student added successfully!";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Error adding student.");
+                }
                 ViewBag.GradeId = new SelectList(context.Grades.ToList(), "GradeID", "GradeName");
             }
-
             return View(student);
         }
 
         // GET: Student/Edit/5
-        // GET: Student/Edit/5
-        // GET: Student/Edit/5
         public ActionResult Edit(int id)
         {
-           
-                using (var context = new StudentContext())
+
+            using (var context = new StudentContext())
+            {
+                var student = context.Students.FirstOrDefault(x => x.Id == id);
+                if (student == null)
                 {
-                    var student = context.Students.FirstOrDefault(x => x.Id == id);
-                    if (student == null)
-                    {
-                        return NotFound();
-                    }
-
-                    // Simple approach - just pass the list and selected value separately
-                    ViewBag.AllGrades = context.Grades.ToList(); // Pass the entire list
-                    ViewBag.SelectedGradeId = student.GradeId;   // Pass the selected value
-
-                    return View(student);
+                    return NotFound();
                 }
-            
+                ViewBag.AllGrades = context.Grades.ToList(); 
+                ViewBag.SelectedGradeId = student.GradeId;   
+                return View(student);
+            }
+
         }
+
         //Edit Post 
         [HttpPost]
         public ActionResult Edit(Students student)
@@ -110,11 +93,8 @@ namespace CoreMVCTutorial.Controllers
                     ModelState.AddModelError("", "Error updating student.");
                 }
 
-                // Repopulate dropdown using the same context
                 ViewBag.GradeId = new SelectList(context.Grades, "GradeID", "GradeName", student.GradeId);
             }
-
-
             return View(student);
         }
 
@@ -151,9 +131,6 @@ namespace CoreMVCTutorial.Controllers
             }
             return RedirectToAction("Index");
         }
-
-
-
 
     }
 }
