@@ -2,6 +2,7 @@ using CoreMVCTutorial.Interfaces;
 using CoreMVCTutorial.Services;
 using CoreMVCTutorial.Repositories;
 using CoreMVCTutorial;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,10 +12,7 @@ builder.Services.AddControllersWithViews();
 
 //Registering the Dependency Injections
 //builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
-//builder.Services.AddScoped<ITeacherService, TeacherService>();
-builder.Services.AddSingleton<DatabaseHelper>();
-
-
+//builder.Services.AddScoped<ITeacherService, TeacherService>();	
 
 var app = builder.Build();
 

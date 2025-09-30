@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static CoreMVCTutorial.Models.Grade;
 
 namespace CoreMVCTutorial.Models
 {
@@ -9,6 +10,9 @@ namespace CoreMVCTutorial.Models
         public string Email { get; set; }
         public int Age { get; set; }
         public DateTime CreatedDate { get; set; }
+
+        public int GradeId { get; set; }
+        public Grade Grade { get; set; }
 
     }
 }

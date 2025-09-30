@@ -4,6 +4,8 @@
 
 @{
     ViewBag.Title = "Students";
+    var gradeNames = ViewBag.GradeNames as Dictionary<int, string>;
+
 }
 
 <h2>Student List</h2>
@@ -28,6 +30,7 @@
         <th>Name</th>
         <th>Email</th>
         <th>Age</th>
+        <th>Grade</th>
         <th>Created Date</th>
         <th>Actions</th>
     </tr>
@@ -39,6 +42,16 @@
             <td>@student.Name</td>
             <td>@student.Email</td>
             <td>@student.Age</td>
+            <td>
+                @if (gradeNames != null && gradeNames.ContainsKey(student.GradeId))
+                {
+                    @gradeNames[student.GradeId]
+                }
+                else
+                {
+                    <text>N/A</text>
+                }
+            </td>
             <td>@Convert.ToDateTime(@student.CreatedDate).ToString("MM/dd/yyyy")</td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = @student.Id }) |

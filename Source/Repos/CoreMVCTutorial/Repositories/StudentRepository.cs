@@ -1,5 +1,6 @@
 ﻿using CoreMVCTutorial.Models;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.Diagnostics;
 namespace CoreMVCTutorial.Repositories
@@ -7,6 +8,7 @@ namespace CoreMVCTutorial.Repositories
 {
     public class StudentRepository
     {
+
         //Connected State
         //public bool AddStudent(Students student)
         //{
@@ -26,25 +28,29 @@ namespace CoreMVCTutorial.Repositories
 
         //    }
         //}
+
         //Disconnected State
         public bool AddStudent(Students student)
         {
-            var studentData = new Students() { Name = student.Name, Email = student.Email, Age = student.Age, CreatedDate = DateTime.Now };
+            var studentData = new Students
+            {
+                Name = student.Name,
+                Email = student.Email,
+                Age = student.Age,
+                CreatedDate = DateTime.Now,
+                GradeId = student.GradeId   // <- include selected grade
+            };
             using (var context = new StudentContext())
             {
+                // EnsureCreated is usually only for simple dev scenarios; it's harmless but optional
                 context.Database.EnsureCreated();
 
-
-                context.Add<Students>(studentData);
-
-                context.SaveChanges();
-
-
-                int result = 1;
-                return result > 0;
-
+                context.Students.Add(studentData);
+                int saved = context.SaveChanges();
+                return saved > 0;
             }
         }
+
 
         //CodeFirst Approach
         public List<Students> GetAllStudents()
@@ -81,21 +87,23 @@ namespace CoreMVCTutorial.Repositories
             }
         }
         //Code First Approach Update
-        // UPDATE - Update student
-        public bool UpdateStudent(Students student)
+        // UPDATE - Update student using provided context
+        public bool UpdateStudent(Students student, StudentContext context)
         {
-
-            //var studentUpdated = context.Students.FirstOrDefault(x => x.Id == student.Id);
-            //studentUpdated.Name = student.Name;
-            //studentUpdated.Email = student.Email;
-            //studentUpdated.Age = student.Age;
-            using (var context = new StudentContext())
+            // Get fresh student from database using the SAME context
+            var existingStudent = context.Students.FirstOrDefault(x => x.Id == student.Id);
+            if (existingStudent != null)
             {
-                context.Update<Students>(student);
+                // Update properties manually
+                existingStudent.Name = student.Name;
+                existingStudent.Email = student.Email;
+                existingStudent.Age = student.Age;
+                existingStudent.GradeId = student.GradeId;
 
                 context.SaveChanges();
                 return true;
             }
+            return false;
         }
         //// UPDATE - Update student
         //public bool UpdateStudent(Students student)

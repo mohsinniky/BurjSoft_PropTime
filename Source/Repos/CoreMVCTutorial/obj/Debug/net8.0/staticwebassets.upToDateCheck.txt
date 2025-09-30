@@ -1,9 +1,6 @@
 wwwroot\css\site.css
 wwwroot\favicon.ico
-wwwroot\images\vecteezy_fruit-farm-logo_11186933.jpg
-wwwroot\js\cl5fhrep.55s~
 wwwroot\js\site.js
-wwwroot\js\teacherJs\custom.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
@@ -61,3 +58,6 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\js\cl5fhrep.55s~
+wwwroot\images\vecteezy_fruit-farm-logo_11186933.jpg
+wwwroot\js\teacherJs\custom.js

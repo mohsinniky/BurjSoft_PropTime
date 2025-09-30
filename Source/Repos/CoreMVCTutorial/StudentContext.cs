@@ -7,6 +7,8 @@ namespace CoreMVCTutorial
     public class StudentContext : DbContext
     {
         public DbSet<Students> Students { get; set; }
+        public DbSet<Grade> Grades { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

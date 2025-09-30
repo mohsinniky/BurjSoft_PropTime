@@ -32,6 +32,23 @@
                 <span asp-validation-for="Age" class="text-danger"></span>
             </div>
 
+            <div class="form-group">
+                @Html.LabelFor(model => model.GradeId, "Grade", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select class="form-control" id="GradeId" name="GradeId">
+                        <option value="">Select Grade</option>
+                        @foreach (var grade in ViewBag.AllGrades)
+                        {
+                            <option value="@grade.GradeID"
+                                    selected="@(grade.GradeID == ViewBag.SelectedGradeId)">
+                                @grade.GradeName
+                            </option>
+                        }
+                    </select>
+                    @Html.ValidationMessageFor(model => model.GradeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
             <div class="form-group mt-3">
                 <input type="submit" value="Save" class="btn btn-primary" />
                 <a asp-action="Index" class="btn btn-secondary">Back to List</a>
