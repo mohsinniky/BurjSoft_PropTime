@@ -2,8 +2,16 @@
 {
     public class Student
     {
-        public int Id { get; set; }
-        public string StudentName { get; set; }
-        public string StudentCity { get; set; }
+            public int StudentId { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string Email { get; set; }
+            public string PhoneNumber { get; set; }
+
+        // Navigation property for courses
+        public List<StudentCourse> StudentCourses { get; set; } = new List<StudentCourse>();
+
+        public string FullName => $"{FirstName} {LastName}";
+        
     }
 }

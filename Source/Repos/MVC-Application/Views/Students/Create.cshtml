@@ -1,0 +1,77 @@
+﻿@model MVC_Application.ViewModels.StudentOperationsViewModel
+
+@{
+    ViewData["Title"] = "Create Student";
+}
+
+<div class="container">
+    <h1>Create New Student</h1>
+
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label asp-for="Student.FirstName" class="form-label"></label>
+                            <input asp-for="Student.FirstName" class="form-control" />
+                            <span asp-validation-for="Student.FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label asp-for="Student.LastName" class="form-label"></label>
+                            <input asp-for="Student.LastName" class="form-control" />
+                            <span asp-validation-for="Student.LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label asp-for="Student.Email" class="form-label"></label>
+                            <input asp-for="Student.Email" class="form-control" />
+                            <span asp-validation-for="Student.Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label asp-for="Student.PhoneNumber" class="form-label"></label>
+                            <input asp-for="Student.PhoneNumber" class="form-control" />
+                            <span asp-validation-for="Student.PhoneNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Select Courses</label>
+                    <div>
+                        @foreach (var course in Model.AvailableCourses)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input"
+                                       type="checkbox"
+                                       name="SelectedCourseIds"
+                                       value="@course.CourseId"
+                                       id="course_@course.CourseId"
+                                       @(Model.SelectedCourseIds.Contains(course.CourseId) ? "checked" : "")>
+                                <label class="form-check-label" for="course_@course.CourseId">
+                                    @course.CourseDisplay
+                                </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,51 @@
+﻿@model MVC_Application.Models.Student
+
+@{
+    ViewData["Title"] = "Student Details";
+}
+
+<div class="container">
+    <h1>Student Details</h1>
+
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">Student ID</dt>
+            <dd class="col-sm-10">@Model.StudentId</dd>
+
+            <dt class="col-sm-2">First Name</dt>
+            <dd class="col-sm-10">@Model.FirstName</dd>
+
+            <dt class="col-sm-2">Last Name</dt>
+            <dd class="col-sm-10">@Model.LastName</dd>
+
+            <dt class="col-sm-2">Email</dt>
+            <dd class="col-sm-10">@Model.Email</dd>
+
+            <dt class="col-sm-2">Phone Number</dt>
+            <dd class="col-sm-10">@Model.PhoneNumber</dd>
+
+            <dt class="col-sm-2">Enrolled Courses</dt>
+            <dd class="col-sm-10">
+                @if (Model.StudentCourses.Any())
+                {
+                    <ul class="list-unstyled">
+                        @foreach (var enrollment in Model.StudentCourses)
+                        {
+                            <li>@enrollment.Course.CourseDisplay</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <span>No courses enrolled</span>
+                }
+            </dd>
+        </dl>
+    </div>
+
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.StudentId" class="btn btn-warning">Edit</a>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
