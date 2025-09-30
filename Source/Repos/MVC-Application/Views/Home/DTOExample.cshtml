@@ -1,0 +1,15 @@
+﻿@using MVC_Application.Models
+@model List<DTO_Student>
+@{
+    ViewData["Title"] = "DTOExample";
+}
+
+
+<h2>Students (DTO: Names Only)</h2>
+
+<ul>
+    @foreach (var student in Model)
+    {
+        <li>@student.Name</li>
+    }
+</ul>

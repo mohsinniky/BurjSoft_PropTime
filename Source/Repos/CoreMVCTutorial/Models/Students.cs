@@ -14,5 +14,8 @@ namespace CoreMVCTutorial.Models
         public int GradeId { get; set; }
         public Grade Grade { get; set; }
 
+        // One to One Relation
+        public StudentCountry StudentCountry { get; set; }
+
     }
 }

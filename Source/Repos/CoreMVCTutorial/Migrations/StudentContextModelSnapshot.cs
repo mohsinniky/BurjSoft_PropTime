@@ -39,6 +39,29 @@ namespace CoreMVCTutorial.Migrations
                     b.ToTable("Grades");
                 });
 
+            modelBuilder.Entity("CoreMVCTutorial.Models.StudentCountry", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CountryName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId")
+                        .IsUnique();
+
+                    b.ToTable("StudentCountry");
+                });
+
             modelBuilder.Entity("CoreMVCTutorial.Models.Students", b =>
                 {
                     b.Property<int>("Id")
@@ -71,6 +94,17 @@ namespace CoreMVCTutorial.Migrations
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("CoreMVCTutorial.Models.StudentCountry", b =>
+                {
+                    b.HasOne("CoreMVCTutorial.Models.Students", "Student")
+                        .WithOne("StudentCountry")
+                        .HasForeignKey("CoreMVCTutorial.Models.StudentCountry", "StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("CoreMVCTutorial.Models.Students", b =>
                 {
                     b.HasOne("CoreMVCTutorial.Models.Grade", "Grade")
@@ -85,6 +119,12 @@ namespace CoreMVCTutorial.Migrations
             modelBuilder.Entity("CoreMVCTutorial.Models.Grade", b =>
                 {
                     b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("CoreMVCTutorial.Models.Students", b =>
+                {
+                    b.Navigation("StudentCountry")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -36,54 +36,76 @@ namespace CoreMVCTutorial.Controllers
         }
 
 
-        // POST: Student/Create
         [HttpPost]
-        public ActionResult Create(Students student)
+        public ActionResult Create(Students student, string CountryName)
         {
             using (var context = new StudentContext())
             {
-                context.Students.Add(student);
-                int result = context.SaveChanges();
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        student.CreatedDate = DateTime.Now;
+                        context.Students.Add(student);
+                        context.SaveChanges(); // This generates the Student ID
 
-                if (result > 0)
-                {
-                    TempData["SuccessMessage"] = "Student added successfully!";
-                    return RedirectToAction("Index");
+                        if (!string.IsNullOrEmpty(CountryName))
+                        {
+                            var studentCountry = new StudentCountry
+                            {
+                                CountryName = CountryName,
+                                StudentId = student.Id
+                            };
+                            context.StudentCountry.Add(studentCountry);
+                            context.SaveChanges();
+                        }
+
+                        transaction.Commit();
+                        TempData["SuccessMessage"] = "Student added successfully!";
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        ModelState.AddModelError("", "Error adding student: " + ex.Message);
+                        ViewBag.GradeId = new SelectList(context.Grades.ToList(), "GradeID", "GradeName");
+                        return View(student);
+                    }
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Error adding student.");
-                }
-                ViewBag.GradeId = new SelectList(context.Grades.ToList(), "GradeID", "GradeName");
             }
-            return View(student);
         }
 
         // GET: Student/Edit/5
-        public ActionResult Edit(int id)
+        public IActionResult Edit(int id)
         {
-
             using (var context = new StudentContext())
             {
-                var student = context.Students.FirstOrDefault(x => x.Id == id);
+                var student = context.Students
+                    .Include(s => s.StudentCountry) // Include the country data
+                    .FirstOrDefault(s => s.Id == id);
+
                 if (student == null)
                 {
                     return NotFound();
                 }
-                ViewBag.AllGrades = context.Grades.ToList(); 
-                ViewBag.SelectedGradeId = student.GradeId;   
+
+                // Pass the country name to the view
+                ViewBag.CountryName = student.StudentCountry?.CountryName;
+
+                // Your existing grade dropdown setup
+                ViewBag.AllGrades = context.Grades.ToList();
+                ViewBag.SelectedGradeId = student.GradeId;
+
                 return View(student);
             }
-
         }
-
-        //Edit Post 
+        // POST: Student/Edit
         [HttpPost]
-        public ActionResult Edit(Students student)
+        public ActionResult Edit(Students student, string CountryName)
         {
             using (var context = new StudentContext())
             {
-                if (studentRepository.UpdateStudent(student, context))
+                if (studentRepository.UpdateStudent(student, CountryName, context))
                 {
                     TempData["SuccessMessage"] = "Student updated successfully!";
                     return RedirectToAction("Index");
@@ -93,7 +115,10 @@ namespace CoreMVCTutorial.Controllers
                     ModelState.AddModelError("", "Error updating student.");
                 }
 
-                ViewBag.GradeId = new SelectList(context.Grades, "GradeID", "GradeName", student.GradeId);
+                // Repopulate ViewBag data if update fails
+                ViewBag.AllGrades = context.Grades.ToList();
+                ViewBag.SelectedGradeId = student.GradeId;
+                ViewBag.CountryName = CountryName;
             }
             return View(student);
         }
