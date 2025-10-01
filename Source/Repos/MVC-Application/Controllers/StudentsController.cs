@@ -42,7 +42,6 @@ namespace MVC_Application.Controllers
 
         // POST: Student/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(StudentOperationsViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -69,7 +68,6 @@ namespace MVC_Application.Controllers
 
         // POST: Student/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, StudentOperationsViewModel viewModel)
         {
             if (id != viewModel.Student.StudentId)
@@ -101,7 +99,6 @@ namespace MVC_Application.Controllers
 
         // POST: Student/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _studentService.DeleteStudentAsync(id);
