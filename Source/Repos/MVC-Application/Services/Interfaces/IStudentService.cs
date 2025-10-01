@@ -13,5 +13,8 @@ namespace MVC_Application.Services.Interfaces
         Task<StudentOperationsViewModel> GetStudentFormDataAsync();
         Task<StudentOperationsViewModel> GetStudentFormDataAsync(int studentId);
         Task<List<Course>> GetStudentCoursesAsync(int studentId);
+        Task<List<Course>> GetAllCoursesAsync();
+
+
     }
 }

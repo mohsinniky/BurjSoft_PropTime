@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC_Application.Services.Interfaces;
 using MVC_Application.ViewModels;
+using MVC_Application.Models;
 
 namespace MVC_Application.Controllers
 {
@@ -19,7 +20,19 @@ namespace MVC_Application.Controllers
         public async Task<IActionResult> Index()
         {
             var students = await _studentService.GetAllStudentsAsync();
-            return View(students);
+            var viewModel = new StudentOperationsViewModel()
+            {
+                Student = new Student(),
+                AvailableCourses = await _studentService.GetAllCoursesAsync(),
+                SelectedCourseIds = new List<int>()
+            };
+            
+            var indexViewModel = new StudentIndexViewModel
+            {
+                Students = students,
+                StudentForm = viewModel
+            };
+            return View(indexViewModel);
         }
 
         // GET: Student/Details/5
@@ -33,26 +46,22 @@ namespace MVC_Application.Controllers
             return View(student);
         }
 
-        // GET: Student/Create
-        public async Task<IActionResult> Create()
-        {
-            var viewModel = await _studentService.GetStudentFormDataAsync();
-            return View(viewModel);
-        }
-
         // POST: Student/Create
         [HttpPost]
-        public async Task<IActionResult> Create(StudentOperationsViewModel viewModel)
+        public async Task<IActionResult> Create([FromBody]StudentOperationsViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
                 await _studentService.CreateStudentAsync(viewModel.Student, viewModel.SelectedCourseIds);
-                return RedirectToAction(nameof(Index));
+                return Json(new { success = true, message = "Student created successfully!" });
             }
 
-            // If we got this far, something failed; redisplay form
-            viewModel.AvailableCourses = await _studentService.GetStudentCoursesAsync(0); // Get all courses
-            return View(viewModel);
+            // If validation fails, return JSON with errors
+            var errors = ModelState.ToDictionary(
+                kvp => kvp.Key,
+                kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+            );
+            return Json(new { success = false, errors = errors });
         }
 
         // GET: Student/Edit/5
@@ -78,7 +87,7 @@ namespace MVC_Application.Controllers
             if (ModelState.IsValid)
             {
                 await _studentService.UpdateStudentAsync(viewModel.Student, viewModel.SelectedCourseIds);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
 
             // If we got this far, something failed; redisplay form
@@ -102,7 +111,7 @@ namespace MVC_Application.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _studentService.DeleteStudentAsync(id);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
     }
 }

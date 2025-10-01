@@ -17,7 +17,6 @@ namespace MVC_Application.Repository
         {
             return await _context.Students
                 .Include(s => s.StudentCourses)
-                .ThenInclude(sc => sc.Course)
                 .ToListAsync();
         }
 
@@ -59,6 +58,7 @@ namespace MVC_Application.Repository
             // Remove existing enrollments
             var existingEnrollments = _context.StudentCourse
                 .Where(sc => sc.StudentId == studentId);
+
             _context.StudentCourse.RemoveRange(existingEnrollments);
 
             // Add new enrollments
@@ -83,6 +83,7 @@ namespace MVC_Application.Repository
                 .Include(sc => sc.Course)
                 .Select(sc => sc.Course)
                 .ToListAsync();
+
         }
 
     }

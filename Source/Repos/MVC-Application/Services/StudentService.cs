@@ -1,4 +1,5 @@
-﻿using MVC_Application.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MVC_Application.Models;
 using MVC_Application.Repository.Interfaces;
 using MVC_Application.Services.Interfaces;
 using MVC_Application.ViewModels;
@@ -61,7 +62,7 @@ namespace MVC_Application.Services
 
         public async Task<StudentOperationsViewModel> GetStudentFormDataAsync()
         {
-            var courses = await _courseRepository.GetAllCoursesAsync();
+            var courses = await GetAllCoursesAsync();
 
             return new StudentOperationsViewModel
             {
@@ -74,7 +75,7 @@ namespace MVC_Application.Services
         public async Task<StudentOperationsViewModel> GetStudentFormDataAsync(int studentId)
         {
             var student = await _studentRepository.GetStudentByIdAsync(studentId);
-            var courses = await _courseRepository.GetAllCoursesAsync();
+            var courses = await GetAllCoursesAsync();
             var studentCourses = await _studentRepository.GetStudentCoursesAsync(studentId);
             var selectedCourseIds = studentCourses.Select(c => c.CourseId).ToList();
 
@@ -90,5 +91,11 @@ namespace MVC_Application.Services
         {
             return await _studentRepository.GetStudentCoursesAsync(studentId);
         }
+
+        public async Task<List<Course>> GetAllCoursesAsync()
+        {
+            return await _courseRepository.GetAllCoursesAsync();
+        }
+
     }
 }

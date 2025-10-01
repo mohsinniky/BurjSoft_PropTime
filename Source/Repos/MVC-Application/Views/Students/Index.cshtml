@@ -1,4 +1,4 @@
-﻿@model List<MVC_Application.Models.Student>
+﻿@model MVC_Application.ViewModels.StudentIndexViewModel
 
 @{
     ViewData["Title"] = "Students";
@@ -8,10 +8,12 @@
     <h1>Students Management</h1>
 
     <div class="mb-3">
-        <a asp-action="Create" class="btn btn-primary">Add New Student</a>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStudentModal">
+            Add New Student
+        </button>
     </div>
 
-    @if (Model.Any())
+    @if (Model.Students.Any())
     {
         <div class="table-responsive">
             <table class="table table-striped table-bordered">
@@ -25,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var student in Model)
+                    @foreach (var student in Model.Students)
                     {
                         <tr>
                             <td>@student.StudentId</td>
@@ -46,7 +48,83 @@
     else
     {
         <div class="alert alert-info">
-            No students found. <a asp-action="Create">Create the first student</a>.
+            No students found. Click "Add New Student" to create the first student.
         </div>
     }
 </div>
+<!-- Add Student Modal -->
+<div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addStudentModalLabel">Add New Student</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="createStudentForm">
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="StudentForm_Student_FirstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="StudentForm_Student_FirstName" >
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="StudentForm_Student_LastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="StudentForm_Student_LastName" >
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="StudentForm_Student_Email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="StudentForm_Student_Email" >
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="StudentForm_Student_PhoneNumber" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="StudentForm_Student_PhoneNumber">
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Select Courses</label>
+                        <div>
+                            @foreach (var course in Model.StudentForm.AvailableCourses)
+                            {
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           name="SelectedCourseIds"
+                                           value="@course.CourseId"
+                                           id="course_@course.CourseId">
+                                    <label class="form-check-label" for="course_@course.CourseId">
+                                        @course.CourseDisplay
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="submitStudentBtn">Save Student</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/studentcourse/studentcourse_ajax_validation.js"></script>
+}
