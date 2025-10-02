@@ -22,17 +22,29 @@ namespace MVC_Application.Controllers
             var students = await _studentService.GetAllStudentsAsync();
             var viewModel = new StudentOperationsViewModel()
             {
-                Student = new Student(),
                 AvailableCourses = await _studentService.GetAllCoursesAsync(),
-                SelectedCourseIds = new List<int>()
+                SelectedCourseIds = new List<int>(),
+                Students = students
             };
-            
-            var indexViewModel = new StudentIndexViewModel
-            {
-                Students = students,
-                StudentForm = viewModel
-            };
-            return View(indexViewModel);
+
+
+            return View(viewModel);
+        }
+
+        // POST: Student/Index
+        [HttpPost]
+        public async Task<IActionResult> Index([FromBody] StudentOperationsViewModel viewModel)
+        {
+
+            await _studentService.CreateStudentAsync(viewModel.Student, viewModel.SelectedCourseIds);
+            return Json(new { success = true, message = "Student created successfully!" });
+        }
+
+        // GET: Student/GetStudentsTable
+        public async Task<IActionResult> GetStudentsTable()
+        {
+            var students = await _studentService.GetAllStudentsAsync();
+            return PartialView("_StudentsTable", students);
         }
 
         // GET: Student/Details/5
@@ -46,23 +58,7 @@ namespace MVC_Application.Controllers
             return View(student);
         }
 
-        // POST: Student/Create
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody]StudentOperationsViewModel viewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                await _studentService.CreateStudentAsync(viewModel.Student, viewModel.SelectedCourseIds);
-                return Json(new { success = true, message = "Student created successfully!" });
-            }
-
-            // If validation fails, return JSON with errors
-            var errors = ModelState.ToDictionary(
-                kvp => kvp.Key,
-                kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
-            );
-            return Json(new { success = false, errors = errors });
-        }
+        
 
         // GET: Student/Edit/5
         public async Task<IActionResult> Edit(int id)

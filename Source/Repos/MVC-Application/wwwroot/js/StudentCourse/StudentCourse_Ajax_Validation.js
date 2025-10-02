@@ -54,8 +54,12 @@ function validateForm() {
         showError('StudentForm_Student_Email', 'Please enter a valid email');
         isValid = false;
     }
-
     return isValid;
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
 }
 
 function getFormData() {
@@ -77,52 +81,34 @@ function getFormData() {
 }
 
 function submitViaAjax(formData) {
-    const submitBtn = $('#submitStudentBtn');
-    submitBtn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status"></span> Saving...');
     $.ajax({
-        url: '/Students/Create',
+        url: '/Students/Index',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(formData),
-
         success: function (response) {
             if (response.success) {
-                showMessage('Student created successfully!', 'success');
                 $('#addStudentModal').modal('hide');
-                // Reload page after short delay to see the message
-                setTimeout(function () {
-                    window.location.reload();
-                }, 1500);
-            } else {
-                // Show server validation errors
-                showServerErrors(response.errors);
+                loadStudentsTable(); // Reload table data
+                resetForm();
             }
         },
         error: function (xhr, status, error) {
-            showMessage('Error saving student: ' + error, 'error');
-        },
-        complete: function () {
-            // Reset button
-            submitBtn.prop('disabled', false).text('Save Student');
+            console.log('Error saving student: ' + error, 'error');
         }
     });
 }
 
-function showServerErrors(errors) {
-    // Clear previous errors
-    $('.text-danger').text('');
-    $('.is-invalid').removeClass('is-invalid');
-
-    if (errors) {
-        $.each(errors, function (field, errorMessages) {
-            if (errorMessages && errorMessages.length > 0) {
-                const fieldId = field.replace(/\./g, '_');
-                showError(fieldId, errorMessages[0]);
-            }
-        });
-        showMessage('Please correct the errors below.', 'error');
-    }
+function loadStudentsTable() {
+    $.ajax({
+        url: '/Students/GetStudentsTable', // Create this endpoint
+        type: 'GET',
+        success: function (data) {
+            $('table tbody').html(data);
+        }
+    });
 }
+
 
 function showError(fieldId, message) {
     $('#' + fieldId).addClass('is-invalid');
@@ -130,31 +116,9 @@ function showError(fieldId, message) {
 }
 
 
-function showMessage(message, type) {
-    $('.alert-dismissable').remove();
-    const alertClass = type == 'success' ? 'alert-success' : 'alert-danger';
-    const icon = type === 'success' ? '✓' : '!';
-
-    const alertHtml = `
-        <div class="alert ${alertClass} alert-dismissible fade show" role="alert" style="position: fixed; top: 20px; right: 20px; z-index: 9999; min-width: 300px;">
-            <strong>${icon}</strong> ${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    `;
-    $('body').append(alertHtml);
-    setTimeout(function () {
-        $('.alert-dismissible').alert('close');
-    })
-}
-
 function resetForm() {
     $('#createStudentForm')[0].reset();
     $('.text-danger').text('');
     $('.is-invalid').removeClass('is-invalid');
     $('input[name="SelectedCourseIds"]').prop('checked', false);
-}
-
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
 }
