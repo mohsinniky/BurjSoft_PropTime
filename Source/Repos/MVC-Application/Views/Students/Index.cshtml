@@ -35,8 +35,15 @@
                         <td>@student.PhoneNumber</td>
                         <td>
                             <a asp-action="Details" asp-route-id="@student.StudentId" class="btn btn-info btn-sm">Details</a>
-                            <a asp-action="Edit" asp-route-id="@student.StudentId" class="btn btn-warning btn-sm">Edit</a>
-                            <a asp-action="Delete" asp-route-id="@student.StudentId" class="btn btn-danger btn-sm">Delete</a>
+                            <button type="button" class="btn btn-warning btn-sm"
+                                    onclick="openEditModal(@student.StudentId)">
+                                Edit
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm"
+                                    onclick="deleteStudent(@student.StudentId, '@student.FullName')"
+                                    data-student-id="@student.StudentId">
+                                Delete
+                            </button>
                         </td>
                     </tr>
                 }

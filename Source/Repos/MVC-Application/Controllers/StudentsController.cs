@@ -35,9 +35,8 @@ namespace MVC_Application.Controllers
         [HttpPost]
         public async Task<IActionResult> Index([FromBody] StudentOperationsViewModel viewModel)
         {
-
-            await _studentService.CreateStudentAsync(viewModel.Student, viewModel.SelectedCourseIds);
-            return Json(new { success = true, message = "Student created successfully!" });
+            var newStudent = await _studentService.CreateStudentAsync(viewModel.Student, viewModel.SelectedCourseIds);
+            return Json(new { success = true, studentId = newStudent.StudentId, student = newStudent });
         }
 
         // GET: Student/GetStudentsTable
@@ -58,56 +57,48 @@ namespace MVC_Application.Controllers
             return View(student);
         }
 
-        
 
-        // GET: Student/Edit/5
-        public async Task<IActionResult> Edit(int id)
-        {
-            var viewModel = await _studentService.GetStudentFormDataAsync(id);
-            if (viewModel.Student == null)
-            {
-                return NotFound();
-            }
-            return View(viewModel);
-        }
-
-        // POST: Student/Edit/5
-        [HttpPost]
-        public async Task<IActionResult> Edit(int id, StudentOperationsViewModel viewModel)
-        {
-            if (id != viewModel.Student.StudentId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                await _studentService.UpdateStudentAsync(viewModel.Student, viewModel.SelectedCourseIds);
-                return RedirectToAction("Index");
-            }
-
-            // If we got this far, something failed; redisplay form
-            viewModel.AvailableCourses = await _studentService.GetStudentCoursesAsync(0);
-            return View(viewModel);
-        }
-
-        // GET: Student/Delete/5
-        public async Task<IActionResult> Delete(int id)
+        // GET: Student/GetStudent/{id}
+        public async Task<IActionResult> GetStudent(int id)
         {
             var student = await _studentService.GetStudentByIdAsync(id);
-            if (student == null)
+            var studentCourses = await _studentService.GetStudentCoursesAsync(id);
+
+            var studentData = new
             {
-                return NotFound();
-            }
-            return View(student);
+                studentId = student.StudentId,
+                firstName = student.FirstName,
+                lastName = student.LastName,
+                email = student.Email,
+                phoneNumber = student.PhoneNumber,
+                courses = studentCourses.Select(c => new { courseId = c.CourseId }).ToList()
+            };
+
+            return Json(studentData);
+        }
+
+        // POST: Student/Update
+        [HttpPost]
+        public async Task<IActionResult> Update([FromBody] StudentOperationsViewModel viewModel)
+        {
+                await _studentService.UpdateStudentAsync(viewModel.Student, viewModel.SelectedCourseIds);
+                return Json(new { success = true, message = "Student updated successfully!" });
+ 
         }
 
         // POST: Student/Delete/5
-        [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
         {
-            await _studentService.DeleteStudentAsync(id);
-            return RedirectToAction("Index");
+            var result = await _studentService.DeleteStudentAsync(id);
+            if (result)
+            {
+                return Json(new { success = true, message = "Student deleted successfully!" });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Error deleting student!" });
+            }
         }
     }
 }
