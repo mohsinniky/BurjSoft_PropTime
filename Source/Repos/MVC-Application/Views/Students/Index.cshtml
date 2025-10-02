@@ -28,13 +28,16 @@
             <tbody>
                 @foreach (var student in Model.Students)
                 {
-                    <tr>
-                        <td>@student.StudentId</td>
+                    <tr data-student-id="@student.StudentId" >
+                        <td >@student.StudentId</td>
                         <td>@student.FullName</td>
                         <td>@student.Email</td>
                         <td>@student.PhoneNumber</td>
                         <td>
-                            <a asp-action="Details" asp-route-id="@student.StudentId" class="btn btn-info btn-sm">Details</a>
+                            <button type="button" class="btn btn-info btn-sm"
+                                    onclick="openDetailsModal(@student.StudentId)">
+                                Details
+                            </button>
                             <button type="button" class="btn btn-warning btn-sm"
                                     onclick="openEditModal(@student.StudentId)">
                                 Edit
@@ -118,12 +121,13 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save Student</button>
+                    <button type="submit" id="submitStudentBtn" class="btn btn-primary">Save Student</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
 
 @section Scripts {
     <script src="~/js/studentcourse/studentcourse_ajax_validation.js"></script>

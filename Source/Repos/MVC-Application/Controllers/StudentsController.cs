@@ -39,24 +39,6 @@ namespace MVC_Application.Controllers
             return Json(new { success = true, studentId = newStudent.StudentId, student = newStudent });
         }
 
-        // GET: Student/GetStudentsTable
-        public async Task<IActionResult> GetStudentsTable()
-        {
-            var students = await _studentService.GetAllStudentsAsync();
-            return PartialView("_StudentsTable", students);
-        }
-
-        // GET: Student/Details/5
-        public async Task<IActionResult> Details(int id)
-        {
-            var student = await _studentService.GetStudentByIdAsync(id);
-            if (student == null)
-            {
-                return NotFound();
-            }
-            return View(student);
-        }
-
 
         // GET: Student/GetStudent/{id}
         public async Task<IActionResult> GetStudent(int id)

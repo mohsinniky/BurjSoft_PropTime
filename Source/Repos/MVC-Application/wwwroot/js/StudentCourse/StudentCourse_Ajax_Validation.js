@@ -134,12 +134,20 @@ function resetForm() {
     $('.is-invalid').removeClass('is-invalid');
     $('input[name="SelectedCourseIds"]').prop('checked', false);
 
-    // Clear edit mode
+    // Re-enable all form fields
+    $('#StudentForm_Student_FirstName').prop('readonly', false);
+    $('#StudentForm_Student_LastName').prop('readonly', false);
+    $('#StudentForm_Student_Email').prop('readonly', false);
+    $('#StudentForm_Student_PhoneNumber').prop('readonly', false);
+
+    // Re-enable all course checkboxes
+    $('input[name="SelectedCourseIds"]').prop('disabled', false);
+
+    // Clear edit mode and show submit button
     $('#createStudentForm').removeData('student-id');
     $('#addStudentModal .modal-title').text('Add New Student');
-    $('#submitStudentBtn').text('Save Student');
+    $('#submitStudentBtn').show().text('Save Student');
 }
-
 
 function openEditModal(studentId) {
     $.ajax({
@@ -218,18 +226,19 @@ function updateStudent(studentId, formData) {
     });
 }
 function updateStudentInTable(studentId, student) {
-    // Find the row and update it
-    $('table tbody tr').each(function () {
-        const row = $(this);
-        const detailsLink = row.find('.btn-info').attr('href');
+    // Find the row by data attribute and update it
+    const row = $(`tr[data-student-id="${studentId}"]`);
 
-        if (detailsLink && detailsLink.includes(studentId)) {
-            row.find('td:eq(0)').text(student.StudentId);
-            row.find('td:eq(1)').text(student.FirstName + ' ' + student.LastName);
-            row.find('td:eq(2)').text(student.Email);
-            row.find('td:eq(3)').text(student.PhoneNumber);
-        }
-    });
+    if (row.length) {
+        row.find('td:eq(0)').text(student.StudentId);
+        row.find('td:eq(1)').text(student.FirstName + ' ' + student.LastName);
+        row.find('td:eq(2)').text(student.Email);
+        row.find('td:eq(3)').text(student.PhoneNumber);
+
+        // Update delete button with new name
+        const deleteButton = row.find('.btn-danger');
+        deleteButton.attr('onclick', `deleteStudent(${studentId}, '${student.FirstName} ${student.LastName}')`);
+    }
 }
 
 
@@ -287,4 +296,49 @@ function showDeleteMessage(message, type) {
     setTimeout(function () {
         $('.delete-alert').alert('close');
     }, 3000);
+}
+
+//Open Details Modal
+function openDetailsModal(studentId) {
+    $.ajax({
+        url: '/Students/GetStudent/' + studentId,
+        type: 'GET',
+        success: function (studentData) {
+            populateDetailsForm(studentData);
+            $('#addStudentModal').modal('show');
+        },
+        error: function (xhr, status, error) {
+            console.log('Error loading student details: ' + error);
+        }
+    });
+}
+
+// Function to populate form with student data for details view
+function populateDetailsForm(studentData) {
+    // Fill form fields with student data
+    $('#StudentForm_Student_FirstName').val(studentData.firstName);
+    $('#StudentForm_Student_LastName').val(studentData.lastName);
+    $('#StudentForm_Student_Email').val(studentData.email);
+    $('#StudentForm_Student_PhoneNumber').val(studentData.phoneNumber);
+
+    // Check enrolled courses
+    $('input[name="SelectedCourseIds"]').prop('checked', false);
+    if (studentData.courses) {
+        studentData.courses.forEach(function (course) {
+            $('#course_' + course.courseId).prop('checked', true);
+        });
+    }
+
+    // Disable all form fields for details view
+    $('#StudentForm_Student_FirstName').prop('readonly', true);
+    $('#StudentForm_Student_LastName').prop('readonly', true);
+    $('#StudentForm_Student_Email').prop('readonly', true);
+    $('#StudentForm_Student_PhoneNumber').prop('readonly', true);
+
+    // Disable all course checkboxes
+    $('input[name="SelectedCourseIds"]').prop('disabled', true);
+
+    // Change modal title and hide submit button
+    $('#addStudentModal .modal-title').text('Student Details');
+    $('#submitStudentBtn').hide();
 }
