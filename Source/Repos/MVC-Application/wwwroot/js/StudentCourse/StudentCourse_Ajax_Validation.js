@@ -102,20 +102,26 @@ function submitViaAjax(formData) {
 function addNewStudentToTable(student) {
 
     const newRow = `
-        <tr>
-            <td>${student.studentId}</td>
-            <td>${student.firstName} ${student.lastName}</td>
-            <td>${student.email}</td>
-            <td>${student.phoneNumber}</td>
-            <td>
-                <a href="/Students/Details/${student.studentId}" class="btn btn-info btn-sm">Details</a>
-                <button type="button" class="btn btn-warning btn-sm" 
-                        onclick="openEditModal(${student.studentId})">Edit</button>
-                <button type="button" class="btn btn-danger btn-sm" 
-                        onclick="deleteStudent(${student.studentId}, '${student.firstName} ${student.lastName}')"
-                        data-student-id="${student.studentId}">Delete</button>
-            </td>
-        </tr>
+        <tr data-student-id="${student.studentId}" >
+                        <td >${student.studentId}</td>
+                        <td>${student.fullName}</td>
+                        <td>${student.email}</td>
+                        <td>${student.phoneNumber}</td>
+                        <td>
+                            <button type="button" class="btn btn-info btn-sm"
+                                    onclick="openDetailsModal(${student.studentId})">
+                                Details
+                            </button>
+                            <button type="button" class="btn btn-warning btn-sm"
+                                    onclick="openEditModal(${student.studentId})">
+                                Edit
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm"
+                                    onclick="deleteStudent(${student.studentId}, '${student.fullName}')">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
     `;
 
     $('table tbody').append(newRow);
@@ -272,7 +278,7 @@ function proceedWithDelete(studentId) {
 
 function removeStudentFromTable(studentId) {
     // Find and remove the row using data attribute
-    $(`button[data-student-id="${studentId}"]`).closest('tr').remove();
+    $(`tr[data-student-id="${studentId}"]`).remove();
 }
 
 // Function to show delete confirmation/result message
