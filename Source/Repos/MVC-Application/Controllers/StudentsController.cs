@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVC_Application.DTOs;
 using MVC_Application.Services.Interfaces;
 using MVC_Application.ViewModels;
-using MVC_Application.Models;
 
 namespace MVC_Application.Controllers
 {
@@ -14,36 +14,45 @@ namespace MVC_Application.Controllers
             _studentService = studentService;
         }
 
-
-
         // GET: Student/Index
         public async Task<IActionResult> Index()
         {
             var students = await _studentService.GetAllStudentsAsync();
+            var courses = await _studentService.GetAllCoursesAsync();
+
             var viewModel = new StudentOperationsViewModel()
             {
-                AvailableCourses = await _studentService.GetAllCoursesAsync(),
-                SelectedCourseIds = new List<int>(),
-                Students = students
+                StudentForm = new StudentViewModel(),
+                AvailableCourses = courses.Select(c => new CourseViewModel
+                {
+                    CourseId = c.CourseId,
+                    CourseName = c.CourseName,
+                    CourseCode = c.CourseCode,
+                    Description = c.Description
+                }).ToList(),
+                Students = students.Select(s => new StudentViewModel
+                {
+                    StudentId = s.StudentId,
+                    FirstName = s.FirstName,
+                    LastName = s.LastName,
+                    Email = s.Email,
+                    PhoneNumber = s.PhoneNumber
+                }).ToList()
             };
-
 
             return View(viewModel);
         }
 
-        // POST: Student/Index
-        [HttpPost]
-        public async Task<IActionResult> Index([FromBody] StudentOperationsViewModel viewModel)
-        {
-            var newStudent = await _studentService.CreateStudentAsync(viewModel.Student, viewModel.SelectedCourseIds);
-            return Json(new { success = true, studentId = newStudent.StudentId, student = newStudent });
-        }
-
-
-        // GET: Student/GetStudent/{id}
+        // GET: Student/GetStudent/{id} - For Edit and Details modals
+        [HttpGet]
         public async Task<IActionResult> GetStudent(int id)
         {
             var student = await _studentService.GetStudentByIdAsync(id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+
             var studentCourses = await _studentService.GetStudentCoursesAsync(id);
 
             var studentData = new
@@ -53,19 +62,36 @@ namespace MVC_Application.Controllers
                 lastName = student.LastName,
                 email = student.Email,
                 phoneNumber = student.PhoneNumber,
-                courses = studentCourses.Select(c => new { courseId = c.CourseId }).ToList()
+                courses = studentCourses.Select(c => new
+                {
+                    courseId = c.CourseId,
+                    courseName = c.CourseName,
+                    courseCode = c.CourseCode
+                }).ToList()
             };
 
             return Json(studentData);
         }
 
-        // POST: Student/Update
+        // POST: Student/Upsert - Single endpoint for both create and update
         [HttpPost]
-        public async Task<IActionResult> Update([FromBody] StudentOperationsViewModel viewModel)
+        public async Task<IActionResult> Upsert([FromBody] StudentUpsertDto studentUpsertDto)
         {
-                await _studentService.UpdateStudentAsync(viewModel.Student, viewModel.SelectedCourseIds);
-                return Json(new { success = true, message = "Student updated successfully!" });
- 
+
+            var student = await _studentService.UpsertStudentAsync(studentUpsertDto);
+
+            return Json(new
+            {
+                success = true,
+                student = new StudentViewModel
+                {
+                    StudentId = student.StudentId,
+                    FirstName = student.FirstName,
+                    LastName = student.LastName,
+                    Email = student.Email,
+                    PhoneNumber = student.PhoneNumber
+                }
+            });
         }
 
         // POST: Student/Delete/5

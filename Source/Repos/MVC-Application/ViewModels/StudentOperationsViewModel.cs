@@ -4,10 +4,15 @@ namespace MVC_Application.ViewModels
 {
     public class StudentOperationsViewModel
     {
-        public Student Student { get; set; } = new Student();
-        public List<Course> AvailableCourses { get; set; } = new List<Course>();
-        public List<int> SelectedCourseIds { get; set; } = new List<int>();
-        public List<Student> Students { get; set; } = new List<Student>(); // Add this
+        // For student form (create/edit)
+        public StudentViewModel StudentForm { get; set; } = new StudentViewModel();
+
+        // Available courses for dropdown
+        public List<CourseViewModel> AvailableCourses { get; set; } = new List<CourseViewModel>();
+
+        // Students list for table
+        public List<StudentViewModel> Students { get; set; } = new List<StudentViewModel>();
 
     }
+
 }

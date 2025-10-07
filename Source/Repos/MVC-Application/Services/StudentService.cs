@@ -1,8 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MVC_Application.DTOs;
 using MVC_Application.Models;
 using MVC_Application.Repository.Interfaces;
 using MVC_Application.Services.Interfaces;
-using MVC_Application.ViewModels;
 
 namespace MVC_Application.Services
 {
@@ -17,42 +16,81 @@ namespace MVC_Application.Services
             _courseRepository = courseRepository;
         }
 
-        public async Task<List<Student>> GetAllStudentsAsync()
+        public async Task<StudentDto> UpsertStudentAsync(StudentUpsertDto studentUpsertDto)
         {
-            return await _studentRepository.GetAllStudentsAsync();
-        }
+            Student student;
 
-        public async Task<Student> GetStudentByIdAsync(int id)
-        {
-            return await _studentRepository.GetStudentByIdAsync(id);
-        }
-
-        public async Task<Student> CreateStudentAsync(Student student, List<int> courseIds)
-        {
-            // Add student
-            var newStudent = await _studentRepository.AddStudentAsync(student);
-
-            // Enroll in courses if any selected
-            if (courseIds != null && courseIds.Any())
+            if (studentUpsertDto.IsCreate)
             {
-                await _studentRepository.EnrollStudentInCoursesAsync(newStudent.StudentId, courseIds);
+                // Create new student
+                student = new Student
+                {
+                    FirstName = studentUpsertDto.FirstName,
+                    LastName = studentUpsertDto.LastName,
+                    Email = studentUpsertDto.Email,
+                    PhoneNumber = studentUpsertDto.PhoneNumber
+                };
+                student = await _studentRepository.AddStudentAsync(student);
+            }
+            else
+            {
+                // Update existing student
+                student = new Student
+                {
+                    StudentId = studentUpsertDto.StudentId,
+                    FirstName = studentUpsertDto.FirstName,
+                    LastName = studentUpsertDto.LastName,
+                    Email = studentUpsertDto.Email,
+                    PhoneNumber = studentUpsertDto.PhoneNumber
+                };
+                student = await _studentRepository.UpdateStudentAsync(student);
             }
 
-            return newStudent;
-        }
-
-        public async Task<Student> UpdateStudentAsync(Student student, List<int> courseIds)
-        {
-            // Update student
-            var updatedStudent = await _studentRepository.UpdateStudentAsync(student);
-
-            // Update course enrollments
-            if (courseIds != null)
+            // Handle course enrollment for both create and update
+            if (studentUpsertDto.SelectedCourseIds != null && studentUpsertDto.SelectedCourseIds.Any())
             {
-                await _studentRepository.EnrollStudentInCoursesAsync(updatedStudent.StudentId, courseIds);
+                await _studentRepository.EnrollStudentInCoursesAsync(student.StudentId, studentUpsertDto.SelectedCourseIds);
             }
 
-            return updatedStudent;
+            // Return the complete student
+            var completeStudent = await _studentRepository.GetStudentByIdAsync(student.StudentId);
+            return new StudentDto
+            {
+                StudentId = completeStudent.StudentId,
+                FirstName = completeStudent.FirstName,
+                LastName = completeStudent.LastName,
+                Email = completeStudent.Email,
+                PhoneNumber = completeStudent.PhoneNumber
+            };
+        }
+
+        // Other methods remain the same...
+        public async Task<List<StudentDto>> GetAllStudentsAsync()
+        {
+            var students = await _studentRepository.GetAllStudentsAsync();
+            return students.Select(s => new StudentDto
+            {
+                StudentId = s.StudentId,
+                FirstName = s.FirstName,
+                LastName = s.LastName,
+                Email = s.Email,
+                PhoneNumber = s.PhoneNumber
+            }).ToList();
+        }
+
+        public async Task<StudentDto> GetStudentByIdAsync(int id)
+        {
+            var student = await _studentRepository.GetStudentByIdAsync(id);
+            if (student == null) return null;
+
+            return new StudentDto
+            {
+                StudentId = student.StudentId,
+                FirstName = student.FirstName,
+                LastName = student.LastName,
+                Email = student.Email,
+                PhoneNumber = student.PhoneNumber
+            };
         }
 
         public async Task<bool> DeleteStudentAsync(int id)
@@ -60,42 +98,28 @@ namespace MVC_Application.Services
             return await _studentRepository.DeleteStudentAsync(id);
         }
 
-        public async Task<StudentOperationsViewModel> GetStudentFormDataAsync()
+        public async Task<List<CourseDto>> GetAllCoursesAsync()
         {
-            var courses = await GetAllCoursesAsync();
-
-            return new StudentOperationsViewModel
+            var courses = await _courseRepository.GetAllCoursesAsync();
+            return courses.Select(c => new CourseDto
             {
-                Student = new Student(),
-                AvailableCourses = courses,
-                SelectedCourseIds = new List<int>()
-            };
+                CourseId = c.CourseId,
+                CourseName = c.CourseName,
+                CourseCode = c.CourseCode,
+                Description = c.Description
+            }).ToList();
         }
 
-        public async Task<StudentOperationsViewModel> GetStudentFormDataAsync(int studentId)
+        public async Task<List<CourseDto>> GetStudentCoursesAsync(int studentId)
         {
-            var student = await _studentRepository.GetStudentByIdAsync(studentId);
-            var courses = await GetAllCoursesAsync();
-            var studentCourses = await _studentRepository.GetStudentCoursesAsync(studentId);
-            var selectedCourseIds = studentCourses.Select(c => c.CourseId).ToList();
-
-            return new StudentOperationsViewModel
+            var courses = await _studentRepository.GetStudentCoursesAsync(studentId);
+            return courses.Select(c => new CourseDto
             {
-                Student = student,
-                AvailableCourses = courses,
-                SelectedCourseIds = selectedCourseIds
-            };
+                CourseId = c.CourseId,
+                CourseName = c.CourseName,
+                CourseCode = c.CourseCode,
+                Description = c.Description
+            }).ToList();
         }
-
-        public async Task<List<Course>> GetStudentCoursesAsync(int studentId)
-        {
-            return await _studentRepository.GetStudentCoursesAsync(studentId);
-        }
-
-        public async Task<List<Course>> GetAllCoursesAsync()
-        {
-            return await _courseRepository.GetAllCoursesAsync();
-        }
-
     }
 }

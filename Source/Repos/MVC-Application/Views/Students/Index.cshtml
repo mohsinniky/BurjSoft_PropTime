@@ -1,4 +1,5 @@
-﻿@model MVC_Application.ViewModels.StudentOperationsViewModel
+﻿@using MVC_Application.DTOs
+@model MVC_Application.ViewModels.StudentOperationsViewModel
 
 @{
     ViewData["Title"] = "Students";
@@ -13,23 +14,22 @@
         </button>
     </div>
 
-    <!-- Simplified Table -->
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
-            <thead class="table-dark">
+            <thead>
                 <tr>
-                    <th>StudentId</th>
-                    <th>Name</th>
+                    <th>Student ID</th>
+                    <th>Full Name</th>
                     <th>Email</th>
-                    <th>Phone</th>
+                    <th>Phone Number</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var student in Model.Students)
                 {
-                    <tr data-student-id="@student.StudentId" >
-                        <td >@student.StudentId</td>
+                    <tr data-student-id="@student.StudentId">
+                        <td>@student.StudentId</td>
                         <td>@student.FullName</td>
                         <td>@student.Email</td>
                         <td>@student.PhoneNumber</td>
@@ -43,7 +43,8 @@
                                 Edit
                             </button>
                             <button type="button" class="btn btn-danger btn-sm"
-                                    onclick="deleteStudent(@student.StudentId, '@student.FullName')">
+                                    onclick="deleteStudent(@student.StudentId, '@student.FullName')"
+                                    data-student-id="@student.StudentId">
                                 Delete
                             </button>
                         </td>
@@ -61,28 +62,29 @@
     }
 </div>
 
-<!-- Modal remains exactly the same -->
+<!-- Fixed Modal with Footer -->
 <div class="modal fade" id="addStudentModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add New Student</h5>
+                <h5 class="modal-title" id="modalTitle">Add New Student</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form id="createStudentForm">
+                @Html.AntiForgeryToken()
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="StudentForm_Student_FirstName" class="form-label">First Name</label>
-                                <input type="text" class="form-control" id="StudentForm_Student_FirstName">
+                                <label for="FirstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="FirstName" name="FirstName">
                                 <span class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="StudentForm_Student_LastName" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" id="StudentForm_Student_LastName">
+                                <label for="LastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="LastName" name="LastName">
                                 <span class="text-danger"></span>
                             </div>
                         </div>
@@ -91,15 +93,15 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="StudentForm_Student_Email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="StudentForm_Student_Email">
+                                <label for="Email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="Email" name="Email">
                                 <span class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="StudentForm_Student_PhoneNumber" class="form-label">Phone Number</label>
-                                <input type="tel" class="form-control" id="StudentForm_Student_PhoneNumber">
+                                <label for="PhoneNumber" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="PhoneNumber" name="PhoneNumber">
                                 <span class="text-danger"></span>
                             </div>
                         </div>
@@ -111,23 +113,27 @@
                             @foreach (var course in Model.AvailableCourses)
                             {
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="SelectedCourseIds" value="@course.CourseId" id="course_@course.CourseId">
-                                    <label class="form-check-label" for="course_@course.CourseId">@course.CourseDisplay</label>
+                                    <input class="form-check-input" type="checkbox"
+                                           name="SelectedCourseIds" value="@course.CourseId"
+                                           id="course_@course.CourseId">
+                                    <label class="form-check-label" for="course_@course.CourseId">
+                                        @course.CourseDisplay
+                                    </label>
                                 </div>
                             }
                         </div>
                     </div>
                 </div>
+                <!-- ADDED MISSING MODAL FOOTER -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" id="submitStudentBtn" class="btn btn-primary">Save Student</button>
+                    <button type="submit" class="btn btn-primary" id="submitStudentBtn">Save Student</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-
 @section Scripts {
-    <script src="~/js/studentcourse/studentcourse_ajax_validation.js"></script>
+    <script asp-append-version="true" src="~/js/studentcourse/studentcourse_ajax_validation.js"></script>
 }
