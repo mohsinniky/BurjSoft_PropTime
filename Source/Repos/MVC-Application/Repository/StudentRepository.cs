@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MVC_Application.Models;
 using MVC_Application.Repository.Interfaces;
+using System.Linq;
 namespace MVC_Application.Repository
 {
     public class StudentRepository : IStudentRepository
@@ -16,15 +17,12 @@ namespace MVC_Application.Repository
         public async Task<List<Student>> GetAllStudentsAsync()
         {
             return await _context.Students
-                .Include(s => s.StudentCourses)
                 .ToListAsync();
         }
 
         public async Task<Student> GetStudentByIdAsync(int id)
         {
             return await _context.Students
-                .Include(s => s.StudentCourses)
-                .ThenInclude(sc => sc.Course)
                 .FirstOrDefaultAsync(s => s.StudentId == id);
         }
 
@@ -55,22 +53,26 @@ namespace MVC_Application.Repository
 
         public async Task<bool> EnrollStudentInCoursesAsync(int studentId, List<int> courseIds)
         {
-            // Remove existing enrollments
-            var existingEnrollments = _context.StudentCourse
-                .Where(sc => sc.StudentId == studentId);
+            var currentEnrollments = await _context.StudentCourse
+                .Where(sc => sc.StudentId == studentId)
+                .ToListAsync();
 
-            _context.StudentCourse.RemoveRange(existingEnrollments);
+            var currentCourseIds = currentEnrollments.Select(sc => sc.CourseId);
+            var newCourseIds = courseIds ?? new List<int>();
 
-            // Add new enrollments
-            foreach (var courseId in courseIds)
-            {
-                var studentCourse = new StudentCourse
+            var toRemove = currentEnrollments
+                .Where(sc => !newCourseIds.Contains(sc.CourseId));
+
+            var toAdd = newCourseIds
+                .Except(currentCourseIds)
+                .Select(courseId => new StudentCourse
                 {
                     StudentId = studentId,
                     CourseId = courseId
-                };
-                _context.StudentCourse.Add(studentCourse);
-            }
+                });
+
+            _context.StudentCourse.RemoveRange(toRemove);
+            _context.StudentCourse.AddRange(toAdd);
 
             await _context.SaveChangesAsync();
             return true;

@@ -20,9 +20,8 @@ namespace MVC_Application.Services
         {
             Student student;
 
-            if (studentUpsertDto.IsCreate)
+            if (studentUpsertDto.StudentId == 0)
             {
-                // Create new student
                 student = new Student
                 {
                     FirstName = studentUpsertDto.FirstName,
@@ -46,7 +45,6 @@ namespace MVC_Application.Services
                 student = await _studentRepository.UpdateStudentAsync(student);
             }
 
-            // Handle course enrollment for both create and update
             if (studentUpsertDto.SelectedCourseIds != null && studentUpsertDto.SelectedCourseIds.Any())
             {
                 await _studentRepository.EnrollStudentInCoursesAsync(student.StudentId, studentUpsertDto.SelectedCourseIds);

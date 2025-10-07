@@ -3,20 +3,40 @@
   "WorkspaceRootPath": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|g:\\burjsoft_proptime\\source\\repos\\mvc-application\\wwwroot\\js\\studentcourse\\studentcourse_ajax_validation.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|solutionrelative:wwwroot\\js\\studentcourse\\studentcourse_ajax_validation.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|g:\\burjsoft_proptime\\source\\repos\\mvc-application\\dtos\\studentupsertdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|solutionrelative:dtos\\studentupsertdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|g:\\burjsoft_proptime\\source\\repos\\mvc-application\\views\\students\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|solutionrelative:views\\students\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|g:\\burjsoft_proptime\\source\\repos\\mvc-application\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|g:\\burjsoft_proptime\\source\\repos\\mvc-application\\services\\studentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|solutionrelative:services\\studentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|g:\\burjsoft_proptime\\source\\repos\\mvc-application\\viewmodels\\studentviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|solutionrelative:viewmodels\\studentviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|g:\\burjsoft_proptime\\source\\repos\\mvc-application\\controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|solutionrelative:controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|g:\\burjsoft_proptime\\source\\repos\\mvc-application\\repository\\studentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|solutionrelative:repository\\studentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|g:\\burjsoft_proptime\\source\\repos\\mvc-application\\viewmodels\\courseviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|solutionrelative:viewmodels\\courseviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|g:\\burjsoft_proptime\\source\\repos\\mvc-application\\viewmodels\\studentoperationsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|solutionrelative:viewmodels\\studentoperationsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|g:\\burjsoft_proptime\\source\\repos\\mvc-application\\wwwroot\\js\\studentcourse\\studentcourse_ajax_validation.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A9DA0ED8-A571-49E8-B909-2522C5632866}|MVC-Application.csproj|solutionrelative:wwwroot\\js\\studentcourse\\studentcourse_ajax_validation.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,32 +46,71 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAUwCIAAAAXAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "StudentRepository.cs",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\Repository\\StudentRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\StudentRepository.cs",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\Repository\\StudentRepository.cs",
+              "RelativeToolTip": "Repository\\StudentRepository.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAjwEYAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-07T08:39:23.268Z",
+              "WhenOpened": "2025-10-07T09:33:14.424Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CourseViewModel.cs",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\ViewModels\\CourseViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\CourseViewModel.cs",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\ViewModels\\CourseViewModel.cs",
+              "RelativeToolTip": "ViewModels\\CourseViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T09:08:09.504Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "StudentViewModel.cs",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\ViewModels\\StudentViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\StudentViewModel.cs",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\ViewModels\\StudentViewModel.cs",
+              "RelativeToolTip": "ViewModels\\StudentViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T09:08:02.155Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "StudentCourse_Ajax_Validation.js",
-              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\wwwroot\\js\\StudentCourse\\StudentCourse_Ajax_Validation.js",
-              "RelativeDocumentMoniker": "wwwroot\\js\\StudentCourse\\StudentCourse_Ajax_Validation.js",
-              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\wwwroot\\js\\StudentCourse\\StudentCourse_Ajax_Validation.js",
-              "RelativeToolTip": "wwwroot\\js\\StudentCourse\\StudentCourse_Ajax_Validation.js",
-              "ViewState": "AgIAAAQBAAAAzMzMzMz8v1cBAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-10-07T08:29:55.018Z",
+              "Title": "StudentUpsertDto.cs",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\DTOs\\StudentUpsertDto.cs",
+              "RelativeDocumentMoniker": "DTOs\\StudentUpsertDto.cs",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\DTOs\\StudentUpsertDto.cs",
+              "RelativeToolTip": "DTOs\\StudentUpsertDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T09:00:49.226Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "StudentService.cs",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\Services\\StudentService.cs",
+              "RelativeDocumentMoniker": "Services\\StudentService.cs",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\Services\\StudentService.cs",
+              "RelativeToolTip": "Services\\StudentService.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAjwBYAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T08:58:01.91Z",
               "EditorCaption": ""
             },
             {
@@ -62,22 +121,48 @@
               "RelativeDocumentMoniker": "Views\\Students\\Index.cshtml",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\Views\\Students\\Index.cshtml",
               "RelativeToolTip": "Views\\Students\\Index.cshtml",
-              "ViewState": "AgIAAG0AAAAAMzMzMzMrwIkAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAAAG8AAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-10-07T08:24:25.096Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "StudentsController.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\Controllers\\StudentsController.cs",
               "RelativeDocumentMoniker": "Controllers\\StudentsController.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\Controllers\\StudentsController.cs",
               "RelativeToolTip": "Controllers\\StudentsController.cs",
-              "ViewState": "AgIAACYAAACAZmZmZmYrwDMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACAAAAAAAAAAAAAmwC8AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-07T08:15:01.785Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "StudentOperationsViewModel.cs",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\ViewModels\\StudentOperationsViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\StudentOperationsViewModel.cs",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\ViewModels\\StudentOperationsViewModel.cs",
+              "RelativeToolTip": "ViewModels\\StudentOperationsViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T09:08:14.102Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "StudentCourse_Ajax_Validation.js",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\wwwroot\\js\\StudentCourse\\StudentCourse_Ajax_Validation.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\StudentCourse\\StudentCourse_Ajax_Validation.js",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\wwwroot\\js\\StudentCourse\\StudentCourse_Ajax_Validation.js",
+              "RelativeToolTip": "wwwroot\\js\\StudentCourse\\StudentCourse_Ajax_Validation.js",
+              "ViewState": "AgIAAKkAAACAZmZmZmYnwBQBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-10-07T08:29:55.018Z",
               "EditorCaption": ""
             }
           ]

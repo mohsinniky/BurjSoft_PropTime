@@ -43,7 +43,6 @@ namespace MVC_Application.Controllers
             return View(viewModel);
         }
 
-        // GET: Student/GetStudent/{id} - For Edit and Details modals
         [HttpGet]
         public async Task<IActionResult> GetStudent(int id)
         {

@@ -19,7 +19,6 @@ function submitStudentForm() {
     const formData = getFormData();
     const studentId = $('#createStudentForm').data('student-id');
 
-    // Set StudentId for upsert operation
     formData.StudentId = studentId || 0;
 
     submitViaAjax(formData);
@@ -106,11 +105,6 @@ function submitViaAjax(formData) {
                 }
 
                 resetForm();
-            } else {
-                // Handle server-side validation errors
-                if (response.errors) {
-                    handleServerValidationErrors(response.errors);
-                }
             }
         },
         error: function (xhr, status, error) {
@@ -120,18 +114,6 @@ function submitViaAjax(formData) {
     });
 }
 
-function handleServerValidationErrors(errors) {
-    // Clear previous errors
-    $('.text-danger').text('');
-    $('.is-invalid').removeClass('is-invalid');
-
-    // Display server-side validation errors
-    for (const [field, errorMessages] of Object.entries(errors)) {
-        if (errorMessages && errorMessages.length > 0) {
-            showError(field, errorMessages[0]);
-        }
-    }
-}
 
 function addNewStudentToTable(student) {
     // Remove "no students" message if exists
@@ -299,7 +281,6 @@ function deleteStudent(studentId, studentName) {
         proceedWithDelete(studentId);
     }
 }
-
 function proceedWithDelete(studentId) {
     $.ajax({
         url: '/Students/Delete/' + studentId,
@@ -321,7 +302,6 @@ function proceedWithDelete(studentId) {
         }
     });
 }
-
 function removeStudentFromTable(studentId) {
     // Find and remove the row using data attribute
     $(`tr[data-student-id="${studentId}"]`).remove();
@@ -334,8 +314,6 @@ function removeStudentFromTable(studentId) {
         $('table').hide();
     }
 }
-
-// Utility function for showing messages
 function showMessage(message, type) {
     // Remove existing messages
     $('.ajax-alert').remove();
