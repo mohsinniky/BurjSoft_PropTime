@@ -116,35 +116,36 @@ function submitViaAjax(formData) {
 
 
 function addNewStudentToTable(student) {
-    // Remove "no students" message if exists
-    $('.alert-info').remove();
-    $('table').show();
+    //// Remove "no students" message if exists
+    //$('.alert-info').remove();
+    //$('table').show();
 
-    const newRow = `
-        <tr data-student-id="${student.studentId}">
-            <td>${student.studentId}</td>
-            <td>${student.firstName} ${student.lastName}</td>
-            <td>${student.email}</td>
-            <td>${student.phoneNumber}</td>
-            <td>
-                <button type="button" class="btn btn-info btn-sm"
-                        onclick="openDetailsModal(${student.studentId})">
-                    Details
-                </button>
-                <button type="button" class="btn btn-warning btn-sm"
-                        onclick="openEditModal(${student.studentId})">
-                    Edit
-                </button>
-                <button type="button" class="btn btn-danger btn-sm"
-                        onclick="deleteStudent(${student.studentId}, '${student.firstName} ${student.lastName}')"
-                        data-student-id="${student.studentId}">
-                    Delete
-                </button>
-            </td>
-        </tr>
-    `;
+    //const newRow = `
+    //    <tr data-student-id="${student.studentId}">
+    //        <td>${student.studentId}</td>
+    //        <td>${student.firstName} ${student.lastName}</td>
+    //        <td>${student.email}</td>
+    //        <td>${student.phoneNumber}</td>
+    //        <td>
+    //            <button type="button" class="btn btn-info btn-sm"
+    //                    onclick="openDetailsModal(${student.studentId})">
+    //                Details
+    //            </button>
+    //            <button type="button" class="btn btn-warning btn-sm"
+    //                    onclick="openEditModal(${student.studentId})">
+    //                Edit
+    //            </button>
+    //            <button type="button" class="btn btn-danger btn-sm"
+    //                    onclick="deleteStudent(${student.studentId}, '${student.firstName} ${student.lastName}')"
+    //                    data-student-id="${student.studentId}">
+    //                Delete
+    //            </button>
+    //        </td>
+    //    </tr>
+    //`;
 
-    $('table tbody').append(newRow);
+    //$('table tbody').append(newRow);
+    showMessage(`Student "${student.firstName} ${student.lastName}" created successfully!`, 'success');
 }
 
 function updateStudentInTable(studentId, student) {

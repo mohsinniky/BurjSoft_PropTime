@@ -86,6 +86,7 @@ namespace MVC_Application.Controllers
             var student = await _studentService.UpsertStudentAsync(studentUpsertDto);
 
             var studentCourses = await _studentService.GetStudentCoursesAsync(student.StudentId);
+
             var coursesDisplay = string.Join(", ", studentCourses.Select(c => c.CourseDisplay));
 
             return Json(new
