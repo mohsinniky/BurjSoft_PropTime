@@ -110,8 +110,7 @@ namespace MVC_Application.Services
 
         public async Task<(List<StudentDto> Students, int TotalCount)> GetStudentsPageAsync(int page, int pageSize)
         {
-            var totalCount = await _studentRepository.GetTotalStudentCountAsync();
-            var students = await _studentRepository.GetStudentsPageAsync(page, pageSize);
+            var (students, totalCount) = await _studentRepository.GetStudentsPageAsync(page, pageSize);
 
             var studentDtos = students.Select(s => new StudentDto
             {
@@ -120,10 +119,9 @@ namespace MVC_Application.Services
                 LastName = s.LastName,
                 Email = s.Email,
                 PhoneNumber = s.PhoneNumber,
-                CoursesDisplay = string
-                    .Join(", ", s.StudentCourses
-                    .Select(sc => sc.Course.CourseDisplay))
-                    
+                CoursesDisplay = string.Join(", ", s.StudentCourses
+                    .Select(sc => sc.Course.CourseDisplay)
+                    .OrderBy(courseName => courseName))
             }).ToList();
 
             return (studentDtos, totalCount);

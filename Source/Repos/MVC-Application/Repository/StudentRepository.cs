@@ -29,6 +29,24 @@ namespace MVC_Application.Repository
         public async Task<Student> UpdateStudentAsync(Student student)
         {
             _context.Students.Update(student);
+            // Above we are Explicitly telling EF to treat the above Entity as Modified regardless of tracking States
+
+            //// AsTracking
+            //var studentTracked = _context.Students.AsTracking().First(st=> st.StudentId.Equals(student.StudentId));
+            //studentTracked.FirstName = student.FirstName;
+            //studentTracked.LastName = student.LastName;
+            //studentTracked.Email = student.Email;
+            //studentTracked.PhoneNumber = student.PhoneNumber;
+
+            //// AsNotTracking
+            //var studentNotTracked = _context.Students.AsNoTracking().First(st => st.StudentId.Equals(student.StudentId));
+            //studentNotTracked.FirstName = student.FirstName;
+            //studentNotTracked.LastName = student.LastName;
+            //studentNotTracked.Email = student.Email;
+            //studentNotTracked.PhoneNumber = student.PhoneNumber;
+            //_context.Students.Attach(studentNotTracked);
+            //_context.Entry(studentNotTracked).State = EntityState.Modified;
+
             await _context.SaveChangesAsync();
             return student;
         }
@@ -134,20 +152,20 @@ namespace MVC_Application.Repository
 
         }
 
-        public async Task<int> GetTotalStudentCountAsync()
+        public async Task<(List<Student> Students, int TotalCount)> GetStudentsPageAsync(int page, int pageSize)
         {
-            return await _context.Students.CountAsync();
-        }
+            var totalCount = await _context.Students.CountAsync();
 
-        public async Task<List<Student>> GetStudentsPageAsync(int page, int pageSize)
-        {
-            return await _context.Students
-                .OrderBy(s => s.StudentId)
+            var students = await _context.Students
+                .AsNoTracking()
                 .Include(s => s.StudentCourses)
-                .ThenInclude(sc => sc.Course)  
+                .ThenInclude(sc => sc.Course)
+                .OrderBy(s => s.StudentId)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
+
+            return (students, totalCount);
         }
 
     }
