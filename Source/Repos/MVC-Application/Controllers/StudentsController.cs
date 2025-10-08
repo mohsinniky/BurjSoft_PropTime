@@ -15,9 +15,10 @@ namespace MVC_Application.Controllers
         }
 
         // GET: Student/Index
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1, int pageSize = 2)
         {
-            var students = await _studentService.GetAllStudentsAsync();
+            var (students, totalCount) = await _studentService.GetStudentsPageAsync(page, pageSize);
+
             var courses = await _studentService.GetAllCoursesAsync();
 
             var viewModel = new StudentOperationsViewModel()
@@ -36,8 +37,14 @@ namespace MVC_Application.Controllers
                     FirstName = s.FirstName,
                     LastName = s.LastName,
                     Email = s.Email,
-                    PhoneNumber = s.PhoneNumber
-                }).ToList()
+                    PhoneNumber = s.PhoneNumber,
+                    CoursesDisplay = s.CoursesDisplay
+                }).ToList(),
+
+                //New Data 
+                CurrentPage = page,
+                PageSize = pageSize,
+                TotalCount = totalCount
             };
 
             return View(viewModel);
@@ -76,19 +83,22 @@ namespace MVC_Application.Controllers
         [HttpPost]
         public async Task<IActionResult> Upsert([FromBody] StudentUpsertDto studentUpsertDto)
         {
-
             var student = await _studentService.UpsertStudentAsync(studentUpsertDto);
+
+            var studentCourses = await _studentService.GetStudentCoursesAsync(student.StudentId);
+            var coursesDisplay = string.Join(", ", studentCourses.Select(c => c.CourseDisplay));
 
             return Json(new
             {
                 success = true,
-                student = new StudentViewModel
+                student = new
                 {
-                    StudentId = student.StudentId,
-                    FirstName = student.FirstName,
-                    LastName = student.LastName,
-                    Email = student.Email,
-                    PhoneNumber = student.PhoneNumber
+                    studentId = student.StudentId,
+                    firstName = student.FirstName,
+                    lastName = student.LastName,
+                    email = student.Email,
+                    phoneNumber = student.PhoneNumber,
+                    coursesDisplay 
                 }
             });
         }

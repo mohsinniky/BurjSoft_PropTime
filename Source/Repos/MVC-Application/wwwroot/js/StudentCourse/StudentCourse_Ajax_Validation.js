@@ -156,7 +156,19 @@ function updateStudentInTable(studentId, student) {
         row.find('td:eq(1)').text(student.firstName + ' ' + student.lastName);
         row.find('td:eq(2)').text(student.email);
         row.find('td:eq(3)').text(student.phoneNumber);
+        const coursesCell = row.find('td:eq(4)');
 
+        if (student.coursesDisplay && student.coursesDisplay.trim() !== '') {
+            coursesCell.html(`
+                <div class="courses-container" style="max-width: 200px;">
+                    ${student.coursesDisplay.split(', ').map(course =>
+                `<span class="badge bg-secondary me-1 mb-1">${course}</span>`
+            ).join('')}
+                </div>
+            `);
+        } else {
+            coursesCell.html('<span class="text-muted">No courses</span>');
+        }
         // Update delete button with new name
         const deleteButton = row.find('.btn-danger');
         deleteButton.attr('onclick', `deleteStudent(${studentId}, '${student.firstName} ${student.lastName}')`);

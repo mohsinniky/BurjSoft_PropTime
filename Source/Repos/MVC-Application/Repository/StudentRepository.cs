@@ -14,12 +14,6 @@ namespace MVC_Application.Repository
             _context = context;
         }
 
-        public async Task<List<Student>> GetAllStudentsAsync()
-        {
-            return await _context.Students
-                .ToListAsync();
-        }
-
         public async Task<Student> GetStudentByIdAsync(int id)
         {
             return await _context.Students.FirstOrDefaultAsync(s => s.StudentId == id);
@@ -138,6 +132,22 @@ namespace MVC_Application.Repository
                           where sc.StudentId == studentId 
                           select sc.Course).ToListAsync();
 
+        }
+
+        public async Task<int> GetTotalStudentCountAsync()
+        {
+            return await _context.Students.CountAsync();
+        }
+
+        public async Task<List<Student>> GetStudentsPageAsync(int page, int pageSize)
+        {
+            return await _context.Students
+                .OrderBy(s => s.StudentId)
+                .Include(s => s.StudentCourses)
+                .ThenInclude(sc => sc.Course)  
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
         }
 
     }

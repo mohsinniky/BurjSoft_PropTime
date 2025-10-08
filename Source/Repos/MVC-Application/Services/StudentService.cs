@@ -1,4 +1,5 @@
-﻿using MVC_Application.DTOs;
+﻿using Microsoft.EntityFrameworkCore;
+using MVC_Application.DTOs;
 using MVC_Application.Models;
 using MVC_Application.Repository.Interfaces;
 using MVC_Application.Services.Interfaces;
@@ -58,23 +59,10 @@ namespace MVC_Application.Services
                 FirstName = completeStudent.FirstName,
                 LastName = completeStudent.LastName,
                 Email = completeStudent.Email,
-                PhoneNumber = completeStudent.PhoneNumber
+                PhoneNumber = completeStudent.PhoneNumber,
             };
         }
 
-        // Other methods remain the same...
-        public async Task<List<StudentDto>> GetAllStudentsAsync()
-        {
-            var students = await _studentRepository.GetAllStudentsAsync();
-            return students.Select(s => new StudentDto
-            {
-                StudentId = s.StudentId,
-                FirstName = s.FirstName,
-                LastName = s.LastName,
-                Email = s.Email,
-                PhoneNumber = s.PhoneNumber
-            }).ToList();
-        }
 
         public async Task<StudentDto> GetStudentByIdAsync(int id)
         {
@@ -119,5 +107,28 @@ namespace MVC_Application.Services
                 Description = c.Description
             }).ToList();
         }
+
+        public async Task<(List<StudentDto> Students, int TotalCount)> GetStudentsPageAsync(int page, int pageSize)
+        {
+            var totalCount = await _studentRepository.GetTotalStudentCountAsync();
+            var students = await _studentRepository.GetStudentsPageAsync(page, pageSize);
+
+            var studentDtos = students.Select(s => new StudentDto
+            {
+                StudentId = s.StudentId,
+                FirstName = s.FirstName,
+                LastName = s.LastName,
+                Email = s.Email,
+                PhoneNumber = s.PhoneNumber,
+                CoursesDisplay = string
+                    .Join(", ", s.StudentCourses
+                    .Select(sc => sc.Course.CourseDisplay))
+                    
+            }).ToList();
+
+            return (studentDtos, totalCount);
+        }
+
+
     }
 }

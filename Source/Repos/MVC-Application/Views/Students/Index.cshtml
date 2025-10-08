@@ -22,6 +22,7 @@
                     <th>Full Name</th>
                     <th>Email</th>
                     <th>Phone Number</th>
+                    <th>Courses</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -33,6 +34,21 @@
                         <td>@student.FullName</td>
                         <td>@student.Email</td>
                         <td>@student.PhoneNumber</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(student.CoursesDisplay))
+                            {
+                                <div class="courses-container" style="max-width: 200px;">
+                                    @foreach (var course in student.CoursesDisplay.Split(", "))
+                                    {
+                                        <span class="badge bg-secondary me-1 mb-1">@course</span>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <span class="text-muted">No courses</span>
+                            }
+                        </td>
                         <td>
                             <button type="button" class="btn btn-info btn-sm"
                                     onclick="openDetailsModal(@student.StudentId)">
@@ -61,6 +77,77 @@
         </div>
     }
 </div>
+
+<!-- Simple Pagination with Page Numbers -->
+@if (Model.TotalPages > 1)
+{
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <div>
+            <span class="text-muted">
+                Page @Model.CurrentPage of @Model.TotalPages
+                (@Model.TotalCount total students)
+            </span>
+        </div>
+
+        <div>
+            <nav>
+                <ul class="pagination pagination-sm mb-0">
+                    <!-- Previous Button -->
+                    <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                        <a class="page-link"
+                           href="@Url.Action("Index", new { page = Model.CurrentPage - 1, pageSize = Model.PageSize })">
+                            &laquo;
+                        </a>
+                    </li>
+
+                    <!-- Page Numbers -->
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        if (i == Model.CurrentPage)
+                        {
+                            <li class="page-item active">
+                                <span class="page-link">@i</span>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="@Url.Action("Index", new { page = i, pageSize = Model.PageSize })">
+                                    @i
+                                </a>
+                            </li>
+                        }
+                    }
+
+                    <!-- Next Button -->
+                    <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                        <a class="page-link"
+                           href="@Url.Action("Index", new { page = Model.CurrentPage + 1, pageSize = Model.PageSize })">
+                            &raquo;
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+}
+
+<!-- Simple Page Size Selector -->
+<div class="mt-2">
+    <small class="text-muted">Show: </small>
+    <select onchange="location = this.value;" class="form-select form-select-sm d-inline-block w-auto">
+        <option value="@Url.Action("Index", new { page = 1, pageSize = 1 })"
+                selected="@(Model.PageSize == 1)">1</option>
+        <option value="@Url.Action("Index", new { page = 1, pageSize = 2 })"
+                selected="@(Model.PageSize == 2)">2</option>
+        <option value="@Url.Action("Index", new { page = 1, pageSize = 3 })"
+                selected="@(Model.PageSize == 3)">3</option>
+    </select>
+    <small class="text-muted">per page</small>
+</div>
+
+
 
 <!-- Fixed Modal with Footer -->
 <div class="modal fade" id="addStudentModal" tabindex="-1">
@@ -134,4 +221,5 @@
 
 @section Scripts {
     <script asp-append-version="true" src="~/js/studentcourse/studentcourse_ajax_validation.js"></script>
+    
 }
