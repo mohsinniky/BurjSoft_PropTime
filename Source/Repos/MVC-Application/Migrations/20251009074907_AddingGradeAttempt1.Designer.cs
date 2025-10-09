@@ -4,6 +4,7 @@ using MVC_Application;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC_Application.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    partial class SchoolContextModelSnapshot : ModelSnapshot
+    [Migration("20251009074907_AddingGradeAttempt1")]
+    partial class AddingGradeAttempt1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,7 +115,7 @@ namespace MVC_Application.Migrations
 
                     b.HasKey("GradeId");
 
-                    b.ToTable("Grades");
+                    b.ToTable("Grade");
 
                     b.HasData(
                         new
@@ -176,33 +179,6 @@ namespace MVC_Application.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("MVC_Application.Models.StudentAddress", b =>
-                {
-                    b.Property<int>("StudentAddressId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentAddressId"));
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("StudentAddressId");
-
-                    b.HasIndex("StudentId")
-                        .IsUnique();
-
-                    b.ToTable("StudentAddresses");
-                });
-
             modelBuilder.Entity("MVC_Application.Models.StudentCourse", b =>
                 {
                     b.Property<int>("Id")
@@ -238,17 +214,6 @@ namespace MVC_Application.Migrations
                     b.Navigation("Grade");
                 });
 
-            modelBuilder.Entity("MVC_Application.Models.StudentAddress", b =>
-                {
-                    b.HasOne("MVC_Application.Models.Student", "Student")
-                        .WithOne("Address")
-                        .HasForeignKey("MVC_Application.Models.StudentAddress", "StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Student");
-                });
-
             modelBuilder.Entity("MVC_Application.Models.StudentCourse", b =>
                 {
                     b.HasOne("MVC_Application.Models.Course", "Course")
@@ -280,8 +245,6 @@ namespace MVC_Application.Migrations
 
             modelBuilder.Entity("MVC_Application.Models.Student", b =>
                 {
-                    b.Navigation("Address");
-
                     b.Navigation("StudentCourses");
                 });
 #pragma warning restore 612, 618

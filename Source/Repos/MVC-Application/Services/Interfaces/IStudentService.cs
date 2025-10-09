@@ -13,5 +13,8 @@ namespace MVC_Application.Services.Interfaces
         Task<List<CourseDto>> GetStudentCoursesAsync(int studentId);
         Task<(List<StudentDto> Students, int TotalCount)> GetStudentsPageAsync(int page, int pageSize);
 
+        //New Method
+        Task<List<GradeDto>> GetAllGradesAsync();
+
     }
 }

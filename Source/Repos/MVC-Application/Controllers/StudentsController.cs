@@ -18,8 +18,8 @@ namespace MVC_Application.Controllers
         public async Task<IActionResult> Index(int page = 1, int pageSize = 2)
         {
             var (students, totalCount) = await _studentService.GetStudentsPageAsync(page, pageSize);
-
             var courses = await _studentService.GetAllCoursesAsync();
+            var grades = await _studentService.GetAllGradesAsync(); // New
 
             var viewModel = new StudentOperationsViewModel()
             {
@@ -31,6 +31,7 @@ namespace MVC_Application.Controllers
                     CourseCode = c.CourseCode,
                     Description = c.Description
                 }).ToList(),
+                AvailableGrades = grades, // New
                 Students = students.Select(s => new StudentViewModel
                 {
                     StudentId = s.StudentId,
@@ -38,10 +39,17 @@ namespace MVC_Application.Controllers
                     LastName = s.LastName,
                     Email = s.Email,
                     PhoneNumber = s.PhoneNumber,
+                    GradeId = s.GradeId,
+                    GradeName = s.GradeName,
+                    StudentAddress = s.StudentAddress != null ? new StudentAddressViewModel
+                    {
+                        StudentAddressId = s.StudentAddress.StudentAddressId,
+                        City = s.StudentAddress.City,
+                        State = s.StudentAddress.State,
+                        StudentId = s.StudentAddress.StudentId
+                    } : new StudentAddressViewModel(),
                     CoursesDisplay = s.CoursesDisplay
                 }).ToList(),
-
-                //New Data 
                 CurrentPage = page,
                 PageSize = pageSize,
                 TotalCount = totalCount

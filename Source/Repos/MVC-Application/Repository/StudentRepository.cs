@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using MVC_Application.DTOs;
 using MVC_Application.Models;
 using MVC_Application.Repository.Interfaces;
 using System.Linq;
@@ -168,5 +169,36 @@ namespace MVC_Application.Repository
             return (students, totalCount);
         }
 
+        public async Task<List<GradeDto>> GetAllGradesAsync()
+        {
+            var grades = await _context.Grades.ToListAsync();
+            return grades.Select(g => new GradeDto
+            {
+                GradeId = g.GradeId,
+                GradeName = g.GradeName
+            }).ToList();
+        }
+
+
+        // Address related methods
+        public async Task<StudentAddress> AddStudentAddressAsync(StudentAddress studentAddress)
+        {
+            _context.StudentAddresses.Add(studentAddress);
+            await _context.SaveChangesAsync();
+            return studentAddress;
+        }
+
+        public async Task<StudentAddress> UpdateStudentAddressAsync(StudentAddress studentAddress)
+        {
+            _context.StudentAddresses.Update(studentAddress);
+            await _context.SaveChangesAsync();
+            return studentAddress;
+        }
+
+        public async Task<StudentAddress> GetStudentAddressAsync(int studentId)
+        {
+            return await _context.StudentAddresses
+                .FirstOrDefaultAsync(sa => sa.StudentId == studentId);
+        }
     }
 }
