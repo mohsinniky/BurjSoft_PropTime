@@ -19,5 +19,6 @@ namespace MVC_Application.Repository.Interfaces
         Task<StudentAddress> UpdateStudentAddressAsync(StudentAddress studentAddress);
         Task<StudentAddress> GetStudentAddressAsync(int studentId);
 
+
     }
 }

@@ -22,6 +22,8 @@
                     <th>Full Name</th>
                     <th>Email</th>
                     <th>Phone Number</th>
+                    <th>Grade</th>
+                    <th>Address</th>
                     <th>Courses</th>
                     <th>Actions</th>
                 </tr>
@@ -34,6 +36,26 @@
                         <td>@student.FullName</td>
                         <td>@student.Email</td>
                         <td>@student.PhoneNumber</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(student.GradeName))
+                            {
+                                <span class="badge bg-info">@student.GradeName</span>
+                            }
+                            else
+                            {
+                                <span class="text-muted">No grade</span>
+                            }
+                        </td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(student.StudentAddress.City))
+                            {
+                                <small>@student.StudentAddress.City, @student.StudentAddress.State</small>
+                            }
+                            else
+                            {
+                                <span class="text-muted">No address</span>
+                            }
+                        </td>
                         <td>
                             @if (!string.IsNullOrEmpty(student.CoursesDisplay))
                             {
@@ -189,6 +211,42 @@
                                 <label for="PhoneNumber" class="form-label">Phone Number</label>
                                 <input type="tel" class="form-control" id="PhoneNumber" name="PhoneNumber">
                                 <span class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="GradeId" class="form-label">Grade</label>
+                                <select class="form-control" id="GradeId" name="GradeId">
+                                    <option value="">-- Select Grade --</option>
+                                    @foreach (var grade in Model.AvailableGrades)
+                                    {
+                                        <option value="@grade.GradeId">@grade.GradeName</option>
+                                    }
+                                </select>
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Student Address Section -->
+                    <div class="mb-3">
+                        <h6 class="border-bottom pb-2">Address Information</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="City" class="form-label">City</label>
+                                    <input type="text" class="form-control" id="City" name="StudentAddress.City">
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="State" class="form-label">State</label>
+                                    <input type="text" class="form-control" id="State" name="StudentAddress.State">
+                                    <span class="text-danger"></span>
+                                </div>
                             </div>
                         </div>
                     </div>

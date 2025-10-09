@@ -19,11 +19,12 @@ namespace MVC_Application.Controllers
         {
             var (students, totalCount) = await _studentService.GetStudentsPageAsync(page, pageSize);
             var courses = await _studentService.GetAllCoursesAsync();
-            var grades = await _studentService.GetAllGradesAsync(); // New
+            var grades = await _studentService.GetAllGradesAsync();
 
             var viewModel = new StudentOperationsViewModel()
             {
                 StudentForm = new StudentViewModel(),
+
                 AvailableCourses = courses.Select(c => new CourseViewModel
                 {
                     CourseId = c.CourseId,
@@ -31,7 +32,8 @@ namespace MVC_Application.Controllers
                     CourseCode = c.CourseCode,
                     Description = c.Description
                 }).ToList(),
-                AvailableGrades = grades, // New
+                AvailableGrades = grades,
+
                 Students = students.Select(s => new StudentViewModel
                 {
                     StudentId = s.StudentId,
@@ -76,12 +78,14 @@ namespace MVC_Application.Controllers
                 lastName = student.LastName,
                 email = student.Email,
                 phoneNumber = student.PhoneNumber,
-                courses = studentCourses.Select(c => new
+                gradeId = student.GradeId,
+                studentAddress = student.StudentAddress != null ? new
                 {
-                    courseId = c.CourseId,
-                    courseName = c.CourseName,
-                    courseCode = c.CourseCode
-                }).ToList()
+                    studentAddressId = student.StudentAddress.StudentAddressId,
+                    city = student.StudentAddress.City,
+                    state = student.StudentAddress.State
+                } : null,
+                courses = studentCourses.Select(c => new { courseId = c.CourseId }).ToList()
             };
 
             return Json(studentData);
@@ -107,6 +111,14 @@ namespace MVC_Application.Controllers
                     lastName = student.LastName,
                     email = student.Email,
                     phoneNumber = student.PhoneNumber,
+                    gradeId = student.GradeId,
+                    gradeName = student.GradeName,
+                    studentAddress = student.StudentAddress != null ? new
+                    {
+                        studentAddressId = student.StudentAddress.StudentAddressId,
+                        city = student.StudentAddress.City,
+                        state = student.StudentAddress.State
+                    } : null,
                     coursesDisplay 
                 }
             });

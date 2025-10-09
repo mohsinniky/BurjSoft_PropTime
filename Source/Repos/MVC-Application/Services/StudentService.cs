@@ -23,7 +23,6 @@ namespace MVC_Application.Services
 
             if (studentUpsertDto.StudentId == 0)
             {
-                // Create new student
                 student = new Student
                 {
                     FirstName = studentUpsertDto.FirstName,
@@ -34,7 +33,6 @@ namespace MVC_Application.Services
                 };
                 student = await _studentRepository.AddStudentAsync(student);
 
-                // Create student address if provided
                 if (studentUpsertDto.StudentAddress != null)
                 {
                     var studentAddress = new StudentAddress
@@ -48,7 +46,6 @@ namespace MVC_Application.Services
             }
             else
             {
-                // Update existing student
                 student = new Student
                 {
                     StudentId = studentUpsertDto.StudentId,
@@ -59,28 +56,30 @@ namespace MVC_Application.Services
                     GradeId = studentUpsertDto.GradeId
                 };
                 student = await _studentRepository.UpdateStudentAsync(student);
+                var existingAddress = await _studentRepository.GetStudentAddressAsync(studentUpsertDto.StudentId);
 
-                // Update student address if provided
                 if (studentUpsertDto.StudentAddress != null)
                 {
                     var studentAddress = new StudentAddress
                     {
-                        StudentAddressId = studentUpsertDto.StudentAddress.StudentAddressId,
+                        StudentAddressId = existingAddress?.StudentAddressId ?? 0,
                         StudentId = student.StudentId,
                         City = studentUpsertDto.StudentAddress.City,
-                        State = studentUpsertDto.StudentAddress.State
+                        State = studentUpsertDto.StudentAddress.State,
+                        Student = student
+
                     };
+
                     await _studentRepository.UpdateStudentAddressAsync(studentAddress);
+
                 }
             }
 
-            // Handle course enrollment
             if (studentUpsertDto.SelectedCourseIds != null && studentUpsertDto.SelectedCourseIds.Any())
             {
                 await _studentRepository.EnrollStudentInCoursesAsync(student.StudentId, studentUpsertDto.SelectedCourseIds);
             }
 
-            // Return complete student with relationships
             var completeStudent = await _studentRepository.GetStudentByIdAsync(student.StudentId);
             var studentCourses = await _studentRepository.GetStudentCoursesAsync(student.StudentId);
 
@@ -100,6 +99,7 @@ namespace MVC_Application.Services
                     State = completeStudent.StudentAddress.State,
                     StudentId = completeStudent.StudentAddress.StudentId
                 } : null,
+
                 CoursesDisplay = string.Join(", ", studentCourses
                     .Select(sc => sc.CourseDisplay)
                     .OrderBy(courseName => courseName))
@@ -117,7 +117,16 @@ namespace MVC_Application.Services
                 FirstName = student.FirstName,
                 LastName = student.LastName,
                 Email = student.Email,
-                PhoneNumber = student.PhoneNumber
+                PhoneNumber = student.PhoneNumber,
+                GradeId = student.GradeId,
+                StudentAddress = student.StudentAddress != null ? new StudentAddressDto
+                {
+                    StudentAddressId = student.StudentAddress.StudentAddressId,
+                    City = student.StudentAddress.City,
+                    State = student.StudentAddress.State,
+                    StudentId = student.StudentAddress.StudentId
+                } : null
+
             };
         }
 
@@ -151,32 +160,32 @@ namespace MVC_Application.Services
         }
 
         public async Task<(List<StudentDto> Students, int TotalCount)> GetStudentsPageAsync(int page = 1, int pageSize = 10)
-{
-    var (students, totalCount) = await _studentRepository.GetStudentsPageAsync(page, pageSize);
-    
-    var studentDtos = students.Select(s => new StudentDto
-    {
-        StudentId = s.StudentId,
-        FirstName = s.FirstName,
-        LastName = s.LastName,
-        Email = s.Email,
-        PhoneNumber = s.PhoneNumber,
-        GradeId = s.GradeId,
-        GradeName = s.Grade?.GradeName,
-        StudentAddress = s.StudentAddress != null ? new StudentAddressDto
         {
-            StudentAddressId = s.StudentAddress.StudentAddressId,
-            City = s.StudentAddress.City,
-            State = s.StudentAddress.State,
-            StudentId = s.StudentAddress.StudentId
-        } : null,
-        CoursesDisplay = string.Join(", ", s.StudentCourses
-            .Select(sc => sc.Course.CourseDisplay)
-            .OrderBy(courseName => courseName))
-    }).ToList();
+            var (students, totalCount) = await _studentRepository.GetStudentsPageAsync(page, pageSize);
 
-    return (studentDtos, totalCount);
-}
+            var studentDtos = students.Select(s => new StudentDto
+            {
+                StudentId = s.StudentId,
+                FirstName = s.FirstName,
+                LastName = s.LastName,
+                Email = s.Email,
+                PhoneNumber = s.PhoneNumber,
+                GradeId = s.GradeId,
+                GradeName = s.Grade?.GradeName,
+                StudentAddress = s.StudentAddress != null ? new StudentAddressDto
+                {
+                    StudentAddressId = s.StudentAddress.StudentAddressId,
+                    City = s.StudentAddress.City,
+                    State = s.StudentAddress.State,
+                    StudentId = s.StudentAddress.StudentId
+                } : null,
+                CoursesDisplay = string.Join(", ", s.StudentCourses
+                    .Select(sc => sc.Course.CourseDisplay)
+                    .OrderBy(courseName => courseName))
+            }).ToList();
+
+            return (studentDtos, totalCount);
+        }
 
         public async Task<List<GradeDto>> GetAllGradesAsync()
         {

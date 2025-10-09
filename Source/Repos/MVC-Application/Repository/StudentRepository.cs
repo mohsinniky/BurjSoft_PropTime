@@ -17,7 +17,7 @@ namespace MVC_Application.Repository
 
         public async Task<Student> GetStudentByIdAsync(int id)
         {
-            return await _context.Students.FirstOrDefaultAsync(s => s.StudentId == id);
+            return await _context.Students.Include(s=> s.StudentAddress).Include(s=>s.Grade).FirstOrDefaultAsync(s => s.StudentId == id);
         }
 
         public async Task<Student> AddStudentAsync(Student student)
@@ -50,7 +50,7 @@ namespace MVC_Application.Repository
 
             await _context.SaveChangesAsync();
             return student;
-        } 
+        }
 
         public async Task<bool> DeleteStudentAsync(int id)
         {
@@ -96,7 +96,7 @@ namespace MVC_Application.Repository
             var countCourses = _context.Courses.Count();
             var averageId = _context.Students.Average(x => x.StudentId);
 
-            var otherColumnSearchLINQ = _context.Students.Where(s=> s.FirstName == "Mohsin");
+            var otherColumnSearchLINQ = _context.Students.Where(s => s.FirstName == "Mohsin");
             var findLINQ = _context.Students.Find(1017);
             var disOrderedStudents = _context.Students.OrderByDescending(s => s.FirstName);
             var orderedStudents = _context.Students.OrderBy(s => s.FirstName);
@@ -123,13 +123,13 @@ namespace MVC_Application.Repository
                       join sc in _context.StudentCourse on st.StudentId equals sc.StudentId
                       group sc by st.FirstName into g
 
-                      select new 
+                      select new
                       {
-                          FirstName= g.Key ,
-                          CourseIds= g.Select(x=> x.CourseId).ToList(),
-                          CourseName= g.Select(x=> x.Course).ToList()
+                          FirstName = g.Key,
+                          CourseIds = g.Select(x => x.CourseId).ToList(),
+                          CourseName = g.Select(x => x.Course).ToList()
                       }
-                       
+
 
 
                       ).ToList();
@@ -148,7 +148,7 @@ namespace MVC_Application.Repository
             //    .ToListAsync();
 
             return await (from sc in _context.StudentCourse
-                          where sc.StudentId == studentId 
+                          where sc.StudentId == studentId
                           select sc.Course).ToListAsync();
 
         }
@@ -159,6 +159,8 @@ namespace MVC_Application.Repository
 
             var students = await _context.Students
                 .AsNoTracking()
+                .Include(s=> s.StudentAddress)
+                .Include(s=> s.Grade)
                 .Include(s => s.StudentCourses)
                 .ThenInclude(sc => sc.Course)
                 .OrderBy(s => s.StudentId)
@@ -190,15 +192,24 @@ namespace MVC_Application.Repository
 
         public async Task<StudentAddress> UpdateStudentAddressAsync(StudentAddress studentAddress)
         {
-            _context.StudentAddresses.Update(studentAddress);
-            await _context.SaveChangesAsync();
-            return studentAddress;
+            try
+            {
+                _context.StudentAddresses.Update(studentAddress);
+                await _context.SaveChangesAsync();
+                return studentAddress;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in UpdateStudentAddressAsync: {ex.Message}");
+                throw;
+            }
         }
-
         public async Task<StudentAddress> GetStudentAddressAsync(int studentId)
         {
             return await _context.StudentAddresses
-                .FirstOrDefaultAsync(sa => sa.StudentId == studentId);
+        .AsNoTracking()
+        .FirstOrDefaultAsync(sa => sa.StudentId == studentId);
         }
+
     }
 }
