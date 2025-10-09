@@ -49,7 +49,7 @@ namespace MVC_Application.Repository
 
             await _context.SaveChangesAsync();
             return student;
-        }
+        } 
 
         public async Task<bool> DeleteStudentAsync(int id)
         {
