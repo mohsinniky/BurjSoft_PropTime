@@ -4,6 +4,7 @@ using MVC_Application.DTOs;
 using MVC_Application.Models;
 using MVC_Application.Repository.Interfaces;
 using System.Linq;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 namespace MVC_Application.Repository
 {
     public class StudentRepository : IStudentRepository
@@ -155,20 +156,65 @@ namespace MVC_Application.Repository
 
         public async Task<(List<Student> Students, int TotalCount)> GetStudentsPageAsync(int page, int pageSize)
         {
-            var totalCount = await _context.Students.CountAsync();
+            //var totalCount = await _context.Students.CountAsync();
 
-            var students = await _context.Students
+            //IQueryable variable = _context.Students
+            //    .AsNoTracking()
+            //    .Include(s => s.StudentAddress)
+            //    .Include(s => s.Grade)
+            //    .Include(s => s.StudentCourses)
+            //    .ThenInclude(sc => sc.Course)
+            //    .OrderBy(s => s.StudentId)
+            //    .Skip((page - 1) * pageSize)
+            //    .Take(pageSize);
+
+            
+            IQueryable<Student> variable = _context.Students
                 .AsNoTracking()
-                .Include(s=> s.StudentAddress)
-                .Include(s=> s.Grade)
+                .Include(s => s.StudentAddress)
+                .Include(s => s.Grade)
                 .Include(s => s.StudentCourses)
                 .ThenInclude(sc => sc.Course)
-                .OrderBy(s => s.StudentId)
+                .OrderBy(s => s.StudentId);
+
+            int gotStudentCount = await variable.CountAsync();
+
+            var studentListIQ = await variable
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
 
-            return (students, totalCount);
+
+            //var students = await _context.Students
+            //    .AsNoTracking()
+            //    .Include(s=> s.StudentAddress)
+            //    .Include(s=> s.Grade)
+            //    .Include(s => s.StudentCourses)
+            //    .ThenInclude(sc => sc.Course)
+            //    .OrderBy(s => s.StudentId)
+            //    .Skip((page - 1) * pageSize)
+            //    .Take(pageSize)
+            //    .ToListAsync();
+
+            //Single Query Approach
+            var result = await variable
+            .GroupBy(_ => 1)
+            .Select(g => new
+            {
+                TotalCount = g.Count(),
+                Students = g.OrderBy(s => s.StudentId)
+                            .Skip((page - 1) * pageSize)
+                            .Take(pageSize)
+                            .ToList()
+            })
+            .FirstOrDefaultAsync();
+
+            //var result = await variable
+            //.GroupBy(_ => 1).FirstOrDefaultAsync();
+
+
+
+            return (result.Students, result.TotalCount);
         }
 
         public async Task<List<GradeDto>> GetAllGradesAsync()

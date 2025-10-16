@@ -1,0 +1,138 @@
+﻿@{
+    ViewData["Title"] = "JSON & XML Serialization Practice";
+}
+
+<div class="container">
+    <h2>JSON & XML Serialization Practice</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <!-- JSON Serialization Section -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4>JSON Serialization</h4>
+                </div>
+                <div class="card-body">
+                    <div id="jsonMessage" class="alert" style="display: none;"></div>
+
+                    <form id="jsonSerializeForm">
+                        <h5>Create and Serialize Person to JSON</h5>
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="birthDate">Birth Date:</label>
+                            <input type="date" class="form-control" name="birthDate" value="@DateTime.Now.AddYears(-25).ToString("yyyy-MM-dd")" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Serialize to JSON</button>
+                    </form>
+
+                    <hr>
+
+                    <form id="jsonDeserializeForm">
+                        <h5>Deserialize from JSON File</h5>
+                        <div class="form-group">
+                            <label for="jsonFileName">JSON File Name:</label>
+                            <input type="text" class="form-control" name="jsonFileName" placeholder="e.g., person_123.json" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Deserialize JSON</button>
+                    </form>
+
+                    <div id="jsonContent" class="mt-3" style="display: none;">
+                        <h6>JSON Content:</h6>
+                        <pre class="alert alert-secondary"><code></code></pre>
+                    </div>
+
+                    <div id="jsonPersonDetails" class="mt-3" style="display: none;">
+                        <h6>Deserialized Person:</h6>
+                        <div class="alert alert-success"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <!-- XML Serialization Section -->
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h4>XML Serialization</h4>
+                </div>
+                <div class="card-body">
+                    <div id="xmlMessage" class="alert" style="display: none;"></div>
+
+                    <form id="xmlSerializeForm">
+                        <h5>Create and Serialize Person to XML</h5>
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="birthDate">Birth Date:</label>
+                            <input type="date" class="form-control" name="birthDate" value="@DateTime.Now.AddYears(-25).ToString("yyyy-MM-dd")" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Serialize to XML</button>
+                    </form>
+
+                    <hr>
+
+                    <form id="xmlDeserializeForm">
+                        <h5>Deserialize from XML File</h5>
+                        <div class="form-group">
+                            <label for="xmlFileName">XML File Name:</label>
+                            <input type="text" class="form-control" name="xmlFileName" placeholder="e.g., person_123.xml" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Deserialize XML</button>
+                    </form>
+
+                    <div id="xmlContent" class="mt-3" style="display: none;">
+                        <h6>XML Content:</h6>
+                        <pre class="alert alert-secondary"><code></code></pre>
+                    </div>
+
+                    <div id="xmlPersonDetails" class="mt-3" style="display: none;">
+                        <h6>Deserialized Person:</h6>
+                        <div class="alert alert-success"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h4>File Management</h4>
+                </div>
+                <div class="card-body">
+                    <div id="fileMessage" class="alert" style="display: none;"></div>
+                    <button id="listFilesBtn" type="button" class="btn btn-info">List All Serialized Files</button>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <h5>JSON Files:</h5>
+                            <ul id="jsonFilesList" class="list-group"></ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>XML Files:</h5>
+                            <ul id="xmlFilesList" class="list-group"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/serializations/xml_json_ajax.js"></script>
+}
