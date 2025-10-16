@@ -110,7 +110,6 @@ namespace MVC_Application.Controllers
             return View();
         }
 
-        // JSON Serialization AJAX Methods
         [HttpPost]
         public async Task<JsonResult> SerializeToJson([FromBody] PersonDTO request)
         {
@@ -146,7 +145,7 @@ namespace MVC_Application.Controllers
                     message = $"Person serialized to JSON successfully!",
                     fileName = fileName,
                     jsonContent = jsonString,
-                    person = person
+                    person
                 });
             }
             catch (Exception ex)
@@ -230,7 +229,7 @@ namespace MVC_Application.Controllers
                         message = $"Person serialized to XML successfully!",
                         fileName = fileName,
                         xmlContent = xmlString,
-                        person = person
+                        person
                     });
                 }
             }
@@ -269,7 +268,7 @@ namespace MVC_Application.Controllers
                         success = true,
                         message = $"Person deserialized from XML successfully!",
                         xmlContent = xmlString,
-                        person = person
+                        person
                     });
                 }
             }
@@ -296,8 +295,8 @@ namespace MVC_Application.Controllers
                 return Json(new
                 {
                     success = true,
-                    jsonFiles = jsonFiles,
-                    xmlFiles = xmlFiles,
+                    jsonFiles,
+                    xmlFiles,
                     message = $"Found {jsonFiles.Length} JSON files and {xmlFiles.Length} XML files"
                 });
             }
