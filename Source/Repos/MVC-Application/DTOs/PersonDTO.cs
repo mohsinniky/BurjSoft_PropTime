@@ -1,6 +1,6 @@
-﻿namespace MVC_Application.Models
+﻿namespace MVC_Application.DTOs
 {
-    public class PersonRequest
+    public class PersonDTO
     {
         public string Name { get; set; }
         public string Email { get; set; }

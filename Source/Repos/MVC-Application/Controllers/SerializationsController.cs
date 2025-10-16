@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVC_Application.DTOs;
 using MVC_Application.Models;
 using System;
 using System.Text.Json;
@@ -108,9 +109,10 @@ namespace MVC_Application.Controllers
         {
             return View();
         }
+
         // JSON Serialization AJAX Methods
         [HttpPost]
-        public async Task<JsonResult> SerializeToJson([FromBody] PersonRequest request)
+        public async Task<JsonResult> SerializeToJson([FromBody] PersonDTO request)
         {
             try
             {
@@ -185,7 +187,7 @@ namespace MVC_Application.Controllers
                     success = true,
                     message = $"Person deserialized from JSON successfully!",
                     jsonContent = jsonString,
-                    person = person
+                    person
                 });
             }
             catch (Exception ex)
@@ -196,7 +198,7 @@ namespace MVC_Application.Controllers
 
         // XML Serialization AJAX Methods
         [HttpPost]
-        public JsonResult SerializeToXml([FromBody] PersonRequest request)
+        public JsonResult SerializeToXml([FromBody] PersonDTO request)
         {
             try
             {
