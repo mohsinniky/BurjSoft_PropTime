@@ -28,22 +28,51 @@ namespace MVC_Application.Services
                     FirstName = studentUpsertDto.FirstName,
                     LastName = studentUpsertDto.LastName,
                     Email = studentUpsertDto.Email,
-                    PhoneNumber = studentUpsertDto.PhoneNumber
+                    PhoneNumber = studentUpsertDto.PhoneNumber,
+                    GradeId = studentUpsertDto.GradeId
                 };
                 student = await _studentRepository.AddStudentAsync(student);
+
+                if (studentUpsertDto.StudentAddress != null)
+                {
+                    var studentAddress = new StudentAddress
+                    {
+                        StudentId = student.StudentId,
+                        City = studentUpsertDto.StudentAddress.City,
+                        State = studentUpsertDto.StudentAddress.State
+                    };
+                    await _studentRepository.AddStudentAddressAsync(studentAddress);
+                }
             }
             else
             {
-                // Update existing student
                 student = new Student
                 {
                     StudentId = studentUpsertDto.StudentId,
                     FirstName = studentUpsertDto.FirstName,
                     LastName = studentUpsertDto.LastName,
                     Email = studentUpsertDto.Email,
-                    PhoneNumber = studentUpsertDto.PhoneNumber
+                    PhoneNumber = studentUpsertDto.PhoneNumber,
+                    GradeId = studentUpsertDto.GradeId
                 };
                 student = await _studentRepository.UpdateStudentAsync(student);
+                var existingAddress = await _studentRepository.GetStudentAddressAsync(studentUpsertDto.StudentId);
+
+                if (studentUpsertDto.StudentAddress != null)
+                {
+                    var studentAddress = new StudentAddress
+                    {
+                        StudentAddressId = existingAddress?.StudentAddressId ?? 0,
+                        StudentId = student.StudentId,
+                        City = studentUpsertDto.StudentAddress.City,
+                        State = studentUpsertDto.StudentAddress.State,
+                        Student = student
+
+                    };
+
+                    await _studentRepository.UpdateStudentAddressAsync(studentAddress);
+
+                }
             }
 
             if (studentUpsertDto.SelectedCourseIds != null && studentUpsertDto.SelectedCourseIds.Any())
@@ -51,8 +80,9 @@ namespace MVC_Application.Services
                 await _studentRepository.EnrollStudentInCoursesAsync(student.StudentId, studentUpsertDto.SelectedCourseIds);
             }
 
-            // Return the complete student
             var completeStudent = await _studentRepository.GetStudentByIdAsync(student.StudentId);
+            var studentCourses = await _studentRepository.GetStudentCoursesAsync(student.StudentId);
+
             return new StudentDto
             {
                 StudentId = completeStudent.StudentId,
@@ -60,9 +90,21 @@ namespace MVC_Application.Services
                 LastName = completeStudent.LastName,
                 Email = completeStudent.Email,
                 PhoneNumber = completeStudent.PhoneNumber,
+                GradeId = completeStudent.GradeId,
+                GradeName = completeStudent.Grade?.GradeName,
+                StudentAddress = completeStudent.StudentAddress != null ? new StudentAddressDto
+                {
+                    StudentAddressId = completeStudent.StudentAddress.StudentAddressId,
+                    City = completeStudent.StudentAddress.City,
+                    State = completeStudent.StudentAddress.State,
+                    StudentId = completeStudent.StudentAddress.StudentId
+                } : null,
+
+                CoursesDisplay = string.Join(", ", studentCourses
+                    .Select(sc => sc.CourseDisplay)
+                    .OrderBy(courseName => courseName))
             };
         }
-
 
         public async Task<StudentDto> GetStudentByIdAsync(int id)
         {
@@ -75,7 +117,16 @@ namespace MVC_Application.Services
                 FirstName = student.FirstName,
                 LastName = student.LastName,
                 Email = student.Email,
-                PhoneNumber = student.PhoneNumber
+                PhoneNumber = student.PhoneNumber,
+                GradeId = student.GradeId,
+                StudentAddress = student.StudentAddress != null ? new StudentAddressDto
+                {
+                    StudentAddressId = student.StudentAddress.StudentAddressId,
+                    City = student.StudentAddress.City,
+                    State = student.StudentAddress.State,
+                    StudentId = student.StudentAddress.StudentId
+                } : null
+
             };
         }
 
@@ -108,7 +159,7 @@ namespace MVC_Application.Services
             }).ToList();
         }
 
-        public async Task<(List<StudentDto> Students, int TotalCount)> GetStudentsPageAsync(int page, int pageSize)
+        public async Task<(List<StudentDto> Students, int TotalCount)> GetStudentsPageAsync(int page = 1, int pageSize = 10)
         {
             var (students, totalCount) = await _studentRepository.GetStudentsPageAsync(page, pageSize);
 
@@ -119,6 +170,15 @@ namespace MVC_Application.Services
                 LastName = s.LastName,
                 Email = s.Email,
                 PhoneNumber = s.PhoneNumber,
+                GradeId = s.GradeId,
+                GradeName = s.Grade?.GradeName,
+                StudentAddress = s.StudentAddress != null ? new StudentAddressDto
+                {
+                    StudentAddressId = s.StudentAddress.StudentAddressId,
+                    City = s.StudentAddress.City,
+                    State = s.StudentAddress.State,
+                    StudentId = s.StudentAddress.StudentId
+                } : null,
                 CoursesDisplay = string.Join(", ", s.StudentCourses
                     .Select(sc => sc.Course.CourseDisplay)
                     .OrderBy(courseName => courseName))
@@ -126,6 +186,13 @@ namespace MVC_Application.Services
 
             return (studentDtos, totalCount);
         }
+
+        public async Task<List<GradeDto>> GetAllGradesAsync()
+        {
+            return await _studentRepository.GetAllGradesAsync();
+        }
+
+
 
 
     }

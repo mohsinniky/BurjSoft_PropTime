@@ -10,5 +10,10 @@ namespace MVC_Application.DTOs
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public List<int> SelectedCourseIds { get; set; } = new List<int>();
+
+
+        // New properties
+        public int? GradeId { get; set; }
+        public StudentAddressDto StudentAddress { get; set; }
     }
 }

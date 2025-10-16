@@ -1,5 +1,6 @@
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\js\Serializations\XML_Json_Ajax.js
 wwwroot\js\site.js
 wwwroot\js\StudentCourse\StudentCourse_Ajax_Validation.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css

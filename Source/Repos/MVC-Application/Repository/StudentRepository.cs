@@ -1,8 +1,10 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using MVC_Application.DTOs;
 using MVC_Application.Models;
 using MVC_Application.Repository.Interfaces;
 using System.Linq;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 namespace MVC_Application.Repository
 {
     public class StudentRepository : IStudentRepository
@@ -16,7 +18,7 @@ namespace MVC_Application.Repository
 
         public async Task<Student> GetStudentByIdAsync(int id)
         {
-            return await _context.Students.FirstOrDefaultAsync(s => s.StudentId == id);
+            return await _context.Students.Include(s=> s.StudentAddress).Include(s=>s.Grade).FirstOrDefaultAsync(s => s.StudentId == id);
         }
 
         public async Task<Student> AddStudentAsync(Student student)
@@ -95,7 +97,7 @@ namespace MVC_Application.Repository
             var countCourses = _context.Courses.Count();
             var averageId = _context.Students.Average(x => x.StudentId);
 
-            var otherColumnSearchLINQ = _context.Students.Where(s=> s.FirstName == "Mohsin");
+            var otherColumnSearchLINQ = _context.Students.Where(s => s.FirstName == "Mohsin");
             var findLINQ = _context.Students.Find(1017);
             var disOrderedStudents = _context.Students.OrderByDescending(s => s.FirstName);
             var orderedStudents = _context.Students.OrderBy(s => s.FirstName);
@@ -122,13 +124,13 @@ namespace MVC_Application.Repository
                       join sc in _context.StudentCourse on st.StudentId equals sc.StudentId
                       group sc by st.FirstName into g
 
-                      select new 
+                      select new
                       {
-                          FirstName= g.Key ,
-                          CourseIds= g.Select(x=> x.CourseId).ToList(),
-                          CourseName= g.Select(x=> x.Course).ToList()
+                          FirstName = g.Key,
+                          CourseIds = g.Select(x => x.CourseId).ToList(),
+                          CourseName = g.Select(x => x.Course).ToList()
                       }
-                       
+
 
 
                       ).ToList();
@@ -147,25 +149,112 @@ namespace MVC_Application.Repository
             //    .ToListAsync();
 
             return await (from sc in _context.StudentCourse
-                          where sc.StudentId == studentId 
+                          where sc.StudentId == studentId
                           select sc.Course).ToListAsync();
 
         }
 
         public async Task<(List<Student> Students, int TotalCount)> GetStudentsPageAsync(int page, int pageSize)
         {
-            var totalCount = await _context.Students.CountAsync();
+            //var totalCount = await _context.Students.CountAsync();
 
-            var students = await _context.Students
+            //IQueryable variable = _context.Students
+            //    .AsNoTracking()
+            //    .Include(s => s.StudentAddress)
+            //    .Include(s => s.Grade)
+            //    .Include(s => s.StudentCourses)
+            //    .ThenInclude(sc => sc.Course)
+            //    .OrderBy(s => s.StudentId)
+            //    .Skip((page - 1) * pageSize)
+            //    .Take(pageSize);
+
+            
+            IQueryable<Student> variable = _context.Students
                 .AsNoTracking()
+                .Include(s => s.StudentAddress)
+                .Include(s => s.Grade)
                 .Include(s => s.StudentCourses)
                 .ThenInclude(sc => sc.Course)
-                .OrderBy(s => s.StudentId)
+                .OrderBy(s => s.StudentId);
+
+            int gotStudentCount = await variable.CountAsync();
+
+            var studentListIQ = await variable
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
 
-            return (students, totalCount);
+
+            //var students = await _context.Students
+            //    .AsNoTracking()
+            //    .Include(s=> s.StudentAddress)
+            //    .Include(s=> s.Grade)
+            //    .Include(s => s.StudentCourses)
+            //    .ThenInclude(sc => sc.Course)
+            //    .OrderBy(s => s.StudentId)
+            //    .Skip((page - 1) * pageSize)
+            //    .Take(pageSize)
+            //    .ToListAsync();
+
+            //Single Query Approach
+            var result = await variable
+            .GroupBy(_ => 1)
+            .Select(g => new
+            {
+                TotalCount = g.Count(),
+                Students = g.OrderBy(s => s.StudentId)
+                            .Skip((page - 1) * pageSize)
+                            .Take(pageSize)
+                            .ToList()
+            })
+            .FirstOrDefaultAsync();
+
+            //var result = await variable
+            //.GroupBy(_ => 1).FirstOrDefaultAsync();
+
+
+
+            return (result.Students, result.TotalCount);
+        }
+
+        public async Task<List<GradeDto>> GetAllGradesAsync()
+        {
+            var grades = await _context.Grades.ToListAsync();
+            return grades.Select(g => new GradeDto
+            {
+                GradeId = g.GradeId,
+                GradeName = g.GradeName
+            }).ToList();
+        }
+
+
+        // Address related methods
+        public async Task<StudentAddress> AddStudentAddressAsync(StudentAddress studentAddress)
+        {
+            _context.StudentAddresses.Add(studentAddress);
+            await _context.SaveChangesAsync();
+            return studentAddress;
+        }
+
+        public async Task<StudentAddress> UpdateStudentAddressAsync(StudentAddress studentAddress)
+        {
+            try
+            {
+                _context.StudentAddresses.Update(studentAddress);
+                await _context.SaveChangesAsync();
+                return studentAddress;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in UpdateStudentAddressAsync: {ex.Message}");
+                throw;
+            }
+        }
+        public async Task<StudentAddress> GetStudentAddressAsync(int studentId)
+        {
+            return await _context.StudentAddresses
+        .AsNoTracking()
+        .FirstOrDefaultAsync(sa => sa.StudentId == studentId);
         }
 
     }

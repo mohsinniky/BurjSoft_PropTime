@@ -98,6 +98,50 @@ namespace MVC_Application.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MVC_Application.Models.Grade", b =>
+                {
+                    b.Property<int>("GradeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GradeId"));
+
+                    b.Property<string>("GradeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("GradeId");
+
+                    b.ToTable("Grades");
+
+                    b.HasData(
+                        new
+                        {
+                            GradeId = 1,
+                            GradeName = "Low"
+                        },
+                        new
+                        {
+                            GradeId = 2,
+                            GradeName = "Inter"
+                        },
+                        new
+                        {
+                            GradeId = 3,
+                            GradeName = "High"
+                        },
+                        new
+                        {
+                            GradeId = 4,
+                            GradeName = "Great"
+                        },
+                        new
+                        {
+                            GradeId = 5,
+                            GradeName = "Genius"
+                        });
+                });
+
             modelBuilder.Entity("MVC_Application.Models.Student", b =>
                 {
                     b.Property<int>("StudentId")
@@ -114,6 +158,9 @@ namespace MVC_Application.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("GradeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -124,7 +171,36 @@ namespace MVC_Application.Migrations
 
                     b.HasKey("StudentId");
 
+                    b.HasIndex("GradeId");
+
                     b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("MVC_Application.Models.StudentAddress", b =>
+                {
+                    b.Property<int>("StudentAddressId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentAddressId"));
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("StudentAddressId");
+
+                    b.HasIndex("StudentId")
+                        .IsUnique();
+
+                    b.ToTable("StudentAddresses");
                 });
 
             modelBuilder.Entity("MVC_Application.Models.StudentCourse", b =>
@@ -153,6 +229,26 @@ namespace MVC_Application.Migrations
                     b.ToTable("StudentCourse");
                 });
 
+            modelBuilder.Entity("MVC_Application.Models.Student", b =>
+                {
+                    b.HasOne("MVC_Application.Models.Grade", "Grade")
+                        .WithMany("Students")
+                        .HasForeignKey("GradeId");
+
+                    b.Navigation("Grade");
+                });
+
+            modelBuilder.Entity("MVC_Application.Models.StudentAddress", b =>
+                {
+                    b.HasOne("MVC_Application.Models.Student", "Student")
+                        .WithOne("StudentAddress")
+                        .HasForeignKey("MVC_Application.Models.StudentAddress", "StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("MVC_Application.Models.StudentCourse", b =>
                 {
                     b.HasOne("MVC_Application.Models.Course", "Course")
@@ -177,8 +273,15 @@ namespace MVC_Application.Migrations
                     b.Navigation("StudentCourses");
                 });
 
+            modelBuilder.Entity("MVC_Application.Models.Grade", b =>
+                {
+                    b.Navigation("Students");
+                });
+
             modelBuilder.Entity("MVC_Application.Models.Student", b =>
                 {
+                    b.Navigation("StudentAddress");
+
                     b.Navigation("StudentCourses");
                 });
 #pragma warning restore 612, 618

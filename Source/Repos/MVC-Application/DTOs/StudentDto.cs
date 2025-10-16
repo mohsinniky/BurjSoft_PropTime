@@ -10,5 +10,10 @@
         public string FullName => $"{FirstName} {LastName}";
         public string CoursesDisplay { get; set; }
 
+        // New properties
+        public int? GradeId { get; set; }
+        public string GradeName { get; set; }
+        public StudentAddressDto StudentAddress { get; set; }
+
     }
 }

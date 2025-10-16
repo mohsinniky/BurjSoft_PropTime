@@ -79,6 +79,12 @@ function getFormData() {
         LastName: $('#LastName').val().trim(),
         Email: $('#Email').val().trim(),
         PhoneNumber: $('#PhoneNumber').val().trim(),
+        GradeId: $('#GradeId').val() ? parseInt($('#GradeId').val()) : null,
+        StudentAddress: {
+            City: $('#City').val().trim(),
+            State: $('#State').val().trim(),
+            StudentAddressId: $('#createStudentForm').data('student-address-id') || 0
+        },
         SelectedCourseIds: selectedCourseIds
     };
 }
@@ -153,12 +159,33 @@ function updateStudentInTable(studentId, student) {
     const row = $(`tr[data-student-id="${studentId}"]`);
 
     if (row.length) {
+        // Update basic info columns
         row.find('td:eq(0)').text(student.studentId);
         row.find('td:eq(1)').text(student.firstName + ' ' + student.lastName);
         row.find('td:eq(2)').text(student.email);
         row.find('td:eq(3)').text(student.phoneNumber);
-        const coursesCell = row.find('td:eq(4)');
 
+        // Update Grade column (index 4)
+        const gradeCell = row.find('td:eq(4)');
+        if (student.gradeName && student.gradeName.trim() !== '') {
+            gradeCell.html(`<span class="badge bg-info">${student.gradeName}</span>`);
+        } else {
+            gradeCell.html('<span class="text-muted">No grade</span>');
+        }
+
+        // Update Address column (index 5)
+        const addressCell = row.find('td:eq(5)');
+        if (student.studentAddress &&
+            (student.studentAddress.city || student.studentAddress.state)) {
+            const city = student.studentAddress.city || '';
+            const state = student.studentAddress.state || '';
+            addressCell.html(`<small>${city}${city && state ? ', ' : ''}${state}</small>`);
+        } else {
+            addressCell.html('<span class="text-muted">No address</span>');
+        }
+
+        // Update Courses column (index 6)
+        const coursesCell = row.find('td:eq(6)');
         if (student.coursesDisplay && student.coursesDisplay.trim() !== '') {
             coursesCell.html(`
                 <div class="courses-container" style="max-width: 200px;">
@@ -170,6 +197,7 @@ function updateStudentInTable(studentId, student) {
         } else {
             coursesCell.html('<span class="text-muted">No courses</span>');
         }
+
         // Update delete button with new name
         const deleteButton = row.find('.btn-danger');
         deleteButton.attr('onclick', `deleteStudent(${studentId}, '${student.firstName} ${student.lastName}')`);
@@ -192,12 +220,16 @@ function resetForm() {
     $('#LastName').prop('readonly', false);
     $('#Email').prop('readonly', false);
     $('#PhoneNumber').prop('readonly', false);
+    $('#GradeId').prop('disabled', false);
+    $('#City').prop('readonly', false);
+    $('#State').prop('readonly', false);
 
     // Re-enable all course checkboxes
     $('input[name="SelectedCourseIds"]').prop('disabled', false);
 
     // Clear edit mode and show submit button
     $('#createStudentForm').removeData('student-id');
+    $('#createStudentForm').removeData('student-address-id');
     $('#modalTitle').text('Add New Student');
     $('#submitStudentBtn').show().text('Save Student');
 }
@@ -220,11 +252,19 @@ function openEditModal(studentId) {
 }
 
 function populateEditForm(studentData) {
-    // Fill form fields
+    // Fill basic form fields
     $('#FirstName').val(studentData.firstName);
     $('#LastName').val(studentData.lastName);
     $('#Email').val(studentData.email);
     $('#PhoneNumber').val(studentData.phoneNumber);
+    $('#GradeId').val(studentData.gradeId || '');
+
+    // Fill address fields
+    if (studentData.studentAddress) {
+        $('#City').val(studentData.studentAddress.city || '');
+        $('#State').val(studentData.studentAddress.state || '');
+        $('#createStudentForm').data('student-address-id', studentData.studentAddress.studentAddressId || 0);
+    }
 
     // Store student ID for update
     $('#createStudentForm').data('student-id', studentData.studentId);
@@ -260,11 +300,18 @@ function openDetailsModal(studentId) {
 }
 
 function populateDetailsForm(studentData) {
-    // Fill form fields with student data
+    // Fill basic form fields
     $('#FirstName').val(studentData.firstName);
     $('#LastName').val(studentData.lastName);
     $('#Email').val(studentData.email);
     $('#PhoneNumber').val(studentData.phoneNumber);
+    $('#GradeId').val(studentData.gradeId || '');
+
+    // Fill address fields
+    if (studentData.studentAddress) {
+        $('#City').val(studentData.studentAddress.city || '');
+        $('#State').val(studentData.studentAddress.state || '');
+    }
 
     // Check enrolled courses
     $('input[name="SelectedCourseIds"]').prop('checked', false);
@@ -279,6 +326,9 @@ function populateDetailsForm(studentData) {
     $('#LastName').prop('readonly', true);
     $('#Email').prop('readonly', true);
     $('#PhoneNumber').prop('readonly', true);
+    $('#GradeId').prop('disabled', true);
+    $('#City').prop('readonly', true);
+    $('#State').prop('readonly', true);
 
     // Disable all course checkboxes
     $('input[name="SelectedCourseIds"]').prop('disabled', true);

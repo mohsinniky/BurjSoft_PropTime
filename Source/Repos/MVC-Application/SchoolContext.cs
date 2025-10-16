@@ -9,6 +9,8 @@ namespace MVC_Application
     {
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Grade> Grades { get; set; }
+        public DbSet<StudentAddress> StudentAddresses { get; set; }
         public DbSet<StudentCourse> StudentCourse { get; set; }
 
 
@@ -72,7 +74,15 @@ namespace MVC_Application
                     CourseCode = "CS305",
                     Description = "Computer networks and communication protocols"
                 }
-             );
+            );
+            // Seed Grades
+            modelBuilder.Entity<Grade>().HasData(
+                new Grade { GradeId = 1, GradeName = "Low" },
+                new Grade { GradeId = 2, GradeName = "Inter" },
+                new Grade { GradeId = 3, GradeName = "High" },
+                new Grade { GradeId = 4, GradeName = "Great" },
+                new Grade { GradeId = 5, GradeName = "Genius" }
+            );
         }
 
     }
