@@ -1,0 +1,224 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
+using MVC_Application.Models.FilesModels;
+
+namespace MVC_Application.Controllers
+{
+    public class FilesController : Controller
+    {
+        private readonly string _filesDirectory;
+        private readonly string _metadataFile;
+
+        public FilesController()
+        {
+            _filesDirectory = Path.Combine(Directory.GetCurrentDirectory(), "UploadedFiles");
+            _metadataFile = Path.Combine(_filesDirectory, "metadata.json");
+
+            if (!Directory.Exists(_filesDirectory))
+                Directory.CreateDirectory(_filesDirectory);
+        }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        // GET: /Files/GetAllFiles
+        [HttpGet]
+        public JsonResult GetAllFiles()
+        {
+            try
+            {
+                var files = GetFilesMetadata();
+                return Json(new { success = true, files = files });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        // POST: /Files/UploadFile
+        [HttpPost]
+        public async Task<JsonResult> UploadFile(IFormFile file, string fileType)
+        {
+            try
+            {
+                if (file == null || file.Length == 0)
+                    return Json(new { success = false, message = "Please select a file." });
+
+                if (string.IsNullOrEmpty(fileType))
+                    return Json(new { success = false, message = "Please select file type." });
+
+                // Generate unique filename
+                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+                var filePath = Path.Combine(_filesDirectory, fileName);
+
+                // Save file
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                // Add to metadata
+                var files = GetFilesMetadata();
+                var fileInfo = new FileMetadata
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    OriginalName = Path.GetFileNameWithoutExtension(file.FileName),
+                    StoredName = fileName,
+                    Extension = fileType.TrimStart('.'),
+                    CreatedDate = DateTime.Now,
+                    Size = file.Length
+                };
+
+                files.Add(fileInfo);
+                SaveFilesMetadata(files);
+
+                return Json(new { success = true, message = "File uploaded successfully!", file = fileInfo });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = $"Upload failed: {ex.Message}" });
+            }
+        }
+
+        // POST: /Files/CreateFromContent
+        [HttpPost]
+        public JsonResult CreateFromContent([FromBody] FileCreateRequest request)
+        {
+            try
+            {
+                if (request == null)
+                    return Json(new { success = false, message = "Invalid request." });
+
+                if (string.IsNullOrEmpty(request.Name) || string.IsNullOrEmpty(request.Extension))
+                    return Json(new { success = false, message = "Please provide name and extension." });
+
+                // Build filename and write content
+                var safeName = Path.GetFileNameWithoutExtension(request.Name);
+                var extension = request.Extension.TrimStart('.');
+                var storedName = $"{Guid.NewGuid()}.{extension}";
+                var filePath = Path.Combine(_filesDirectory, storedName);
+
+                var bytes = System.Text.Encoding.UTF8.GetBytes(request.Content ?? string.Empty);
+                System.IO.File.WriteAllBytes(filePath, bytes);
+
+                var files = GetFilesMetadata();
+                var fileInfo = new FileMetadata
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    OriginalName = safeName,
+                    StoredName = storedName,
+                    Extension = extension,
+                    CreatedDate = DateTime.Now,
+                    Size = bytes.LongLength
+                };
+
+                files.Add(fileInfo);
+                SaveFilesMetadata(files);
+
+                return Json(new { success = true, message = "File created from content successfully!", file = fileInfo });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = $"Create failed: {ex.Message}" });
+            }
+        }
+
+        // POST: /Files/UpdateFile
+        [HttpPost]
+        public JsonResult UpdateFile([FromBody] FileUpdateRequest request)
+        {
+            try
+            {
+                var files = GetFilesMetadata();
+                var file = files.FirstOrDefault(f => f.Id == request.Id);
+
+                if (file == null)
+                    return Json(new { success = false, message = "File not found." });
+
+                file.OriginalName = request.Name;
+                file.Extension = request.Extension;
+
+                SaveFilesMetadata(files);
+
+                return Json(new { success = true, message = "File updated successfully!", file = file });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = $"Update failed: {ex.Message}" });
+            }
+        }
+
+        // POST: /Files/DeleteFile
+        [HttpPost]
+        public JsonResult DeleteFile([FromBody] FileDeleteRequest request)
+        {
+            try
+            {
+                var files = GetFilesMetadata();
+                var file = files.FirstOrDefault(f => f.Id == request.Id);
+
+                if (file == null)
+                    return Json(new { success = false, message = "File not found." });
+
+                // Delete physical file
+                var filePath = Path.Combine(_filesDirectory, file.StoredName);
+                if (System.IO.File.Exists(filePath))
+                    System.IO.File.Delete(filePath);
+
+                // Remove from metadata
+                files.Remove(file);
+                SaveFilesMetadata(files);
+
+                return Json(new { success = true, message = "File deleted successfully!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = $"Delete failed: {ex.Message}" });
+            }
+        }
+
+        // GET: /Files/DownloadFile
+        [HttpGet]
+        public IActionResult DownloadFile(string id)
+        {
+            try
+            {
+                var files = GetFilesMetadata();
+                var file = files.FirstOrDefault(f => f.Id == id);
+
+                if (file == null)
+                    return NotFound();
+
+                var filePath = Path.Combine(_filesDirectory, file.StoredName);
+                if (!System.IO.File.Exists(filePath))
+                    return NotFound();
+
+                var fileBytes = System.IO.File.ReadAllBytes(filePath);
+                return File(fileBytes, "application/octet-stream", $"{file.OriginalName}.{file.Extension}");
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        private List<FileMetadata> GetFilesMetadata()
+        {
+            if (!System.IO.File.Exists(_metadataFile))
+                return new List<FileMetadata>();
+
+            var json = System.IO.File.ReadAllText(_metadataFile);
+            return JsonSerializer.Deserialize<List<FileMetadata>>(json) ?? new List<FileMetadata>();
+        }
+
+        private void SaveFilesMetadata(List<FileMetadata> files)
+        {
+            var json = JsonSerializer.Serialize(files, new JsonSerializerOptions { WriteIndented = true });
+            System.IO.File.WriteAllText(_metadataFile, json);
+        }
+    }
+
+}

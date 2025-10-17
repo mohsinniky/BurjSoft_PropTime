@@ -1,0 +1,16 @@
+[
+  {
+    "Id": "e7a4cd97-6d2e-4b71-94fe-7f211c3740c2",
+    "OriginalName": "test",
+    "StoredName": "de5a0f2d-cc2e-4527-8c05-10bee2452bd9.txt",
+    "CreatedDate": "2025-10-16T20:30:45.996659+05:00",
+    "Size": 52
+  },
+  {
+    "Id": "cbdc28dd-22fd-4946-8bc7-46fb478606c5",
+    "OriginalName": "boom",
+    "StoredName": "3bc924af-53fb-4c9c-be74-efdcb83cee9b.txt",
+    "CreatedDate": "2025-10-17T12:19:43.4330441+05:00",
+    "Size": 31
+  }
+]
