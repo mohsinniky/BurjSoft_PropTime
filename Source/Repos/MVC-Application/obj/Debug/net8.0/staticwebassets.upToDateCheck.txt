@@ -1,6 +1,5 @@
 wwwroot\css\site.css
 wwwroot\favicon.ico
-wwwroot\js\Files\Files_Ajax.js
 wwwroot\js\Serializations\XML_Json_Ajax.js
 wwwroot\js\site.js
 wwwroot\js\StudentCourse\StudentCourse_Ajax_Validation.js
@@ -61,3 +60,4 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\js\Files\Files_Ajax.js

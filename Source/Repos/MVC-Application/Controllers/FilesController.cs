@@ -8,10 +8,25 @@ namespace MVC_Application.Controllers
     {
         private readonly string _filesDirectory;
         private readonly string _metadataFile;
+        private readonly Dictionary<string, string> _allowedMimeTypes = new Dictionary<string, string>
+        {
+            { ".txt", "text/plain" },
+            { ".pdf", "application/pdf" },
+            { ".doc", "application/msword" },
+            { ".docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document" },
+            { ".xls", "application/vnd.ms-excel" },
+            { ".xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" },
+            { ".jpg", "image/jpeg" },
+            { ".jpeg", "image/jpeg" },
+            { ".png", "image/png" },
+            { ".gif", "image/gif" },
+            { ".zip", "application/zip" },
+            { ".rar", "application/x-rar-compressed" }
+        };
 
         public FilesController()
         {
-            _filesDirectory = Path.Combine(Directory.GetCurrentDirectory(), "TextFiles");
+            _filesDirectory = Path.Combine(Directory.GetCurrentDirectory(), "UploadedFiles");
             _metadataFile = Path.Combine(_filesDirectory, "metadata.json");
 
             if (!Directory.Exists(_filesDirectory))
@@ -47,11 +62,27 @@ namespace MVC_Application.Controllers
                 if (string.IsNullOrEmpty(request.Name))
                     return Json(new { success = false, message = "File name is required." });
 
-                var fileName = $"{Guid.NewGuid()}.txt";
+                // Validate extension
+                if (string.IsNullOrEmpty(request.Extension))
+                    request.Extension = ".txt";
+
+                if (!_allowedMimeTypes.ContainsKey(request.Extension.ToLower()))
+                    return Json(new { success = false, message = "File type not allowed." });
+
+                var fileExtension = request.Extension.StartsWith('.') ? request.Extension : "." + request.Extension;
+                var fileName = $"{Guid.NewGuid()}{fileExtension}";
                 var filePath = Path.Combine(_filesDirectory, fileName);
 
-                // Create file with content
-                System.IO.File.WriteAllText(filePath, request.Content ?? "Empty file");
+                // Create file with content (for text files) or empty for other types
+                if (fileExtension == ".txt" && !string.IsNullOrEmpty(request.Content))
+                {
+                    System.IO.File.WriteAllText(filePath, request.Content);
+                }
+                else
+                {
+                    // Create empty file for non-text files when creating new
+                    System.IO.File.WriteAllBytes(filePath, new byte[0]);
+                }
 
                 var fileInfo = new FileInfo(filePath);
 
@@ -62,8 +93,10 @@ namespace MVC_Application.Controllers
                     Id = Guid.NewGuid().ToString(),
                     OriginalName = request.Name,
                     StoredName = fileName,
+                    Extension = fileExtension,
                     CreatedDate = DateTime.Now,
-                    Size = fileInfo.Length
+                    Size = fileInfo.Length,
+                    MimeType = _allowedMimeTypes[fileExtension.ToLower()]
                 };
 
                 files.Add(fileMetadata);
@@ -77,7 +110,7 @@ namespace MVC_Application.Controllers
             }
         }
 
-        // POST: Upload existing text file
+        // POST: Upload existing file
         [HttpPost]
         public async Task<JsonResult> UploadFile(IFormFile file)
         {
@@ -86,12 +119,16 @@ namespace MVC_Application.Controllers
                 if (file == null || file.Length == 0)
                     return Json(new { success = false, message = "Please select a file." });
 
-                // Check if it's a text file
+                // Check file extension
                 var extension = Path.GetExtension(file.FileName).ToLower();
-                if (extension != ".txt")
-                    return Json(new { success = false, message = "Only .txt files are allowed." });
+                if (string.IsNullOrEmpty(extension) || !_allowedMimeTypes.ContainsKey(extension))
+                    return Json(new { success = false, message = "File type not allowed." });
 
-                var fileName = $"{Guid.NewGuid()}.txt";
+                // Check file size (10MB limit)
+                if (file.Length > 10 * 1024 * 1024)
+                    return Json(new { success = false, message = "File size cannot exceed 10MB." });
+
+                var fileName = $"{Guid.NewGuid()}{extension}";
                 var filePath = Path.Combine(_filesDirectory, fileName);
 
                 // Save the uploaded file
@@ -107,8 +144,10 @@ namespace MVC_Application.Controllers
                     Id = Guid.NewGuid().ToString(),
                     OriginalName = Path.GetFileNameWithoutExtension(file.FileName),
                     StoredName = fileName,
+                    Extension = extension,
                     CreatedDate = DateTime.Now,
-                    Size = file.Length
+                    Size = file.Length,
+                    MimeType = _allowedMimeTypes[extension]
                 };
 
                 files.Add(fileMetadata);
@@ -122,7 +161,7 @@ namespace MVC_Application.Controllers
             }
         }
 
-        // POST: Update file content
+        // POST: Update file (only for text files)
         [HttpPost]
         public JsonResult UpdateFile([FromBody] FileUpdateRequest request)
         {
@@ -134,10 +173,14 @@ namespace MVC_Application.Controllers
                 if (file == null)
                     return Json(new { success = false, message = "File not found." });
 
+                // Only allow updating text files
+                if (file.Extension?.ToLower() != ".txt")
+                    return Json(new { success = false, message = "Only text files can be edited." });
+
                 var filePath = Path.Combine(_filesDirectory, file.StoredName);
 
                 // Update file content
-                System.IO.File.WriteAllText(filePath, request.Content);
+                System.IO.File.WriteAllText(filePath, request.Content ?? string.Empty);
 
                 // Update metadata
                 file.OriginalName = request.Name;
@@ -153,7 +196,7 @@ namespace MVC_Application.Controllers
             }
         }
 
-        // GET: Read file content
+        // GET: Read file content (only for text files)
         [HttpGet]
         public JsonResult ReadFile(string id)
         {
@@ -170,13 +213,20 @@ namespace MVC_Application.Controllers
                 if (!System.IO.File.Exists(filePath))
                     return Json(new { success = false, message = "File not found." });
 
-                var content = System.IO.File.ReadAllText(filePath);
+                string content = string.Empty;
+
+                // Only read content for text files
+                if (file.Extension?.ToLower() == ".txt")
+                {
+                    content = System.IO.File.ReadAllText(filePath);
+                }
 
                 return Json(new
                 {
                     success = true,
-                    content = content,
-                    file = file
+                    content,
+                    file,
+                    canEdit = file.Extension?.ToLower() == ".txt"
                 });
             }
             catch (Exception ex)
@@ -231,12 +281,26 @@ namespace MVC_Application.Controllers
                     return NotFound();
 
                 var fileBytes = System.IO.File.ReadAllBytes(filePath);
-                return File(fileBytes, "text/plain", $"{file.OriginalName}.txt");
+                var mimeType = file.MimeType ?? "application/octet-stream";
+
+                return File(fileBytes, mimeType, $"{file.OriginalName}{file.Extension}");
             }
             catch (Exception)
             {
                 return NotFound();
             }
+        }
+
+        // GET: Get allowed file types
+        [HttpGet]
+        public JsonResult GetAllowedFileTypes()
+        {
+            var allowedTypes = _allowedMimeTypes.Keys.Select(ext => new {
+                extension = ext,
+                mimeType = _allowedMimeTypes[ext]
+            }).ToList();
+
+            return Json(new { success = true, fileTypes = allowedTypes });
         }
 
         private List<FileMetadata> GetFilesMetadata()
@@ -254,5 +318,4 @@ namespace MVC_Application.Controllers
             System.IO.File.WriteAllText(_metadataFile, json);
         }
     }
-
 }

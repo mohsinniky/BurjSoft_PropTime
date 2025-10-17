@@ -2,7 +2,8 @@
 {
     public class FileCreateRequest
     {
-        public string Name { get; set; }
-        public string Content { get; set; }
+        public string? Name { get; set; }
+        public string? Content { get; set; }
+        public string? Extension { get; set; } = ".txt";
     }
 }

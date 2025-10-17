@@ -1,9 +1,9 @@
 ﻿@{
-    ViewData["Title"] = "Text File Manager";
+    ViewData["Title"] = "File Manager";
 }
 
 <div class="container">
-    <h2>Text File Manager</h2>
+    <h2>File Manager</h2>
 
     <div class="row mb-4">
         <div class="col-12">
@@ -11,7 +11,7 @@
                 <i class="fas fa-plus"></i> New Text File
             </button>
             <button id="uploadFileBtn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                <i class="fas fa-upload"></i> Upload Text File
+                <i class="fas fa-upload"></i> Upload File
             </button>
             <button id="refreshBtn" class="btn btn-secondary">
                 <i class="fas fa-sync-alt"></i> Refresh
@@ -21,7 +21,7 @@
 
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0">Text Files</h5>
+            <h5 class="mb-0">Files</h5>
         </div>
         <div class="card-body">
             <div id="message" class="alert" style="display: none;"></div>
@@ -29,6 +29,7 @@
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Type</th>
                         <th>Created Date</th>
                         <th>Size</th>
                         <th>Actions</th>
@@ -59,6 +60,14 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="fileExtension" class="form-label">File Type:</label>
+                        <select class="form-control" id="fileExtension" disabled>
+                            <option value=".txt">Text File (.txt)</option>
+                        </select>
+                        <div class="form-text">Only text files can be created and edited directly.</div>
+                    </div>
+
+                    <div class="mb-3">
                         <label for="fileContent" class="form-label">Content:</label>
                         <textarea class="form-control" id="fileContent" rows="10" placeholder="Enter file content..."></textarea>
                     </div>
@@ -77,15 +86,16 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Upload Text File</h5>
+                <h5 class="modal-title">Upload File</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <form id="uploadForm">
                     <div class="mb-3">
-                        <label for="uploadInput" class="form-label">Select .txt file:</label>
-                        <input type="file" class="form-control" id="uploadInput" accept=".txt" required>
-                        <div class="form-text">Only .txt files are allowed.</div>
+                        <label for="uploadInput" class="form-label">Select file:</label>
+                        <input type="file" class="form-control" id="uploadInput"
+                               accept=".txt,.pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.gif,.zip,.rar" required>
+                        <div class="form-text">Allowed types: .txt, .pdf, .doc, .docx, .xls, .xlsx, .jpg, .jpeg, .png, .gif, .zip, .rar (Max: 10MB)</div>
                     </div>
                 </form>
             </div>
@@ -99,4 +109,5 @@
 
 @section Scripts {
     <script src="~/js/files/files_ajax.js"></script>
+
 }
