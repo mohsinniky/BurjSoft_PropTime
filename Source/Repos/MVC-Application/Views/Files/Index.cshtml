@@ -8,7 +8,7 @@
     <div class="row mb-4">
         <div class="col-12">
             <button id="addFileBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fileModal">
-                <i class="fas fa-plus"></i> New Text File
+                <i class="fas fa-plus"></i> New File
             </button>
             <button id="uploadFileBtn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#uploadModal">
                 <i class="fas fa-upload"></i> Upload File
@@ -47,7 +47,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalTitle">New Text File</h5>
+                <h5 class="modal-title" id="modalTitle">New File</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
@@ -61,13 +61,24 @@
 
                     <div class="mb-3">
                         <label for="fileExtension" class="form-label">File Type:</label>
-                        <select class="form-control" id="fileExtension" disabled>
+                        <select class="form-control" id="fileExtension">
                             <option value=".txt">Text File (.txt)</option>
+                            <option value=".pdf">PDF Document (.pdf)</option>
+                            <option value=".doc">Word Document (.doc)</option>
+                            <option value=".docx">Word Document (.docx)</option>
+                            <option value=".xls">Excel Spreadsheet (.xls)</option>
+                            <option value=".xlsx">Excel Spreadsheet (.xlsx)</option>
+                            <option value=".jpg">JPEG Image (.jpg)</option>
+                            <option value=".jpeg">JPEG Image (.jpeg)</option>
+                            <option value=".png">PNG Image (.png)</option>
+                            <option value=".gif">GIF Image (.gif)</option>
+                            <option value=".zip">ZIP Archive (.zip)</option>
+                            <option value=".rar">RAR Archive (.rar)</option>
                         </select>
-                        <div class="form-text">Only text files can be created and edited directly.</div>
+                        <div class="form-text">Select the file type. Only text files can be edited directly.</div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3" id="contentSection">
                         <label for="fileContent" class="form-label">Content:</label>
                         <textarea class="form-control" id="fileContent" rows="10" placeholder="Enter file content..."></textarea>
                     </div>
@@ -75,7 +86,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="saveFileBtn">Save File</button>
+                <button type="button" class="btn btn-primary" id="saveFileBtn">Create File</button>
             </div>
         </div>
     </div>
@@ -107,7 +118,32 @@
     </div>
 </div>
 
+<!-- Replace File Modal -->
+<div class="modal fade" id="replaceModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Replace File</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="replaceForm">
+                    <input type="hidden" id="replaceFileId">
+                    <div class="mb-3">
+                        <label for="replaceInput" class="form-label">Select replacement file:</label>
+                        <input type="file" class="form-control" id="replaceInput" required>
+                        <div class="form-text" id="replaceFileTypeInfo"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-warning" id="replaceBtn">Replace</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     <script src="~/js/files/files_ajax.js"></script>
-
 }

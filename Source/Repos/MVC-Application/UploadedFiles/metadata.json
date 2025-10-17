@@ -22,8 +22,26 @@
     "OriginalName": "huawei ai",
     "StoredName": "1645add2-d661-4017-aed2-f018285ea74d.pdf",
     "Extension": ".pdf",
-    "CreatedDate": "2025-10-17T14:45:45.3427211+05:00",
+    "CreatedDate": "2025-10-17T16:19:03.4793746+05:00",
     "Size": 329038,
     "MimeType": "application/pdf"
+  },
+  {
+    "Id": "6db4f9a4-ebca-4af4-9840-2ced0816b986",
+    "OriginalName": "Daily Report",
+    "StoredName": "447354b3-5d23-4ba0-92d6-b7941d3e5e2f.txt",
+    "Extension": ".txt",
+    "CreatedDate": "2025-10-17T16:22:09.6709519+05:00",
+    "Size": 21302,
+    "MimeType": "text/plain"
+  },
+  {
+    "Id": "2e52d563-6447-4d21-9d9b-1be263f508a0",
+    "OriginalName": "testing",
+    "StoredName": "6ad6d2f2-1a83-472c-85e4-a85a40fe3a2e.docx",
+    "Extension": ".docx",
+    "CreatedDate": "2025-10-17T16:14:56.5867589+05:00",
+    "Size": 0,
+    "MimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
   }
 ]

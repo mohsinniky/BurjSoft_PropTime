@@ -53,7 +53,7 @@ namespace MVC_Application.Controllers
             }
         }
 
-        // POST: Create new text file
+        // POST: Create new file (empty file of any type)
         [HttpPost]
         public JsonResult CreateFile([FromBody] FileCreateRequest request)
         {
@@ -74,13 +74,13 @@ namespace MVC_Application.Controllers
                 var filePath = Path.Combine(_filesDirectory, fileName);
 
                 // Create file with content (for text files) or empty for other types
-                if (fileExtension == ".txt" && !string.IsNullOrEmpty(request.Content))
+                if (fileExtension == ".txt")
                 {
-                    System.IO.File.WriteAllText(filePath, request.Content);
+                    System.IO.File.WriteAllText(filePath, request.Content ?? string.Empty);
                 }
                 else
                 {
-                    // Create empty file for non-text files when creating new
+                    // Create empty file for non-text files
                     System.IO.File.WriteAllBytes(filePath, new byte[0]);
                 }
 
@@ -158,6 +158,57 @@ namespace MVC_Application.Controllers
             catch (Exception ex)
             {
                 return Json(new { success = false, message = $"Upload failed: {ex.Message}" });
+            }
+        }
+
+        // POST: Replace file
+        [HttpPost]
+        public async Task<JsonResult> ReplaceFile([FromForm] FileReplaceRequest request)
+        {
+            try
+            {
+                if (request.File == null || request.File.Length == 0)
+                    return Json(new { success = false, message = "Please select a file." });
+
+                var files = GetFilesMetadata();
+                var existingFile = files.FirstOrDefault(f => f.Id == request.Id);
+
+                if (existingFile == null)
+                    return Json(new { success = false, message = "File not found." });
+
+                // Check if the new file has the same extension
+                var newExtension = Path.GetExtension(request.File.FileName).ToLower();
+                if (newExtension != existingFile.Extension?.ToLower())
+                    return Json(new { success = false, message = "Replacement file must have the same file type." });
+
+                // Check file size (10MB limit)
+                if (request.File.Length > 10 * 1024 * 1024)
+                    return Json(new { success = false, message = "File size cannot exceed 10MB." });
+
+                var filePath = Path.Combine(_filesDirectory, existingFile.StoredName);
+
+                // Delete the old file
+                if (System.IO.File.Exists(filePath))
+                    System.IO.File.Delete(filePath);
+
+                // Save the new file
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await request.File.CopyToAsync(stream);
+                }
+
+                // Update metadata
+                existingFile.OriginalName = Path.GetFileNameWithoutExtension(request.File.FileName);
+                existingFile.Size = request.File.Length;
+                existingFile.CreatedDate = DateTime.Now;
+
+                SaveFilesMetadata(files);
+
+                return Json(new { success = true, message = "File replaced successfully!", file = existingFile });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = $"Replace failed: {ex.Message}" });
             }
         }
 
@@ -291,17 +342,17 @@ namespace MVC_Application.Controllers
             }
         }
 
-        // GET: Get allowed file types
-        [HttpGet]
-        public JsonResult GetAllowedFileTypes()
-        {
-            var allowedTypes = _allowedMimeTypes.Keys.Select(ext => new {
-                extension = ext,
-                mimeType = _allowedMimeTypes[ext]
-            }).ToList();
+        //// GET: Get allowed file types
+        //[HttpGet]
+        //public JsonResult GetAllowedFileTypes()
+        //{
+        //    var allowedTypes = _allowedMimeTypes.Keys.Select(ext => new {
+        //        extension = ext,
+        //        mimeType = _allowedMimeTypes[ext]
+        //    }).ToList();
 
-            return Json(new { success = true, fileTypes = allowedTypes });
-        }
+        //    return Json(new { success = true, fileTypes = allowedTypes });
+        //}
 
         private List<FileMetadata> GetFilesMetadata()
         {

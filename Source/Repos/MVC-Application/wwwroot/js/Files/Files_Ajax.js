@@ -7,9 +7,13 @@
 
     $('#addFileBtn').click(function () {
         resetModal();
-        $('#modalTitle').text('New Text File');
-        $('#fileExtension').val('.txt').prop('disabled', true);
-        $('#fileContent').prop('disabled', false);
+        $('#modalTitle').text('New File');
+        $('#fileExtension').prop('disabled', false);
+        toggleContentSection();
+    });
+
+    $('#fileExtension').change(function () {
+        toggleContentSection();
     });
 
     $('#saveFileBtn').click(function () {
@@ -20,6 +24,21 @@
     $('#uploadBtn').click(function () {
         uploadFile();
     });
+
+    $('#replaceBtn').click(function () {
+        replaceFile();
+    });
+
+    function toggleContentSection() {
+        const extension = $('#fileExtension').val();
+        if (extension === '.txt') {
+            $('#contentSection').show();
+            $('#fileContent').prop('disabled', false);
+        } else {
+            $('#contentSection').hide();
+            $('#fileContent').val('');
+        }
+    }
 
     function loadFiles() {
         $.ajax({
@@ -89,6 +108,38 @@
         });
     }
 
+    function replaceFile() {
+        const fileInput = $('#replaceInput')[0];
+        const fileId = $('#replaceFileId').val();
+
+        if (!fileInput.files[0]) {
+            showMessage('Please select a file.', 'warning');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('Id', fileId);
+        formData.append('File', fileInput.files[0]);
+
+        $.ajax({
+            url: '/Files/ReplaceFile',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                if (response.success) {
+                    $('#replaceModal').modal('hide');
+                    $('#replaceForm')[0].reset();
+                    loadFiles();
+                    showMessage(response.message, 'success');
+                } else {
+                    showMessage(response.message, 'danger');
+                }
+            }
+        });
+    }
+
     function updateFile() {
         const request = {
             Id: $('#fileId').val(),
@@ -123,14 +174,18 @@
                     $('#fileId').val(response.file.id);
                     $('#fileName').val(response.file.originalName);
                     $('#fileContent').val(response.content);
-                    $('#fileExtension').val(response.file.extension).prop('disabled', true);
+                    $('#fileExtension').val(response.file.extension);
 
                     // Only allow editing for text files
                     if (response.canEdit) {
+                        $('#fileExtension').prop('disabled', true);
+                        $('#contentSection').show();
                         $('#fileContent').prop('disabled', false);
                         $('#modalTitle').text('Edit Text File');
+                        $('#saveFileBtn').show().text('Update File');
                     } else {
-                        $('#fileContent').prop('disabled', true);
+                        $('#fileExtension').prop('disabled', true);
+                        $('#contentSection').hide();
                         $('#modalTitle').text('View File Details');
                         $('#saveFileBtn').hide();
                     }
@@ -141,6 +196,13 @@
                 }
             }
         });
+    }
+
+    function showReplaceModal(fileId, fileName, fileExtension) {
+        $('#replaceFileId').val(fileId);
+        $('#replaceFileTypeInfo').text(`Please select a ${fileExtension.toUpperCase()} file to replace "${fileName}${fileExtension}"`);
+        $('#replaceInput').attr('accept', fileExtension);
+        $('#replaceModal').modal('show');
     }
 
     function deleteFile(fileId, fileName) {
@@ -192,6 +254,9 @@
                         <button class="btn btn-sm btn-info" onclick="readFile('${file.id}')">
                             <i class="fas fa-eye"></i> View
                         </button>
+                        <button class="btn btn-sm btn-warning" onclick="showReplaceModal('${file.id}', '${file.originalName}', '${file.extension}')">
+                            <i class="fas fa-exchange-alt"></i> Replace
+                        </button>
                         <button class="btn btn-sm btn-success" onclick="downloadFile('${file.id}')">
                             <i class="fas fa-download"></i> Download
                         </button>
@@ -220,8 +285,10 @@
     function resetModal() {
         $('#fileForm')[0].reset();
         $('#fileId').val('');
+        $('#fileExtension').val('.txt');
+        $('#contentSection').show();
         $('#fileContent').prop('disabled', false);
-        $('#saveFileBtn').show();
+        $('#saveFileBtn').show().text('Create File');
     }
 
     function showMessage(message, type) {
@@ -243,4 +310,5 @@
     window.readFile = readFile;
     window.downloadFile = downloadFile;
     window.deleteFile = deleteFile;
+    window.showReplaceModal = showReplaceModal;
 });

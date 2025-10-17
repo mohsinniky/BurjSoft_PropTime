@@ -1,0 +1,564 @@
+
+Today's Report:
+ASP .NET Core:
+- Data Annotation(Data Validations(ServerSide, ClientSide))
+
+- ServerSide(Using Syntax = [Annotation(parameter,ErrorMessage at the End)])
+	- Display Using Asp-Validation-For (Validation Message, For a single Field)
+	- Display Using Asp-Summary-For (Validation Summary, Displays All ErrorMessage oof all fields)
+	- Annotations(Required,Range,MinLength,MaxLength,RegularExpression,StringLength etc)
+	- Annotations like Display, Datatype are for optimizing Code and better Readability
+- ModelState (Dictionary, {ValuesSubmitted,ErrorMessages})
+
+- Using Js(Jquery) with MVC for Modal Of Inputs
+- Validations of Inputs using JS
+
+
+Today's Report:
+ASP .NET Core:
+- Ajax:
+	- exchange data with a server without reloading the whole page
+	- $.ajax() function performs an AJAX request
+	- Syntax, Structure
+	- set of key/value pairs that handles/configures the request
+- Ajax Keys
+	- Url: Endpoint of action, The link to which request is being sent
+	- Type: Https method (POST, PUT, GET, DELETE)
+	- success: callback, request succeeds, receives response
+	- error: callback, request fails, details of error
+	- data: {key:value}, appended in jquery as ?key=value for GET, sent in request(payload) for POST
+	- contentType: tells the server , about the type data we are sending
+	- dataType: Expected data type of response i.e. JSon
+
+
+Today's Report:
+ASP .NET Core:
+- Areas (mini-website/section)
+	- for Website Organization, big Site to smaller, Seperate Sections
+	- Each area has its own (models,views,controllers)
+	- organizing related functionality into a group as seperate section
+	- urls: site/area/controller/action/id
+
+Today's Report:
+MySQL:
+- Database(Creation, Delete(Drop))
+- Table (Creation, View(Select), Delete(Drop), Alter)
+	- AlterTable: DropColumn, AddColumn, RenameColumn, AlterColumnDatatype
+	- Constraints: NOT NULL, UNIQUE, PK, FK, DEFAULT, CHECK, AUTO INCREMENT
+- Views (virtual table,  based on the result-set of an SQL statement, Updating A view )
+
+
+
+
+
+
+
+SQL Keywords:
+
+- SELECT 	(Columns to retrieve, comma-separated or *)
+- FROM 		(Source table(s) to query from)
+- WHERE 	(Filter rows based on conditions)
+- AS 		(Column/table aliasing or type casting)
+- ADD 		(Alter Table, Adding constraints)
+- INSERT INTO 	(Add new rows to table)
+- UPDATE 	(Modify existing data in table)
+- DELETE 	(Remove rows from table)
+- CREATE 	(Define new database objects)
+- ALTER 	(Modify existing database objects like table)
+- DROP 		(Remove database objects permanently)
+- DISTINCT	(Return unique values only)
+- LIKE 		(Pattern matching in text fields)
+- BETWEEN 	(Range filtering)
+
+
+- IN 		(Multiple possible value matching)
+- NULL 		(Represent missing/unknown data)
+- TRUNCATE	(Deletes data from a table, and Resets it)
+- Joins 	(Inner,Left,Right,Full,Self)
+- Union		(Returns Distinct Values from two Select Queries)
+- Union All	(Returns All Values from two Select Queries)
+- GroupBy	(Making Groups)
+- Having 	(to filter groups after GROUP BY)
+- Exists 	(After Where, boolean if A subquery returns any result)
+
+
+- Any
+- All
+- Select Into	(Copies data from one Table to New Table)
+- Insert Into Select (Copies data from one Table to an existing Table)
+
+with where u can't use aggregates
+
+
+Today's Report:
+ASP .NET Core:
+Dependency Injection:
+	- Loose Coupling, A Design Pattern
+	- Creation of dependent Objects ouside of class and then passing it to class
+	- DI involves 3 Classes
+		- Client Class (Dependent Class) Uses => Service Class (Dependency) 
+		- Injector Class Injects ( Service Class Object into Client Class)
+IOC Container:
+	- Frameword for implementing automatic dependency injection
+	- Manages Object Creation/Disposing, Its Life-time and Injection to classes
+
+Thoery:
+Step1: Application Service(Custom Dependency) Must first be registered in IOC Container
+ 
+
+- 2 types of Services in ASP.net Core
+	- Framework Service: Built-in, A part of ASP.net Core
+	- Application Service: Custom
+
+- Life-Time
+	- Scoped 	- object Created for Duration of Single HTTPS Request
+	- Singleton	- New Instances Every time when injected, even within Same Request
+	- Transient 	- object Created Once and share for Duration of whole Application
+
+
+ADO .NET:
+- Microsoft Data Access technology
+- Connects the .net application with different Data sources
+Today's Report:
+- CRUD on Student Table
+Components Practiced:
+- Connection
+	- Establishes a connection to a data source (Database)
+	- Provides method to open/close the database connection
+- Command
+	- a command that is executed against the databse
+	- SQLCommand, Command Object used for executing SQL Queries
+	- Different Data sources have different command object keywords
+	- Adding Parameter to the Sql query
+
+- DataReader
+	- Efficiently reads the data from Database, Fast and memory Efficient
+	- Read Only component
+	- Used to get read data quickly without modifying it.
+
+- DataAdapter
+	- Acts as bridge/messenger between database and program/Database
+	- Fetches data to fill a DataSet and saves changes from the DataSet back to the database
+	- to fill the dataTable/DataSet and also to update the DataSource 
+
+- DataTable
+	- Represents a table of Data
+	- Initially The dataTable is empty , no columns and constraints
+	- Allows to store/manipulate tabular data, can also have relationships and constraint to maintain data integrity
+	- No relation can be defined here
+
+- Dataset
+	- offline copy of data stored in your computer's memory.
+	- hold multiple tables and lets you work with the data without being connected to the database.
+	- Can define Relation between tables
+	- container of DataTables
+
+
+
+
+ASP.Net Core:
+Entity Framework:
+- To automate all these database-related(Connection, Command, Ecexecution Using DataAdapter/DaraReader and DateSets/DataTables) activities for our application
+- For this purpose we provide EntityFramework with the necessary Details
+- It is an open Source O/RM (Object-Relational-Mapping) Framework
+- Helps developers work with databases using C# objects instead of writing SQL queries
+- It saves time by automatically handling the database operations (like insert, update, delete, fetch)
+- Developers don’t have to write a lot of data-access code.
+
+Entities:
+- Entity are mapped to the corresponsding table in the Database
+- EF keeps track of these entities So that it can perform DB CRUD operation automatically based on the object status
+
+Domain Classes:
+- Core Functionality, ensuring that Business Rules are properly Implemented
+
+DB Context Class:
+- an Instance of it is session with the DB
+- used For Query and saving Instances of entity to DB
+- It Performs: 
+	-- Managing DB Connection		-- Configure Model and RelationShips
+	-- Querying Database			-- Save Data to DB
+	-- Configure Change Tracking		-- Caching
+	-- Managing Transaction
+
+EnsureCreated()
+Domain Classes --> Included --> DBContext (Class of EF) --> Entity (Now it can be tracked by EF)
+
+- Two ways to create a Database and Schema
+	-- EnsureCreated() method  (Commonly Used)	
+	-- Migration API ()
+
+Migration
+- To keep the database schema in Sync
+- Microsoft.EntityFrameworkCore.Tools need to be installed
+- provides migrations commands to create, update, or remove tables and other DB objects based on the entities and configurations.
+- after first migration, it creates a folder of it in project which also has ModelSnapshotFiles
+- Domain Classes --> EF Core API Builds --> EF Core Models --> Migrations --> Database
+
+Generating SQL Scripts:
+- A migration generates SQL commands these commands are called Migration Scripts
+- EF can automatically run these scripts to update your database
+- tell the database exactly what to change so it matches your models
+
+Today's Report
+- Installing EF Package using NUGet
+- Domain Classes(Student,Grade) Creation 		//Student Has one Grade, One Grade has many Studentss
+- Configuring DB Connection
+- Create Entities and DBContext
+- Migration And Sql Query
+
+
+
+Today's Report:
+- Saving Data (Insertion, Updation, Deletion)
+- EF Querying (Using Lambda Expression for Applying conditions)
+- Code first approach Vs DB First Approach
+- Disconnected State(Insert,Update, Delete)
+- Routing (How it works)
+- Any 	(
+	Lambda Expression For any condition, TRUE if a single condition true else false
+	Without Lambda Expression checks if not Empty then TRUE else false, NullException on Null
+	)
+- All	(
+	Lambda Expression For any condition, TRUE if all condition true else false
+	Without Lambda Expression TRUE on Empty
+	)
+- RelationShips (One to One, One to Many, Many to Many)
+	- One to Many Relationships(CRUD Ongoing)
+
+Today's Report:
+- RelationShips (One to One, One to Many,)
+	- One to Many Relationships(CRUD)
+ 	- One to One Relationship (CRUD)
+- Studied/Implemented
+	- ModelViewClass (Done)
+	- DTO (Done)
+	- 3 Layer Architecture (Implementation Ongoing(CR Done | UD Remaining))
+
+
+
+
+
+
+
+
+
+Learnings:
+- One to Many Relationships
+	- In the dependent Entity add a Foreign key Property with naming Convention as:[Referenced Entity|RE Primary Key i.e. Id]
+	- At the other end, the Referenced entity also includes a collection navigation property ICollection<Dependent Entity>.
+
+- One to One RelationShips:
+	- 
+
+
+- Model View Class: 
+	- A model class that will represent/Define the data a View will Display
+	- ViewModel is specifically for presentation Layer
+	- Can Combine properties from Multiple models
+	- It acts as a DTO(Data transfer Object)
+	- Steps
+		- Define the ViewModel
+		- Populate the ViewModel with data in Controller
+		- Pass the viewModel to the view
+		- Use the ViewModel in the View
+
+- DTO
+	- Data Transfer Objects
+	- a design pattern that gives flexibility
+	- transfer data independently between different Layers
+	- to maintain a clear separation between different layers of the application
+	- increasing Code readablilty as only having attributes and no business logic
+	- for loose coupling
+
+- 3 Layer Architecture
+	- Also known as 3 tier Architecture
+	- A way of Structuring your Application into 3 seperate layers
+ 	- to seperate responsibilities so that the code is easy to understand
+	- Layers:
+		- Presentation Layer
+			- The top Layer that interacts with the user
+			- Accept Input from User, Send the input to business layer for processing, Show result to the user
+			- Classes/Files: Controllers, Views, API endpoints(a specific URL, serves as a point for applications to access resources from a web service.)
+		- Business Layer
+			- Middle Layer , that contains the Main Logic
+			- Process input from the Presentation Layer, Apply (B_rules, Validations, Calculations),Decide what Data to Fetch/Update but not HOW.
+			- Classes/Files: Service, Managers
+		- Data Access Layer:
+			- The bottom Layer that talks to the Database
+			- implemented with EF_Core, Dapper or ADO.net
+			- Role: Interact with DB for CRUD, Sending Data data back to Business Layer
+			- Classes/Files: Repositories 
+
+
+Today's Report:
+- RelationShips
+	- Many to Many(Student | Course) CRUD
+
+
+
+
+
+- Studied/Implemented
+	- 3 Layer Architecture(CRUD)
+- Configuration
+	- Domain classes can be configured/Customized if we dont want the conventions, 
+	- This can be done Using two ways
+		- Using Annotation of Domain Class Members(Properties)
+		- Using Fluent API
+	- 
+
+
+
+- Select
+	- A LINQ method that transforms each item in the list to something new
+- Task
+	- A unit of work that will finish in the future
+	- an object that represents a work running in the background
+	- 
+- Async
+	- Making the method to run Asynchronously
+	- To make task independent and run concurrently without halting the program progress waiting for the processing of Long-running task
+	- So that the application may not freeze while waiting for a task to be completed
+- Include 
+	- Load related/Child Data with the main entity in one go
+	- include brings the first level of related data and by using ThenInclude() it bring second level of data meaning (Child of Child Entity)
+
+
+
+
+
+/MyApp.Web/                      <-- root ASP.NET Core project
+│  Program.cs
+│  appsettings.json
+│
+├─ Controllers/                  <-- Presentation Layer
+│   ├─ HomeController.cs
+│   └─ StudentController.cs
+│
+├─ ViewModels/ or DTOs/          <-- DTOs/ViewModels for controllers
+│   └─ StudentDto.cs
+│
+├─ Views/                        <-- Razor views (if MVC)
+│   └─ Student/
+│       └─ Index.cshtml
+│
+├─ Services/                     <-- Business Logic Layer (BLL)
+│   ├─ Interfaces/
+│   │   └─ IStudentService.cs
+│   └─ StudentService.cs
+│
+├─ Repositories/                 <-- Data Access Layer (DAL)
+│   ├─ Interfaces/
+│   │   └─ IStudentRepository.cs
+│   └─ StudentRepository.cs
+│
+├─ Data/                         <-- EF Core DbContext & migrations
+│   ├─ AppDbContext.cs
+│   └─ Migrations/
+│
+├─ Models/                       <-- Domain models / entities
+│   └─ Student.cs
+│
+└─ Helpers/ (optional)
+    └─ MappingProfile.cs         <-- AutoMapper profile (if used)
+
+
+
+-- Today's Report:
+- Removed Entities from ViewModels and defined Seperately ViewModels of Entities and then using them
+- Using DTO for transfering data of Student between the layers
+- extra code Remove
+- id ki based per add or Updating
+- while adding courses , remove unselected and add newly selected, instead of deleting all then adding all
+- Studying Queries
+
+
+To Learn:
+Union Intersection
+
+
+- Select: to select Specific Columns and to transform data into a different Form
+- Where:  to apply conditions
+- Order By: to sort the data
+- Joins: used to combine data from multiple tables
+- Include: Used to load related data from other tables (Use only when u neeed related data)
+- GroupBy: Used for grouping Data, often combined with aggregate functions
+- Aggregate Queries (Sum,Count,Average): Aggregate function that can be applied on a column
+- Any All: Condition Checking Queries
+- FromSqlRaw: in this u can directly give Sql Query
+- Union: Combines two columns of similar type data, but distinctly
+- Intersection: finds the similar data between two columns of similar type of data
+- Except: Select data from one column after difference from the second column
+
+
+
+- Select New{column1,coulmn2,...}
+
+
+- Include VS Join
+- Load related Entities based on navigation property		- Combine two or more tables Based on a key
+- Returns the main entity with relative data filled		- returns combined result
+- used when need to Load related data				- when need to join multiple unrelated table data
+- uses left join						- uses inner join
+- Usually Tracked						- Usually not tracked
+
+
+ToDo:
+As tracking
+as not tracking
+pagination 
+Group by method using From query way
+Seed Data
+IQueryable/ IEnumerable
+
+Pagination on IQueryable,
+Pagination on Database, Entity Level
+
+
+Today's Report:
+- Group by method using From query way
+- Studied IQueryable/IEnumerable
+- Using IQueryable, apply Pagination
+- Using SeededData for adding initial Data to the database using migration
+- Learned/Implemented AsTracking & AsNoTracking EF Methods
+
+
+
+
+
+
+Learned:
+- group sc by st.FirstName into g
+	- In this line , we are grouping sc objects by FirstName of st objects
+	- each g has a key by which it is grouped, and a collection of StudentCourses
+
+- IEnumerable:
+	- IEnumerable is an interface that defines one method, Get INumerator , which returns IEnumerator Interface
+	- IEnumerable can be used with a forEach statement
+	- it allows read only access
+	- IEnumerator:
+		- two methods:
+		- GetNext(//Sets the enumerator to the next element of collection, if success returns true else returns false) and 
+		- Reset(//Sets the enumerator to its initial position, which is before the first element of the list )
+		- Current(//returns the current element in the collection)
+	- To loop through a collection of classes or lists
+- IQueryAble
+	- Interface, provides functionality to evaluate queries against a specific data Source, where the type of data is not specified
+	- Lets one build LINQ , that are not run immediately but translate into SQL and executed on the Database when needed
+	- It inherits the IEnumerable interface so yes it can also iterate over the elements of a collection
+	- it is not an actual collection, its a query definition like a blueprint of what data to fetch
+	- It is a query not yet executed
+
+- IEnumerable works in memory
+- IQueryable works in Database
+
+- Pagination:
+	- for a large number of rows in Database , in place of loading all of the Data at once,
+	 which will take more time, we might just show or fetch 10 to 20 records and show page buttons
+
+- SeedData:
+	- Predefined Data that automatically populates the Database Tables during Database Update/Create by using migrations
+	- to add default values (Admin users, Roles, Lookup Tables), to make the app useable right after startup
+	- if manually added data to the DB then EF will not touch it
+- AsTracking:
+	- A method, in EF Core that tells the EF to track Changes made to the data it loads from the database
+	- Method added during QueryFormation(In DAL), 
+	- when Query executed with tracking Enabled, EF keeps their records and if you modify them , it automatically detects the changes made to them when calling SaveChanges()
+	- When query Executed , by default the Tracking is Enabled
+
+AsNoTracking:
+	- Similar to AsTracking() method but in Functionality completely opposite
+	- it improves Read operations performance
+	- Entry() function/Method provides Access to change tracking status
+	- 
+
+Today's Report:
+- OneToMany RelationShips
+	- Added Table Grades with Seeded Data using migration
+	- Made CRUD
+- OneToOne RelationShips
+	- Added Table StudentAddresses using migration
+	- Made CRUD
+- Learned/Implemented to execute multiple Queries using a single query
+
+
+
+GroupBy:
+	- Result is a Tkey, TValue Pair here, tkey is the value by which the Query is grouped by and Tvalues are result
+	- so when tkey = 1 it means true and all rows are grouped by a single key have all records
+	- useful when you want to use aggregate functions in a single query and return the orignal collection also
+	- as in our case we gave a constant, so all the records were grouped as one.
+
+
+
+ 
+ToDo:
+- File I/O Serialization
+	- Reading/Writing files
+	- JSON XML serialization
+
+
+Today's Report:
+ToDo:
+- File I/O Serialization
+	- Reading/Writing files
+	- Serialization/DeSerialization
+	- File Handling/Upload/Download(Ongoing)
+ToDo:
+- File Handling/Upload/Download(Ongoing)
+- Dapper
+
+File save
+file upload
+
+
+-Studied:
+	- File I/O Serialization: Saving the state of an object to a medium storage such as a file and later restore the object from the File(Deserialization)
+	- Serialization: The conversion of an object or more objects into a stream of bytes or a structured format(XML, JSon) that can be stored/Transmitted
+	- Deserialization: The reverse process of reconstructing an object from its serialized state
+	- File I/O: Operation that involve Reading/Writing Files on a storage device 
+
+- StringWriter: In-Memory text container like a temporary file, Temporary Text Container in memory for the XML output
+- constructor is mandatory for XML serialization/deserialization
+- creates an empty object first, and then fills in the property values one by one from the file, this is the reason why a parameterless constructor is required
+- PersonRequest Model Needed for: as a messenger between frontend and backend
+
+
+
+- string jsonString = JsonSerializer.Serialize(person, options);
+- using (var writer = new StringWriter())
+	{
+		xmlSerializer.Serialize(writer, person);
+
+DE:
+- var person = JsonSerializer.Deserialize<Person>(jsonString, options);
+- var person = (Person)xmlSerializer.Deserialize(reader);
+
+
+- System.IO.File.WriteAllText(filePath, xmlString);
+- GUID: Global unique identifier
+
+
+Today's Report:
+- File Handling/Upload/Download
+
+
+Learned:
+- Metadata.json: It acts as a file catalog, to keep the track of files, without it you might lose track of the files
+- getFilesMetadata: It read the json file and returns a list of objects
+- Using Serialization and deserialization to update the Metadata.json file
+
+- FileStream: a class that lets us to Read/write data to a file
+- creating a new file on the path given
+- FileMode.Create: It means if the file doesn't exist create it, if it exists overwrite it
+- CopyTO: copy the contents of the uploaded file
+
+- 🟢 return File(fileBytes, "text/plain", $"{file.OriginalName}.txt");
+- This returns the file as downloadable response to the user
+ReadAllBytes(filePath)
+- Reads the entire file from disk into a byte array
+- $('#fileForm')[0]     // → Actual <form> DOM element // Real Form Element
+
+- processData = False //to not convert your data into a query string
+- Window(Object).Function() : expose JavaScript functions to the global scope so they can be called from HTML onclick attributes
