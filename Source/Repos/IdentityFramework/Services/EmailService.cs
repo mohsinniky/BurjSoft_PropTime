@@ -64,6 +64,8 @@ namespace IdentityFramework.Services
                 var senderEmail = _configuration["EmailSettings:SenderEmail"];
                 var senderName = _configuration["EmailSettings:SenderName"];
                 var password = _configuration["EmailSettings:Password"];
+
+                //Create a new email message object
                 using var message = new MailMessage
                 {
                     From = new MailAddress(senderEmail!, senderName),
@@ -71,13 +73,17 @@ namespace IdentityFramework.Services
                     Body = body,
                     IsBodyHtml = isBodyHtml
                 };
+                //Add the recipient email address
                 message.To.Add(new MailAddress(toEmail));
 
+                //configuring the SMTP client that will actually send the email
                 using var client = new SmtpClient(smtpServer, smtpPort)
                 {
                     Credentials = new NetworkCredential(senderEmail, password),
+                    // For secure Communication
                     EnableSsl = true
                 };
+                // Send the email asynchronously
                 await client.SendMailAsync(message);
             }
             catch (Exception ex)
