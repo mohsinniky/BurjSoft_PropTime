@@ -1,5 +1,6 @@
 using IdentityFramework.Data;
 using IdentityFramework.Models;
+using IdentityFramework.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +13,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 //Adding Services for Identity Framework For Users and Roles
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+// Set token valid for 30 minutes
+builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>
+{
+    options.TokenLifespan = TimeSpan.FromMinutes(30);
+});
+// Registering Custom Services
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 var app = builder.Build();
 
