@@ -3,28 +3,32 @@
   "WorkspaceRootPath": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\viewmodels\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:viewmodels\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\views\\roles\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:views\\roles\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\views\\roles\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:views\\roles\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\services\\roleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:services\\roleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\controllers\\rolescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:controllers\\rolescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\views\\roles\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:views\\roles\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\views\\roles\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:views\\roles\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\views\\roles\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:views\\roles\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\views\\shared\\_pager.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -33,18 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\services\\roleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:services\\roleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\services\\iaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -87,71 +79,45 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "RegisterViewModel.cs",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\ViewModels\\RegisterViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\RegisterViewModel.cs",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\ViewModels\\RegisterViewModel.cs",
+              "RelativeToolTip": "ViewModels\\RegisterViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T15:57:02.579Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Views\\Roles\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Roles\\Index.cshtml",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Views\\Roles\\Index.cshtml",
+              "RelativeToolTip": "Views\\Roles\\Index.cshtml",
+              "ViewState": "AgIAADkAAAAAy8zMzMwYwKoAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-21T14:54:21.646Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGEAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-10-21T13:49:06.327Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Views\\Roles\\Details.cshtml",
-              "RelativeDocumentMoniker": "Views\\Roles\\Details.cshtml",
-              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Views\\Roles\\Details.cshtml",
-              "RelativeToolTip": "Views\\Roles\\Details.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-21T13:48:17.098Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Views\\Roles\\Edit.cshtml",
-              "RelativeDocumentMoniker": "Views\\Roles\\Edit.cshtml",
-              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Views\\Roles\\Edit.cshtml",
-              "RelativeToolTip": "Views\\Roles\\Edit.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-21T13:46:42.213Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Views\\Roles\\Create.cshtml",
-              "RelativeDocumentMoniker": "Views\\Roles\\Create.cshtml",
-              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Views\\Roles\\Create.cshtml",
-              "RelativeToolTip": "Views\\Roles\\Create.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-21T13:45:10.871Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Views\\Roles\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Roles\\Index.cshtml",
-              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Views\\Roles\\Index.cshtml",
-              "RelativeToolTip": "Views\\Roles\\Index.cshtml",
-              "ViewState": "AgIAAGMAAAAAAAAAAAAAAAEAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-21T13:42:53.595Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "_Pager.cshtml",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Views\\Shared\\_Pager.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Pager.cshtml",
@@ -164,33 +130,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "RolesController.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Controllers\\RolesController.cs",
               "RelativeDocumentMoniker": "Controllers\\RolesController.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Controllers\\RolesController.cs",
               "RelativeToolTip": "Controllers\\RolesController.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAwwH0AAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAHwAAAAAZmZmZmYKwKUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-21T13:37:19.094Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 1,
               "Title": "RoleService.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Services\\RoleService.cs",
               "RelativeDocumentMoniker": "Services\\RoleService.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Services\\RoleService.cs",
               "RelativeToolTip": "Services\\RoleService.cs",
-              "ViewState": "AgIAAKAAAAAAZ2ZmZmb2v74AAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAMzMzMzMbwDoAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-21T13:32:30.545Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 12,
               "Title": "ApplicationUser.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Models\\ApplicationUser.cs",
               "RelativeDocumentMoniker": "Models\\ApplicationUser.cs",
@@ -203,7 +169,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 10,
               "Title": "EmailService.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Services\\EmailService.cs",
               "RelativeDocumentMoniker": "Services\\EmailService.cs",
@@ -216,33 +182,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 3,
               "Title": "AccountService.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Services\\AccountService.cs",
               "RelativeDocumentMoniker": "Services\\AccountService.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Services\\AccountService.cs",
               "RelativeToolTip": "Services\\AccountService.cs",
-              "ViewState": "AgIAAH8AAABAZ2ZmZmYSwJ0AAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAIIAAAAAAAAAAAAhwJMAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-20T13:54:12.769Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 4,
               "Title": "AccountController.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Controllers\\AccountController.cs",
               "RelativeToolTip": "Controllers\\AccountController.cs",
-              "ViewState": "AgIAAJcAAACAmZmZmZkpwLsAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAJsAAAAAAQAAAAAkwLUAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-20T11:59:39.726Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Program.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -255,7 +221,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 11,
               "Title": "appsettings.json",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -268,7 +234,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 14,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
@@ -281,7 +247,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 13,
               "Title": "IdentityFramework",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\IdentityFramework.csproj",
               "RelativeDocumentMoniker": "IdentityFramework.csproj",
@@ -294,7 +260,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 9,
               "Title": "IAccountService.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Services\\IAccountService.cs",
               "RelativeDocumentMoniker": "Services\\IAccountService.cs",

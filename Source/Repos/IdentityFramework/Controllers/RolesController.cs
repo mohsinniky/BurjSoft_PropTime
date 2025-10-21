@@ -14,6 +14,7 @@ namespace ASPNETCoreIdentityDemo.Controllers
             _roleService = roleService;
             _logger = logger;
         }
+
         // GET: /Roles
         [HttpGet]
         public async Task<IActionResult> Index([FromQuery] RoleListFilterViewModel filter)
@@ -81,9 +82,9 @@ namespace ASPNETCoreIdentityDemo.Controllers
         {
             try
             {
-                var vm = await _roleService.GetForEditAsync(id);
-                if (vm == null) return NotFound();
-                return View(vm);
+                var viewModel = await _roleService.GetForEditAsync(id);
+                if (viewModel == null) return NotFound();
+                return View(viewModel);
             }
             catch (Exception ex)
             {

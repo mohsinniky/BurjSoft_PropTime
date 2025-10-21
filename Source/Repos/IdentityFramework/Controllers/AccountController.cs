@@ -174,7 +174,6 @@ namespace IdentityFramework.Controllers
             }
         }
 
-
         //Ajax Validation
         [AllowAnonymous]
         [HttpGet]

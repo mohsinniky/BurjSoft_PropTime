@@ -20,12 +20,12 @@ namespace IdentityFramework.Services
         // Retrieves a paginated list of roles based on filter criteria.
         public async Task<PagedResult<RoleListItemViewModel>> GetRolesAsync(RoleListFilterViewModel filter)
         {
-            // Start with all roles (No Tracking = better performance for read-only queries)
             var query = _roleManager.Roles.AsNoTracking();
             // Apply search filter (if provided)
             if (!string.IsNullOrWhiteSpace(filter.Search))
             {
                 var s = filter.Search.Trim();
+
                 query = query.Where(r => r.Name!.Contains(s) || (r.Description ?? "").Contains(s));
             }
             // Apply Active/Inactive filter (if provided)
@@ -117,7 +117,7 @@ namespace IdentityFramework.Services
                     Description = "This role was modified by another user while you were editing. Please reload the page and try again."
                 });
             }
-            // Ensure name is still unique (excluding current role)
+            // Ensure name is still unique
             if (!string.Equals(role.Name, model.Name, StringComparison.Ordinal))
             {
                 var dup = await _roleManager.FindByNameAsync(model.Name);
@@ -162,8 +162,8 @@ namespace IdentityFramework.Services
                 return null;
             // Query all users in this role via junction table (IdentityUserRole)
             var usersQuery =
-            from ur in _dbContext.Set<IdentityUserRole<Guid>>().AsNoTracking() //Left table - User Roles
-            join u in _dbContext.Set<ApplicationUser>().AsNoTracking() //Right table - Users
+            from ur in _dbContext.Set<IdentityUserRole<Guid>>().AsNoTracking()
+            join u in _dbContext.Set<ApplicationUser>().AsNoTracking() 
             on ur.UserId equals u.Id
             where ur.RoleId == id
             select new UserInRoleViewModel
