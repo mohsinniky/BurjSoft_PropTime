@@ -12,7 +12,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SQLServerIdentityConnection")));
 
 //Adding Services for Identity Framework For Users and Roles
-builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
+{
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 8;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+
+    options.User.RequireUniqueEmail = true;
+})
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
@@ -20,6 +28,12 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
 builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>
 {
     options.TokenLifespan = TimeSpan.FromMinutes(30);
+});
+
+// Setting up the redirection path of unauthorized users
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath= "/Account/Login";
 });
 // Registering Custom Services
 builder.Services.AddScoped<IAccountService, AccountService>();

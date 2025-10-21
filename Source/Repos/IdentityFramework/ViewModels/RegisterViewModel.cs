@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace IdentityFramework.ViewModels
 {
@@ -13,6 +14,7 @@ namespace IdentityFramework.ViewModels
         public string? LastName { get; set; }
         [Required(ErrorMessage = "Email Id is Required")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [Remote(action: "IsEmailAvailable", controller: "Account")]
         public string Email { get; set; } = null!;
         [DataType(DataType.Date)]
         [Display(Name = "Date of Birth")]

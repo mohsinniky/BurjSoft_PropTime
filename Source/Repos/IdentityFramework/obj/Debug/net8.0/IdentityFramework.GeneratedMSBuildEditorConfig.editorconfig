@@ -64,8 +64,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[G:/BurjSoft_PropTime/Source/Repos/IdentityFramework/Views/Home/NonSecureMethod.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxOb25TZWN1cmVNZXRob2QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [G:/BurjSoft_PropTime/Source/Repos/IdentityFramework/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/BurjSoft_PropTime/Source/Repos/IdentityFramework/Views/Home/SecureMethod.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZWN1cmVNZXRob2QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/BurjSoft_PropTime/Source/Repos/IdentityFramework/Views/Shared/Error.cshtml]

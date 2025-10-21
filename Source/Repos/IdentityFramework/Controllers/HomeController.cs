@@ -1,6 +1,7 @@
-using System.Diagnostics;
 using IdentityFramework.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace IdentityFramework.Controllers
 {
@@ -19,6 +20,17 @@ namespace IdentityFramework.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult SecureMethod()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public IActionResult NonSecureMethod()
         {
             return View();
         }

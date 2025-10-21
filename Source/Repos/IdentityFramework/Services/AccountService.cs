@@ -144,5 +144,21 @@ namespace IdentityFramework.Services
             var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
             return encodedToken;
         }
+
+        public async Task<(bool IsAvailable, string Message)> IsEmailAvailableAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null)
+            {
+                return (true, "Email is available.");
+            }
+            else
+            {
+                return (false, $"Email {email} is already in use.");
+            }
+        }
+
+
     }
 }

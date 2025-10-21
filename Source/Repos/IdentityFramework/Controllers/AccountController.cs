@@ -1,5 +1,6 @@
 ﻿using IdentityFramework.Services;
 using IdentityFramework.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -57,7 +58,11 @@ namespace IdentityFramework.Controllers
         {
             try
             {
-                if (userId == Guid.Empty || string.IsNullOrEmpty(token) || !userId.HasValue)
+                if (!userId.HasValue)
+                {
+                    return BadRequest("UserId was not given fo email confirmation");
+                }
+                if (string.IsNullOrEmpty(token))
                     return BadRequest("Invalid email confirmation request.");
                 var result = await _accountService.ConfirmEmailAsync(userId.Value, token);
 
@@ -76,8 +81,9 @@ namespace IdentityFramework.Controllers
         }
         // GET: /Account/Login
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string? ReturnUrl = null)
         {
+            ViewData["ReturnUrl"] = ReturnUrl;
             return View();
         }
         // POST: /Account/Login
@@ -92,9 +98,9 @@ namespace IdentityFramework.Controllers
                 var result = await _accountService.LoginUserAsync(model);
                 if (result.Succeeded)
                 {
-                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    if (!string.IsNullOrEmpty(returnUrl))
                         return Redirect(returnUrl);
-                    return RedirectToAction("Profile", "Account"); ;
+                    return RedirectToAction("Index", "Home"); ;
                 }
                 if (result.IsNotAllowed)
                     ModelState.AddModelError("", "Email is not confirmed yet.");
@@ -166,6 +172,20 @@ namespace IdentityFramework.Controllers
                 ModelState.AddModelError("", "An unexpected error occurred. Please try again later.");
                 return View(model);
             }
+        }
+
+
+        //Ajax Validation
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> IsEmailAvailable(string email)
+        {
+            var result = await _accountService.IsEmailAvailableAsync(email);
+
+            if (result.IsAvailable)
+                return Json(true); 
+            else
+                return Json(result.Message); 
         }
     }
 }

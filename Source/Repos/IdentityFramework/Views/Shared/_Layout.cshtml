@@ -30,9 +30,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("About", "Home")">About</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="SecureMethod">Secure</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="NonSecureMethod">Non Secure</a>
+                    </li>
                 </ul>
-
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     @if (User.Identity?.IsAuthenticated == true)
                     {

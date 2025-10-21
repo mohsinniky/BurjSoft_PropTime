@@ -11,5 +11,6 @@ namespace IdentityFramework.Services
         Task LogoutUserAsync();
         Task SendEmailConfirmationAsync(string email);
         Task<ProfileViewModel> GetUserProfileByEmailAsync(string email);
+        Task<(bool IsAvailable, string Message)> IsEmailAvailableAsync(string email);
     }
 }
