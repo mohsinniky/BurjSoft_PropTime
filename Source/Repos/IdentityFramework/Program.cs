@@ -35,9 +35,13 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath= "/Account/Login";
 });
+
 // Registering Custom Services
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
+
+
 
 var app = builder.Build();
 
