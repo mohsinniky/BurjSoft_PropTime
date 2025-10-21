@@ -53,13 +53,14 @@ namespace IdentityFramework.Controllers
         }
         // GET: /Account/ConfirmEmail
         [HttpGet]
-        public async Task<IActionResult> ConfirmEmail(Guid userId, string token)
+        public async Task<IActionResult> ConfirmEmail(Guid? userId, string token)
         {
             try
             {
-                if (userId == Guid.Empty || string.IsNullOrEmpty(token))
+                if (userId == Guid.Empty || string.IsNullOrEmpty(token) || !userId.HasValue)
                     return BadRequest("Invalid email confirmation request.");
-                var result = await _accountService.ConfirmEmailAsync(userId, token);
+                var result = await _accountService.ConfirmEmailAsync(userId.Value, token);
+
                 if (result.Succeeded)
                     return View("EmailConfirmed");
                 foreach (var error in result.Errors)
