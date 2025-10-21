@@ -21,6 +21,7 @@ namespace IdentityFramework.Controllers
         {
             return View();
         }
+
         // POST: /Account/Register
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -61,7 +62,6 @@ namespace IdentityFramework.Controllers
                 var result = await _accountService.ConfirmEmailAsync(userId, token);
                 if (result.Succeeded)
                     return View("EmailConfirmed");
-                // Combine errors into one message or pass errors to the view
                 foreach (var error in result.Errors)
                     ModelState.AddModelError("", error.Description);
                 return View("Error");
