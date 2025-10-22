@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
-namespace IdentityFramework.Models
+namespace IdentityFramework.ViewModels.Users
 {
     public class UserCreateViewModel
     {

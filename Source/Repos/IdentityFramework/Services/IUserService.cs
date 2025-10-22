@@ -1,5 +1,4 @@
-﻿using IdentityFramework.Models;
-using IdentityFramework.ViewModels;
+﻿using IdentityFramework.ViewModels;
 using IdentityFramework.ViewModels.Users;
 using Microsoft.AspNetCore.Identity;
 

@@ -1,4 +1,4 @@
-﻿namespace IdentityFramework.Models
+﻿namespace IdentityFramework.ViewModels.Users
 {
     public class UserListItemViewModel
     {
