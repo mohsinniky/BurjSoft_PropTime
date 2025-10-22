@@ -36,5 +36,6 @@ namespace IdentityFramework.Data
             );
         }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<ClaimMaster> ClaimMasters { get; set; }
     }
 }

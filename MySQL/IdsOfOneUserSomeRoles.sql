@@ -1,3 +1,4 @@
+/*
 Select * from Users
 -- 0E3520F9-AA09-4D53-8E7E-08DE107A6969  TestId -- User Id
 -- C8D89A25-4B96-4F20-9D79-7F8A54C5213D  Admin
@@ -10,3 +11,8 @@ where UserId = '0E3520F9-AA09-4D53-8E7E-08DE107A6969';
 
 Select * from UserRoles
 Select * From Roles
+
+*/
+Select * From ClaimMasters;
+Select * From UserClaims;
+Select * From RoleClaims;

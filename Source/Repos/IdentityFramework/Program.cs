@@ -1,3 +1,4 @@
+using ASPNETCoreIdentityDemo.Services;
 using IdentityFramework.Data;
 using IdentityFramework.Models;
 using IdentityFramework.Services;
@@ -42,6 +43,9 @@ builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IClaimsService, ClaimsService>();
+
+
 
 
 
