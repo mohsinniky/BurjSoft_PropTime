@@ -4,6 +4,7 @@ using IdentityFramework.ViewModels;
 using IdentityFramework.ViewModels.Roles;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace IdentityFramework.Services
 {
@@ -160,29 +161,40 @@ namespace IdentityFramework.Services
             var role = await _roleManager.Roles.AsNoTracking().FirstOrDefaultAsync(r => r.Id == id);
             if (role == null)
                 return null;
+
             // Query all users in this role via junction table (IdentityUserRole)
             var usersQuery =
-            from ur in _dbContext.Set<IdentityUserRole<Guid>>().AsNoTracking()
-            join u in _dbContext.Set<ApplicationUser>().AsNoTracking() 
-            on ur.UserId equals u.Id
-            where ur.RoleId == id
-            select new UserInRoleViewModel
-            {
-                Id = u.Id,
-                Email = u.Email!,
-                FirstName = u.FirstName,
-                LastName = u.LastName,
-                IsActive = u.IsActive,
-                PhoneNumber = u.PhoneNumber
-            };
+                from ur in _dbContext.Set<IdentityUserRole<Guid>>().AsNoTracking() //Left table - User Roles
+                join u in _dbContext.Set<ApplicationUser>().AsNoTracking() //Right table - Users
+                on ur.UserId equals u.Id
+                where ur.RoleId == id
+                select new UserInRoleViewModel
+                {
+                    Id = u.Id,
+                    Email = u.Email!,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    IsActive = u.IsActive,
+                    PhoneNumber = u.PhoneNumber
+                };
+
             // Get total user count
             var total = await usersQuery.CountAsync();
+
             // Get current page of users
             var users = await usersQuery
-            .OrderBy(u => u.Email)
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
+                .OrderBy(u => u.Email)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            //fetch the role claims
+            var claims = await _roleManager.GetClaimsAsync(role);
+            var claimTexts = claims
+                .OrderBy(c => c.Type).ThenBy(c => c.Value)
+                .Select(c => $"{c.Type}: {c.Value}")
+                .ToList();
+
             // Return role details with users
             return new RoleDetailsViewModel
             {
@@ -192,6 +204,7 @@ namespace IdentityFramework.Services
                 IsActive = role.IsActive,
                 CreatedOn = role.CreatedOn,
                 ModifiedOn = role.ModifiedOn,
+                Claims = claimTexts, //Populate the Role Claims in the RoleDetailsViewModel
                 Users = new PagedResult<UserInRoleViewModel>
                 {
                     Items = users,
@@ -200,6 +213,65 @@ namespace IdentityFramework.Services
                     PageSize = pageSize
                 }
             };
+        }
+
+        public async Task<RoleClaimsEditViewModel?> GetClaimsForEditAsync(Guid roleId)
+        {
+            var role = await _roleManager.Roles.AsNoTracking().FirstOrDefaultAsync(r => r.Id == roleId);
+            if (role == null) return null;
+
+            // Allowed options: Active + (Role or Both) from ClaimMasters
+            var allClaims = await _dbContext.ClaimMasters.AsNoTracking()
+                .Where(c => c.IsActive && (c.Category == "Role" || c.Category == "Both"))
+                .OrderBy(c => c.ClaimType).ThenBy(c => c.ClaimValue)
+                .ToListAsync();
+
+            var current = await _roleManager.GetClaimsAsync(role);
+
+            return new RoleClaimsEditViewModel
+            {
+                RoleId = role.Id,
+                RoleName = role.Name ?? "",
+                Claims = allClaims.Select(c => new RoleClaimCheckboxItem
+                {
+                    ClaimId = c.Id,
+                    ClaimType = c.ClaimType,
+                    ClaimValue = c.ClaimValue,
+                    Category = c.Category,
+                    Description = c.Description,
+                    IsSelected = current.Any(rc => rc.Type == c.ClaimType && rc.Value == c.ClaimValue)
+                }).ToList()
+            };
+        }
+
+        public async Task<IdentityResult> UpdateClaimsAsync(Guid roleId, IEnumerable<Guid> selectedClaimIds)
+        {
+            var role = await _roleManager.FindByIdAsync(roleId.ToString());
+            if (role == null)
+                return IdentityResult.Failed(new IdentityError { Code = "RoleNotFound", Description = "Role not found." });
+
+            // Only accept active Role/Both claims
+            var allowed = await _dbContext.ClaimMasters
+                .Where(c => c.IsActive && (c.Category == "Role" || c.Category == "Both"))
+                .ToListAsync();
+
+            var selected = allowed.Where(c => selectedClaimIds.Contains(c.Id)).ToList();
+
+            // Replace all current role claims (simple, matches user-claims flow)
+            var current = await _roleManager.GetClaimsAsync(role);
+            foreach (var c in current)
+            {
+                var rm = await _roleManager.RemoveClaimAsync(role, c);
+                if (!rm.Succeeded) return rm;
+            }
+
+            foreach (var c in selected)
+            {
+                var add = await _roleManager.AddClaimAsync(role, new Claim(c.ClaimType, c.ClaimValue));
+                if (!add.Succeeded) return add;
+            }
+
+            return IdentityResult.Success;
         }
     }
 }

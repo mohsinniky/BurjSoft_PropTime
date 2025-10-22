@@ -12,5 +12,8 @@ namespace IdentityFramework.Services
         Task<IdentityResult> UpdateAsync(RoleEditViewModel model);
         Task<IdentityResult> DeleteAsync(Guid id);
         Task<RoleDetailsViewModel?> GetDetailsAsync(Guid id, int pageNumber, int pageSize);
+        //New methods for Role Claims Management
+        Task<RoleClaimsEditViewModel?> GetClaimsForEditAsync(Guid roleId);
+        Task<IdentityResult> UpdateClaimsAsync(Guid roleId, IEnumerable<Guid> selectedClaimIds);
     }
 }

@@ -162,5 +162,51 @@ namespace ASPNETCoreIdentityDemo.Controllers
                 return View("Error");
             }
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> ManageClaims(Guid id)
+        {
+            var roleClaimsEditViewModel = await _roleService.GetClaimsForEditAsync(id);
+            if (roleClaimsEditViewModel == null)
+            {
+                TempData["Error"] = "The role was not found.";
+                return RedirectToAction(nameof(Index));
+            }
+            return View(roleClaimsEditViewModel);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> ManageClaims(RoleClaimsEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            try
+            {
+                var selected = model.Claims.Where(c => c.IsSelected).Select(c => c.ClaimId).ToList();
+                var result = await _roleService.UpdateClaimsAsync(model.RoleId, selected);
+
+                if (result.Succeeded)
+                {
+                    TempData["Success"] = "Role claims were updated successfully.";
+                    return RedirectToAction(nameof(Details), new { id = model.RoleId });
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+
+                var reload = await _roleService.GetClaimsForEditAsync(model.RoleId);
+                return View(reload ?? model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error in Managing Role Claims. RoleName: {model.RoleName}");
+                return View("Error");
+            }
+        }
     }
 }
