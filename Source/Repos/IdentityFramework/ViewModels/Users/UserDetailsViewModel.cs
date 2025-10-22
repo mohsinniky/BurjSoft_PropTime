@@ -15,5 +15,7 @@
         public DateTime? CreatedOn { get; init; }
         public DateTime? ModifiedOn { get; init; }
         public List<string> Roles { get; init; } = new();
+
+        public List<string> Claims { get; init; } = new();
     }
 }
