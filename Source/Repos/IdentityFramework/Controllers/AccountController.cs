@@ -186,5 +186,13 @@ namespace IdentityFramework.Controllers
             else
                 return Json(result.Message); 
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult AccessDenied(string? returnUrl = null)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
     }
 }

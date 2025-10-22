@@ -1,5 +1,9 @@
 ﻿@{
     ViewData["Title"] = ViewData["Title"] ?? "IdentityFramework Tutorial";
+    bool isAuthenticated = User?.Identity?.IsAuthenticated ?? false;
+    bool isAdmin = User?.IsInRole("Admin") ?? false;
+    bool isManager = User?.IsInRole("Manager") ?? false;
+    bool isStaff = isAdmin || isManager; // Admin OR Manager
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -20,31 +24,54 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarContent">
+                <!-- Left: Primary navigation -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("Index", "Home")">Home</a>
                     </li>
+                    <!-- Any authenticated user -->
+                    @if (isAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="SecureMethod">
+                                Secure
+                            </a>
+                        </li>
+                    }
+                    <!-- Public -->
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("About", "Home")">About</a>
+                        <a class="nav-link" asp-controller="Home" asp-action="NonSecureMethod">
+                            Non Secure
+                        </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="SecureMethod">Secure</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="NonSecureMethod">Non Secure</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Roles" asp-action="Index">Roles</a>
-                    </li>
+                    <!-- Admin-only -->
+                    @if (isAdmin)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Roles" asp-action="Index">
+                                Roles
+                            </a>
+                        </li>
+                    }
+                    <!-- Admin OR Manager -->
+                    @if (isStaff)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Users" asp-action="Index">
+                                Users
+                            </a>
+                        </li>
+                    }
                 </ul>
+                <!-- Right: Auth links / user menu -->
                 <ul class="navbar-nav mb-2 mb-lg-0">
-                    @if (User.Identity?.IsAuthenticated == true)
+                    @if (isAuthenticated)
                     {
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-person-circle me-1"></i>
-                                Hello, @User.Identity.Name
+                                Hello, @User!.Identity!.Name
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                 <li>

@@ -28,6 +28,10 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
+[G:/BurjSoft_PropTime/Source/Repos/IdentityFramework/Views/Account/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [G:/BurjSoft_PropTime/Source/Repos/IdentityFramework/Views/Account/EmailConfirmed.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxFbWFpbENvbmZpcm1lZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -122,6 +126,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [G:/BurjSoft_PropTime/Source/Repos/IdentityFramework/Views/Users/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/BurjSoft_PropTime/Source/Repos/IdentityFramework/Views/Users/ManageRoles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcTWFuYWdlUm9sZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/BurjSoft_PropTime/Source/Repos/IdentityFramework/Views/_ViewImports.cshtml]

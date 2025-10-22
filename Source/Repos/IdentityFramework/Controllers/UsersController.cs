@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 namespace IdentityFramework.Controllers
 {
+    // Any authenticated user
     [Authorize]
     public class UsersController : Controller
     {
@@ -18,11 +19,10 @@ namespace IdentityFramework.Controllers
             _userService = userService;
             _logger = logger;
         }
-        // GET: /Users
+
         [HttpGet]
         public async Task<IActionResult> Index([FromQuery] UserListFilterViewModel filter)
         {
-            // List page is read-only; exceptions here are unlikely, but log & show friendly error.
             try
             {
                 var result = await _userService.GetUsersAsync(filter);
@@ -36,13 +36,15 @@ namespace IdentityFramework.Controllers
                 return View(new PagedResult<UserListItemViewModel>()); // empty model to avoid null view
             }
         }
-        // GET: /Users/Create
+
+        // Create User Admin Manager can do this
+        [Authorize(Roles = "Manager")]
         [HttpGet]
         public IActionResult Create()
         {
             return View(new UserCreateViewModel());
         }
-        // POST: /Users/Create
+        [Authorize(Roles = "Manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(UserCreateViewModel model)
@@ -74,7 +76,8 @@ namespace IdentityFramework.Controllers
                 return View(model);
             }
         }
-        // GET: /Users/Edit/{id}
+
+        [Authorize(Roles = "Admin,Manager")]
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
@@ -95,7 +98,7 @@ namespace IdentityFramework.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-        // POST: /Users/Edit
+        [Authorize(Roles = "Admin,Manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UserEditViewModel model)
@@ -137,7 +140,6 @@ namespace IdentityFramework.Controllers
                 return View(model);
             }
         }
-        // GET: /Users/Details/{id}
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
@@ -158,7 +160,8 @@ namespace IdentityFramework.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-        // GET: /Users/Delete/{id}
+        // Requires single role: Admin
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -179,7 +182,8 @@ namespace IdentityFramework.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-        // POST: /Users/Delete/{id}
+        // Requires single role: Admin
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -222,7 +226,8 @@ namespace IdentityFramework.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-        // GET: /Users/ManageRoles/{id}
+        // Requires multiple roles (OR): Admin or Manager
+        [Authorize(Roles = "Admin,Manager")] // OR semantics
         [HttpGet]
         public async Task<IActionResult> ManageRoles(Guid id)
         {
@@ -243,12 +248,13 @@ namespace IdentityFramework.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-        // POST: /Users/ManageRoles
+        // Requires multiple roles (OR): Admin or Manager
+        [Authorize(Roles = "Admin,Manager")] // OR semantics
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> ManageRoles(UserRolesEditViewModel model)
         {
-            if (model == null || model.UserId == Guid.Empty)
-                return NotFound();
+            if (!ModelState.IsValid)
+                return View(model);
             try
             {
                 var selected = model.Roles.Where(r => r.IsSelected).Select(r => r.RoleId).ToList();
