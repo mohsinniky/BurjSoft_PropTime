@@ -2,6 +2,7 @@
 using IdentityFramework.Models;
 using IdentityFramework.ViewModels;
 using IdentityFramework.ViewModels.Users;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
 namespace IdentityFramework.Services
@@ -12,6 +13,7 @@ namespace IdentityFramework.Services
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly ApplicationDbContext _dbContext;
+
         public UserService(
         UserManager<ApplicationUser> userManager,
         RoleManager<ApplicationRole> roleManager,
@@ -21,26 +23,23 @@ namespace IdentityFramework.Services
             _roleManager = roleManager;
             _dbContext = dbContext;
         }
+
         // Returns a paged list of users with filter/search.
         // Uses normalized columns (index-friendly) where possible for best performance.
         public async Task<PagedResult<UserListItemViewModel>> GetUsersAsync(UserListFilterViewModel filter)
         {
-            // Normalize and clamp paging inputs to safe values
-            var pageNumber = filter.PageNumber < 1 ? 1 : filter.PageNumber;
-            var pageSize = filter.PageSize < 1 ? 10 : (filter.PageSize > MaxPageSize ? MaxPageSize : filter.PageSize);
-            // Base query (read-only fast path)
-            var query = _userManager.Users.AsNoTracking();
-            // Search heuristic:
-            // - If it looks like an email, use NormalizedEmail (indexed).
-            // - If it's numeric, filter by PhoneNumber prefix (common usage).
-            // - Else, use NormalizedUserName (indexed) + First/Last name prefix.
+            var pageNumber = filter.PageNumber < 1 ? 1 : filter.PageNumber; // less than 1 not allowed 
+            var pageSize = filter.PageSize < 1 ? 10 : (filter.PageSize > MaxPageSize ? MaxPageSize : filter.PageSize); // limit users per page and also prevent invalid values
+            var query = _userManager.Users.AsNoTracking(); //IqueryAble<ApplicationUser>
+
+            //for the three filter criteria, we be using Iquery till we get the final query
             if (!string.IsNullOrWhiteSpace(filter.Search))
             {
                 var search = filter.Search.Trim();
-                var seachUpper = search.ToUpperInvariant();
+                var searchUpper = search.ToUpperInvariant();
                 if (search.Contains('@'))
                 {
-                    query = query.Where(u => u.NormalizedEmail!.StartsWith(seachUpper));
+                    query = query.Where(u => u.NormalizedEmail!.StartsWith(searchUpper));
                 }
                 else if (search.All(char.IsDigit))
                 {
@@ -49,23 +48,23 @@ namespace IdentityFramework.Services
                 else
                 {
                     query = query.Where(u =>
-                    (u.NormalizedUserName!.StartsWith(seachUpper))
+                    (u.NormalizedUserName!.StartsWith(searchUpper))
                     || (u.FirstName ?? "").StartsWith(search)
                     || (u.LastName ?? "").StartsWith(search));
                 }
             }
             if (filter.IsActive.HasValue)
                 query = query.Where(u => u.IsActive == filter.IsActive.Value);
+
             if (filter.EmailConfirmed.HasValue)
                 query = query.Where(u => u.EmailConfirmed == filter.EmailConfirmed.Value);
-            // Total count for pager (single scalar query)
-            var total = await query.CountAsync();
-            var items = await query
-            // Current sort: friendly alphabetical.
+
+            var total = await query.CountAsync(); //total count after applying filters
+            var items = await query 
             .OrderBy(u => u.FirstName).ThenBy(u => u.LastName).ThenBy(u => u.Email)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
-            // Project only what you need
+
             .Select(u => new UserListItemViewModel
             {
                 Id = u.Id,
@@ -78,7 +77,9 @@ namespace IdentityFramework.Services
                 EmailConfirmed = u.EmailConfirmed,
                 CreatedOn = u.CreatedOn
             })
-            .ToListAsync();
+            .ToListAsync(); //execute the query and get the list
+
+
             return new PagedResult<UserListItemViewModel>
             {
                 Items = items,
@@ -87,13 +88,14 @@ namespace IdentityFramework.Services
                 PageSize = pageSize
             };
         }
+
         // Creates a new user with password.
         // We rely on Identity's built-in uniqueness/validation (avoid extra pre-check round trip).
         public async Task<(IdentityResult Result, Guid? UserId)> CreateAsync(UserCreateViewModel model)
         {
-            // ExecutionStrategy adds resiliency (automatic retries for transient SQL errors)
+            // builtin Retry Mechanism in EF
             var strategy = _dbContext.Database.CreateExecutionStrategy();
-            return await strategy.ExecuteAsync<(IdentityResult, Guid?)>(async () =>
+            return await strategy.ExecuteAsync<(IdentityResult, Guid?)>(async () => //running the enclosed code
             {
                 // Start an explicit transaction
                 await using var transaction = await _dbContext.Database.BeginTransactionAsync();
@@ -127,7 +129,7 @@ namespace IdentityFramework.Services
                 catch
                 {
                     await transaction.RollbackAsync();
-                    throw; // let middleware/logging handle it; caller gets a 500
+                    throw; // re hrow the exception to be handled by upper layers like logs
                 }
             });
         }
@@ -167,8 +169,7 @@ namespace IdentityFramework.Services
                         await transaction.RollbackAsync();
                         return IdentityResult.Failed(new IdentityError { Code = "NotFound", Description = "User not found." });
                     }
-                    // Optimistic concurrency guard:
-                    // If stamp changed, someone else updated the record
+
                     if (!string.Equals(user.ConcurrencyStamp, model.ConcurrencyStamp, StringComparison.Ordinal))
                     {
                         await transaction.RollbackAsync();
@@ -187,13 +188,14 @@ namespace IdentityFramework.Services
                             await transaction.RollbackAsync();
                             return emailResult;
                         }
-                        var usernameResult = await _userManager.SetUserNameAsync(user, model.Email.Trim());
+                        var usernameResult = await _userManager.SetUserNameAsync(user, model.Email.Trim()); // updating the user name also as email is also username
                         if (!usernameResult.Succeeded)
                         {
                             await transaction.RollbackAsync();
                             return usernameResult;
                         }
                     }
+
                     // Update profile fields
                     user.FirstName = model.FirstName.Trim();
                     user.LastName = model.LastName?.Trim();
@@ -225,7 +227,7 @@ namespace IdentityFramework.Services
             var user = await _userManager.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
             if (user == null)
                 return null;
-            // Identity API requires the user entity for role lookup
+            // Identity API uses user entity for role lookup
             var roles = await _userManager.GetRolesAsync(user);
             return new UserDetailsViewModel
             {
@@ -263,11 +265,12 @@ namespace IdentityFramework.Services
                     var adminRole = await _roleManager.FindByNameAsync("Admin");
                     if (adminRole != null)
                     {
-                        var isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
+                        var isAdmin = await _userManager.IsInRoleAsync(user, "Admin"); // Checking if the user to be deleted is an Admin
                         if (isAdmin)
                         {
                             var anotherAdminExists = await _dbContext.Set<IdentityUserRole<Guid>>()
-                            .AnyAsync(ur => ur.RoleId == adminRole.Id && ur.UserId != user.Id);
+                            .AnyAsync(ur => ur.RoleId == adminRole.Id && ur.UserId != user.Id); //Comparing with other users in the same role
+
                             if (!anotherAdminExists)
                             {
                                 await transaction.RollbackAsync();
@@ -298,18 +301,18 @@ namespace IdentityFramework.Services
         // Builds the roles editor (checkbox list) with pre-checked assignments.
         public async Task<UserRolesEditViewModel?> GetRolesForEditAsync(Guid userId)
         {
-            var user = await _userManager.FindByIdAsync(userId.ToString());
+            var user = await _userManager.FindByIdAsync(userId.ToString()); //getting the user
             if (user == null)
                 return null;
-            // List all active roles (read-only)
-            var allRoles = await _roleManager.Roles
+
+            var allRoles = await _roleManager.Roles //getting all the roles
             .AsNoTracking()
             .OrderBy(r => r.Name)
             .Where(r => r.IsActive)
             .ToListAsync();
-            // Current assignments for the user
-            var assignedRoles = await _userManager.GetRolesAsync(user);
-            // Case-insensitive check to avoid surprises with different normalizations
+
+            var assignedRoles = await _userManager.GetRolesAsync(user); //getting the roles assigned to the user
+
             var userRolesEditViewModel = new UserRolesEditViewModel
             {
                 UserId = user.Id,
@@ -320,17 +323,18 @@ namespace IdentityFramework.Services
                     RoleName = role.Name!,
                     Description = role.Description,
                     IsSelected = assignedRoles.Contains(role.Name!, StringComparer.OrdinalIgnoreCase)
+
                 }).ToList()
             };
             return userRolesEditViewModel;
         }
         // Updates a user's roles using batched operations
         public async Task<IdentityResult> UpdateRolesAsync(Guid userId, IEnumerable<Guid> selectedRoleIds)
-        {
-            var strategy = _dbContext.Database.CreateExecutionStrategy();
-            return await strategy.ExecuteAsync<IdentityResult>(async () =>
+        {  
+            var strategy = _dbContext.Database.CreateExecutionStrategy(); //Execution strategy Creation
+            return await strategy.ExecuteAsync<IdentityResult>(async () => //Executing the enclosed code
             {
-                await using var transaction = await _dbContext.Database.BeginTransactionAsync();
+                await using var transaction = await _dbContext.Database.BeginTransactionAsync(); //Starting a transaction
                 try
                 {
                     var user = await _userManager.FindByIdAsync(userId.ToString());
@@ -340,16 +344,13 @@ namespace IdentityFramework.Services
                         return IdentityResult.Failed(new IdentityError { Code = "NotFound", Description = "User not found." });
                     }
                     // Normalize and de-duplicate incoming IDs
-                    var ids = (selectedRoleIds ?? Enumerable.Empty<Guid>()).Distinct().ToList();
-                    // Map ONLY requested IDs -> names (read-only)
-                    var selectedRoleNames = (ids.Count == 0)
-                    ? new List<string>()
-                    : await _roleManager.Roles
+                    var ids = (selectedRoleIds ?? Enumerable.Empty<Guid>()).Distinct().ToList(); //getting the ids from the selectedRoleIds, else just an empty list
+
+                    var selectedRoleNames = /* IF */ (ids.Count == 0) ? new List<string>() :/* ELSE */ await _roleManager.Roles
                     .AsNoTracking()
                     .Where(r => ids.Contains(r.Id))
                     .Select(r => r.Name!)
                     .ToListAsync();
-                    // Validate existence
                     if (selectedRoleNames.Count != ids.Count)
                     {
                         await transaction.RollbackAsync();
@@ -359,23 +360,24 @@ namespace IdentityFramework.Services
                             Description = "One or more selected roles do not exist."
                         });
                     }
+
                     // Current roles
                     var currentRoles = await _userManager.GetRolesAsync(user);
-                    // Compute diffs (case-insensitive)
+                    // Computing differences here 
                     var current = new HashSet<string>(currentRoles, StringComparer.OrdinalIgnoreCase);
                     var target = new HashSet<string>(selectedRoleNames, StringComparer.OrdinalIgnoreCase);
-                    //current: Admin Manager User
-                    //target: Admin Manager CustomerSupport Vendor
+
                     var toAdd = target.Except(current, StringComparer.OrdinalIgnoreCase).ToList();
                     //toAdd = CustomerSupport Vendor
+
                     var toRemove = current.Except(target, StringComparer.OrdinalIgnoreCase).ToList();
                     //toRemove = User
+
                     if (toAdd.Count() == 0 && toRemove.Count() == 0)
                     {
                         await transaction.CommitAsync(); // nothing to do
                         return IdentityResult.Success;
                     }
-                    // Batch add/remove to minimize round-trips; both inside the same transaction
                     if (toAdd.Count() > 0)
                     {
                         var add = await _userManager.AddToRolesAsync(user, toAdd);
