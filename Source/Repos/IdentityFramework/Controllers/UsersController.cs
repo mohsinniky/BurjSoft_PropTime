@@ -43,7 +43,7 @@ namespace IdentityFramework.Controllers
         {
             // Permission check: Only users with "AddUser" claim can access
             if (!User.HasClaim("Permission", "AddUser"))
-                return Forbid(); // returns 403
+                RedirectToAction("AccessDenied", "Account"); // returns 403
             return View(new UserCreateViewModel());
         }
         // POST: /Users/Create
@@ -53,7 +53,7 @@ namespace IdentityFramework.Controllers
         {
             // Always check claims on POST too (defense-in-depth)
             if (!User.HasClaim("Permission", "AddUser"))
-                return Forbid();
+                RedirectToAction("AccessDenied", "Account");
             try
             {
                 if (!ModelState.IsValid)
@@ -90,7 +90,7 @@ namespace IdentityFramework.Controllers
         {
             // Requires "EditUser" permission
             if (!User.HasClaim("Permission", "EditUser"))
-                return Forbid();
+                RedirectToAction("AccessDenied", "Account");
             try
             {
                 var userEditViewModel = await _userService.GetForEditAsync(id);
@@ -114,7 +114,7 @@ namespace IdentityFramework.Controllers
         public async Task<IActionResult> Edit(UserEditViewModel model)
         {
             if (!User.HasClaim("Permission", "EditUser"))
-                return Forbid();
+                RedirectToAction("AccessDenied", "Account");
             try
             {
                 if (!ModelState.IsValid)
@@ -159,7 +159,7 @@ namespace IdentityFramework.Controllers
         {
             // Requires "ViewUsers" claim
             if (!User.HasClaim("Permission", "ViewUsers"))
-                return Forbid();
+                RedirectToAction("AccessDenied", "Account");
             try
             {
                 var userDetailsViewModel = await _userService.GetDetailsAsync(id);
@@ -182,7 +182,7 @@ namespace IdentityFramework.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             if (!User.HasClaim("Permission", "DeleteUser"))
-                return Forbid();
+                RedirectToAction("AccessDenied", "Account");
             try
             {
                 var userDetailsViewModel = await _userService.GetDetailsAsync(id);
@@ -206,7 +206,7 @@ namespace IdentityFramework.Controllers
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             if (!User.HasClaim("Permission", "DeleteUser"))
-                return Forbid();
+                RedirectToAction("AccessDenied", "Account");
             if (id == Guid.Empty) return NotFound();
             try
             {
@@ -249,7 +249,7 @@ namespace IdentityFramework.Controllers
         public async Task<IActionResult> ManageRoles(Guid id)
         {
             if (!User.HasClaim("Permission", "ManageRoles"))
-                return Forbid();
+                RedirectToAction("AccessDenied", "Account");
             try
             {
                 var userRolesEditViewModel = await _userService.GetRolesForEditAsync(id);
@@ -272,7 +272,7 @@ namespace IdentityFramework.Controllers
         public async Task<IActionResult> ManageRoles(UserRolesEditViewModel model)
         {
             if (!User.HasClaim("Permission", "ManageRoles"))
-                return Forbid();
+                RedirectToAction("AccessDenied", "Account");
             if (!ModelState.IsValid)
                 return View(model);
             try

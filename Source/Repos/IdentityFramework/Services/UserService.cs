@@ -31,7 +31,7 @@ namespace IdentityFramework.Services
         {
             var pageNumber = filter.PageNumber < 1 ? 1 : filter.PageNumber; // less than 1 not allowed 
             var pageSize = filter.PageSize < 1 ? 10 : (filter.PageSize > MaxPageSize ? MaxPageSize : filter.PageSize); // limit users per page and also prevent invalid values
-            var query = _userManager.Users.AsNoTracking(); //IqueryAble<ApplicationUser>
+            var query = _userManager.Users.AsNoTracking(); 
 
             //for the three filter criteria, we be using Iquery till we get the final query
             if (!string.IsNullOrWhiteSpace(filter.Search))
@@ -462,22 +462,36 @@ namespace IdentityFramework.Services
                 .Where(c => c.IsActive && (c.Category == "User" || c.Category == "Both"))
                 .ToListAsync();
 
-            //Selected Claims
-            var selected = allowedClaims.Where(c => selectedClaimIds.Contains(c.Id)).ToList();
+            // Selected Claims
+            var selected = allowedClaims.Where(c => selectedClaimIds.Contains(c.Id))
+                .Select(c => new Claim(c.ClaimType, c.ClaimValue))
+                .ToList();
 
-            //Current Claims
+            // Current Claims
             var currentClaims = await _userManager.GetClaimsAsync(user);
 
-            // Remove old
-            foreach (var claim in currentClaims)
+            // Claims to remove (exist in current but not in selected)
+            var claimsToRemove = currentClaims
+                .Where(current => !selected.Any(s =>
+                    s.Type == current.Type && s.Value == current.Value))
+                .ToList();
+
+            // Claims to add (exist in selected but not in current)
+            var claimsToAdd = selected
+                .Where(s => !currentClaims.Any(current =>
+                    current.Type == s.Type && current.Value == s.Value))
+                .ToList();
+
+            // Remove only claims that need to be removed
+            foreach (var claim in claimsToRemove)
             {
                 await _userManager.RemoveClaimAsync(user, claim);
             }
 
-            // Add selected
-            foreach (var claim in selected)
+            // Add only claims that need to be added
+            foreach (var claim in claimsToAdd)
             {
-                await _userManager.AddClaimAsync(user, new Claim(claim.ClaimType, claim.ClaimValue));
+                await _userManager.AddClaimAsync(user, claim);
             }
 
             return IdentityResult.Success;

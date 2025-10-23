@@ -255,19 +255,37 @@ namespace IdentityFramework.Services
                 .Where(c => c.IsActive && (c.Category == "Role" || c.Category == "Both"))
                 .ToListAsync();
 
-            var selected = allowed.Where(c => selectedClaimIds.Contains(c.Id)).ToList();
+            // Selected Claims
+            var selected = allowed.Where(c => selectedClaimIds.Contains(c.Id))
+                .Select(c => new Claim(c.ClaimType, c.ClaimValue))
+                .ToList();
 
-            // Replace all current role claims (simple, matches user-claims flow)
+            // Current Claims
             var current = await _roleManager.GetClaimsAsync(role);
-            foreach (var c in current)
+
+            // Claims to remove (exist in current but not in selected)
+            var claimsToRemove = current
+                .Where(currentClaim => !selected.Any(s =>
+                    s.Type == currentClaim.Type && s.Value == currentClaim.Value))
+                .ToList();
+
+            // Claims to add (exist in selected but not in current)
+            var claimsToAdd = selected
+                .Where(s => !current.Any(currentClaim =>
+                    currentClaim.Type == s.Type && currentClaim.Value == s.Value))
+                .ToList();
+
+            // Remove only claims that need to be removed
+            foreach (var claim in claimsToRemove)
             {
-                var rm = await _roleManager.RemoveClaimAsync(role, c);
+                var rm = await _roleManager.RemoveClaimAsync(role, claim);
                 if (!rm.Succeeded) return rm;
             }
 
-            foreach (var c in selected)
+            // Add only claims that need to be added
+            foreach (var claim in claimsToAdd)
             {
-                var add = await _roleManager.AddClaimAsync(role, new Claim(c.ClaimType, c.ClaimValue));
+                var add = await _roleManager.AddClaimAsync(role, claim);
                 if (!add.Succeeded) return add;
             }
 

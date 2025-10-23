@@ -7,34 +7,28 @@ using IdentityFramework.ViewModels.Claims;
 using Microsoft.EntityFrameworkCore;
 namespace IdentityFramework.Services
 {
-    // Application service for Claims catalog (ClaimMasters).
-    // Encapsulates query logic (search, filter, paging) and CRUD with basic guards.
-    // Controllers should call this service instead of touching DbContext directly.
     public class ClaimsService : IClaimsService
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<ClaimsService> _logger;
-        // Hard guard for paging; avoid accidental "SELECT *" with huge pageSize.
         private const int MaxPageSize = 100;
         public ClaimsService(ApplicationDbContext context, ILogger<ClaimsService> logger)
         {
             _context = context;
             _logger = logger;
         }
-        // Returns a paged, filtered list of claims for the Index grid.
+        // Returns a paged, filtered list of claims
         // - search: matches ClaimType, ClaimValue, or Description (contains).
         // - category: exact match on Category ("User", "Role", "Both").
-        // Read path is AsNoTracking for best performance.
         public async Task<PagedResult<ClaimListItemViewModel>> GetPagedClaimsAsync(
         string? search, string? category, int pageNumber, int pageSize)
         {
             try
             {
-                // Defensive paging (never page 0 or negative; clamp size).
                 pageNumber = Math.Max(1, pageNumber);
                 pageSize = Math.Clamp(pageSize <= 0 ? 10 : pageSize, 1, MaxPageSize);
-                // Read-only query → AsNoTracking avoids change-tracker overhead.
-                var query = _context.ClaimMasters.AsNoTracking().AsQueryable();
+
+                var query = _context.ClaimMasters.AsNoTracking();
                 if (!string.IsNullOrWhiteSpace(search))
                 {
                     search = search.Trim();
@@ -82,7 +76,6 @@ namespace IdentityFramework.Services
             {
                 _logger.LogError(ex, "Error fetching paged claims (search: {Search}, category: {Category}, page: {Page}, size: {Size})",
                 search, category, pageNumber, pageSize);
-                // Fail soft: return empty page but preserve requested paging info.
                 return new PagedResult<ClaimListItemViewModel>
                 {
                     Items = Array.Empty<ClaimListItemViewModel>(),
