@@ -1,4 +1,4 @@
-﻿namespace APIPractice.ViewModels
+﻿namespace IdentityFramework.ViewModels
 {
     public class ProfileViewModel
     {

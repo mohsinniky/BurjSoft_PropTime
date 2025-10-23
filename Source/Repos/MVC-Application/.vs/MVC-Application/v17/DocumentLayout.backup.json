@@ -50,8 +50,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 6,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 4,
@@ -124,7 +128,7 @@
               "RelativeDocumentMoniker": "wwwroot\\js\\Files\\Files_Ajax.js",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\MVC-Application\\wwwroot\\js\\Files\\Files_Ajax.js",
               "RelativeToolTip": "wwwroot\\js\\Files\\Files_Ajax.js",
-              "ViewState": "AgIAABYBAAAAAAAAAAAwwDkBAAADAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-10-16T14:04:13.894Z",
               "EditorCaption": ""

@@ -105,7 +105,6 @@ namespace APIPracticeAPI.Controllers
         {
             try
             {
-                // Convert API DTO to service model
                 var createModel = new UserCreateViewModel
                 {
                     Email = userDto.Email,
@@ -150,7 +149,7 @@ namespace APIPracticeAPI.Controllers
                     DateOfBirth = userDto.DateOfBirth,
                     IsActive = userDto.IsActive,
                     EmailConfirmed = userDto.EmailConfirmed,
-                    ConcurrencyStamp = userDto.ConcurrencyStamp
+                    //ConcurrencyStamp = userDto.ConcurrencyStamp
                 };
 
                 var result = await _userService.UpdateAsync(updateModel);

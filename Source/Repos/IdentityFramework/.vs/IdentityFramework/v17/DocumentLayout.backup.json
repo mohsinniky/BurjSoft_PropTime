@@ -3,40 +3,20 @@
   "WorkspaceRootPath": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\models\\claimmaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:models\\claimmaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\models\\applicationrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:models\\applicationrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\services\\roleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:services\\roleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\controllers\\claimscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -45,6 +25,22 @@
     {
       "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\services\\claimsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:services\\claimsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\models\\applicationrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|solutionrelative:models\\applicationrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B8BE2F62-9C59-4BD1-B786-561C241B7F8D}|IdentityFramework.csproj|g:\\burjsoft_proptime\\source\\repos\\identityframework\\controllers\\rolescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -58,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -67,32 +63,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ClaimMaster.cs",
-              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Models\\ClaimMaster.cs",
-              "RelativeDocumentMoniker": "Models\\ClaimMaster.cs",
-              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Models\\ClaimMaster.cs",
-              "RelativeToolTip": "Models\\ClaimMaster.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T11:53:55.634Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "ApplicationUser.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Models\\ApplicationUser.cs",
               "RelativeDocumentMoniker": "Models\\ApplicationUser.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Models\\ApplicationUser.cs",
               "RelativeToolTip": "Models\\ApplicationUser.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-23T11:53:45.477Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "ApplicationRole.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Models\\ApplicationRole.cs",
               "RelativeDocumentMoniker": "Models\\ApplicationRole.cs",
@@ -100,12 +83,11 @@
               "RelativeToolTip": "Models\\ApplicationRole.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T11:53:15.975Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-23T11:53:15.975Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 8,
               "Title": "appsettings.json",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -113,77 +95,76 @@
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-23T11:52:20.074Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-23T11:52:20.074Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 6,
               "Title": "AccountController.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Controllers\\AccountController.cs",
               "RelativeToolTip": "Controllers\\AccountController.cs",
-              "ViewState": "AgIAALEAAAAAZmZmZmYWwL8AAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAZ2ZmZmYkwB0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-23T09:25:01.957Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 5,
               "Title": "ClaimsService.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Services\\ClaimsService.cs",
               "RelativeDocumentMoniker": "Services\\ClaimsService.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Services\\ClaimsService.cs",
               "RelativeToolTip": "Services\\ClaimsService.cs",
-              "ViewState": "AgIAAAIAAADwNzMzMzMbwHMAAABkAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAnJmZmZklwHMAAABkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-23T08:58:22.986Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 4,
               "Title": "ClaimsController.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Controllers\\ClaimsController.cs",
               "RelativeDocumentMoniker": "Controllers\\ClaimsController.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Controllers\\ClaimsController.cs",
               "RelativeToolTip": "Controllers\\ClaimsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAApwB4AAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-23T08:58:18.575Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "UserService.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "Services\\UserService.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Services\\UserService.cs",
               "RelativeToolTip": "Services\\UserService.cs",
-              "ViewState": "AgIAAMwBAAAAAAAAAAAQwPQBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAmpmZmZkdwFYBAABjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-23T08:49:47.166Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
               "Title": "UsersController.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Controllers\\UsersController.cs",
               "RelativeToolTip": "Controllers\\UsersController.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAAABwAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAABcAAAAAAAAAAAAwwCQAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-23T08:14:45.106Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 10,
               "Title": "RolesController.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Controllers\\RolesController.cs",
               "RelativeDocumentMoniker": "Controllers\\RolesController.cs",
@@ -195,20 +176,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "RoleService.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Services\\RoleService.cs",
               "RelativeDocumentMoniker": "Services\\RoleService.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Services\\RoleService.cs",
               "RelativeToolTip": "Services\\RoleService.cs",
-              "ViewState": "AgIAAP8AAAAAAAAAAAAQwBgBAABKAAAAAAAAAA==",
+              "ViewState": "AgIAANcAAAAAAAAAAAAMwOoAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-22T15:49:55.519Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "Program.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\IdentityFramework\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",

@@ -171,15 +171,15 @@ namespace APIPractice.Services
                         return IdentityResult.Failed(new IdentityError { Code = "NotFound", Description = "User not found." });
                     }
 
-                    if (!string.Equals(user.ConcurrencyStamp, model.ConcurrencyStamp, StringComparison.Ordinal))
-                    {
-                        await transaction.RollbackAsync();
-                        return IdentityResult.Failed(new IdentityError
-                        {
-                            Code = "ConcurrencyFailure",
-                            Description = "This user was modified by another admin. Please reload and try again."
-                        });
-                    }
+                    //if (!string.Equals(user.ConcurrencyStamp, model.ConcurrencyStamp, StringComparison.Ordinal))
+                    //{
+                    //    await transaction.RollbackAsync();
+                    //    return IdentityResult.Failed(new IdentityError
+                    //    {
+                    //        Code = "ConcurrencyFailure",
+                    //        Description = "This user was modified by another admin. Please reload and try again."
+                    //    });
+                    //}
                     // If email changed, update both Email & UserName (Identity will SaveChanges inside the transaction)
                     if (!string.Equals(user.Email, model.Email, StringComparison.OrdinalIgnoreCase))
                     {
@@ -362,19 +362,7 @@ namespace APIPractice.Services
                     .Where(r => ids.Contains(r.Id))
                     .Select(r => r.Name!)
                     .ToListAsync();
-                    if (selectedRoleNames.Count != ids.Count)
-                    {
-                        await transaction.RollbackAsync();
-                        return IdentityResult.Failed(new IdentityError
-                        {
-                            Code = "RoleNotFound",
-                            Description = "One or more selected roles do not exist."
-                        });
-                    }
-
-                    // Current roles
                     var currentRoles = await _userManager.GetRolesAsync(user);
-                    // Computing differences here 
                     var current = new HashSet<string>(currentRoles, StringComparer.OrdinalIgnoreCase);
                     var target = new HashSet<string>(selectedRoleNames, StringComparer.OrdinalIgnoreCase);
 
@@ -416,85 +404,6 @@ namespace APIPractice.Services
                     throw;
                 }
             });
-        }
-
-        public async Task<UserClaimsEditViewModel?> GetClaimsForEditAsync(Guid userId)
-        {
-            var user = await _userManager.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == userId);
-            if (user == null) return null;
-
-            // Get all active claims that can be assigned to Users or Both
-            var allClaims = await _dbContext.ClaimMasters
-                .AsNoTracking()
-                .Where(c => c.IsActive && (c.Category == "User" || c.Category == "Both"))
-                .OrderBy(c => c.ClaimType).ThenBy(c => c.ClaimValue)
-                .ToListAsync();
-
-            // Read current user claims from Identity
-            var currentClaims = await _userManager.GetClaimsAsync(user);
-
-            var vm = new UserClaimsEditViewModel
-            {
-                UserId = user.Id,
-                UserName = user.UserName!,
-                Claims = allClaims.Select(c => new UserClaimCheckboxItem
-                {
-                    ClaimId = c.Id,
-                    ClaimType = c.ClaimType,
-                    ClaimValue = c.ClaimValue,
-                    Category = c.Category,
-                    Description = c.Description,
-                    IsSelected = currentClaims.Any(uc => uc.Type == c.ClaimType && uc.Value == c.ClaimValue)
-                }).ToList()
-            };
-
-            return vm;
-        }
-
-        public async Task<IdentityResult> UpdateClaimsAsync(Guid userId, IEnumerable<Guid> selectedClaimIds)
-        {
-            var user = await _userManager.FindByIdAsync(userId.ToString());
-            if (user == null)
-                return IdentityResult.Failed(new IdentityError { Code = "UserNotFound", Description = "User not found." });
-
-            // Only allow choosing from active ClaimMasters in Category = User or Both
-            var allowedClaims = await _dbContext.ClaimMasters
-                .Where(c => c.IsActive && (c.Category == "User" || c.Category == "Both"))
-                .ToListAsync();
-
-            // Selected Claims
-            var selected = allowedClaims.Where(c => selectedClaimIds.Contains(c.Id))
-                .Select(c => new Claim(c.ClaimType, c.ClaimValue))
-                .ToList();
-
-            // Current Claims
-            var currentClaims = await _userManager.GetClaimsAsync(user);
-
-            // Claims to remove (exist in current but not in selected)
-            var claimsToRemove = currentClaims
-                .Where(current => !selected.Any(s =>
-                    s.Type == current.Type && s.Value == current.Value))
-                .ToList();
-
-            // Claims to add (exist in selected but not in current)
-            var claimsToAdd = selected
-                .Where(s => !currentClaims.Any(current =>
-                    current.Type == s.Type && current.Value == s.Value))
-                .ToList();
-
-            // Remove only claims that need to be removed
-            foreach (var claim in claimsToRemove)
-            {
-                await _userManager.RemoveClaimAsync(user, claim);
-            }
-
-            // Add only claims that need to be added
-            foreach (var claim in claimsToAdd)
-            {
-                await _userManager.AddClaimAsync(user, claim);
-            }
-
-            return IdentityResult.Success;
         }
     }
 }

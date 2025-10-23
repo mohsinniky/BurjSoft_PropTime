@@ -55,8 +55,8 @@ namespace APIPractice.Models
         public bool IsActive { get; set; }
         public bool EmailConfirmed { get; set; }
 
-        [Required]
-        public string ConcurrencyStamp { get; set; } = null!;
+        //[Required]
+        //public string ConcurrencyStamp { get; set; } = null!;
     }
 
     // For GET /api/users/{id} (details)

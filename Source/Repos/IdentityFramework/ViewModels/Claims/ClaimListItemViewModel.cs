@@ -1,4 +1,4 @@
-﻿namespace APIPractice.ViewModels.Claims
+﻿namespace IdentityFramework.ViewModels.Claims
 {
     public class ClaimListItemViewModel
     {
