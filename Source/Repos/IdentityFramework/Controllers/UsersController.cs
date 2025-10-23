@@ -5,10 +5,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 namespace IdentityFramework.Controllers
 {
-    // Any authenticated user
+    // Require authentication for ALL actions in this controller
     [Authorize]
     public class UsersController : Controller
     {
@@ -19,68 +18,79 @@ namespace IdentityFramework.Controllers
             _userService = userService;
             _logger = logger;
         }
-
+        // GET: /Users
         [HttpGet]
         public async Task<IActionResult> Index([FromQuery] UserListFilterViewModel filter)
         {
             try
             {
+                // Fetch paged users list from service using provided filter
                 var result = await _userService.GetUsersAsync(filter);
-                ViewBag.Filter = filter;
+                ViewBag.Filter = filter; // keep filter in ViewBag for persistence in UI
                 return View(result);
             }
             catch (Exception ex)
             {
+                // Log and show friendly error message
                 _logger.LogError(ex, "Error loading users list.");
                 SetError("We couldn’t load the users right now. Please try again.");
-                return View(new PagedResult<UserListItemViewModel>()); // empty model to avoid null view
+                return View(new PagedResult<UserListItemViewModel>());
             }
         }
-
-        // Create User Admin Manager can do this
-        [Authorize(Roles = "Manager")]
+        // GET: /Users/Create
         [HttpGet]
         public IActionResult Create()
         {
+            // Permission check: Only users with "AddUser" claim can access
+            if (!User.HasClaim("Permission", "AddUser"))
+                return Forbid(); // returns 403
             return View(new UserCreateViewModel());
         }
-        [Authorize(Roles = "Manager")]
+        // POST: /Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(UserCreateViewModel model)
         {
+            // Always check claims on POST too (defense-in-depth)
+            if (!User.HasClaim("Permission", "AddUser"))
+                return Forbid();
             try
             {
                 if (!ModelState.IsValid)
-                    return View(model);
+                    return View(model); // redisplay form with validation errors
+                                        // Call service to create user
                 var (result, newId) = await _userService.CreateAsync(model);
                 if (result.Succeeded)
                 {
                     SetSuccess($"User '{model.Email}' was created successfully.");
                     return RedirectToAction(nameof(Index));
                 }
+                // If Identity errors returned, push into ModelState for display
                 AddIdentityErrors(result);
                 return View(model);
             }
             catch (DbUpdateException dbx)
             {
-                // Most common: unique index conflicts or other DB issues
+                // Common DB error (e.g., duplicate key, constraint violation)
                 _logger.LogError(dbx, $"DB error while creating user {model.Email}");
                 SetError("We couldn’t create the user due to a database error. Please try again.");
                 return View(model);
             }
             catch (Exception ex)
             {
+                // Catch any other unexpected errors
                 _logger.LogError(ex, $"Unexpected error creating user {model.Email}");
                 SetError("An unexpected error occurred while creating the user.");
                 return View(model);
             }
         }
-
-        [Authorize(Roles = "Admin,Manager")]
+        // GET: /Users/Edit/{id}
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
+            // Requires "EditUser" permission
+            if (!User.HasClaim("Permission", "EditUser"))
+                return Forbid();
             try
             {
                 var userEditViewModel = await _userService.GetForEditAsync(id);
@@ -98,11 +108,13 @@ namespace IdentityFramework.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-        [Authorize(Roles = "Admin,Manager")]
+        // POST: /Users/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UserEditViewModel model)
         {
+            if (!User.HasClaim("Permission", "EditUser"))
+                return Forbid();
             try
             {
                 if (!ModelState.IsValid)
@@ -113,11 +125,12 @@ namespace IdentityFramework.Controllers
                     SetSuccess("User was updated successfully.");
                     return RedirectToAction(nameof(Index));
                 }
-                // Detect optimistic concurrency from service error code and show friendlier message
+                // Handle concurrency errors specifically (optimistic concurrency check)
                 if (result.Errors.Any(e => string.Equals(e.Code, "ConcurrencyFailure", StringComparison.OrdinalIgnoreCase)))
                 {
                     SetError("This user was modified by another admin. Please reload the page and try again.");
                 }
+                // Push other Identity errors into ModelState
                 AddIdentityErrors(result);
                 return View(model);
             }
@@ -140,9 +153,13 @@ namespace IdentityFramework.Controllers
                 return View(model);
             }
         }
+        // GET: /Users/Details/{id}
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
+            // Requires "ViewUsers" claim
+            if (!User.HasClaim("Permission", "ViewUsers"))
+                return Forbid();
             try
             {
                 var userDetailsViewModel = await _userService.GetDetailsAsync(id);
@@ -160,11 +177,12 @@ namespace IdentityFramework.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-        // Requires single role: Admin
-        [Authorize(Roles = "Admin")]
+        // GET: /Users/Delete/{id}
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
+            if (!User.HasClaim("Permission", "DeleteUser"))
+                return Forbid();
             try
             {
                 var userDetailsViewModel = await _userService.GetDetailsAsync(id);
@@ -173,7 +191,7 @@ namespace IdentityFramework.Controllers
                     SetError("The user you’re trying to delete was not found.");
                     return RedirectToAction(nameof(Index));
                 }
-                return View(userDetailsViewModel); // confirm page
+                return View(userDetailsViewModel);
             }
             catch (Exception ex)
             {
@@ -182,23 +200,23 @@ namespace IdentityFramework.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-        // Requires single role: Admin
-        [Authorize(Roles = "Admin")]
+        // POST: /Users/DeleteConfirmed
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
+            if (!User.HasClaim("Permission", "DeleteUser"))
+                return Forbid();
             if (id == Guid.Empty) return NotFound();
             try
             {
-                var currentUserId = Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var g) ? g : Guid.Empty;
                 var result = await _userService.DeleteAsync(id);
                 if (result.Succeeded)
                 {
                     SetSuccess("User was deleted successfully.");
                     return RedirectToAction(nameof(Index));
                 }
-                // Last Admin cannot be deleted
+                // Handle specific business rules encoded in IdentityResult.Errors
                 if (result.Errors.Any(e => string.Equals(e.Code, "LastAdmin", StringComparison.OrdinalIgnoreCase)))
                 {
                     SetError("You cannot delete the last user in the ‘Admin’ role.");
@@ -226,11 +244,12 @@ namespace IdentityFramework.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-        // Requires multiple roles (OR): Admin or Manager
-        [Authorize(Roles = "Admin,Manager")] // OR semantics
+        // GET: /Users/ManageRoles/{id}
         [HttpGet]
         public async Task<IActionResult> ManageRoles(Guid id)
         {
+            if (!User.HasClaim("Permission", "ManageRoles"))
+                return Forbid();
             try
             {
                 var userRolesEditViewModel = await _userService.GetRolesForEditAsync(id);
@@ -248,15 +267,17 @@ namespace IdentityFramework.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-        // Requires multiple roles (OR): Admin or Manager
-        [Authorize(Roles = "Admin,Manager")] // OR semantics
+        // POST: /Users/ManageRoles
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> ManageRoles(UserRolesEditViewModel model)
         {
+            if (!User.HasClaim("Permission", "ManageRoles"))
+                return Forbid();
             if (!ModelState.IsValid)
                 return View(model);
             try
             {
+                // Collect only selected roles from form
                 var selected = model.Roles.Where(r => r.IsSelected).Select(r => r.RoleId).ToList();
                 var result = await _userService.UpdateRolesAsync(model.UserId, selected);
                 if (result.Succeeded)
@@ -264,13 +285,11 @@ namespace IdentityFramework.Controllers
                     SetSuccess("User roles were updated successfully.");
                     return RedirectToAction(nameof(Details), new { id = model.UserId });
                 }
-                // Surface specific role errors cleanly
                 if (result.Errors.Any(e => string.Equals(e.Code, "RoleNotFound", StringComparison.OrdinalIgnoreCase)))
                 {
                     SetError("One or more selected roles no longer exist. Please refresh and try again.");
                 }
                 AddIdentityErrors(result);
-                // Reload editor if failed (to re-populate checkbox list accurately)
                 var userRolesEditViewModel = await _userService.GetRolesForEditAsync(model.UserId);
                 return View(userRolesEditViewModel ?? model);
             }
@@ -289,44 +308,38 @@ namespace IdentityFramework.Controllers
                 return View(vm ?? model);
             }
         }
-
+        // GET: /Users/ManageClaims/{id} - Admin only
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> ManageClaims(Guid id)
         {
+            // Role-based protection (only Admins can access)
             var userClaimsEditViewModel = await _userService.GetClaimsForEditAsync(id);
             if (userClaimsEditViewModel == null)
             {
                 SetError("The user was not found.");
                 return RedirectToAction(nameof(Index));
             }
-
             return View(userClaimsEditViewModel);
         }
-
+        // POST: /Users/ManageClaims - Admin only
         [Authorize(Roles = "Admin")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> ManageClaims(UserClaimsEditViewModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);
-
             try
             {
                 var selected = model.Claims.Where(c => c.IsSelected).Select(c => c.ClaimId).ToList();
                 var result = await _userService.UpdateClaimsAsync(model.UserId, selected);
-
                 if (result.Succeeded)
                 {
                     SetSuccess("User claims were updated successfully.");
                     return RedirectToAction(nameof(Details), new { id = model.UserId });
                 }
-
-                // Friendly messages for validation-style failures
                 if (result.Errors.Any(e => string.Equals(e.Code, "InvalidClaimSelection", StringComparison.OrdinalIgnoreCase)))
                     SetError("One or more selected claims are not assignable to users. Please refresh and try again.");
-
                 AddIdentityErrors(result);
                 var reload = await _userService.GetClaimsForEditAsync(model.UserId);
                 return View(reload ?? model);
@@ -346,27 +359,24 @@ namespace IdentityFramework.Controllers
                 return View(reload ?? model);
             }
         }
-
         #region Helpers
-        // Push a success message to TempData.
+        // Helper: Push a success message into TempData (survives redirect)
         private void SetSuccess(string message)
         {
             TempData["Success"] = message;
         }
-        // Push an error message to TempData.
+        // Helper: Push an error message into TempData (survives redirect)
         private void SetError(string message)
         {
             TempData["Error"] = message;
         }
-        // Adds IdentityResult errors into ModelState for field and model-level display.
+        // Helper: Copy IdentityResult errors into ModelState 
+        // so they can be displayed by validation summary in views.
         private void AddIdentityErrors(IdentityResult result)
         {
-            if (result == null || result.Succeeded)
-                return;
+            if (result == null || result.Succeeded) return;
             foreach (var e in result.Errors)
-            {
                 ModelState.AddModelError(string.Empty, e.Description);
-            }
         }
         #endregion
     }

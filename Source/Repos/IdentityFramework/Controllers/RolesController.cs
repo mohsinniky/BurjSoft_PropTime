@@ -17,6 +17,7 @@ namespace ASPNETCoreIdentityDemo.Controllers
 
         // GET: /Roles
         [HttpGet]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Index([FromQuery] RoleListFilterViewModel filter)
         {
             try
@@ -33,6 +34,7 @@ namespace ASPNETCoreIdentityDemo.Controllers
         }
         // GET: /Roles/Create
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             try
@@ -48,6 +50,7 @@ namespace ASPNETCoreIdentityDemo.Controllers
         // POST: /Roles/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(RoleCreateViewModel model)
         {
             try
@@ -95,6 +98,7 @@ namespace ASPNETCoreIdentityDemo.Controllers
         // POST: /Roles/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(RoleEditViewModel model)
         {
             try
@@ -124,6 +128,7 @@ namespace ASPNETCoreIdentityDemo.Controllers
         }
         // GET: /Roles/Details/{id}?page=1&pageSize=4
         [HttpGet]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Details(Guid id, int pageNumber = 1, int pageSize = 4)
         {
             try
@@ -141,6 +146,7 @@ namespace ASPNETCoreIdentityDemo.Controllers
         // POST: /Roles/Delete/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(Guid id)
         {
             try
