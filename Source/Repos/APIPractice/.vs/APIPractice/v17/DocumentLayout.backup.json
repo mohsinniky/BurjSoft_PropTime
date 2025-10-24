@@ -3,6 +3,22 @@
   "WorkspaceRootPath": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|g:\\burjsoft_proptime\\source\\repos\\apipractice\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|g:\\burjsoft_proptime\\source\\repos\\apipractice\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|solutionrelative:models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|g:\\burjsoft_proptime\\source\\repos\\apipractice\\viewmodels\\users\\userdetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|solutionrelative:viewmodels\\users\\userdetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|g:\\burjsoft_proptime\\source\\repos\\apipractice\\models\\userdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|solutionrelative:models\\userdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|g:\\burjsoft_proptime\\source\\repos\\apipractice\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|solutionrelative:services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,12 +27,16 @@
       "RelativeMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|solutionrelative:services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|g:\\burjsoft_proptime\\source\\repos\\apipractice\\viewmodels\\pagedresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|solutionrelative:viewmodels\\pagedresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|g:\\burjsoft_proptime\\source\\repos\\apipractice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|g:\\burjsoft_proptime\\source\\repos\\apipractice\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|g:\\burjsoft_proptime\\source\\repos\\apipractice\\viewmodels\\users\\usereditviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|solutionrelative:viewmodels\\users\\usereditviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|g:\\burjsoft_proptime\\source\\repos\\apipractice\\viewmodels\\pagedresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|solutionrelative:viewmodels\\pagedresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A6D0BE08-B0C1-4886-A210-E4D71D708F26}|APIPractice.csproj|g:\\burjsoft_proptime\\source\\repos\\apipractice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,32 +50,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "PagedResult.cs",
-              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\ViewModels\\PagedResult.cs",
-              "RelativeDocumentMoniker": "ViewModels\\PagedResult.cs",
-              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\ViewModels\\PagedResult.cs",
-              "RelativeToolTip": "ViewModels\\PagedResult.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAfAAAAAAAAAA==",
+              "Title": "UserDetailsViewModel.cs",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\ViewModels\\Users\\UserDetailsViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\Users\\UserDetailsViewModel.cs",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\ViewModels\\Users\\UserDetailsViewModel.cs",
+              "RelativeToolTip": "ViewModels\\Users\\UserDetailsViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAIAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T15:32:42.402Z",
+              "WhenOpened": "2025-10-24T12:30:30.132Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IUserService.cs",
-              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\Services\\IUserService.cs",
-              "RelativeDocumentMoniker": "Services\\IUserService.cs",
-              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\Services\\IUserService.cs",
-              "RelativeToolTip": "Services\\IUserService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAFAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "UserDtos.cs",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\Models\\UserDtos.cs",
+              "RelativeDocumentMoniker": "Models\\UserDtos.cs",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\Models\\UserDtos.cs",
+              "RelativeToolTip": "Models\\UserDtos.cs",
+              "ViewState": "AgIAAD0AAACAMzMzMzMhwE4AAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T15:31:50.577Z",
+              "WhenOpened": "2025-10-24T09:31:38.988Z",
               "EditorCaption": ""
             },
             {
@@ -64,33 +84,96 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "ApplicationUser.cs",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\Models\\ApplicationUser.cs",
+              "RelativeDocumentMoniker": "Models\\ApplicationUser.cs",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\Models\\ApplicationUser.cs",
+              "RelativeToolTip": "Models\\ApplicationUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T16:04:15.696Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UserEditViewModel.cs",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\ViewModels\\Users\\UserEditViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\Users\\UserEditViewModel.cs",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\ViewModels\\Users\\UserEditViewModel.cs",
+              "RelativeToolTip": "ViewModels\\Users\\UserEditViewModel.cs",
+              "ViewState": "AgIAAAkAAACAmZmZmZktwAUAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T16:03:18.276Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-23T15:47:58.109Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PagedResult.cs",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\ViewModels\\PagedResult.cs",
+              "RelativeDocumentMoniker": "ViewModels\\PagedResult.cs",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\ViewModels\\PagedResult.cs",
+              "RelativeToolTip": "ViewModels\\PagedResult.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T15:32:42.402Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IUserService.cs",
+              "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\Services\\IUserService.cs",
+              "RelativeDocumentMoniker": "Services\\IUserService.cs",
+              "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\Services\\IUserService.cs",
+              "RelativeToolTip": "Services\\IUserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAsAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T15:31:50.577Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "UserService.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "Services\\UserService.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\Services\\UserService.cs",
               "RelativeToolTip": "Services\\UserService.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAqwFYBAABqAAAAAAAAAA==",
+              "ViewState": "AgIAAOMAAAAAAQAAAAAAwAABAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-23T13:36:22.092Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "UsersController.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
               "ToolTip": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\Controllers\\UsersController.cs",
               "RelativeToolTip": "Controllers\\UsersController.cs",
-              "ViewState": "AgIAAAAAAABAmZmZmZknwA4AAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAEMAAAAAAAAAAIAwwH8AAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-23T13:05:41.975Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "Program.cs",
               "DocumentMoniker": "G:\\BurjSoft_PropTime\\Source\\Repos\\APIPractice\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -98,8 +181,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAABUAAACAZmZmZmYkwAQAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T12:11:00.057Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-23T12:11:00.057Z"
             }
           ]
         }

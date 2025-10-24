@@ -254,7 +254,9 @@ namespace APIPractice.Services
                 CreatedOn = user.CreatedOn,
                 ModifiedOn = user.ModifiedOn,
                 Roles = roles.OrderBy(r => r).ToList(),
-                Claims = claimTexts
+                Claims = claimTexts,
+                ConcurrencyStamp = user.ConcurrencyStamp!
+
             };
         }
         // Deletes a user with a guard to prevent removing the last Admin.

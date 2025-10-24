@@ -17,5 +17,7 @@
         public List<string> Roles { get; init; } = new();
 
         public List<string> Claims { get; init; } = new();
+        public string ConcurrencyStamp { get; set; } = null!;
+
     }
 }

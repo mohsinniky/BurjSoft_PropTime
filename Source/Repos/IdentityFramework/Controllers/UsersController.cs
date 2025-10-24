@@ -71,7 +71,6 @@ namespace IdentityFramework.Controllers
             }
             catch (DbUpdateException dbx)
             {
-                // Common DB error (e.g., duplicate key, constraint violation)
                 _logger.LogError(dbx, $"DB error while creating user {model.Email}");
                 SetError("We couldn’t create the user due to a database error. Please try again.");
                 return View(model);

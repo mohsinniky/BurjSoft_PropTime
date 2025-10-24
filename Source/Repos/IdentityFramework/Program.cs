@@ -44,7 +44,8 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IClaimsService, ClaimsService>();
-
+// Add after your other service registrations
+builder.Services.AddHttpClient<IUserService, UserService>();
 
 
 

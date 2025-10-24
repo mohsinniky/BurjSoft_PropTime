@@ -18,8 +18,54 @@ namespace APIPracticeAPI.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<PagedResultDto<UserListDto>>> GetUsers([FromQuery] UserFilterDto filter)
+        [HttpGet("users")]
+        public async Task<ActionResult<PagedResultDto<UserListDto>>> GetUsersList([FromQuery] UserFilterDto filter)
+        {
+            try
+            {
+                // Convert API filter to service filter
+                var serviceFilter = new UserListFilterViewModel
+                {
+                    Search = filter.Search,
+                    IsActive = filter.IsActive,
+                    EmailConfirmed = filter.EmailConfirmed,
+                    PageNumber = filter.PageNumber,
+                    PageSize = filter.PageSize
+                };
+
+                var result = await _userService.GetUsersAsync(serviceFilter);
+
+                // Convert service result to API DTO
+                var apiResult = new PagedResultDto<UserListDto>
+                {
+                    Items = result.Items.Select(u => new UserListDto
+                    {
+                        Id = u.Id,
+                        Email = u.Email,
+                        UserName = u.UserName,
+                        FirstName = u.FirstName,
+                        LastName = u.LastName,
+                        PhoneNumber = u.PhoneNumber,
+                        IsActive = u.IsActive,
+                        EmailConfirmed = u.EmailConfirmed,
+                        CreatedOn = u.CreatedOn
+                    }).ToList(),
+                    TotalCount = result.TotalCount,
+                    PageNumber = result.PageNumber,
+                    PageSize = result.PageSize
+                };
+
+                return Ok(apiResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error fetching users");
+                return StatusCode(500, new { error = "Internal server error" });
+            }
+        }
+
+        [HttpGet("list")]
+        public async Task<ActionResult<PagedResultDto<UserListDto>>> GetList([FromQuery] UserFilterDto filter)
         {
             try
             {
@@ -88,7 +134,9 @@ namespace APIPracticeAPI.Controllers
                     CreatedOn = user.CreatedOn,
                     ModifiedOn = user.ModifiedOn,
                     Roles = user.Roles,
-                    Claims = user.Claims
+                    Claims = user.Claims,
+                    ConcurrencyStamp = user.ConcurrencyStamp
+                    
                 };
 
                 return Ok(userDto);

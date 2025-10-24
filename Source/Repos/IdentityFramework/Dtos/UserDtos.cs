@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace APIPractice.Models
+namespace IdentityFramework.Models
 {
+    // For GET /api/users (list with pagination)
     public class UserListDto
     {
         public Guid Id { get; set; }
@@ -55,8 +56,8 @@ namespace APIPractice.Models
         public bool IsActive { get; set; }
         public bool EmailConfirmed { get; set; }
 
-        //[Required]
-        //public string ConcurrencyStamp { get; set; } = null!;
+        [Required]
+        public string ConcurrencyStamp { get; set; } = null!;
     }
 
     // For GET /api/users/{id} (details)
@@ -74,10 +75,9 @@ namespace APIPractice.Models
         public bool EmailConfirmed { get; set; }
         public DateTime? CreatedOn { get; set; }
         public DateTime? ModifiedOn { get; set; }
+        public string? ConcurrencyStamp { get; set; }
         public List<string> Roles { get; set; } = new();
         public List<string> Claims { get; set; } = new();
-        public string ConcurrencyStamp { get; set; } = null;
-
     }
 
     // Pagination

@@ -14,84 +14,139 @@ namespace IdentityFramework.Services
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly ApplicationDbContext _dbContext;
+        private readonly HttpClient _httpClient;
 
         public UserService(
         UserManager<ApplicationUser> userManager,
         RoleManager<ApplicationRole> roleManager,
-        ApplicationDbContext dbContext)
+        ApplicationDbContext dbContext,
+        HttpClient httpClient)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _dbContext = dbContext;
+            _httpClient = httpClient;
+            _httpClient.BaseAddress = new Uri("https://localhost:7066");
         }
 
         // Returns a paged list of users with filter/search.
         // Uses normalized columns (index-friendly) where possible for best performance.
-        public async Task<PagedResult<UserListItemViewModel>> GetUsersAsync(UserListFilterViewModel filter)
-        {
-            var pageNumber = filter.PageNumber < 1 ? 1 : filter.PageNumber; // less than 1 not allowed 
-            var pageSize = filter.PageSize < 1 ? 10 : (filter.PageSize > MaxPageSize ? MaxPageSize : filter.PageSize); // limit users per page and also prevent invalid values
-            var query = _userManager.Users.AsNoTracking(); 
+        //public async Task<PagedResult<UserListItemViewModel>> GetUsersAsync(UserListFilterViewModel filter)
+        //{
+        //    var pageNumber = filter.PageNumber < 1 ? 1 : filter.PageNumber; // less than 1 not allowed 
+        //    var pageSize = filter.PageSize < 1 ? 10 : (filter.PageSize > MaxPageSize ? MaxPageSize : filter.PageSize); // limit users per page and also prevent invalid values
+        //    var query = _userManager.Users.AsNoTracking(); 
 
-            //for the three filter criteria, we be using Iquery till we get the final query
-            if (!string.IsNullOrWhiteSpace(filter.Search))
-            {
-                var search = filter.Search.Trim();
-                var searchUpper = search.ToUpperInvariant();
-                if (search.Contains('@'))
-                {
-                    query = query.Where(u => u.NormalizedEmail!.StartsWith(searchUpper));
-                }
-                else if (search.All(char.IsDigit))
-                {
-                    query = query.Where(u => (u.PhoneNumber ?? "").StartsWith(search));
-                }
-                else
-                {
-                    query = query.Where(u =>
-                    (u.NormalizedUserName!.StartsWith(searchUpper))
-                    || (u.FirstName ?? "").StartsWith(search)
-                    || (u.LastName ?? "").StartsWith(search));
-                }
-            }
-            if (filter.IsActive.HasValue)
-                query = query.Where(u => u.IsActive == filter.IsActive.Value);
+        //    //for the three filter criteria, we be using Iquery till we get the final query
+        //    if (!string.IsNullOrWhiteSpace(filter.Search))
+        //    {
+        //        var search = filter.Search.Trim();
+        //        var searchUpper = search.ToUpperInvariant();
+        //        if (search.Contains('@'))
+        //        {
+        //            query = query.Where(u => u.NormalizedEmail!.StartsWith(searchUpper));
+        //        }
+        //        else if (search.All(char.IsDigit))
+        //        {
+        //            query = query.Where(u => (u.PhoneNumber ?? "").StartsWith(search));
+        //        }
+        //        else
+        //        {
+        //            query = query.Where(u =>
+        //            (u.NormalizedUserName!.StartsWith(searchUpper))
+        //            || (u.FirstName ?? "").StartsWith(search)
+        //            || (u.LastName ?? "").StartsWith(search));
+        //        }
+        //    }
+        //    if (filter.IsActive.HasValue)
+        //        query = query.Where(u => u.IsActive == filter.IsActive.Value);
 
-            if (filter.EmailConfirmed.HasValue)
-                query = query.Where(u => u.EmailConfirmed == filter.EmailConfirmed.Value);
+        //    if (filter.EmailConfirmed.HasValue)
+        //        query = query.Where(u => u.EmailConfirmed == filter.EmailConfirmed.Value);
 
-            var total = await query.CountAsync(); //total count after applying filters
-            var items = await query 
-            .OrderBy(u => u.FirstName).ThenBy(u => u.LastName).ThenBy(u => u.Email)
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
+        //    var total = await query.CountAsync(); //total count after applying filters
+        //    var items = await query 
+        //    .OrderBy(u => u.FirstName).ThenBy(u => u.LastName).ThenBy(u => u.Email)
+        //    .Skip((pageNumber - 1) * pageSize)
+        //    .Take(pageSize)
 
-            .Select(u => new UserListItemViewModel
-            {
-                Id = u.Id,
-                Email = u.Email!,
-                UserName = u.UserName!,
-                FirstName = u.FirstName,
-                LastName = u.LastName,
-                PhoneNumber = u.PhoneNumber,
-                IsActive = u.IsActive,
-                EmailConfirmed = u.EmailConfirmed,
-                CreatedOn = u.CreatedOn
-            })
-            .ToListAsync(); //execute the query and get the list
+        //    .Select(u => new UserListItemViewModel
+        //    {
+        //        Id = u.Id,
+        //        Email = u.Email!,
+        //        UserName = u.UserName!,
+        //        FirstName = u.FirstName,
+        //        LastName = u.LastName,
+        //        PhoneNumber = u.PhoneNumber,
+        //        IsActive = u.IsActive,
+        //        EmailConfirmed = u.EmailConfirmed,
+        //        CreatedOn = u.CreatedOn
+        //    })
+        //    .ToListAsync(); //execute the query and get the list
 
 
-            return new PagedResult<UserListItemViewModel>
-            {
-                Items = items,
-                TotalCount = total,
-                PageNumber = pageNumber,
-                PageSize = pageSize
-            };
-        }
+        //    return new PagedResult<UserListItemViewModel>
+        //    {
+        //        Items = items,
+        //        TotalCount = total,
+        //        PageNumber = pageNumber,
+        //        PageSize = pageSize
+        //    };
+        //}
 
         // Creates a new user with password.
         // We rely on Identity's built-in uniqueness/validation (avoid extra pre-check round trip).
+
+        public async Task<PagedResult<UserListItemViewModel>> GetUsersAsync(UserListFilterViewModel filter)
+        {
+            try
+            {
+                var queryParams = new List<string> 
+                {
+                    $"pageNumber={filter.PageNumber}",
+                    $"pageSize={filter.PageSize}"
+                };
+
+                if (!string.IsNullOrWhiteSpace(filter.Search))
+                {
+                    queryParams.Add($"search={Uri.EscapeDataString(filter.Search)}");
+                }
+                if (filter.IsActive.HasValue)
+                {
+                    queryParams.Add($"isActive={filter.IsActive.Value}");
+                }
+                if (filter.EmailConfirmed.HasValue)
+                {
+                    queryParams.Add($"emailConfirmed={filter.EmailConfirmed.Value}");
+                }
+                var queryString = string.Join("&", queryParams);
+
+                var response = await _httpClient.GetAsync($"/api/users/list?{queryString}");
+
+
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"Failed to fetch users. Status Code: {response.StatusCode}");
+                }
+
+                var pagedResult = await response.Content.ReadFromJsonAsync<PagedResult<UserListItemViewModel>>();
+                if (pagedResult == null)
+                {
+                    throw new Exception("Failed to deserialize the response content.");
+                }
+                return pagedResult;
+
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (you can use any logging framework you prefer)
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                throw; 
+            }
+        }
+
+
         public async Task<(IdentityResult Result, Guid? UserId)> CreateAsync(UserCreateViewModel model)
         {
             // builtin Retry Mechanism in EF
@@ -135,26 +190,51 @@ namespace IdentityFramework.Services
             });
         }
         // Loads user data for the Edit form (read-only).
+        //public async Task<UserEditViewModel?> GetForEditAsync(Guid id)
+        //{
+        //    // AsNoTracking -> we don't need change tracking for display
+        //    var user = await _userManager.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+        //    if (user == null)
+        //        return null;
+        //    return new UserEditViewModel
+        //    {
+        //        Id = user.Id,
+        //        FirstName = user.FirstName,
+        //        LastName = user.LastName,
+        //        Email = user.Email!,
+        //        PhoneNumber = user.PhoneNumber,
+        //        DateOfBirth = user.DateOfBirth,
+        //        IsActive = user.IsActive,
+        //        EmailConfirmed = user.EmailConfirmed,
+        //        ConcurrencyStamp = user.ConcurrencyStamp // used for optimistic concurrency in Update
+        //    };
+        //}
+        // Updates a user with optimistic concurrency check via ConcurrencyStamp.
         public async Task<UserEditViewModel?> GetForEditAsync(Guid id)
         {
-            // AsNoTracking -> we don't need change tracking for display
-            var user = await _userManager.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
-            if (user == null)
-                return null;
-            return new UserEditViewModel
+            try
             {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email!,
-                PhoneNumber = user.PhoneNumber,
-                DateOfBirth = user.DateOfBirth,
-                IsActive = user.IsActive,
-                EmailConfirmed = user.EmailConfirmed,
-                ConcurrencyStamp = user.ConcurrencyStamp // used for optimistic concurrency in Update
-            };
+                var response = await _httpClient.GetAsync($"api/users/{id}");
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"Failed to fetch users. Status Code: {response.StatusCode}");
+                }
+
+                var pagedResult = await response.Content.ReadFromJsonAsync<UserEditViewModel>();
+                if (pagedResult == null)
+                {
+                    throw new Exception("Failed to deserialize the response content.");
+                }
+                return pagedResult;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (you can use any logging framework you prefer)
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                throw;
+            }
+
         }
-        // Updates a user with optimistic concurrency check via ConcurrencyStamp.
         public async Task<IdentityResult> UpdateAsync(UserEditViewModel model)
         {
             // ExecutionStrategy adds resiliency (automatic retries for transient SQL errors)
