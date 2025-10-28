@@ -1,7 +1,8 @@
-﻿using APIPractice.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Shared.Models;
+
 
 namespace APIPractice.Data
 {
@@ -35,6 +36,5 @@ namespace APIPractice.Data
                 new ApplicationRole { Id = guestRoleId, Name = "Guest", NormalizedName = "GUEST", Description = "Guest role with limited access.", IsActive = true, CreatedOn = new DateTime(2025, 8, 4), ModifiedOn = new DateTime(2025, 8, 4) }
             );
         }
-        public DbSet<ClaimMaster> ClaimMasters { get; set; }
     }
 }

@@ -1,39 +1,40 @@
-﻿using APIPractice.Data;
+﻿// Services/UserService.cs
+using APIPractice.Data;
+using APIPractice.DAL.Interfaces;
+
+using APIPractice.Dtos;
+using APIPractice.Dtos.Users;
 using APIPractice.Models;
-using APIPractice.ViewModels;
-using APIPractice.ViewModels.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace APIPractice.Services
 {
     public class UserService : IUserService
     {
         private const int MaxPageSize = 100;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly IUserRepository _userRepository;
+        private readonly RoleManager<IdentityRole<Guid>> _roleManager;
         private readonly ApplicationDbContext _dbContext;
 
         public UserService(
-        UserManager<ApplicationUser> userManager,
-        RoleManager<ApplicationRole> roleManager,
-        ApplicationDbContext dbContext)
+            IUserRepository userRepository,
+            RoleManager<IdentityRole<Guid>> roleManager,
+            ApplicationDbContext dbContext)
         {
-            _userManager = userManager;
+            _userRepository = userRepository;
             _roleManager = roleManager;
             _dbContext = dbContext;
         }
 
-        // Returns a paged list of users with filter/search.
-        // Uses normalized columns (index-friendly) where possible for best performance.
-        public async Task<PagedResult<UserListItemViewModel>> GetUsersAsync(UserListFilterViewModel filter)
+        public async Task<PagedResult<UserListItemResponseDto>> GetUsersAsync(UserListFilterResponseDto filter)
         {
-            var pageNumber = filter.PageNumber < 1 ? 1 : filter.PageNumber; // less than 1 not allowed 
-            var pageSize = filter.PageSize < 1 ? 10 : (filter.PageSize > MaxPageSize ? MaxPageSize : filter.PageSize); // limit users per page and also prevent invalid values
-            var query = _userManager.Users.AsNoTracking(); 
+            var pageNumber = filter.PageNumber < 1 ? 1 : filter.PageNumber;
+            var pageSize = filter.PageSize < 1 ? 10 : (filter.PageSize > MaxPageSize ? MaxPageSize : filter.PageSize);
 
-            //for the three filter criteria, we be using Iquery till we get the final query
+            var query = _userRepository.GetQueryable();
+
+            // Apply filters (same logic)
             if (!string.IsNullOrWhiteSpace(filter.Search))
             {
                 var search = filter.Search.Trim();
@@ -49,24 +50,26 @@ namespace APIPractice.Services
                 else
                 {
                     query = query.Where(u =>
-                    (u.NormalizedUserName!.StartsWith(searchUpper))
-                    || (u.FirstName ?? "").StartsWith(search)
-                    || (u.LastName ?? "").StartsWith(search));
+                        (u.NormalizedUserName!.StartsWith(searchUpper))
+                        || (u.FirstName ?? "").StartsWith(search)
+                        || (u.LastName ?? "").StartsWith(search));
                 }
             }
+
             if (filter.IsActive.HasValue)
                 query = query.Where(u => u.IsActive == filter.IsActive.Value);
 
             if (filter.EmailConfirmed.HasValue)
                 query = query.Where(u => u.EmailConfirmed == filter.EmailConfirmed.Value);
 
-            var total = await query.CountAsync(); //total count after applying filters
-            var items = await query 
-            .OrderBy(u => u.FirstName).ThenBy(u => u.LastName).ThenBy(u => u.Email)
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
+            var total = await query.CountAsync();
+            var users = await query
+                .OrderBy(u => u.FirstName).ThenBy(u => u.LastName).ThenBy(u => u.Email)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
 
-            .Select(u => new UserListItemViewModel
+            var items = users.Select(u => new UserListItemResponseDto
             {
                 Id = u.Id,
                 Email = u.Email!,
@@ -77,11 +80,9 @@ namespace APIPractice.Services
                 IsActive = u.IsActive,
                 EmailConfirmed = u.EmailConfirmed,
                 CreatedOn = u.CreatedOn
-            })
-            .ToListAsync(); //execute the query and get the list
+            }).ToList();
 
-
-            return new PagedResult<UserListItemViewModel>
+            return new PagedResult<UserListItemResponseDto>
             {
                 Items = items,
                 TotalCount = total,
@@ -90,58 +91,33 @@ namespace APIPractice.Services
             };
         }
 
-        // Creates a new user with password.
-        // We rely on Identity's built-in uniqueness/validation (avoid extra pre-check round trip).
-        public async Task<(IdentityResult Result, Guid? UserId)> CreateAsync(UserCreateViewModel model)
+        public async Task<(IdentityResult Result, Guid? UserId)> CreateAsync(UserCreateResponseDto model)
         {
-            // builtin Retry Mechanism in EF
-            var strategy = _dbContext.Database.CreateExecutionStrategy();
-            return await strategy.ExecuteAsync<(IdentityResult, Guid?)>(async () => //running the enclosed code
+            var user = new ApplicationUser
             {
-                // Start an explicit transaction
-                await using var transaction = await _dbContext.Database.BeginTransactionAsync();
-                try
-                {
-                    // Prepare a new ApplicationUser (keep UserName = Email for simplicity/consistency)
-                    var user = new ApplicationUser
-                    {
-                        Id = Guid.NewGuid(),
-                        FirstName = model.FirstName.Trim(),
-                        LastName = model.LastName?.Trim(),
-                        Email = model.Email.Trim(),
-                        UserName = model.Email.Trim(),
-                        PhoneNumber = model.PhoneNumber,
-                        DateOfBirth = model.DateOfBirth,
-                        IsActive = model.IsActive,
-                        EmailConfirmed = model.MarkEmailConfirmed,
-                        CreatedOn = DateTime.UtcNow,
-                        ModifiedOn = DateTime.UtcNow
-                    };
-                    // Let Identity enforce password policy + unique constraints (inside the transaction)
-                    var create = await _userManager.CreateAsync(user, model.Password);
-                    if (!create.Succeeded)
-                    {
-                        await transaction.RollbackAsync();
-                        return (create, null);
-                    }
-                    await transaction.CommitAsync();
-                    return (IdentityResult.Success, user.Id);
-                }
-                catch
-                {
-                    await transaction.RollbackAsync();
-                    throw; // re hrow the exception to be handled by upper layers like logs
-                }
-            });
+                Id = Guid.NewGuid(),
+                FirstName = model.FirstName.Trim(),
+                LastName = model.LastName?.Trim(),
+                Email = model.Email.Trim(),
+                UserName = model.Email.Trim(),
+                PhoneNumber = model.PhoneNumber,
+                DateOfBirth = model.DateOfBirth,
+                IsActive = model.IsActive,
+                EmailConfirmed = model.MarkEmailConfirmed,
+                CreatedOn = DateTime.UtcNow,
+                ModifiedOn = DateTime.UtcNow
+            };
+
+            var result = await _userRepository.CreateUserAsync(user, model.Password);
+            return (result, result.Succeeded ? user.Id : null);
         }
-        // Loads user data for the Edit form (read-only).
-        public async Task<UserEditViewModel?> GetForEditAsync(Guid id)
+
+        public async Task<UserEditResponseDto?> GetForEditAsync(Guid id)
         {
-            // AsNoTracking -> we don't need change tracking for display
-            var user = await _userManager.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
-            if (user == null)
-                return null;
-            return new UserEditViewModel
+            var user = await _userRepository.GetByIdAsync(id);
+            if (user == null) return null;
+
+            return new UserEditResponseDto
             {
                 Id = user.Id,
                 FirstName = user.FirstName,
@@ -151,95 +127,45 @@ namespace APIPractice.Services
                 DateOfBirth = user.DateOfBirth,
                 IsActive = user.IsActive,
                 EmailConfirmed = user.EmailConfirmed,
-                ConcurrencyStamp = user.ConcurrencyStamp // used for optimistic concurrency in Update
+                ConcurrencyStamp = user.ConcurrencyStamp
             };
         }
-        // Updates a user with optimistic concurrency check via ConcurrencyStamp.
-        public async Task<IdentityResult> UpdateAsync(UserEditViewModel model)
-        {
-            // ExecutionStrategy adds resiliency (automatic retries for transient SQL errors)
-            var strategy = _dbContext.Database.CreateExecutionStrategy();
-            return await strategy.ExecuteAsync<IdentityResult>(async () =>
-            {
-                await using var transaction = await _dbContext.Database.BeginTransactionAsync();
-                try
-                {
-                    var user = await _userManager.FindByIdAsync(model.Id.ToString());
-                    if (user == null)
-                    {
-                        await transaction.RollbackAsync();
-                        return IdentityResult.Failed(new IdentityError { Code = "NotFound", Description = "User not found." });
-                    }
 
-                    //if (!string.Equals(user.ConcurrencyStamp, model.ConcurrencyStamp, StringComparison.Ordinal))
-                    //{
-                    //    await transaction.RollbackAsync();
-                    //    return IdentityResult.Failed(new IdentityError
-                    //    {
-                    //        Code = "ConcurrencyFailure",
-                    //        Description = "This user was modified by another admin. Please reload and try again."
-                    //    });
-                    //}
-                    // If email changed, update both Email & UserName (Identity will SaveChanges inside the transaction)
-                    if (!string.Equals(user.Email, model.Email, StringComparison.OrdinalIgnoreCase))
-                    {
-                        var emailResult = await _userManager.SetEmailAsync(user, model.Email.Trim());
-                        if (!emailResult.Succeeded)
-                        {
-                            await transaction.RollbackAsync();
-                            return emailResult;
-                        }
-                        var usernameResult = await _userManager.SetUserNameAsync(user, model.Email.Trim()); // updating the user name also as email is also username
-                        if (!usernameResult.Succeeded)
-                        {
-                            await transaction.RollbackAsync();
-                            return usernameResult;
-                        }
-                    }
-
-                    // Update profile fields
-                    user.FirstName = model.FirstName.Trim();
-                    user.LastName = model.LastName?.Trim();
-                    user.PhoneNumber = model.PhoneNumber;
-                    user.DateOfBirth = model.DateOfBirth;
-                    user.IsActive = model.IsActive;
-                    user.EmailConfirmed = model.EmailConfirmed;
-                    user.ModifiedOn = DateTime.UtcNow;
-                    var update = await _userManager.UpdateAsync(user);
-                    if (!update.Succeeded)
-                    {
-                        await transaction.RollbackAsync();
-                        return update;
-                    }
-                    await transaction.CommitAsync();
-                    return IdentityResult.Success;
-                }
-                catch
-                {
-                    await transaction.RollbackAsync();
-                    throw;
-                }
-            });
-        }
-        // Returns detailed view model including assigned roles.
-        // Returns detailed view model including assigned roles.
-        public async Task<UserDetailsViewModel?> GetDetailsAsync(Guid id)
+        public async Task<IdentityResult> UpdateAsync(UserEditResponseDto model)
         {
-            // Read-only entity for display
-            var user = await _userManager.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            var user = await _userRepository.GetByIdAsync(model.Id);
             if (user == null)
-                return null;
+                return IdentityResult.Failed(new IdentityError { Code = "NotFound", Description = "User not found." });
 
-            // Identity API requires the user entity for role lookup
-            var roles = await _userManager.GetRolesAsync(user);
+            // Update fields
+            user.FirstName = model.FirstName.Trim();
+            user.LastName = model.LastName?.Trim();
+            user.PhoneNumber = model.PhoneNumber;
+            user.DateOfBirth = model.DateOfBirth;
+            user.IsActive = model.IsActive;
+            user.EmailConfirmed = model.EmailConfirmed;
+            user.ModifiedOn = DateTime.UtcNow;
 
-            var claims = await _userManager.GetClaimsAsync(user);
-            var claimTexts = claims
-                .OrderBy(c => c.Type).ThenBy(c => c.Value)
-                .Select(c => $"{c.Type}: {c.Value}")
-                .ToList();
+            // Update email if changed
+            if (!string.Equals(user.Email, model.Email, StringComparison.OrdinalIgnoreCase))
+            {
+                user.Email = model.Email.Trim();
+                user.UserName = model.Email.Trim();
+                user.NormalizedEmail = model.Email.Trim().ToUpperInvariant();
+                user.NormalizedUserName = model.Email.Trim().ToUpperInvariant();
+            }
 
-            return new UserDetailsViewModel
+            return await _userRepository.UpdateUserAsync(user);
+        }
+
+        public async Task<UserDetailsResponseDto?> GetDetailsAsync(Guid id)
+        {
+            var user = await _userRepository.GetByIdAsync(id);
+            if (user == null) return null;
+
+            var roles = await _userRepository.GetUserRolesAsync(user);
+
+            return new UserDetailsResponseDto
             {
                 Id = user.Id,
                 Email = user.Email!,
@@ -254,158 +180,17 @@ namespace APIPractice.Services
                 CreatedOn = user.CreatedOn,
                 ModifiedOn = user.ModifiedOn,
                 Roles = roles.OrderBy(r => r).ToList(),
-                Claims = claimTexts,
                 ConcurrencyStamp = user.ConcurrencyStamp!
-
             };
         }
-        // Deletes a user with a guard to prevent removing the last Admin.
+
         public async Task<IdentityResult> DeleteAsync(Guid id)
         {
-            var strategy = _dbContext.Database.CreateExecutionStrategy();
-            return await strategy.ExecuteAsync<IdentityResult>(async () =>
-            {
-                await using var transaction = await _dbContext.Database.BeginTransactionAsync();
-                try
-                {
-                    var user = await _userManager.FindByIdAsync(id.ToString());
-                    if (user == null)
-                    {
-                        await transaction.RollbackAsync();
-                        return IdentityResult.Failed(new IdentityError { Code = "NotFound", Description = "User not found." });
-                    }
-                    // Safety: block deleting the last "Admin"
-                    var adminRole = await _roleManager.FindByNameAsync("Admin");
-                    if (adminRole != null)
-                    {
-                        var isAdmin = await _userManager.IsInRoleAsync(user, "Admin"); // Checking if the user to be deleted is an Admin
-                        if (isAdmin)
-                        {
-                            var anotherAdminExists = await _dbContext.Set<IdentityUserRole<Guid>>()
-                            .AnyAsync(ur => ur.RoleId == adminRole.Id && ur.UserId != user.Id); //Comparing with other users in the same role
-
-                            if (!anotherAdminExists)
-                            {
-                                await transaction.RollbackAsync();
-                                return IdentityResult.Failed(new IdentityError
-                                {
-                                    Code = "LastAdmin",
-                                    Description = "You cannot delete the last user in the 'Admin' role."
-                                });
-                            }
-                        }
-                    }
-                    var delete = await _userManager.DeleteAsync(user);
-                    if (!delete.Succeeded)
-                    {
-                        await transaction.RollbackAsync();
-                        return delete;
-                    }
-                    await transaction.CommitAsync();
-                    return IdentityResult.Success;
-                }
-                catch
-                {
-                    await transaction.RollbackAsync();
-                    throw;
-                }
-            });
-        }
-        // Builds the roles editor (checkbox list) with pre-checked assignments.
-        public async Task<UserRolesEditViewModel?> GetRolesForEditAsync(Guid userId)
-        {
-            var user = await _userManager.FindByIdAsync(userId.ToString()); //getting the user
+            var user = await _userRepository.GetByIdAsync(id);
             if (user == null)
-                return null;
+                return IdentityResult.Failed(new IdentityError { Code = "NotFound", Description = "User not found." });
 
-            var allRoles = await _roleManager.Roles //getting all the roles
-            .AsNoTracking()
-            .OrderBy(r => r.Name)
-            .Where(r => r.IsActive)
-            .ToListAsync();
-
-            var assignedRoles = await _userManager.GetRolesAsync(user); //getting the roles assigned to the user
-
-            var userRolesEditViewModel = new UserRolesEditViewModel
-            {
-                UserId = user.Id,
-                UserName = user.UserName!,
-                Roles = allRoles.Select(role => new RoleCheckboxItem
-                {
-                    RoleId = role.Id,
-                    RoleName = role.Name!,
-                    Description = role.Description,
-                    IsSelected = assignedRoles.Contains(role.Name!, StringComparer.OrdinalIgnoreCase)
-
-                }).ToList()
-            };
-            return userRolesEditViewModel;
-        }
-        // Updates a user's roles using batched operations
-        public async Task<IdentityResult> UpdateRolesAsync(Guid userId, IEnumerable<Guid> selectedRoleIds)
-        {  
-            var strategy = _dbContext.Database.CreateExecutionStrategy(); //Execution strategy Creation
-            return await strategy.ExecuteAsync<IdentityResult>(async () => //Executing the enclosed code
-            {
-                await using var transaction = await _dbContext.Database.BeginTransactionAsync(); //Starting a transaction
-                try
-                {
-                    var user = await _userManager.FindByIdAsync(userId.ToString());
-                    if (user == null)
-                    {
-                        await transaction.RollbackAsync();
-                        return IdentityResult.Failed(new IdentityError { Code = "NotFound", Description = "User not found." });
-                    }
-                    // Normalize and de-duplicate incoming IDs
-                    var ids = (selectedRoleIds ?? Enumerable.Empty<Guid>()).Distinct().ToList(); //getting the ids from the selectedRoleIds, else just an empty list
-
-                    var selectedRoleNames = /* IF */ (ids.Count == 0) ? new List<string>() :/* ELSE */ await _roleManager.Roles
-                    .AsNoTracking()
-                    .Where(r => ids.Contains(r.Id))
-                    .Select(r => r.Name!)
-                    .ToListAsync();
-                    var currentRoles = await _userManager.GetRolesAsync(user);
-                    var current = new HashSet<string>(currentRoles, StringComparer.OrdinalIgnoreCase);
-                    var target = new HashSet<string>(selectedRoleNames, StringComparer.OrdinalIgnoreCase);
-
-                    var toAdd = target.Except(current, StringComparer.OrdinalIgnoreCase).ToList();
-                    //toAdd = CustomerSupport Vendor
-
-                    var toRemove = current.Except(target, StringComparer.OrdinalIgnoreCase).ToList();
-                    //toRemove = User
-
-                    if (toAdd.Count() == 0 && toRemove.Count() == 0)
-                    {
-                        await transaction.CommitAsync(); // nothing to do
-                        return IdentityResult.Success;
-                    }
-                    if (toAdd.Count() > 0)
-                    {
-                        var add = await _userManager.AddToRolesAsync(user, toAdd);
-                        if (!add.Succeeded)
-                        {
-                            await transaction.RollbackAsync();
-                            return add;
-                        }
-                    }
-                    if (toRemove.Count() > 0)
-                    {
-                        var rem = await _userManager.RemoveFromRolesAsync(user, toRemove);
-                        if (!rem.Succeeded)
-                        {
-                            await transaction.RollbackAsync();
-                            return rem;
-                        }
-                    }
-                    await transaction.CommitAsync();
-                    return IdentityResult.Success;
-                }
-                catch
-                {
-                    await transaction.RollbackAsync();
-                    throw;
-                }
-            });
+            return await _userRepository.DeleteUserAsync(user);
         }
     }
 }

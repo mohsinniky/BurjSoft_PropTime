@@ -1,7 +1,8 @@
-﻿using APIPractice.Models;
+﻿using Shared.Models;
 using APIPractice.Services;
 using Microsoft.AspNetCore.Mvc;
-using APIPractice.ViewModels.Users;
+using Shared.Dtos.Users;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace APIPracticeAPI.Controllers
 {
@@ -24,7 +25,7 @@ namespace APIPracticeAPI.Controllers
             try
             {
                 // Convert API filter to service filter
-                var serviceFilter = new UserListFilterViewModel
+                var serviceFilter = new UserListFilterResponseDto
                 {
                     Search = filter.Search,
                     IsActive = filter.IsActive,
@@ -70,7 +71,7 @@ namespace APIPracticeAPI.Controllers
             try
             {
                 // Convert API filter to service filter
-                var serviceFilter = new UserListFilterViewModel
+                var serviceFilter = new UserListFilterResponseDto
                 {
                     Search = filter.Search,
                     IsActive = filter.IsActive,
@@ -110,7 +111,7 @@ namespace APIPracticeAPI.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
         public async Task<ActionResult<UserDetailsDto>> GetUser(Guid id)
         {
             try
@@ -136,7 +137,7 @@ namespace APIPracticeAPI.Controllers
                     Roles = user.Roles,
                     Claims = user.Claims,
                     ConcurrencyStamp = user.ConcurrencyStamp
-                    
+
                 };
 
                 return Ok(userDto);
@@ -153,7 +154,7 @@ namespace APIPracticeAPI.Controllers
         {
             try
             {
-                var createModel = new UserCreateViewModel
+                var createModel = new UserCreateResponseDto
                 {
                     Email = userDto.Email,
                     FirstName = userDto.FirstName,
@@ -187,7 +188,7 @@ namespace APIPracticeAPI.Controllers
             try
             {
                 // Convert API DTO to service model
-                var updateModel = new UserEditViewModel
+                var updateModel = new UserEditResponseDto
                 {
                     Id = id,
                     Email = userDto.Email,
@@ -221,7 +222,7 @@ namespace APIPracticeAPI.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<ActionResult> DeleteUser(Guid id)
         {
             try
@@ -246,5 +247,6 @@ namespace APIPracticeAPI.Controllers
                 return StatusCode(500, new { error = "Internal server error" });
             }
         }
+
     }
 }
